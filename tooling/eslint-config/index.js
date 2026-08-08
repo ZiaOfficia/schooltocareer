@@ -1,4 +1,4 @@
-﻿const layers = require('./layers.js');
+const layers = require('./layers.js');
 
 /**
  * Base config shared by every workspace. `layers.js` carries the

@@ -1,5 +1,11 @@
 import { ROUTES } from '@stc/constants';
-import type { EducationLevel, ExamFrequency, ExamLevel, ExamMode, PublishStatus } from '@stc/types';
+import type {
+  ExamDetailDto,
+  ExamDto,
+  ExamEventDto,
+  ExamListItemDto,
+  ExamYearDto,
+} from '@stc/types';
 import { toIsoDate } from '@stc/utils';
 
 import type { ExamDetailRecord, ExamListRecord, ExamRecord } from './exam.types.js';
@@ -20,56 +26,20 @@ import type { ExamDetailRecord, ExamListRecord, ExamRecord } from './exam.types.
  * sitemap, search indexer — gets the same URL from one definition.
  */
 
-export type ExamListItemDto = {
-  id: string;
-  slug: string;
-  path: string;
-  name: string;
-  shortName: string;
-  level: ExamLevel;
-  mode: ExamMode;
-  educationLevel: EducationLevel;
-  popularityScore: number;
-  isActive: boolean;
-  status: PublishStatus;
-  publishedAt: string | null;
-  updatedAt: string;
-  category: { id: string; name: string; slug: string } | null;
-  logo: { url: string; alt: string | null; blurDataUrl: string | null } | null;
-};
-
-export type ExamDto = ExamListItemDto & {
-  fullName: string | null;
-  conductingBody: string;
-  frequency: ExamFrequency;
-  officialWebsite: string | null;
-  overview: string | null;
-  board: { id: string; name: string; shortName: string; slug: string; path: string } | null;
-  createdAt: string;
-};
-
-export type ExamEventDto = {
-  id: string;
-  type: string;
-  title: string;
-  startDate: string | null;
-  endDate: string | null;
-  isTentative: boolean;
-  officialUrl: string | null;
-};
-
-export type ExamYearDto = {
-  id: string;
-  year: number;
-  sessionName: string | null;
-  slug: string;
-  isCurrent: boolean;
-  events: ExamEventDto[];
-};
-
-export type ExamDetailDto = ExamDto & {
-  years: ExamYearDto[];
-};
+/**
+ * The DTO SHAPES now live in @stc/types so apps/web consumes the same
+ * definition instead of restating it. This file keeps the MAPPERS — turning a
+ * database row into the public shape is API-side work and stays here.
+ *
+ * Re-exported so existing imports from this module keep working.
+ */
+export type {
+  ExamDetailDto,
+  ExamDto,
+  ExamEventDto,
+  ExamListItemDto,
+  ExamYearDto,
+} from '@stc/types';
 
 export function toExamListItemDto(record: ExamListRecord): ExamListItemDto {
   return {

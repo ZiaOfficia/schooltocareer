@@ -21,3 +21,6 @@ coverage/
 .idea/
 .vscode/*
 !.vscode/extensions.json
+
+# Next.js build output lives in apps/web/.next (covered by .next/ above)
+next-env.d.ts

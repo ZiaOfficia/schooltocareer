@@ -1,0 +1,194 @@
+@import 'tailwindcss';
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   DESIGN TOKENS
+
+   The single source for the visual language proven in the mockups. Tailwind 4
+   reads `@theme`, so every value here becomes a utility (`bg-surface`,
+   `text-t-exam`, `border-rule`) — components never carry raw hex.
+
+   Two rules that the whole system rests on:
+
+   1. ENTITY hues (--color-t-*) identify WHAT a thing is. They appear only on
+      the outlined badge with its accent spine and mark.
+   2. SEMANTIC hues (urgent/ok/wait) describe STATE. They appear only on filled,
+      tinted stamps.
+
+   Exam and "closing soon" are both vermilion. They are never confusable
+   because they never share a shape. Break that and the palette stops working.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@theme {
+  --color-ink: #10233f;
+  --color-ink-soft: #3d5372;
+  --color-ink-mute: #6b7c96;
+  --color-link: #2a4a7b;
+
+  --color-paper: #f4f6f8;
+  --color-surface: #ffffff;
+  --color-rule: #d3dae3;
+  --color-rule-hard: #10233f;
+  --color-row-hover: #eef2f6;
+
+  --color-urgent: #c8322a;
+  --color-urgent-bg: #fbedec;
+  --color-ok: #0e7a5f;
+  --color-ok-bg: #e7f3ef;
+  --color-wait: #9a5a0b;
+  --color-wait-bg: #fbf1e2;
+  --color-mark-bg: #fbf1e2;
+
+  --color-t-exam: #c8322a;
+  --color-t-result: #0e7a5f;
+  --color-t-paper: #1f6fb2;
+  --color-t-article: #9a5a0b;
+  --color-t-board: #6b7c96;
+  --color-t-syllabus: #2a4a7b;
+
+  /* No webfonts. A font request is a render-blocking round trip on a 3G
+     connection in Bihar, and Georgia + system-ui already carry the identity. */
+  --font-display: Georgia, 'Noto Serif', 'Times New Roman', serif;
+  --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial, sans-serif;
+  --font-data: ui-monospace, 'SF Mono', 'Cascadia Mono', 'Roboto Mono', Consolas, monospace;
+
+  --radius-none: 0px;
+}
+
+/* Dark theme. `prefers-color-scheme` carries the OS setting; the explicit
+   [data-theme] attributes must win in BOTH directions so a manual toggle can
+   override the OS rather than only agreeing with it. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-ink: #e4eaf2;
+    --color-ink-soft: #a9b8cd;
+    --color-ink-mute: #7c8ca4;
+    --color-link: #8fb4e8;
+    --color-paper: #0c1626;
+    --color-surface: #121f33;
+    --color-rule: #26364f;
+    --color-rule-hard: #47617f;
+    --color-row-hover: #17263c;
+    --color-urgent: #f0837a;
+    --color-urgent-bg: #33191a;
+    --color-ok: #56c7a4;
+    --color-ok-bg: #102b25;
+    --color-wait: #e0a857;
+    --color-wait-bg: #2e2415;
+    --color-mark-bg: #3a2e12;
+    --color-t-exam: #f0837a;
+    --color-t-result: #56c7a4;
+    --color-t-paper: #6fa8dc;
+    --color-t-article: #e0a857;
+    --color-t-board: #93a4bc;
+    --color-t-syllabus: #8fb4e8;
+  }
+}
+
+:root[data-theme='dark'] {
+  --color-ink: #e4eaf2;
+  --color-ink-soft: #a9b8cd;
+  --color-ink-mute: #7c8ca4;
+  --color-link: #8fb4e8;
+  --color-paper: #0c1626;
+  --color-surface: #121f33;
+  --color-rule: #26364f;
+  --color-rule-hard: #47617f;
+  --color-row-hover: #17263c;
+  --color-urgent: #f0837a;
+  --color-urgent-bg: #33191a;
+  --color-ok: #56c7a4;
+  --color-ok-bg: #102b25;
+  --color-wait: #e0a857;
+  --color-wait-bg: #2e2415;
+  --color-mark-bg: #3a2e12;
+  --color-t-exam: #f0837a;
+  --color-t-result: #56c7a4;
+  --color-t-paper: #6fa8dc;
+  --color-t-article: #e0a857;
+  --color-t-board: #93a4bc;
+  --color-t-syllabus: #8fb4e8;
+}
+
+:root[data-theme='light'] {
+  --color-ink: #10233f;
+  --color-ink-soft: #3d5372;
+  --color-ink-mute: #6b7c96;
+  --color-link: #2a4a7b;
+  --color-paper: #f4f6f8;
+  --color-surface: #ffffff;
+  --color-rule: #d3dae3;
+  --color-rule-hard: #10233f;
+  --color-row-hover: #eef2f6;
+  --color-urgent: #c8322a;
+  --color-urgent-bg: #fbedec;
+  --color-ok: #0e7a5f;
+  --color-ok-bg: #e7f3ef;
+  --color-wait: #9a5a0b;
+  --color-wait-bg: #fbf1e2;
+  --color-mark-bg: #fbf1e2;
+  --color-t-exam: #c8322a;
+  --color-t-result: #0e7a5f;
+  --color-t-paper: #1f6fb2;
+  --color-t-article: #9a5a0b;
+  --color-t-board: #6b7c96;
+  --color-t-syllabus: #2a4a7b;
+}
+
+@layer base {
+  * {
+    border-radius: 0;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    text-wrap: balance;
+    margin: 0;
+  }
+
+  a {
+    color: var(--color-link);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-link);
+    outline-offset: 2px;
+  }
+
+  /* Digits that sit in a column must line up. This is why the data font is
+     monospace and why every count, date and file size uses `.num`. */
+  .num {
+    font-family: var(--font-data);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.01em;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,4 +1,4 @@
-﻿export * from './slug.js';
+export * from './slug.js';
 export * from './text.js';
 export * from './format.js';
 export * from './collection.js';
