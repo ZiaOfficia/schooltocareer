@@ -108,26 +108,43 @@ round trips.
 PgBouncer, so the API runtime would have carried a full second of dead time on
 every endpoint.
 
-**Not yet changed.** The flag disables prepared statements, and removing it
-risks `prepared statement already exists` under concurrency. Neon's pooler has
-added protocol-level prepared-statement support, which would make the flag
-obsolete — but that needs a concurrency test, not an inference from a
-single-connection benchmark. **Open item.**
+**Resolved 2026-08-09 — flag removed.** Tested at 24-way concurrency over 192
+parameterised queries against the pooled endpoint:
+
+| | result | per query |
+| --- | --- | ---: |
+| with `pgbouncer=true` | 192/192 ok | 64 ms |
+| without | 192/192 ok | **20 ms** |
+
+Zero prepared-statement errors either way. The penalty ratio was 4.96x in
+us-east-2 and 5.01x in ap-southeast-1 — constant across two regions 6,000 miles
+apart, which shows the flag adds round trips rather than fixed overhead, and so
+its cost scales with distance and never optimises away.
+
+Watch the API logs for `prepared statement "s0" already exists`. That signature,
+and only that one, means the flag has to go back.
 
 ### Bulk work belongs on the direct endpoint
 
 The seed ran 3,000+ upserts. On the pooled endpoint it reached 161 rows in 13
 minutes; on the direct endpoint the whole seed finished in 653 s.
 
-## Numbers to re-measure from the deployment region
+## Re-measured after the region move (9 Aug 2026)
 
-Measured from India against `us-east-2`, so these are dominated by round-trip
-latency, not by plans:
+Both numbers below were flagged as round-trip bound rather than plan bound. The
+move to `ap-southeast-1` confirmed it — no plan changed, and both fell in
+proportion to latency:
 
-- seven facet aggregations in one transaction — **4,171 ms**. Individual facet
-  queries are 0.8 ms, so this is ~9 round trips × ~280 ms, not a planning
-  problem. Re-measure with the API co-located with the database.
-- recursive cycle guard — 609 ms for 10 levels, same reasoning.
+| | us-east-2 | ap-southeast-1 | ratio |
+| --- | ---: | ---: | ---: |
+| Round trip (`SELECT 1`) | 276 ms | 93 ms | 2.97x |
+| Seven facet aggregations | 4,171 ms | 1,541 ms | 2.71x |
+| Recursive cycle guard | 609 ms | 175 ms | 3.48x |
+| Full seed | 653 s | 214 s | 3.05x |
+
+The facet transaction is still ~9 round trips; it is simply that each one now
+costs a third of what it did. Co-locating the API with the database in Singapore
+removes almost all of what remains.
 
 ## Still not covered
 

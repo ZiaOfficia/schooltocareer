@@ -124,8 +124,9 @@ Full 89-model design preserved at `docs/architecture/schema-full-v1/`.
 
 | Item | Why it matters |
 | --- | --- |
-| `pgbouncer=true` latency | Costs 1.08 s per query on Neon's pooler (1370 ms vs 283 ms). Removing it needs a concurrency test — it prevents "prepared statement already exists". |
-| Database credential | Current Neon password was shared in a chat transcript. Previous one confirmed revoked; rotate this one out-of-band before real user data exists. |
+| ~~`pgbouncer=true` latency~~ | **Closed 9 Aug.** Removed after a 24-way concurrency test: 192/192 queries succeeded without it, at 20 ms/query vs 64 ms. Watch for `prepared statement "s0" already exists` in logs; that signature means put it back. |
+| ~~Database region~~ | **Closed 9 Aug.** Moved us-east-2 → ap-southeast-1. Round trip 276 ms → 93 ms; seed 653 s → 214 s. |
+| Database credential | Current Neon password was shared in a chat transcript. Rotate out-of-band before real user data exists. The old us-east-2 project should be deleted, not left running. |
 | Seed display names | Exams stored as `JEE MAIN`, rendering in caps. Wrong as the convention editors copy. |
 | DTO sharing | Only `ExamDto` is hoisted to `@stc/types`. 7 modules still declare DTOs inside the API. |
 | Provenance untested | Every seeded date is `isTentative`, so the *official* branch has never rendered against real data. |

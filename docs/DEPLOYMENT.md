@@ -9,29 +9,40 @@ Ship what exists — home, exam hub, robots, sitemap. Three page types is enough
 
 ---
 
-## Do this first: move the database to Singapore
+## Database: done (9 Aug 2026)
 
-**This is the single most consequential decision in Phase A, and it is cheap now
-and expensive later.**
+The database was moved from `us-east-2` to **`ap-southeast-1`** (Singapore),
+matching Render's nearest region to India. Measured from India:
 
-The database currently sits in Neon's `us-east-2` (Ohio). Measured round trip
-from India was **276 ms**. Render's nearest region to India is Singapore. A
-Singapore API against an Ohio database pays roughly 200 ms *per query*, and a
-page that runs three queries has lost half a second before rendering a byte. No
-amount of frontend work recovers that.
+| | Ohio | Singapore |
+| --- | ---: | ---: |
+| Round trip | 276 ms | **93 ms** |
+| Full seed (3,000 papers) | 653 s | **214 s** |
+| Seven facet aggregations | 4,171 ms | **1,541 ms** |
+| Recursive cycle guard | 609 ms | **175 ms** |
 
-Create a new Neon project in **`aws-ap-southeast-1`** and re-run the five
-commands from `docs/architecture/operational-validation.md`. It takes about
-twenty minutes against an empty database. After launch it means migrating live
-data and a cutover.
+No query plan changed — those last two were round-trip bound all along, which
+is what the move was meant to prove.
 
-While doing it, settle the other open item:
+**`pgbouncer=true` was removed.** Tested at 24-way concurrency over 192
+parameterised queries against the pooled endpoint:
 
-**`pgbouncer=true` costs 1.08 s per query** on Neon's pooler (1370 ms vs 283 ms;
-direct is 276 ms). It disables prepared statements, which is what PgBouncer in
-transaction mode requires — but Neon's pooler now supports them at protocol
-level. Test with concurrent requests before removing it. Do not remove it on the
-basis of the single-connection benchmark alone.
+| | result | per query |
+| --- | --- | ---: |
+| with `pgbouncer=true` | 192/192 ok | 64 ms |
+| without | 192/192 ok | **20 ms** |
+
+Zero prepared-statement errors either way. Neon's pooler supports protocol-level
+prepared statements, so the flag was costing roughly 3x for nothing. The penalty
+ratio was 4.96x in Ohio and 5.01x in Singapore — constant across regions, which
+means it adds round trips rather than fixed overhead.
+
+**If `prepared statement "s0" already exists` ever appears in the API logs, put
+the flag back.** That error is the exact failure it prevents, and it only shows
+up under concurrency.
+
+Keep migrations on `DIRECT_DATABASE_URL` regardless — transaction pooling breaks
+advisory locks and DDL.
 
 ---
 

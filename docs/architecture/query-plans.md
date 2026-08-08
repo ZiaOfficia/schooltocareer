@@ -7,7 +7,7 @@ into a `Seq Scan` is usually a missing index, and the most common cause is
 `pnpm db:constraints` not having been re-run after a migration recreated a
 table.
 
-Captured: 2026-08-08T18:57:01.970Z
+Captured: 2026-08-08T21:38:00.380Z
 
 ## exam hub page by slug
 
@@ -15,18 +15,18 @@ Captured: 2026-08-08T18:57:01.970Z
 
 **Expected:** Index Scan using Exam_slug_key
 
-> Execution time: 0.061 ms
+> Execution time: 0.066 ms
 
 ```
-Index Scan using idx_exam_live on "Exam"  (cost=0.14..8.16 rows=1 width=128) (actual time=0.019..0.029 rows=1.00 loops=1)
+Index Scan using idx_exam_live on "Exam"  (cost=0.14..8.16 rows=1 width=128) (actual time=0.020..0.033 rows=1.00 loops=1)
   Filter: (slug = 'jee-main'::text)
   Rows Removed by Filter: 19
   Index Searches: 1
   Buffers: shared hit=4
 Planning:
   Buffers: shared hit=242
-Planning Time: 0.551 ms
-Execution Time: 0.061 ms
+Planning Time: 0.558 ms
+Execution Time: 0.066 ms
 ```
 
 ## paper listing, keyset paginated
@@ -35,19 +35,19 @@ Execution Time: 0.061 ms
 
 **Expected:** Index Scan on (examId, year DESC) — no Sort node
 
-> Execution time: 1.307 ms
+> Execution time: 0.077 ms
 
 ```
-Limit  (cost=0.28..4.58 rows=21 width=68) (actual time=1.259..1.282 rows=21.00 loops=1)
-  Buffers: shared hit=10 read=2
-  ->  Index Scan using idx_paper_live_year on "QuestionPaper"  (cost=0.28..569.86 rows=2782 width=68) (actual time=1.257..1.278 rows=21.00 loops=1)
+Limit  (cost=0.28..4.73 rows=21 width=68) (actual time=0.034..0.059 rows=21.00 loops=1)
+  Buffers: shared hit=12
+  ->  Index Scan using idx_paper_live_year on "QuestionPaper"  (cost=0.28..589.86 rows=2782 width=68) (actual time=0.033..0.056 rows=21.00 loops=1)
         Filter: ((year < '2026'::bigint) OR ((year = '2026'::bigint) AND (id > ''::text)))
         Index Searches: 1
-        Buffers: shared hit=10 read=2
+        Buffers: shared hit=12
 Planning:
-  Buffers: shared hit=252 read=1
-Planning Time: 2.218 ms
-Execution Time: 1.307 ms
+  Buffers: shared hit=253 dirtied=1
+Planning Time: 0.624 ms
+Execution Time: 0.077 ms
 ```
 
 ## paper facet: year counts
@@ -56,21 +56,21 @@ Execution Time: 1.307 ms
 
 **Expected:** HashAggregate over an index scan, not a full Seq Scan + Sort
 
-> Execution time: 3.895 ms
+> Execution time: 0.759 ms
 
 ```
-HashAggregate  (cost=96.28..96.40 rows=12 width=12) (actual time=3.836..3.838 rows=12.00 loops=1)
+HashAggregate  (cost=88.28..88.40 rows=12 width=12) (actual time=0.701..0.703 rows=12.00 loops=1)
   Group Key: year
   Batches: 1  Memory Usage: 32kB
-  Buffers: shared hit=63 read=6
-  ->  Index Only Scan using idx_paper_live_exam on "QuestionPaper"  (cost=0.28..81.28 rows=3000 width=4) (actual time=1.702..3.373 rows=3000.00 loops=1)
-        Heap Fetches: 84
+  Buffers: shared hit=9
+  ->  Index Only Scan using idx_paper_live_exam on "QuestionPaper"  (cost=0.28..73.28 rows=3000 width=4) (actual time=0.019..0.291 rows=3000.00 loops=1)
+        Heap Fetches: 28
         Index Searches: 1
-        Buffers: shared hit=63 read=6
+        Buffers: shared hit=9
 Planning:
   Buffers: shared hit=15
-Planning Time: 0.203 ms
-Execution Time: 3.895 ms
+Planning Time: 0.210 ms
+Execution Time: 0.759 ms
 ```
 
 ## paper facet with a filter applied
@@ -79,32 +79,32 @@ Execution Time: 3.895 ms
 
 **Expected:** Index or bitmap scan on examId
 
-> Seq Scan on Exam (3 rows) — correct at this size; re-check at production volume · 0.309 ms
+> Seq Scan on Exam (3 rows) — correct at this size; re-check at production volume · 0.286 ms
 
 ```
-HashAggregate  (cost=35.71..35.83 rows=12 width=12) (actual time=0.231..0.233 rows=12.00 loops=1)
+HashAggregate  (cost=27.72..27.84 rows=12 width=12) (actual time=0.214..0.216 rows=12.00 loops=1)
   Group Key: "QuestionPaper".year
   Batches: 1  Memory Usage: 32kB
-  Buffers: shared hit=23
-  ->  Nested Loop  (cost=0.51..33.46 rows=450 width=4) (actual time=0.040..0.163 rows=480.00 loops=1)
-        Buffers: shared hit=23
-        ->  HashAggregate  (cost=0.22..0.26 rows=3 width=32) (actual time=0.019..0.021 rows=3.00 loops=1)
+  Buffers: shared hit=15
+  ->  Nested Loop  (cost=0.51..25.47 rows=450 width=4) (actual time=0.041..0.147 rows=480.00 loops=1)
+        Buffers: shared hit=15
+        ->  HashAggregate  (cost=0.22..0.26 rows=3 width=32) (actual time=0.019..0.020 rows=3.00 loops=1)
               Group Key: "Exam".id
               Batches: 1  Memory Usage: 32kB
               Buffers: shared hit=2
               ->  Limit  (cost=0.00..0.22 rows=3 width=32) (actual time=0.013..0.014 rows=3.00 loops=1)
                     Buffers: shared hit=2
-                    ->  Seq Scan on "Exam"  (cost=0.00..11.60 rows=160 width=32) (actual time=0.012..0.013 rows=3.00 loops=1)
+                    ->  Seq Scan on "Exam"  (cost=0.00..11.60 rows=160 width=32) (actual time=0.012..0.012 rows=3.00 loops=1)
                           Buffers: shared hit=2
-        ->  Index Only Scan using idx_paper_live_exam on "QuestionPaper"  (cost=0.28..9.57 rows=150 width=21) (actual time=0.008..0.024 rows=160.00 loops=3)
+        ->  Index Only Scan using idx_paper_live_exam on "QuestionPaper"  (cost=0.28..6.91 rows=150 width=21) (actual time=0.012..0.027 rows=160.00 loops=3)
               Index Cond: ("examId" = "Exam".id)
-              Heap Fetches: 15
+              Heap Fetches: 6
               Index Searches: 3
-              Buffers: shared hit=21
+              Buffers: shared hit=13
 Planning:
   Buffers: shared hit=3
-Planning Time: 0.303 ms
-Execution Time: 0.309 ms
+Planning Time: 0.292 ms
+Execution Time: 0.286 ms
 ```
 
 ## full-text search
@@ -113,22 +113,22 @@ Execution Time: 0.309 ms
 
 **Expected:** Bitmap Index Scan using idx_search_vector
 
-> Seq Scan on SearchDocument (0 rows) — correct at this size; re-check at production volume · 0.036 ms
+> Seq Scan on SearchDocument (0 rows) — correct at this size; re-check at production volume · 0.038 ms
 
 ```
-Limit  (cost=12.01..12.02 rows=1 width=36) (actual time=0.020..0.020 rows=0.00 loops=1)
+Limit  (cost=12.01..12.02 rows=1 width=36) (actual time=0.021..0.021 rows=0.00 loops=1)
   Buffers: shared hit=4
-  ->  Sort  (cost=12.01..12.02 rows=1 width=36) (actual time=0.019..0.019 rows=0.00 loops=1)
+  ->  Sort  (cost=12.01..12.02 rows=1 width=36) (actual time=0.020..0.020 rows=0.00 loops=1)
         Sort Key: (ts_rank_cd("SearchDocument"."searchVector", '''physic'' & ''prepar'''::tsquery, 32)) DESC
         Sort Method: quicksort  Memory: 25kB
         Buffers: shared hit=4
-        ->  Seq Scan on "SearchDocument"  (cost=0.00..12.00 rows=1 width=36) (actual time=0.006..0.006 rows=0.00 loops=1)
+        ->  Seq Scan on "SearchDocument"  (cost=0.00..12.00 rows=1 width=36) (actual time=0.008..0.008 rows=0.00 loops=1)
               Filter: ("isActive" AND ("searchVector" @@ '''physic'' & ''prepar'''::tsquery))
               Buffers: shared hit=1
 Planning:
   Buffers: shared hit=234
-Planning Time: 1.150 ms
-Execution Time: 0.036 ms
+Planning Time: 1.160 ms
+Execution Time: 0.038 ms
 ```
 
 ## typo-tolerant autocomplete
@@ -140,18 +140,18 @@ Execution Time: 0.036 ms
 > Seq Scan on SearchDocument (0 rows) — correct at this size; re-check at production volume · 0.037 ms
 
 ```
-Limit  (cost=12.02..12.02 rows=2 width=36) (actual time=0.014..0.014 rows=0.00 loops=1)
+Limit  (cost=12.02..12.02 rows=2 width=36) (actual time=0.013..0.014 rows=0.00 loops=1)
   Buffers: shared hit=1
-  ->  Sort  (cost=12.02..12.02 rows=2 width=36) (actual time=0.013..0.013 rows=0.00 loops=1)
+  ->  Sort  (cost=12.02..12.02 rows=2 width=36) (actual time=0.012..0.013 rows=0.00 loops=1)
         Sort Key: (similarity(title, 'entrence'::text)) DESC
         Sort Method: quicksort  Memory: 25kB
         Buffers: shared hit=1
-        ->  Seq Scan on "SearchDocument"  (cost=0.00..12.01 rows=2 width=36) (actual time=0.009..0.010 rows=0.00 loops=1)
+        ->  Seq Scan on "SearchDocument"  (cost=0.00..12.01 rows=2 width=36) (actual time=0.009..0.009 rows=0.00 loops=1)
               Filter: (title % 'entrence'::text)
               Buffers: shared hit=1
 Planning:
   Buffers: shared hit=10
-Planning Time: 0.436 ms
+Planning Time: 0.411 ms
 Execution Time: 0.037 ms
 ```
 
@@ -161,20 +161,20 @@ Execution Time: 0.037 ms
 
 **Expected:** Recursive Union with an index scan on the id, bounded by depth
 
-> Seq Scan on Category (7 rows) — correct at this size; re-check at production volume · 0.096 ms
+> Seq Scan on Category (7 rows) — correct at this size; re-check at production volume · 0.103 ms
 
 ```
-CTE Scan on ancestors  (cost=138.64..138.86 rows=11 width=100) (actual time=0.022..0.046 rows=3.00 loops=1)
+CTE Scan on ancestors  (cost=138.64..138.86 rows=11 width=100) (actual time=0.026..0.050 rows=3.00 loops=1)
   Storage: Memory  Maximum Storage: 17kB
-  Buffers: shared hit=4
+  Buffers: shared hit=4 dirtied=1
   CTE ancestors
-    ->  Recursive Union  (cost=0.00..138.64 rows=11 width=100) (actual time=0.020..0.044 rows=3.00 loops=1)
+    ->  Recursive Union  (cost=0.00..138.64 rows=11 width=100) (actual time=0.025..0.047 rows=3.00 loops=1)
           Storage: Memory  Maximum Storage: 33kB
-          Buffers: shared hit=4
-          ->  Seq Scan on "Category"  (cost=0.00..12.88 rows=1 width=100) (actual time=0.019..0.019 rows=1.00 loops=1)
+          Buffers: shared hit=4 dirtied=1
+          ->  Seq Scan on "Category"  (cost=0.00..12.88 rows=1 width=100) (actual time=0.023..0.024 rows=1.00 loops=1)
                 Filter: (("deletedAt" IS NULL) AND (slug = 'jee-strategy'::text))
                 Rows Removed by Filter: 6
-                Buffers: shared hit=1
+                Buffers: shared hit=1 dirtied=1
           ->  Nested Loop  (cost=0.00..12.56 rows=1 width=100) (actual time=0.005..0.007 rows=0.67 loops=3)
                 Join Filter: (c.id = a."parentId")
                 Rows Removed by Join Filter: 6
@@ -186,8 +186,8 @@ CTE Scan on ancestors  (cost=138.64..138.86 rows=11 width=100) (actual time=0.02
                       Filter: (depth < 10)
 Planning:
   Buffers: shared hit=95
-Planning Time: 0.338 ms
-Execution Time: 0.096 ms
+Planning Time: 0.334 ms
+Execution Time: 0.103 ms
 ```
 
 ## outbox claim (SKIP LOCKED)
@@ -196,22 +196,21 @@ Execution Time: 0.096 ms
 
 **Expected:** Index Scan on (status, availableAt)
 
-> Seq Scan on OutboxEvent (0 rows) — correct at this size; re-check at production volume · 0.039 ms
+> Seq Scan on OutboxEvent (0 rows) — correct at this size; re-check at production volume · 0.032 ms
 
 ```
-Limit  (cost=1.78..1.83 rows=20 width=8) (actual time=0.023..0.024 rows=0.00 loops=1)
-  Buffers: shared hit=4
-  ->  Sort  (cost=1.78..1.83 rows=20 width=8) (actual time=0.022..0.022 rows=0.00 loops=1)
+Limit  (cost=0.01..0.02 rows=1 width=8) (actual time=0.018..0.018 rows=0.00 loops=1)
+  Buffers: shared hit=3
+  ->  Sort  (cost=0.01..0.02 rows=1 width=8) (actual time=0.017..0.017 rows=0.00 loops=1)
         Sort Key: id
         Sort Method: quicksort  Memory: 25kB
-        Buffers: shared hit=4
-        ->  Seq Scan on "OutboxEvent"  (cost=0.00..1.35 rows=20 width=8) (actual time=0.012..0.012 rows=0.00 loops=1)
+        Buffers: shared hit=3
+        ->  Seq Scan on "OutboxEvent"  (cost=0.00..0.00 rows=1 width=8) (actual time=0.005..0.006 rows=0.00 loops=1)
               Filter: ((status = ANY ('{PENDING,FAILED}'::"OutboxStatus"[])) AND ("availableAt" <= now()))
-              Buffers: shared hit=1
 Planning:
-  Buffers: shared hit=102
-Planning Time: 0.329 ms
-Execution Time: 0.039 ms
+  Buffers: shared hit=99
+Planning Time: 0.290 ms
+Execution Time: 0.032 ms
 ```
 
 ## scheduled posts due
@@ -220,24 +219,24 @@ Execution Time: 0.039 ms
 
 **Expected:** Index Scan on (status, publishedAt)
 
-> Execution time: 0.088 ms
+> Execution time: 0.078 ms
 
 ```
-Limit  (cost=5.93..5.93 rows=1 width=21) (actual time=0.071..0.072 rows=0.00 loops=1)
-  Buffers: shared hit=8
-  ->  Sort  (cost=5.93..5.93 rows=1 width=21) (actual time=0.070..0.070 rows=0.00 loops=1)
+Limit  (cost=5.93..5.93 rows=1 width=21) (actual time=0.060..0.061 rows=0.00 loops=1)
+  Buffers: shared hit=8 dirtied=1
+  ->  Sort  (cost=5.93..5.93 rows=1 width=21) (actual time=0.059..0.059 rows=0.00 loops=1)
         Sort Key: "publishedAt"
         Sort Method: quicksort  Memory: 25kB
-        Buffers: shared hit=8
-        ->  Index Scan using "ContentEntry_authorId_status_idx" on "ContentEntry"  (cost=0.15..5.92 rows=1 width=21) (actual time=0.031..0.031 rows=0.00 loops=1)
+        Buffers: shared hit=8 dirtied=1
+        ->  Index Scan using "ContentEntry_authorId_status_idx" on "ContentEntry"  (cost=0.15..5.92 rows=1 width=21) (actual time=0.029..0.029 rows=0.00 loops=1)
               Index Cond: (status = 'DRAFT'::"PublishStatus")
               Filter: (("deletedAt" IS NULL) AND ("publishedAt" <= now()))
               Index Searches: 1
-              Buffers: shared hit=5
+              Buffers: shared hit=5 dirtied=1
 Planning:
   Buffers: shared hit=292
-Planning Time: 0.539 ms
-Execution Time: 0.088 ms
+Planning Time: 0.572 ms
+Execution Time: 0.078 ms
 ```
 
 ## results awaiting declaration
@@ -246,21 +245,21 @@ Execution Time: 0.088 ms
 
 **Expected:** Index scan on (year DESC, isDeclared, status)
 
-> Seq Scan on Result (54 rows) — correct at this size; re-check at production volume · 0.086 ms
+> Seq Scan on Result (54 rows) — correct at this size; re-check at production volume · 0.078 ms
 
 ```
-Limit  (cost=8.67..8.69 rows=10 width=38) (actual time=0.062..0.064 rows=10.00 loops=1)
+Limit  (cost=8.67..8.69 rows=10 width=38) (actual time=0.059..0.061 rows=10.00 loops=1)
   Buffers: shared hit=5
-  ->  Sort  (cost=8.67..8.80 rows=54 width=38) (actual time=0.061..0.061 rows=10.00 loops=1)
+  ->  Sort  (cost=8.67..8.80 rows=54 width=38) (actual time=0.058..0.059 rows=10.00 loops=1)
         Sort Key: "expectedAt"
         Sort Method: top-N heapsort  Memory: 26kB
         Buffers: shared hit=5
-        ->  Seq Scan on "Result"  (cost=0.00..7.50 rows=54 width=38) (actual time=0.016..0.046 rows=54.00 loops=1)
+        ->  Seq Scan on "Result"  (cost=0.00..7.50 rows=54 width=38) (actual time=0.014..0.043 rows=54.00 loops=1)
               Filter: (("deletedAt" IS NULL) AND (NOT "isDeclared") AND (status = 'PUBLISHED'::"PublishStatus"))
               Rows Removed by Filter: 146
               Buffers: shared hit=5
 Planning:
-  Buffers: shared hit=129
-Planning Time: 0.352 ms
-Execution Time: 0.086 ms
+  Buffers: shared hit=130
+Planning Time: 0.326 ms
+Execution Time: 0.078 ms
 ```
