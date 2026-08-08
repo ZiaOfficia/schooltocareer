@@ -6,23 +6,23 @@ The backend is complete and validated against real PostgreSQL. The frontend is
 one reference page and the foundation beneath it. The hard architecture is done
 and almost none of the site is.
 
-## How many pages are not built
+## How much is not built
 
-Two questions hide in that one.
+**The unit of work is templates, not pages.** An earlier version of this document
+led with "7,315 URLs missing", which is true and misleading. Those URLs are
+produced by roughly **18 distinct templates**. `/previous-year-papers/[slug]` is
+one engineering problem whether it renders 3,000 papers or 200,000 — past that
+point it is a content problem, not a build problem.
 
 | | count |
 | --- | --- |
-| Distinct route templates in `ROUTES` | 38 |
-| Route templates built | **2** (home, exam hub) |
-| Route templates missing | **36** |
+| Distinct templates to build | **~18** |
+| Templates built | **2** (home, exam hub) |
 | URLs the current seed implies | 7,336 |
-| URLs live | **21** |
-| URLs missing | **7,315** (99.7%) |
+| URLs live | 21 |
 
-The 20 exam hubs came from building *one* page — the dynamic route generates
-every instance. Most remaining templates are the same shape of work. But the
-count also understates the gap: at launch volume the same templates produce
-roughly 60,000 URLs, not 7,000.
+Keep both numbers in view. The template count is what you schedule against; the
+URL count is what tells you which template to schedule first.
 
 ## Built and verified
 
@@ -87,9 +87,15 @@ down rather than merely failing to rank.
 ## Tiering rule
 
 "Own one search intent completely" and "100,000 SEO pages" pull in opposite
-directions. They reconcile as three tiers. **This needs a decision — it changes
-what gets built.**
+directions. They reconcile as four tiers.
 
+- **Tier 0 — Money pages (~50).** JEE Main, NEET, CBSE Class 10 and 12, UPSC,
+  SSC CGL, IBPS PO, CUET, GATE, CAT. Disproportionate effort: original graphics,
+  historical analysis, interactive tools, download centre, deep internal linking.
+  These should be the best pages in India on their subject, and the honest test
+  is whether a student can finish their task without opening a second tab.
+  **Tier 0 is not a content tier — it is a product tier.** Each one is closer to
+  a small application than a page.
 - **Tier 1 — Hubs (~1,400).** Full reference-page depth, editorially maintained,
   indexable. These carry the rankings.
 - **Tier 2 — Records (~21,000).** Papers, results, articles. Honest and shallow:
@@ -125,22 +131,83 @@ Full 89-model design preserved at `docs/architecture/schema-full-v1/`.
 | Provenance untested | Every seeded date is `isTentative`, so the *official* branch has never rendered against real data. |
 | ESLint on tooling | `tooling/scripts` typechecks but has no `lint` script. |
 | Worker not deployed | Cache revalidation, Cloudinary round-trip and IndexNow are asserted as outbox rows only; delivery has never run. |
-| Nothing deployed | No Vercel, no Render, no DNS. The apex canonical policy is enforced in code but never exercised in production. |
+| Nothing deployed | No Vercel, no Render, no DNS. The apex canonical policy is enforced in code but never exercised in production. **Now Phase A.** |
+| Editorial workflow — UI only | The *workflow* exists: `ContentDraft`, `ContentRevision`, `PublishStatus`, scheduled publishing (verified in `verify:e2e`), and `EXAM_PUBLISH` separated from `EXAM_MANAGE` so an author can draft but not publish. What is missing is the admin UI, plus two steps that were never modelled: a **fact-check gate** and **update reminders** for pages that go stale. The second matters most — an exam page that was right in March and wrong in June is worse than no page. |
+| No question-level data | Blocks insights, chapter analytics and real recommendations. See "What the schema cannot do yet". |
 
-## Next, in order
+## What the schema cannot do yet
 
-Highest search intent per unit of work.
+This matters because several of the most valuable ideas depend on it, and the
+gap is easy to miss.
 
-1. **Exam cluster pages** (7 routes, 140 URLs) — completes Phase 1 for the
-   highest-intent queries. Reuses the reference page wholesale.
-2. **Search results** (1) — already designed; board pages become filtered
-   versions of it.
-3. **Paper detail + browse** (3,001) — largest corpus, clearest transactional
-   intent.
-4. **Board / class hubs** (980) — assembly work once search exists.
-5. **Result detail + articles** (500) — spiky seasonal traffic.
-6. **Deploy** — until this happens the canonical policy is theory.
-7. **Admin** — needed before anyone but you can add content.
+**There is no question-level model.** The finest granularity is `QuestionPaper`
+(a whole paper) and `QuestionPaperFile` (the PDF). The 30 models contain no
+`Question`, no per-question topic tagging, and no per-question difficulty.
 
-Items 1–5 take the site from 21 live URLs to roughly 4,600 — about 63% of
-everything the current data can produce — without a single new backend endpoint.
+So the graph is:
+
+```
+Board → Class → Subject → Chapter
+Exam  → Year  → Paper (year, shift, session, subject, paperType, locale)
+```
+
+not:
+
+```
+Question → Chapter → Subject → Exam → Difficulty → Year → Shift
+```
+
+| Wanted | Possible today |
+| --- | --- |
+| "All Physics papers, JEE Main, 2017–2026" | **Yes** — paper-level facets exist |
+| "Every Mechanics *question* in that range" | **No** — questions are not modelled |
+| "Electrostatics weightage fell 8% since 2021" | **No** — needs question→chapter tagging |
+| "Most repeated chapters" | **No** — same reason |
+
+An insight engine and a genuine recommendation engine both sit on top of this
+missing layer. Adding it is a `Question` model plus `QuestionTopic`, and the
+expensive part is not the schema — it is tagging 20,000 papers' worth of
+questions to chapters. That is an editorial and possibly ML programme, not a
+sprint. **Worth deciding early, because it changes what Tier 0 pages can promise.**
+
+## Roadmap
+
+Revised after review. The ordering principle is: start the clock on things that
+need calendar time, then build the template that unlocks the most other templates.
+
+### Phase A — Deploy (now)
+
+Deploy what exists today: home, exam hub, robots, sitemap. Not for visitors —
+for the things that cannot be validated locally and that need elapsed time:
+
+- Render cold starts, Vercel function limits, CDN and compression behaviour
+- Real DNS, SSL, and the apex canonical policy actually exercised
+- Search Console verification and the start of index history
+- Core Web Vitals **field** data, which needs weeks of real traffic
+
+You lose nothing by starting that clock with three page types instead of twenty.
+
+### Phase B — Search
+
+Search is the universal renderer. Board hubs, class pages, paper browse, exam
+category listings and result listings are all the same component with different
+presets. Building it well finishes a large fraction of the remaining templates
+as a side effect.
+
+### Phase C — Paper detail
+
+Evergreen and transactional. "JEE Main 2021 Physics Shift 2 PDF" is searched
+every year by a new cohort, and the intent is unambiguous.
+
+### Then
+
+Exam cluster (7 routes) → board cluster → results and articles → admin and
+editorial UI → Tier 0 build-out → predictors and calculators → question-level
+tagging, insights, recommendations.
+
+### The KPI
+
+**Queries owned, not pages published.** Owning "JEE Main syllabus", "JEE Main
+eligibility", "JEE Main answer key" and "JEE Main previous year papers"
+completely is what makes Google trust the domain for "JEE Main" generally.
+Authority compounds per topic cluster, not per URL.
