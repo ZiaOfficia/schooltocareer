@@ -187,6 +187,20 @@ for the things that cannot be validated locally and that need elapsed time:
 
 You lose nothing by starting that clock with three page types instead of twenty.
 
+### Phase A2 — Observability (immediately after)
+
+The first month of real data will say things no planning document can. None of
+this is useful retroactively, so it goes in before the traffic does.
+
+- Search Console verified; sitemap submitted; Index Coverage watched weekly
+- Analytics with the events that matter here: PDF downloads, internal search
+  terms, zero-result queries
+- Core Web Vitals **field** data (CrUX needs weeks of real sessions)
+- 404 and crawl-error monitoring, server logs, sitemap fetch status
+
+`SearchQueryLog` already captures internal zero-result queries — that table is
+the editorial backlog, and it only starts filling once people arrive.
+
 ### Phase B — Search
 
 Search is the universal renderer. Board hubs, class pages, paper browse, exam
@@ -211,3 +225,48 @@ tagging, insights, recommendations.
 eligibility", "JEE Main answer key" and "JEE Main previous year papers"
 completely is what makes Google trust the domain for "JEE Main" generally.
 Authority compounds per topic cluster, not per URL.
+
+## Intent map
+
+Schedule by intent, not by route. An intent is *satisfied* only when every page
+it needs exists and is good — a half-satisfied intent earns nothing.
+
+| Intent | Pages needed | Satisfied |
+| --- | --- | --- |
+| "When is the exam / am I eligible" | exam hub, eligibility, dates | **partial** — hub only |
+| "Download a specific paper" | paper detail, paper browse, exam papers | no |
+| "What's on the syllabus" | syllabus, pattern, chapter weightage | no |
+| "Has my result come out" | result detail, exam result, result browse | no |
+| "What do I study for Class 10 X" | board → class → subject → chapter | no |
+| "Which exam should I take" | exam category, comparison | no |
+| "What will the cutoff be" | cutoff pages, predictors | no — needs Phase 2 models |
+| "Which chapters matter most" | chapter analytics | no — needs question-level data |
+
+**Current score: 0 of 8 intents fully satisfied, 1 partial.** That is a more
+honest headline than "21 URLs live", and it is the number to move.
+
+## Tier 0 checklist
+
+A page is Tier 0 only if **every** item passes. Missing one means it is Tier 1
+with ambitions. The point of a checklist is that it cannot be argued with.
+
+| # | Requirement | Machine-checkable |
+| --- | --- | --- |
+| 1 | Complete overview, conducting body, official link | no |
+| 2 | Full official timeline, every event dated or explicitly "not announced" | yes |
+| 3 | Previous papers linked, with counts | yes |
+| 4 | Syllabus page complete | yes |
+| 5 | Exam pattern complete | yes |
+| 6 | Eligibility complete | yes |
+| 7 | FAQs answered inline, none fabricated | no |
+| 8 | Original analysis — something no competitor has | no |
+| 9 | Structured data valid (breadcrumb + page schema) | yes |
+| 10 | Internal links to every cluster page, and inbound from ≥3 | yes |
+| 11 | Download centre — every asset in one place | yes |
+| 12 | Lighthouse performance ≥ 95 mobile | yes |
+| 13 | Every fact carries provenance | yes |
+| 14 | Human editorial review, signed and dated | no |
+
+Ten of fourteen are machine-checkable, so this should become a script that runs
+in CI against the live site and fails the Tier 0 claim rather than a document
+someone remembers to consult.

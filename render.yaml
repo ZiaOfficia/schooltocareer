@@ -1,0 +1,89 @@
+# Render blueprint for the API and the outbox worker.
+#
+# REGION. Both services run in Singapore, the closest Render region to India.
+# The database must be in the SAME region — see docs/DEPLOYMENT.md. A Singapore
+# API talking to a Neon instance in us-east-2 pays ~200 ms on every query, which
+# no amount of frontend optimisation recovers.
+#
+# The worker is a SEPARATE service, not a flag on the API. Two reasons: a worker
+# crash-loop must not take the API down with it, and they scale on different
+# signals — the API on request volume, the worker on outbox depth.
+
+services:
+  - type: web
+    name: stc-api
+    runtime: node
+    region: singapore
+    plan: starter
+    branch: main
+    buildCommand: corepack enable && pnpm install --frozen-lockfile && pnpm --filter @stc/database generate && pnpm --filter @stc/api build
+    startCommand: node apps/api/dist/server.js
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: LOG_LEVEL
+        value: info
+      - key: RUN_WORKER_IN_PROCESS
+        value: false
+      - key: WEB_BASE_URL
+        value: https://schooltocareer.in
+      - key: CORS_ORIGINS
+        value: https://schooltocareer.in
+      # Everything below is set in the Render dashboard, never in this file.
+      - key: DATABASE_URL
+        sync: false
+      - key: DIRECT_DATABASE_URL
+        sync: false
+      - key: SITE_ID
+        sync: false
+      - key: JWT_ACCESS_SECRET
+        sync: false
+      - key: JWT_REFRESH_SECRET
+        sync: false
+      - key: CLOUDINARY_CLOUD_NAME
+        sync: false
+      - key: CLOUDINARY_API_KEY
+        sync: false
+      - key: CLOUDINARY_API_SECRET
+        sync: false
+      - key: IP_HASH_SALT
+        sync: false
+      - key: REVALIDATE_SECRET
+        sync: false
+      - key: INDEXNOW_KEY
+        sync: false
+
+  - type: worker
+    name: stc-worker
+    runtime: node
+    region: singapore
+    plan: starter
+    branch: main
+    buildCommand: corepack enable && pnpm install --frozen-lockfile && pnpm --filter @stc/database generate && pnpm --filter @stc/api build
+    startCommand: node apps/api/dist/workers/worker.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: LOG_LEVEL
+        value: info
+      - key: WEB_BASE_URL
+        value: https://schooltocareer.in
+      - key: DATABASE_URL
+        sync: false
+      - key: DIRECT_DATABASE_URL
+        sync: false
+      - key: SITE_ID
+        sync: false
+      - key: REVALIDATE_SECRET
+        sync: false
+      - key: CLOUDINARY_CLOUD_NAME
+        sync: false
+      - key: CLOUDINARY_API_KEY
+        sync: false
+      - key: CLOUDINARY_API_SECRET
+        sync: false
+      - key: INDEXNOW_KEY
+        sync: false
