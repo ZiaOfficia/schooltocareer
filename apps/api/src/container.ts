@@ -49,6 +49,7 @@ import { PostgresSearchProvider } from './providers/search/postgres.search-provi
 import { SearchRepository } from './providers/search/search.repository.js';
 import type { ISearchProvider } from './providers/search/search.provider.js';
 import { CloudinaryStorageProvider } from './providers/storage/cloudinary.storage-provider.js';
+import { UnavailableStorageProvider } from './providers/storage/unavailable.storage-provider.js';
 import type { IStorageProvider } from './providers/storage/storage.provider.js';
 
 /**
@@ -119,13 +120,28 @@ export function createContainer(overrides: Partial<AppContainer> = {}): AppConta
   const search: ISearchProvider =
     overrides.providers?.search ?? new PostgresSearchProvider(searchRepository);
 
+  // All three or none — a partial Cloudinary config is a misconfiguration, not
+  // a degraded mode, and silently half-enabling it would fail later and
+  // further from the cause. Destructured into locals so the narrowing is real
+  // rather than three non-null assertions.
+  const cloudName = env.CLOUDINARY_CLOUD_NAME;
+  const apiKey = env.CLOUDINARY_API_KEY;
+  const apiSecret = env.CLOUDINARY_API_SECRET;
+  const cloudinaryConfigured = Boolean(cloudName && apiKey && apiSecret);
+
   const storage: IStorageProvider =
     overrides.providers?.storage ??
-    new CloudinaryStorageProvider({
-      cloudName: env.CLOUDINARY_CLOUD_NAME,
-      apiKey: env.CLOUDINARY_API_KEY,
-      apiSecret: env.CLOUDINARY_API_SECRET,
-    });
+    (cloudName && apiKey && apiSecret
+      ? new CloudinaryStorageProvider({ cloudName, apiKey, apiSecret })
+      : new UnavailableStorageProvider());
+
+  if (!cloudinaryConfigured) {
+    logger.warn(
+      'No Cloudinary credentials — uploads, deletes and media reconciliation are disabled. ' +
+        'Every read path works; MediaAsset URLs are stored columns. Set CLOUDINARY_CLOUD_NAME, ' +
+        'CLOUDINARY_API_KEY and CLOUDINARY_API_SECRET before the admin needs to publish media.',
+    );
+  }
 
   if (!env.REDIS_URL && env.NODE_ENV === 'production') {
     logger.warn(
