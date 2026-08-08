@@ -27,6 +27,13 @@ const nextConfig = {
    *
    * Mapping the extension here is what lets apps/web consume the packages
    * as source rather than forcing every one of them to emit a build first.
+   *
+   * THIS IS ALSO WHY `dev` DOES NOT USE TURBOPACK. Turbopack ignores this
+   * config and has no equivalent for extension aliasing, so `--turbopack`
+   * resolved `./site.js` to nothing and reported "@stc/config has no exports"
+   * — while `next build` compiled the same code fine. A dev server and a
+   * production build that disagree about module resolution is a worse problem
+   * than a slower dev server.
    */
   webpack(config) {
     config.resolve.extensionAlias = {

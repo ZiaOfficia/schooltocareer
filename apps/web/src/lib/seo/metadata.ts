@@ -71,7 +71,12 @@ export function buildMetadata(input: BuildInput): Metadata {
   const rawTitle = input.title ?? fillTemplate(tpl.title, input.values);
   const rawDescription = input.description ?? fillTemplate(tpl.description, input.values);
 
-  const title = clamp(rawTitle, SEO_LIMITS.TITLE_MAX);
+  // The root layout applies TITLE_TEMPLATE.DEFAULT ("%s | SchoolToCareer"), so
+  // the string clamped here is NOT what appears in the SERP — the suffix is
+  // added afterwards. Clamping to TITLE_MAX produced 78-character titles.
+  // Reserve the suffix so the rendered total lands inside the limit.
+  const suffixLength = TITLE_TEMPLATE.DEFAULT.replace('%s', '').length;
+  const title = clamp(rawTitle, Math.max(20, SEO_LIMITS.TITLE_MAX - suffixLength));
   const description = clamp(rawDescription, SEO_LIMITS.DESCRIPTION_MAX);
 
   const canonical = absoluteUrl(input.path);

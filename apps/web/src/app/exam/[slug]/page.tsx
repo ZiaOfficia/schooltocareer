@@ -98,13 +98,32 @@ function formatDate(iso: string | null): string {
   }).format(new Date(iso));
 }
 
-/** Picks the event a visitor most needs, by type keyword. */
-function findEvent(events: readonly ExamEventDto[], keyword: string): ExamEventDto | undefined {
-  const needle = keyword.toLowerCase();
-  return events.find(
-    (e) => e.type.toLowerCase().includes(needle) || e.title.toLowerCase().includes(needle),
-  );
+/**
+ * Finds an event by EXAM_EVENT_TYPE, exactly.
+ *
+ * An earlier version matched on a substring, which quietly picked
+ * APPLICATION_START for the registration deadline — showing the day the form
+ * OPENS where the page promises the day it CLOSES, and making the "closing
+ * soon" warning unreachable. On the single most consequential number on the
+ * page, a near-enough match is worse than no match.
+ */
+function findEvent(events: readonly ExamEventDto[], type: string): ExamEventDto | undefined {
+  return events.find((e) => e.type.toUpperCase() === type);
 }
+
+/** The date a deadline actually falls on. */
+function eventDate(event: ExamEventDto | undefined): string | null {
+  if (!event) return null;
+  return event.endDate ?? event.startDate;
+}
+
+const FREQUENCY_PHRASE: Record<string, string> = {
+  ANNUAL: 'once a year',
+  BIANNUAL: 'twice a year',
+  QUARTERLY: 'four times a year',
+  MULTIPLE_SESSIONS: 'in multiple sessions each year',
+  ONE_TIME: 'as a one-time exam',
+};
 
 export default async function ExamPage({ params }: { params: Promise<Params> }) {
   const { slug } = await params;
@@ -115,11 +134,13 @@ export default async function ExamPage({ params }: { params: Promise<Params> }) 
   const cycle = exam.years.find((y) => y.isCurrent) ?? exam.years[0];
   const events = cycle?.events ?? [];
 
-  const registration = findEvent(events, 'registration') ?? findEvent(events, 'application');
-  const examDate = findEvent(events, 'exam');
-  const result = findEvent(events, 'result');
+  const applicationOpens = findEvent(events, 'APPLICATION_START');
+  const applicationCloses = findEvent(events, 'APPLICATION_END');
+  const examDate = findEvent(events, 'EXAM_DATE');
+  const result = findEvent(events, 'RESULT');
 
-  const closingIn = daysUntil(registration?.endDate ?? null);
+  const deadline = eventDate(applicationCloses);
+  const closingIn = daysUntil(deadline);
   const isClosingSoon = closingIn !== null && closingIn >= 0 && closingIn <= 14;
 
   const trail = [
@@ -137,16 +158,19 @@ export default async function ExamPage({ params }: { params: Promise<Params> }) 
   const faqs = [
     {
       question: `What is the ${exam.name} ${year} exam date?`,
-      answer: examDate?.startDate
-        ? `${exam.name} ${year} is scheduled for ${formatDate(examDate.startDate)}${
-            examDate.isTentative ? '. This date is tentative and may change.' : '.'
+      answer: eventDate(examDate)
+        ? `${exam.name} ${year} is scheduled for ${formatDate(eventDate(examDate))}${
+            examDate?.isTentative ? '. This date is tentative and may change.' : '.'
           }`
         : `The ${exam.name} ${year} exam date has not been announced by ${exam.conductingBody} yet. This page is updated when the official notification is released.`,
     },
     {
       question: `Who conducts ${exam.name}?`,
-      answer: `${exam.name} is conducted by ${exam.conductingBody}${
-        exam.frequency ? `, ${exam.frequency.toLowerCase().replace(/_/g, ' ')}` : ''
+      // A phrase map, not `frequency.toLowerCase()` — that produced
+      // "conducted by the National Testing Agency, annual", which is the kind
+      // of machine-generated sentence that makes a page read as spun.
+      answer: `${exam.name} is conducted by ${exam.conductingBody}, held ${
+        FREQUENCY_PHRASE[exam.frequency] ?? 'on a published schedule'
       }.`,
     },
     {
@@ -243,13 +267,15 @@ export default async function ExamPage({ params }: { params: Promise<Params> }) 
               items={[
                 {
                   label: 'Registration',
-                  value: registration?.endDate
-                    ? `Ends ${formatDate(registration.endDate)}`
-                    : formatDate(registration?.startDate ?? null),
+                  value: deadline
+                    ? `Ends ${formatDate(deadline)}`
+                    : applicationOpens
+                      ? `Opens ${formatDate(eventDate(applicationOpens))}`
+                      : 'To be announced',
                   tone: isClosingSoon ? 'urgent' : 'plain',
                 },
-                { label: 'Exam', value: formatDate(examDate?.startDate ?? null) },
-                { label: 'Result', value: formatDate(result?.startDate ?? null) },
+                { label: 'Exam', value: formatDate(eventDate(examDate)) },
+                { label: 'Result', value: formatDate(eventDate(result)) },
                 {
                   label: 'Cycle',
                   value: cycle?.sessionName ? `${year} · ${cycle.sessionName}` : String(year),
