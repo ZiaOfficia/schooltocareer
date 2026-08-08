@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022"],
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "noFallthroughCasesInSwitch": true,
+    "exactOptionalPropertyTypes": true,
+    "forceConsistentCasingInFileNames": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "skipLibCheck": true,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "moduleDetection": "force",
+    "paths": {
+      "@stc/database": ["./packages/database/src/index.ts"],
+      "@stc/types": ["./packages/types/src/index.ts"],
+      "@stc/validation": ["./packages/validation/src/index.ts"],
+      "@stc/config": ["./packages/config/src/index.ts"],
+      "@stc/utils": ["./packages/utils/src/index.ts"],
+      "@stc/ui": ["./packages/ui/src/index.ts"]
+    }
+  },
+  "exclude": ["node_modules", "dist", ".next", "**/generated/**"]
+}

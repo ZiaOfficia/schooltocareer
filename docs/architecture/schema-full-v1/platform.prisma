@@ -1,0 +1,207 @@
+// ---------------------------------------------------------------------------
+// PLATFORM — Site (multi-brand), transactional outbox, analytics, AI reserve.
+//
+// Multi-tenancy scope decision (v1.0):
+//   `siteId` lives on the CONTENT/PRESENTATION layer only —
+//   ContentEntry, Category, PageSection, FaqItem, SeoMeta, Redirect,
+//   SearchDocument, InternalLinkRule.
+//   Entities (Exam, Board, College, Subject...) are SHARED reference data
+//   across sites. A second brand presents different content over the same
+//   taxonomy; it must not duplicate the NEET exam or the CBSE board.
+// ---------------------------------------------------------------------------
+
+model Site {
+  id            String  @id @default(cuid())
+  key           String  @unique // "schooltocareer"
+  name          String
+  domain        String  @unique // "schooltocareer.in"
+  defaultLocale Locale  @default(EN)
+  locales       Locale[]
+  isActive      Boolean @default(true)
+
+  logoUrl       String?
+  themeTokens   Json? // brand colour/typography overrides
+  adsenseClient String?
+  gaMeasurementId String?
+  organizationSchema Json? // Organization JSON-LD payload
+
+  contentEntries    ContentEntry[]
+  categories        Category[]
+  pageSections      PageSection[]
+  faqItems          FaqItem[]
+  seoMetas          SeoMeta[]
+  redirects         Redirect[]
+  searchDocuments   SearchDocument[]
+  internalLinkRules InternalLinkRule[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([isActive])
+}
+
+// ---------------------------------------------------------------------------
+// TRANSACTIONAL OUTBOX
+//
+// Rows are inserted IN THE SAME TRANSACTION as the domain write. A worker
+// claims batches with `SELECT ... FOR UPDATE SKIP LOCKED`, so N workers scale
+// without double-processing. This is the transactional GUARANTEE; a future
+// BullMQ/SQS transport sits behind IQueueProvider and consumes from here.
+// ---------------------------------------------------------------------------
+
+model OutboxEvent {
+  id          BigInt          @id @default(autoincrement())
+  eventType   OutboxEventType
+  ownerType   OwnerType
+  ownerId     String
+  payload     Json
+  status      OutboxStatus    @default(PENDING)
+  attempts    Int             @default(0)
+  availableAt DateTime        @default(now()) // exponential-backoff target
+  lastError   String?
+  processedAt DateTime?
+  createdAt   DateTime        @default(now())
+
+  @@index([status, availableAt])
+  @@index([ownerType, ownerId, eventType])
+  @@index([status, createdAt])
+}
+
+// ---------------------------------------------------------------------------
+// ANALYTICS
+//
+// AnalyticsEvent is append-only and RANGE-PARTITIONED BY MONTH on occurredAt.
+// PostgreSQL requires the partition key in the primary key, hence @@id([id, occurredAt]).
+// Raw events: 90-day retention. Rollups below: permanent.
+// `siteId` / `userId` are intentionally UNCONSTRAINED here — an FK check on a
+// high-volume insert path is a cost with no benefit for a fire-and-forget event.
+// ---------------------------------------------------------------------------
+
+model AnalyticsEvent {
+  id          BigInt             @default(autoincrement())
+  eventType   AnalyticsEventType
+  siteId      String?
+  ownerType   OwnerType?
+  ownerId     String?
+  path        String
+  locale      Locale             @default(EN)
+  sessionHash String? // salted, rotating — not a stable identifier
+  userId      String?
+  referrer    String?
+  deviceType  String?
+  country     String?
+  metadata    Json?
+  occurredAt  DateTime           @default(now())
+
+  @@id([id, occurredAt])
+  @@index([eventType, occurredAt(sort: Desc)])
+  @@index([ownerType, ownerId, occurredAt(sort: Desc)])
+  @@index([path, occurredAt(sort: Desc)])
+}
+
+/// Permanent rollup. Feeds `popularityScore` on Exam/Board/College, which in
+/// turn feeds generateStaticParams — analytics closes the loop into rendering.
+model ContentDailyStat {
+  id          BigInt    @id @default(autoincrement())
+  ownerType   OwnerType
+  ownerId     String
+  date        DateTime  @db.Date
+  views       Int       @default(0)
+  uniqueViews Int       @default(0)
+  downloads   Int       @default(0)
+  shares      Int       @default(0)
+  avgTimeSec  Int?
+
+  @@unique([ownerType, ownerId, date])
+  @@index([date(sort: Desc), views(sort: Desc)])
+  @@index([ownerType, date(sort: Desc)])
+}
+
+/// Zero-result queries are content gaps — this table is an editorial backlog.
+model SearchTermDailyStat {
+  id              BigInt   @id @default(autoincrement())
+  normalizedQuery String
+  locale          Locale   @default(EN)
+  date            DateTime @db.Date
+  searches        Int      @default(0)
+  zeroResultCount Int      @default(0)
+  clickThroughs   Int      @default(0)
+
+  @@unique([normalizedQuery, locale, date])
+  @@index([date(sort: Desc), searches(sort: Desc)])
+  @@index([date(sort: Desc), zeroResultCount(sort: Desc)])
+}
+
+// ---------------------------------------------------------------------------
+// AI RESERVE — schema only. Not implemented, not wired in v1.0.
+// The pgvector extension is created now because adding it to a live database
+// later requires a maintenance window.
+// ---------------------------------------------------------------------------
+
+model AiPromptTemplate {
+  id                 String  @id @default(cuid())
+  key                String // "exam.summary"
+  version            Int     @default(1)
+  name               String
+  description        String?
+  systemPrompt       String  @db.Text
+  userPromptTemplate String  @db.Text
+  model              String
+  temperature        Float   @default(0.3)
+  maxTokens          Int     @default(1024)
+  outputSchema       Json?
+  isActive           Boolean @default(true)
+
+  generations AiGeneration[]
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  createdById String?
+
+  @@unique([key, version])
+  @@index([isActive])
+}
+
+model AiGeneration {
+  id               BigInt             @id @default(autoincrement())
+  templateId       String?
+  kind             AiContentKind
+  ownerType        OwnerType?
+  ownerId          String?
+  locale           Locale             @default(EN)
+  inputPayload     Json
+  outputText       String?            @db.Text
+  outputJson       Json?
+  model            String
+  promptTokens     Int?
+  completionTokens Int?
+  costMicros       Int?
+  status           AiGenerationStatus @default(PENDING)
+  error            String?
+  reviewedById     String?
+  approvedAt       DateTime?
+  createdAt        DateTime           @default(now())
+
+  template AiPromptTemplate? @relation(fields: [templateId], references: [id], onDelete: SetNull)
+
+  @@index([kind, status, createdAt(sort: Desc)])
+  @@index([ownerType, ownerId])
+}
+
+model ContentEmbedding {
+  id         String                @id @default(cuid())
+  ownerType  OwnerType
+  ownerId    String
+  locale     Locale                @default(EN)
+  chunkIndex Int
+  chunkText  String                @db.Text
+  tokenCount Int?
+  model      String // "text-embedding-3-small"
+  embedding  Unsupported("vector(1536)")?
+  sourceHash String?
+  createdAt  DateTime              @default(now())
+  updatedAt  DateTime              @updatedAt
+
+  @@unique([ownerType, ownerId, locale, chunkIndex, model])
+  @@index([ownerType, ownerId])
+}

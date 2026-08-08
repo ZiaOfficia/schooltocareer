@@ -1,0 +1,327 @@
+// ---------------------------------------------------------------------------
+// CONTENT — the publishing spine, editorial workflow, taxonomy.
+//
+// ContentEntry carries slug/path/status/SEO/publishing for ALL authored
+// content. Typed satellites (Article, Note, SyllabusDoc) hold type-specific
+// columns via a 1:1 FK. One spine means sitemap generation, the search
+// indexer, "latest updates" feeds and the admin content list are each ONE
+// indexed query instead of eight UNIONed ones.
+//
+// Editorial workflow (v1.0):
+//   autosave  → ContentDraft   (volatile, one row per content+editor)
+//   save      → ContentRevision(MANUAL)
+//   publish   → ContentRevision(PUBLISHED) + ContentEntry.publishedRevisionId
+//   schedule  → ContentRevision(SCHEDULED) + ContentEntry.scheduledRevisionId
+//   rollback  → NEW revision with rollbackOfVersion set, then publish
+// Autosave is NOT a revision. Autosaving into ContentRevision produces 200
+// junk rows per article and makes real history unreadable.
+// ---------------------------------------------------------------------------
+
+model ContentEntry {
+  id             String      @id @default(cuid())
+  siteId         String
+  type           ContentType
+  slug           String
+  path           String // canonical URL path — drives sitemap + redirects
+  title          String
+  subtitle       String?
+  excerpt        String?     @db.Text
+  bodyHtml       String?     @db.Text
+  bodyJson       Json? // editor AST — source of truth for editing
+  readingMinutes Int?
+  locale         Locale      @default(EN)
+  translationOfId String?
+
+  status      PublishStatus @default(DRAFT)
+  publishedAt DateTime?
+  scheduledAt DateTime?
+  expiresAt   DateTime?
+  version     Int           @default(1)
+  isFeatured  Boolean       @default(false)
+  isPinned    Boolean       @default(false)
+  viewCount   Int           @default(0) // denormalised; batched worker
+
+  authorId        String
+  reviewerId      String?
+  categoryId      String?
+  featuredImageId String?
+
+  // editorial workflow pointers
+  publishedRevisionId BigInt?
+  scheduledRevisionId BigInt?
+  lockedById          String?
+  lockedAt            DateTime?
+
+  // entity anchors — REAL FKs, these are hot-path filters
+  examId              String?
+  boardId             String?
+  boardClassSubjectId String?
+  chapterId           String?
+  collegeId           String?
+  courseId            String?
+  careerId            String?
+
+  site          Site          @relation(fields: [siteId], references: [id], onDelete: Cascade)
+  author        User          @relation("ContentAuthor", fields: [authorId], references: [id], onDelete: Restrict)
+  reviewer      User?         @relation("ContentReviewer", fields: [reviewerId], references: [id], onDelete: SetNull)
+  lockedBy      User?         @relation("ContentLock", fields: [lockedById], references: [id], onDelete: SetNull)
+  category      Category?     @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  featuredImage MediaAsset?   @relation("ContentFeaturedImage", fields: [featuredImageId], references: [id], onDelete: SetNull)
+  translationOf ContentEntry? @relation("Translations", fields: [translationOfId], references: [id], onDelete: SetNull)
+  translations  ContentEntry[] @relation("Translations")
+
+  publishedRevision ContentRevision? @relation("PublishedRevision", fields: [publishedRevisionId], references: [id], onDelete: SetNull)
+  scheduledRevision ContentRevision? @relation("ScheduledRevision", fields: [scheduledRevisionId], references: [id], onDelete: SetNull)
+
+  exam              Exam?              @relation(fields: [examId], references: [id], onDelete: Cascade)
+  board             Board?             @relation(fields: [boardId], references: [id], onDelete: Cascade)
+  boardClassSubject BoardClassSubject? @relation(fields: [boardClassSubjectId], references: [id], onDelete: Cascade)
+  chapter           Chapter?           @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+  college           College?           @relation(fields: [collegeId], references: [id], onDelete: Cascade)
+  course            Course?            @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  career            Career?            @relation(fields: [careerId], references: [id], onDelete: Cascade)
+
+  tags      ContentTag[]
+  article   Article?
+  note      Note?
+  syllabus  SyllabusDoc?
+  related   ContentRelation[] @relation("RelationSource")
+  relatedBy ContentRelation[] @relation("RelationTarget")
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  createdById String?
+  updatedById String?
+  deletedAt   DateTime?
+
+  @@unique([siteId, path])
+  @@unique([siteId, type, slug, locale])
+  @@index([siteId, status, publishedAt(sort: Desc)])
+  @@index([siteId, type, status, publishedAt(sort: Desc)])
+  @@index([categoryId, status, publishedAt(sort: Desc)])
+  @@index([examId, type, status])
+  @@index([boardClassSubjectId, type, status])
+  @@index([chapterId, type, status])
+  @@index([collegeId, type, status])
+  @@index([authorId, status])
+  @@index([status, scheduledAt]) // scheduled-publish worker
+  @@index([isFeatured, status, publishedAt(sort: Desc)])
+  @@index([lockedAt])
+  @@index([deletedAt])
+}
+
+model Article {
+  contentEntryId  String    @id
+  articleType     String // BLOG | NEWS
+  sourceName      String?
+  sourceUrl       String?
+  dateline        String?
+  isBreaking      Boolean   @default(false)
+  newsPublishedAt DateTime?
+
+  contentEntry ContentEntry @relation(fields: [contentEntryId], references: [id], onDelete: Cascade)
+
+  @@index([articleType, newsPublishedAt(sort: Desc)])
+  @@index([isBreaking, newsPublishedAt(sort: Desc)])
+}
+
+model Note {
+  contentEntryId String  @id
+  difficulty     String?
+  pdfId          String?
+
+  contentEntry ContentEntry @relation(fields: [contentEntryId], references: [id], onDelete: Cascade)
+  pdf          MediaAsset?  @relation("NotePdf", fields: [pdfId], references: [id], onDelete: SetNull)
+}
+
+model SyllabusDoc {
+  contentEntryId String  @id
+  academicYear   String // "2025-26"
+  isLatest       Boolean @default(true)
+  pdfId          String?
+
+  contentEntry ContentEntry @relation(fields: [contentEntryId], references: [id], onDelete: Cascade)
+  pdf          MediaAsset?  @relation("SyllabusPdf", fields: [pdfId], references: [id], onDelete: SetNull)
+
+  @@index([academicYear, isLatest])
+}
+
+model Category {
+  id          String  @id @default(cuid())
+  siteId      String
+  name        String
+  slug        String
+  parentId    String?
+  type        String // BLOG | NEWS | CAREER
+  description String? @db.Text
+  order       Int     @default(0)
+
+  site         Site                  @relation(fields: [siteId], references: [id], onDelete: Cascade)
+  parent       Category?             @relation("CategoryTree", fields: [parentId], references: [id], onDelete: SetNull)
+  children     Category[]            @relation("CategoryTree")
+  entries      ContentEntry[]
+  translations CategoryTranslation[]
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  createdById String?
+  updatedById String?
+  deletedAt   DateTime?
+
+  @@unique([siteId, slug])
+  @@index([siteId, type, order])
+  @@index([parentId])
+}
+
+model CategoryTranslation {
+  id          String            @id @default(cuid())
+  categoryId  String
+  locale      Locale
+  name        String
+  description String?           @db.Text
+  status      TranslationStatus @default(DRAFT)
+  sourceHash  String?
+
+  category Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([categoryId, locale])
+}
+
+model Tag {
+  id       String @id @default(cuid())
+  name     String
+  slug     String @unique
+  useCount Int    @default(0) // denormalised, refreshed by worker
+
+  entries ContentTag[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([useCount(sort: Desc)])
+}
+
+model ContentTag {
+  contentEntryId String
+  tagId          String
+
+  contentEntry ContentEntry @relation(fields: [contentEntryId], references: [id], onDelete: Cascade)
+  tag          Tag          @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([contentEntryId, tagId])
+  @@index([tagId])
+}
+
+/// Curated "Related Articles". Explicit join because it carries weight and
+/// will carry more (placement slot, campaign) within six months.
+model ContentRelation {
+  sourceId String
+  targetId String
+  weight   Int    @default(0)
+
+  source ContentEntry @relation("RelationSource", fields: [sourceId], references: [id], onDelete: Cascade)
+  target ContentEntry @relation("RelationTarget", fields: [targetId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@id([sourceId, targetId])
+  @@index([targetId])
+}
+
+/// Editable prose blocks on ENTITY pages (exam eligibility, college admission
+/// process, ...). Locale-scoped: this is where most translatable prose lives.
+model PageSection {
+  id        String    @id @default(cuid())
+  siteId    String
+  ownerType OwnerType
+  ownerId   String
+  key       String // "eligibility" | "how-to-apply"
+  locale    Locale    @default(EN)
+  heading   String?
+  bodyHtml  String    @db.Text
+  order     Int       @default(0)
+  isVisible Boolean   @default(true)
+
+  site Site @relation(fields: [siteId], references: [id], onDelete: Cascade)
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  createdById String?
+  updatedById String?
+
+  @@unique([siteId, ownerType, ownerId, key, locale])
+  @@index([ownerType, ownerId, locale, order])
+}
+
+model FaqItem {
+  id         String    @id @default(cuid())
+  siteId     String
+  ownerType  OwnerType
+  ownerId    String
+  locale     Locale    @default(EN)
+  question   String
+  answerHtml String    @db.Text
+  order      Int       @default(0)
+  inSchema   Boolean   @default(true) // include in FAQPage JSON-LD
+
+  site Site @relation(fields: [siteId], references: [id], onDelete: Cascade)
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  createdById String?
+  updatedById String?
+
+  @@index([ownerType, ownerId, locale, order])
+  @@index([siteId, inSchema])
+}
+
+/// Volatile autosave. One row per (content, editor) — the @@unique makes
+/// concurrent editing VISIBLE instead of silently destructive, and the table
+/// never grows unboundedly. baseVersion is the optimistic-concurrency guard.
+model ContentDraft {
+  id          String    @id @default(cuid())
+  ownerType   OwnerType
+  ownerId     String
+  authorId    String
+  payload     Json
+  baseVersion Int
+  savedAt     DateTime  @updatedAt
+  createdAt   DateTime  @default(now())
+
+  author User @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  @@unique([ownerType, ownerId, authorId])
+  @@index([ownerType, ownerId])
+  @@index([savedAt]) // stale-draft cleanup (30 days)
+}
+
+/// Append-only history. Full JSON snapshots rather than diffs: restore is a
+/// single write with no chain replay. ~8KB/revision × ~120k/yr < 1GB.
+/// Retention: last 30 per owner, always keeping every PUBLISHED revision.
+model ContentRevision {
+  id                BigInt        @id @default(autoincrement())
+  ownerType         OwnerType
+  ownerId           String
+  version           Int
+  revisionType      RevisionType
+  status            PublishStatus
+  snapshot          Json
+  changedFields     String[]
+  changeNote        String?
+  rollbackOfVersion Int?
+  scheduledFor      DateTime?
+  publishedAt       DateTime?
+  authorId          String?
+  createdAt         DateTime      @default(now())
+
+  author      User?          @relation(fields: [authorId], references: [id], onDelete: SetNull)
+  publishedOn ContentEntry[] @relation("PublishedRevision")
+  scheduledOn ContentEntry[] @relation("ScheduledRevision")
+
+  @@unique([ownerType, ownerId, version])
+  @@index([ownerType, ownerId, createdAt(sort: Desc)])
+  @@index([revisionType, scheduledFor]) // scheduled-publish worker scan
+}

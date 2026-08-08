@@ -1,0 +1,51 @@
+// ---------------------------------------------------------------------------
+// AUTH — admin-only at launch. No public accounts, no OAuth, no RBAC tables.
+//
+// `role` is an enum column. Phase 2 replaces it with
+// Role/Permission/RolePermission/UserRole — an additive migration, because all
+// authorisation already funnels through one `can(user, 'exam:publish')` helper
+// rather than checking `user.role` inline.
+// ---------------------------------------------------------------------------
+
+model User {
+  id           String     @id @default(cuid())
+  email        String     @unique // tombstoned on soft delete — see README
+  passwordHash String
+  name         String
+  slug         String?    @unique // /author/[slug]
+  bio          String?    @db.Text
+  designation  String?
+  avatarUrl    String?
+  role         UserRole   @default(AUTHOR)
+  status       UserStatus @default(ACTIVE)
+  lastLoginAt  DateTime?
+
+  sessions        Session[]
+  authoredEntries ContentEntry[]    @relation("ContentAuthor")
+  revisions       ContentRevision[]
+  drafts          ContentDraft[]
+  uploads         MediaAsset[]
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  @@index([role, status])
+  @@index([deletedAt])
+}
+
+model Session {
+  id           String    @id @default(cuid())
+  userId       String
+  refreshToken String    @unique // stored hashed
+  userAgent    String?
+  ipHash       String?
+  expiresAt    DateTime
+  revokedAt    DateTime?
+  createdAt    DateTime  @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, expiresAt])
+  @@index([expiresAt])
+}

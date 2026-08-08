@@ -1,0 +1,411 @@
+// ---------------------------------------------------------------------------
+// CAREER — careers, colleges, courses, scholarships, jobs.
+//
+// Every M:N here is an EXPLICIT join model, never Prisma's implicit @relation.
+// Implicit relations create a hidden _AToB table you cannot add columns to,
+// cannot index beyond the default, and cannot migrate cleanly. CollegeCourse
+// already carries fees and seats; it is a first-class entity, not a link.
+// ---------------------------------------------------------------------------
+
+model Career {
+  id             String         @id @default(cuid())
+  slug           String         @unique
+  title          String
+  summary        String?        @db.Text
+  streamId       String?
+  educationLevel EducationLevel
+  avgSalaryMin   Int?
+  avgSalaryMax   Int?
+  demandLevel    String?
+  skills         String[]
+
+  stream       Stream?             @relation(fields: [streamId], references: [id], onDelete: SetNull)
+  courses      CareerCourse[]
+  exams        CareerExam[]
+  entries      ContentEntry[]
+  translations CareerTranslation[]
+
+  status      PublishStatus @default(DRAFT)
+  publishedAt DateTime?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  createdById String?
+  updatedById String?
+  deletedAt   DateTime?
+
+  @@index([status, deletedAt])
+  @@index([streamId, educationLevel, status])
+}
+
+model CareerTranslation {
+  id         String            @id @default(cuid())
+  careerId   String
+  locale     Locale
+  title      String
+  summary    String?           @db.Text
+  status     TranslationStatus @default(DRAFT)
+  sourceHash String?
+
+  career Career @relation(fields: [careerId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([careerId, locale])
+}
+
+model CareerCourse {
+  careerId String
+  courseId String
+
+  career Career @relation(fields: [careerId], references: [id], onDelete: Cascade)
+  course Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  @@id([careerId, courseId])
+  @@index([courseId])
+}
+
+model CareerExam {
+  careerId String
+  examId   String
+
+  career Career @relation(fields: [careerId], references: [id], onDelete: Cascade)
+  exam   Exam   @relation(fields: [examId], references: [id], onDelete: Cascade)
+
+  @@id([careerId, examId])
+  @@index([examId])
+}
+
+model College {
+  id              String      @id @default(cuid())
+  slug            String      @unique
+  name            String
+  shortName       String?
+  type            CollegeType
+  parentId        String? // affiliating university (self-relation)
+  stateId         String?
+  city            String?
+  address         String?
+  latitude        Float?
+  longitude       Float?
+  establishedYear Int?
+  approvals       String[] // AICTE, UGC, NBA
+  naacGrade       String?
+  nirfRank        Int?
+  websiteUrl      String?
+  email           String?
+  phone           String?
+  logoId          String?
+  bannerId        String?
+  popularityScore Int         @default(0)
+
+  parent     College?    @relation("Affiliation", fields: [parentId], references: [id], onDelete: SetNull)
+  affiliates College[]   @relation("Affiliation")
+  state      State?      @relation(fields: [stateId], references: [id], onDelete: SetNull)
+  logo       MediaAsset? @relation("CollegeLogo", fields: [logoId], references: [id], onDelete: SetNull)
+  banner     MediaAsset? @relation("CollegeBanner", fields: [bannerId], references: [id], onDelete: SetNull)
+
+  courses      CollegeCourse[]
+  rankings     CollegeRanking[]
+  placements   Placement[]
+  cutoffs      ExamCutoff[]
+  entries      ContentEntry[]
+  translations CollegeTranslation[]
+
+  status      PublishStatus @default(DRAFT)
+  publishedAt DateTime?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  createdById String?
+  updatedById String?
+  deletedAt   DateTime?
+
+  @@index([status, deletedAt])
+  @@index([stateId, type, status])
+  @@index([nirfRank])
+  @@index([popularityScore(sort: Desc)])
+  @@index([parentId])
+}
+
+model CollegeTranslation {
+  id              String            @id @default(cuid())
+  collegeId       String
+  locale          Locale
+  name            String
+  shortName       String?
+  description     String?           @db.Text
+  address         String?
+  metaTitle       String?
+  metaDescription String?
+  status          TranslationStatus @default(DRAFT)
+  sourceHash      String?
+
+  college College @relation(fields: [collegeId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([collegeId, locale])
+  @@index([locale, status])
+}
+
+model Course {
+  id              String         @id @default(cuid())
+  slug            String         @unique
+  name            String
+  shortName       String?
+  level           EducationLevel
+  streamId        String?
+  durationMonths  Int?
+  eligibilityText String?        @db.Text
+  careerScope     String?        @db.Text
+
+  stream          Stream?             @relation(fields: [streamId], references: [id], onDelete: SetNull)
+  specializations Specialization[]
+  colleges        CollegeCourse[]
+  careers         CareerCourse[]
+  cutoffs         ExamCutoff[]
+  entries         ContentEntry[]
+  translations    CourseTranslation[]
+
+  status      PublishStatus @default(DRAFT)
+  publishedAt DateTime?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  createdById String?
+  updatedById String?
+  deletedAt   DateTime?
+
+  @@index([level, streamId, status])
+  @@index([status, deletedAt])
+}
+
+model CourseTranslation {
+  id              String            @id @default(cuid())
+  courseId        String
+  locale          Locale
+  name            String
+  shortName       String?
+  eligibilityText String?           @db.Text
+  careerScope     String?           @db.Text
+  status          TranslationStatus @default(DRAFT)
+  sourceHash      String?
+
+  course Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([courseId, locale])
+}
+
+model Specialization {
+  id       String @id @default(cuid())
+  courseId String
+  name     String
+  slug     String
+
+  course         Course          @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  collegeCourses CollegeCourse[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([courseId, slug])
+}
+
+/// Identity uniqueness uses NULLS NOT DISTINCT (nullable specializationId) —
+/// see 001_raw_constraints.sql.
+model CollegeCourse {
+  id               String  @id @default(cuid())
+  collegeId        String
+  courseId         String
+  specializationId String?
+  totalSeats       Int?
+  tuitionFeeTotal  Int?
+  feeBreakup       Json?
+  durationMonths   Int?
+  admissionMode    String?
+
+  college        College                 @relation(fields: [collegeId], references: [id], onDelete: Cascade)
+  course         Course                  @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  specialization Specialization?         @relation(fields: [specializationId], references: [id], onDelete: SetNull)
+  acceptedExams  CollegeExamAcceptance[]
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  createdById String?
+  updatedById String?
+  deletedAt   DateTime?
+
+  @@index([courseId, tuitionFeeTotal]) // "MBA colleges under Rs 5L"
+  @@index([collegeId])
+  @@index([specializationId])
+}
+
+model CollegeExamAcceptance {
+  collegeCourseId String
+  examId          String
+
+  collegeCourse CollegeCourse @relation(fields: [collegeCourseId], references: [id], onDelete: Cascade)
+  exam          Exam          @relation(fields: [examId], references: [id], onDelete: Cascade)
+
+  @@id([collegeCourseId, examId])
+  @@index([examId])
+}
+
+model CollegeRanking {
+  id        String @id @default(cuid())
+  collegeId String
+  agency    String // NIRF | India Today
+  category  String // Engineering
+  rank      Int
+  year      Int
+
+  college College @relation(fields: [collegeId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([collegeId, agency, category, year])
+  @@index([agency, category, year, rank])
+}
+
+model Placement {
+  id               String   @id @default(cuid())
+  collegeId        String
+  year             Int
+  avgPackage       Int?
+  highestPackage   Int?
+  placementPercent Float?
+  topRecruiters    String[]
+
+  college College @relation(fields: [collegeId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([collegeId, year])
+}
+
+model Scholarship {
+  id               String               @id @default(cuid())
+  slug             String               @unique
+  name             String
+  provider         String
+  providerType     String // GOVERNMENT | PRIVATE | NGO
+  educationLevel   EducationLevel
+  amountMin        Int?
+  amountMax        Int?
+  benefitType      String?
+  stateId          String?
+  gender           String?
+  category         ReservationCategory?
+  incomeLimit      Int?
+  eligibilityText  String?              @db.Text
+  applicationStart DateTime?
+  applicationEnd   DateTime?
+  officialUrl      String?
+
+  state        State?                   @relation(fields: [stateId], references: [id], onDelete: SetNull)
+  translations ScholarshipTranslation[]
+
+  status      PublishStatus @default(DRAFT)
+  publishedAt DateTime?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  createdById String?
+  updatedById String?
+  deletedAt   DateTime?
+
+  @@index([status, applicationEnd(sort: Desc)])
+  @@index([educationLevel, stateId, status])
+}
+
+model ScholarshipTranslation {
+  id              String            @id @default(cuid())
+  scholarshipId   String
+  locale          Locale
+  name            String
+  provider        String?
+  eligibilityText String?           @db.Text
+  status          TranslationStatus @default(DRAFT)
+  sourceHash      String?
+
+  scholarship Scholarship @relation(fields: [scholarshipId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([scholarshipId, locale])
+}
+
+model Employer {
+  id      String  @id @default(cuid())
+  name    String
+  slug    String  @unique
+  type    String // CENTRAL_GOVT | STATE_GOVT | PSU | PRIVATE
+  logoId  String?
+  website String?
+
+  logo MediaAsset? @relation("EmployerLogo", fields: [logoId], references: [id], onDelete: SetNull)
+  jobs Job[]
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+}
+
+model Job {
+  id               String    @id @default(cuid())
+  slug             String    @unique
+  title            String
+  employerId       String
+  stateId          String?
+  jobType          String // GOVERNMENT | PRIVATE | INTERNSHIP
+  location         String?
+  totalVacancies   Int?
+  qualification    String?
+  ageMin           Int?
+  ageMax           Int?
+  salaryMin        Int?
+  salaryMax        Int?
+  applicationStart DateTime?
+  applicationEnd   DateTime?
+  examDate         DateTime?
+  notificationUrl  String?
+  applyUrl         String?
+
+  employer     Employer         @relation(fields: [employerId], references: [id], onDelete: Restrict)
+  state        State?           @relation(fields: [stateId], references: [id], onDelete: SetNull)
+  translations JobTranslation[]
+
+  status      PublishStatus @default(DRAFT)
+  publishedAt DateTime?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  createdById String?
+  updatedById String?
+  deletedAt   DateTime?
+
+  @@index([status, applicationEnd(sort: Desc)])
+  @@index([jobType, stateId, status])
+  @@index([employerId, status])
+}
+
+model JobTranslation {
+  id            String            @id @default(cuid())
+  jobId         String
+  locale        Locale
+  title         String
+  qualification String?
+  status        TranslationStatus @default(DRAFT)
+  sourceHash    String?
+
+  job Job @relation(fields: [jobId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([jobId, locale])
+}

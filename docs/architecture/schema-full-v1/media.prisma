@@ -1,0 +1,149 @@
+// ---------------------------------------------------------------------------
+// MEDIA — provider-agnostic asset registry.
+//
+// `provider` + `publicId` keep this decoupled from Cloudinary. Swapping to
+// S3/R2 means a new IStorageProvider implementation and a backfill of
+// publicId/secureUrl — no schema change.
+//
+// blurDataUrl + width + height + aspectRatio are what let next/image render
+// with zero layout shift and a real placeholder. That is a direct Core Web
+// Vitals (CLS/LCP) input, so these columns are SEO work, not just UX.
+// ---------------------------------------------------------------------------
+
+model MediaFolder {
+  id       String  @id @default(cuid())
+  name     String
+  slug     String
+  parentId String?
+  path     String  @unique // "exams/jee-main"
+
+  parent   MediaFolder?  @relation("MediaFolderTree", fields: [parentId], references: [id], onDelete: SetNull)
+  children MediaFolder[] @relation("MediaFolderTree")
+  assets   MediaAsset[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([parentId])
+}
+
+model MediaAsset {
+  id       String  @id @default(cuid())
+  folderId String?
+  provider String  @default("cloudinary")
+  publicId String  @unique // provider-side identifier
+  version  String? // provider version token — cache busting
+  secureUrl String
+
+  type      MediaType
+  mimeType  String // "image/webp", "application/pdf"
+  format    String?
+  bytes     BigInt?
+  width     Int?
+  height    Int?
+  aspectRatio Float? // stored, not derived — avoids CLS math client-side
+  durationSec Int?
+  pageCount   Int? // PDFs
+
+  // modern image delivery
+  focalX        Float?  @default(0.5) // 0..1 — art-directed cropping
+  focalY        Float?  @default(0.5)
+  blurDataUrl   String? // base64 LQIP for next/image placeholder
+  dominantColor String? // "#1E3A8A"
+  hasAlpha      Boolean?
+  orientation   Int? // EXIF
+  variants      Json? // { thumb, card, og, hero } → derived URLs
+
+  originalFilename String?
+  /// SHA-256. Uniqueness is enforced by a PARTIAL index (WHERE deleted_at IS
+  /// NULL) rather than @unique, so a soft-deleted asset does not permanently
+  /// block re-upload. Lookups use findFirst — this column is never a
+  /// findUnique key, so there is no Prisma ergonomics cost.
+  checksum         String?
+  altText          String? // default locale
+  caption          String?
+  credit           String?
+  license          String?
+  isDecorative     Boolean @default(false) // alt="" is correct, not missing
+  usageCount       Int     @default(0) // safe-delete check
+  uploadedById     String?
+
+  folder       MediaFolder?       @relation(fields: [folderId], references: [id], onDelete: SetNull)
+  uploadedBy   User?              @relation(fields: [uploadedById], references: [id], onDelete: SetNull)
+  links        MediaLink[]
+  translations MediaTranslation[]
+
+  // reverse relations for FKs declared in other files
+  boardLogos       Board[]             @relation("BoardLogo")
+  examLogos        Exam[]              @relation("ExamLogo")
+  answerKeyFiles   AnswerKey[]         @relation("AnswerKeyFile")
+  paperFiles       QuestionPaperFile[] @relation("PaperFileMedia")
+  contentFeatured  ContentEntry[]      @relation("ContentFeaturedImage")
+  notePdfs         Note[]              @relation("NotePdf")
+  syllabusPdfs     SyllabusDoc[]       @relation("SyllabusPdf")
+  collegeLogos     College[]           @relation("CollegeLogo")
+  collegeBanners   College[]           @relation("CollegeBanner")
+  employerLogos    Employer[]          @relation("EmployerLogo")
+  seoOgImages      SeoMeta[]           @relation("SeoOgImage")
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  @@index([type, createdAt(sort: Desc)])
+  @@index([folderId, type])
+  @@index([mimeType])
+  @@index([usageCount])
+  @@index([deletedAt])
+}
+
+model MediaTranslation {
+  id      String  @id @default(cuid())
+  mediaId String
+  locale  Locale
+  altText String?
+  caption String?
+  credit  String?
+
+  media MediaAsset @relation(fields: [mediaId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([mediaId, locale])
+}
+
+/// Galleries and attachments on any entity. Polymorphic by design — this is
+/// on the closed allowlist.
+model MediaLink {
+  id        String    @id @default(cuid())
+  mediaId   String
+  ownerType OwnerType
+  ownerId   String
+  role      MediaRole
+  order     Int       @default(0)
+
+  media MediaAsset @relation(fields: [mediaId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@unique([mediaId, ownerType, ownerId, role])
+  @@index([ownerType, ownerId, role, order])
+}
+
+/// Append-only. RANGE-PARTITIONED BY MONTH on createdAt (composite PK).
+/// questionPaperId / mediaId / userId are UNCONSTRAINED — no FK check on a
+/// high-volume insert path.
+model DownloadRecord {
+  id              BigInt   @default(autoincrement())
+  questionPaperId String?
+  mediaId         String?
+  userId          String?
+  ipHash          String?
+  referrer        String?
+  createdAt       DateTime @default(now())
+
+  @@id([id, createdAt])
+  @@index([questionPaperId, createdAt(sort: Desc)])
+  @@index([createdAt(sort: Desc)])
+}

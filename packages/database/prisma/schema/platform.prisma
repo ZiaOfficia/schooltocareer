@@ -1,0 +1,53 @@
+// ---------------------------------------------------------------------------
+// PLATFORM — Site (seam only) and the transactional outbox.
+// ---------------------------------------------------------------------------
+
+/// Exactly ONE row is seeded at launch. No admin UI, no site switcher.
+/// It exists because `siteId` participates in composite unique constraints on
+/// ContentEntry / Category / SeoMeta / Redirect / SearchDocument, and altering
+/// a unique index on a populated table is the one deferral that would hurt.
+model Site {
+  id              String  @id @default(cuid())
+  key             String  @unique // "schooltocareer"
+  name            String
+  domain          String  @unique
+  defaultLocale   Locale  @default(EN)
+  isActive        Boolean @default(true)
+  adsenseClient   String?
+  gaMeasurementId String?
+
+  contentEntries  ContentEntry[]
+  categories      Category[]
+  pageSections    PageSection[]
+  faqItems        FaqItem[]
+  seoMetas        SeoMeta[]
+  redirects       Redirect[]
+  searchDocuments SearchDocument[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+/// Transactional outbox. The row is inserted IN THE SAME TRANSACTION as the
+/// domain write; a worker claims batches with `FOR UPDATE SKIP LOCKED`.
+/// Enqueueing to an external queue inside a service method means a later
+/// rollback leaves the search index permanently wrong.
+///
+/// Drives search indexing, Next.js revalidateTag, and sitemap pings — one
+/// reliable mechanism rather than three unreliable ones.
+model OutboxEvent {
+  id          BigInt          @id @default(autoincrement())
+  eventType   OutboxEventType
+  ownerType   OwnerType
+  ownerId     String
+  payload     Json
+  status      OutboxStatus    @default(PENDING)
+  attempts    Int             @default(0)
+  availableAt DateTime        @default(now()) // exponential-backoff target
+  lastError   String?
+  processedAt DateTime?
+  createdAt   DateTime        @default(now())
+
+  @@index([status, availableAt])
+  @@index([ownerType, ownerId, eventType])
+}

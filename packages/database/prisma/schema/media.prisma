@@ -1,0 +1,70 @@
+// ---------------------------------------------------------------------------
+// MEDIA — provider-agnostic asset registry.
+//
+// `provider` + `publicId` keep this decoupled from Cloudinary. Swapping to
+// S3/R2 is a new IStorageProvider implementation plus a backfill — no schema
+// change.
+//
+// blurDataUrl + width + height + aspectRatio are what let next/image render
+// with zero layout shift and a real placeholder. That is a direct Core Web
+// Vitals (CLS/LCP) input, so these columns are SEO work, not just polish.
+//
+// Deferred to Phase 2: MediaFolder (folderPath string covers it),
+// MediaLink galleries, MediaTranslation, DownloadRecord log.
+// ---------------------------------------------------------------------------
+
+model MediaAsset {
+  id        String  @id @default(cuid())
+  provider  String  @default("cloudinary")
+  publicId  String  @unique // provider-side identifier
+  version   String? // provider version token — cache busting
+  secureUrl String
+  folderPath String? // "exams/jee-main" — flat, no folder table yet
+
+  type        MediaType
+  mimeType    String // "image/webp", "application/pdf"
+  format      String?
+  bytes       BigInt?
+  width       Int?
+  height      Int?
+  aspectRatio Float? // stored, not derived — avoids CLS math client-side
+  pageCount   Int? // PDFs
+
+  focalX        Float?   @default(0.5) // 0..1 — art-directed cropping
+  focalY        Float?   @default(0.5)
+  blurDataUrl   String? // base64 LQIP for next/image placeholder
+  dominantColor String? // "#1E3A8A"
+  hasAlpha      Boolean?
+  variants      Json? // { thumb, card, og } → derived URLs
+
+  originalFilename String?
+  /// SHA-256. Uniqueness is enforced by a PARTIAL index (WHERE deletedAt IS
+  /// NULL) rather than @unique, so a soft-deleted asset does not permanently
+  /// block re-upload. Never a findUnique key, so no Prisma ergonomics cost.
+  checksum         String?
+  altText          String?
+  caption          String?
+  credit           String?
+  isDecorative     Boolean @default(false) // alt="" is correct, not missing
+  usageCount       Int     @default(0) // safe-delete check
+  uploadedById     String?
+
+  uploadedBy User? @relation(fields: [uploadedById], references: [id], onDelete: SetNull)
+
+  // reverse relations for FKs declared in other files
+  boardLogos      Board[]             @relation("BoardLogo")
+  examLogos       Exam[]              @relation("ExamLogo")
+  paperFiles      QuestionPaperFile[] @relation("PaperFileMedia")
+  contentFeatured ContentEntry[]      @relation("ContentFeaturedImage")
+  seoOgImages     SeoMeta[]           @relation("SeoOgImage")
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  @@index([type, createdAt(sort: Desc)])
+  @@index([folderPath, type])
+  @@index([mimeType])
+  @@index([usageCount])
+  @@index([deletedAt])
+}

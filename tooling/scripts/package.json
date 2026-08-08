@@ -1,0 +1,19 @@
+{
+  "name": "@stc/scripts",
+  "version": "0.1.0",
+  "private": true,
+  "//type": "These scripts use import.meta.url, which is ESM-only. Without this the compiler treats them as CommonJS and rejects it (TS1470). tsx already ran them correctly by shimming import.meta; declaring it makes the manifest tell the truth.",
+  "type": "module",
+  "description": "Operational and architectural verification scripts. Run from the repo root via the scripts in the root package.json; this manifest exists so turbo typechecks them alongside the application code.",
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.3.0",
+    "@stc/database": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.5",
+    "typescript": "^5.7.3"
+  }
+}

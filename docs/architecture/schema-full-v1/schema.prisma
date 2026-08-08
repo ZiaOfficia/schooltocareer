@@ -1,0 +1,303 @@
+// ---------------------------------------------------------------------------
+// SchoolToCareer — Schema v1.0 (FROZEN)
+// Base: datasource, generator, and every shared enum.
+//
+// Conventions applied across all domain files:
+//   id          String   @id @default(cuid())      — entities & content
+//   id          BigInt   @id @default(autoincrement()) — append-only tables
+//   status      PublishStatus @default(DRAFT)
+//   createdAt / updatedAt                          — always
+//   createdById / updatedById                      — UNCONSTRAINED columns (no FK).
+//                                                    Real audit trail lives in AuditLog.
+//   deletedAt   DateTime?                          — user-facing rows only.
+//                                                    Never on join tables, revisions, logs.
+//
+// Constraints that PostgreSQL supports but Prisma cannot express live in
+//   prisma/migrations/manual/001_raw_constraints.sql
+// ---------------------------------------------------------------------------
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["prismaSchemaFolder", "relationJoins", "postgresqlExtensions"]
+  output          = "../../src/generated/client"
+}
+
+datasource db {
+  provider   = "postgresql"
+  url        = env("DATABASE_URL")        // Neon POOLED (PgBouncer) — runtime
+  directUrl  = env("DIRECT_DATABASE_URL") // Neon UNPOOLED — migrations only
+  extensions = [pg_trgm, unaccent, vector]
+}
+
+// ── Publishing ─────────────────────────────────────────────────────────────
+
+enum PublishStatus {
+  DRAFT
+  IN_REVIEW
+  SCHEDULED
+  PUBLISHED
+  ARCHIVED
+}
+
+enum ContentType {
+  ARTICLE
+  NEWS
+  NOTE
+  SYLLABUS
+  GUIDE
+  STATIC_PAGE
+}
+
+/// Owner discriminator for the CLOSED allowlist of polymorphic tables:
+/// AuditLog, ContentRevision, ContentDraft, MediaLink, FaqItem, PageSection,
+/// SlugHistory, SearchDocument, OutboxEvent, SavedItem, AnalyticsEvent,
+/// ContentDailyStat, AiGeneration, ContentEmbedding.
+/// Adding a polymorphic owner to any OTHER model is an ESLint error.
+enum OwnerType {
+  EXAM
+  EXAM_YEAR
+  BOARD
+  BOARD_CLASS
+  BOARD_CLASS_SUBJECT
+  CHAPTER
+  SUBJECT
+  COLLEGE
+  COURSE
+  COLLEGE_COURSE
+  CAREER
+  SCHOLARSHIP
+  JOB
+  CONTENT_ENTRY
+  QUESTION_PAPER
+  RESULT
+  ANSWER_KEY
+  CATEGORY
+  MEDIA_ASSET
+}
+
+enum Locale {
+  EN
+  HI
+}
+
+// ── Education domain ───────────────────────────────────────────────────────
+
+enum EducationLevel {
+  SCHOOL
+  CERTIFICATE
+  DIPLOMA
+  UNDERGRADUATE
+  POSTGRADUATE
+  DOCTORATE
+}
+
+enum BoardType {
+  CENTRAL
+  STATE
+  INTERNATIONAL
+  OPEN_SCHOOLING
+}
+
+enum SchoolStage {
+  PRIMARY
+  MIDDLE
+  SECONDARY
+  SENIOR_SECONDARY
+}
+
+// ── Exam domain ────────────────────────────────────────────────────────────
+
+enum ExamLevel {
+  NATIONAL
+  STATE
+  UNIVERSITY
+  BOARD
+  INTERNATIONAL
+}
+
+enum ExamMode {
+  ONLINE
+  OFFLINE
+  HYBRID
+}
+
+enum ExamFrequency {
+  ANNUAL
+  BIANNUAL
+  QUARTERLY
+  MULTIPLE_SESSIONS
+  ONE_TIME
+}
+
+enum ExamEventType {
+  NOTIFICATION
+  APPLICATION_START
+  APPLICATION_END
+  CORRECTION_WINDOW
+  ADMIT_CARD
+  EXAM_DATE
+  ANSWER_KEY
+  OBJECTION_WINDOW
+  RESULT
+  COUNSELLING
+}
+
+enum PaperType {
+  PREVIOUS_YEAR
+  SAMPLE
+  MODEL
+  MOCK
+  PRACTICE
+}
+
+enum PaperFileRole {
+  PAPER
+  SOLUTION
+  ANSWER_KEY
+  TRANSCRIPT
+}
+
+enum ResultType {
+  EXAM
+  BOARD
+  COUNSELLING
+  MERIT_LIST
+  SCORECARD
+}
+
+enum ReservationCategory {
+  GENERAL
+  EWS
+  OBC_NCL
+  SC
+  ST
+  PWD
+  OTHER
+}
+
+// ── Career domain ──────────────────────────────────────────────────────────
+
+enum CollegeType {
+  GOVERNMENT
+  PRIVATE
+  DEEMED
+  AUTONOMOUS
+  PUBLIC_PRIVATE
+}
+
+// ── Media ──────────────────────────────────────────────────────────────────
+
+enum MediaType {
+  IMAGE
+  PDF
+  DOCUMENT
+  VIDEO
+  OTHER
+}
+
+enum MediaRole {
+  LOGO
+  BANNER
+  FEATURED
+  GALLERY
+  ATTACHMENT
+  THUMBNAIL
+}
+
+// ── Identity & audit ───────────────────────────────────────────────────────
+
+enum UserStatus {
+  ACTIVE
+  SUSPENDED
+  INVITED
+  DEACTIVATED
+}
+
+enum AuditAction {
+  CREATE
+  UPDATE
+  DELETE
+  RESTORE
+  PUBLISH
+  UNPUBLISH
+  SCHEDULE
+  ROLLBACK
+  SLUG_CHANGE
+  LOGIN
+  LOGIN_FAILED
+  BULK_IMPORT
+}
+
+// ── Editorial workflow ─────────────────────────────────────────────────────
+
+enum RevisionType {
+  MANUAL
+  SUBMITTED
+  PUBLISHED
+  SCHEDULED
+  ROLLBACK
+  IMPORT
+}
+
+enum SlugChangeReason {
+  MANUAL_RENAME
+  NORMALIZATION
+  MERGE
+  SOFT_DELETE
+  RESTORE
+  IMPORT_CORRECTION
+}
+
+enum TranslationStatus {
+  DRAFT
+  MACHINE_TRANSLATED
+  IN_REVIEW
+  APPROVED
+  OUTDATED
+}
+
+// ── Platform ───────────────────────────────────────────────────────────────
+
+enum OutboxEventType {
+  SEARCH_UPSERT
+  SEARCH_DELETE
+  CACHE_REVALIDATE
+  SITEMAP_PING
+  WEBHOOK
+}
+
+enum OutboxStatus {
+  PENDING
+  PROCESSING
+  DONE
+  FAILED
+  DEAD
+}
+
+enum AnalyticsEventType {
+  PAGE_VIEW
+  PAPER_DOWNLOAD
+  SEARCH
+  SEARCH_CLICK
+  OUTBOUND_CLICK
+  CTA_CLICK
+  SHARE
+}
+
+enum AiContentKind {
+  SUMMARY
+  FAQ_SUGGESTION
+  META_DESCRIPTION
+  TITLE_VARIANT
+  CAREER_GUIDANCE
+  QA_ANSWER
+  TRANSLATION
+}
+
+enum AiGenerationStatus {
+  PENDING
+  SUCCEEDED
+  FAILED
+  APPROVED
+  REJECTED
+}

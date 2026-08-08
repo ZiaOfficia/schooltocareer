@@ -1,0 +1,196 @@
+// ---------------------------------------------------------------------------
+// SEO — metadata overrides, slug history, redirects, search index, page stats.
+//
+// SlugHistory vs Redirect — both exist, with different grains:
+//   SlugHistory  entity-level, one row per rename. Source of truth. Resolves
+//                any historical slug -> current entity.
+//   Redirect     URL-level, one row per path. Serves the 301 in middleware.
+// A rename produces ONE SlugHistory row and N Redirect rows — one per
+// registered sub-path template in packages/constants/routes.ts. Adding a new
+// sub-page therefore extends redirect coverage for all past renames on the
+// next regeneration.
+// ---------------------------------------------------------------------------
+
+model SeoMeta {
+  id              String   @id @default(cuid())
+  siteId          String
+  path            String // "/exam/jee-main/syllabus" — locale is encoded in the path
+  ownerType       OwnerType?
+  ownerId         String?
+  title           String?
+  description     String?
+  keywords        String[]
+  canonicalUrl    String?
+  robotsIndex     Boolean  @default(true)
+  robotsFollow    Boolean  @default(true)
+  ogTitle         String?
+  ogDescription   String?
+  ogImageId       String?
+  twitterCard     String?  @default("summary_large_image")
+  schemaOverride  Json?
+  sitemapPriority Float?   @default(0.5)
+  changeFrequency String?  @default("weekly")
+  lastReviewedAt  DateTime?
+
+  site    Site        @relation(fields: [siteId], references: [id], onDelete: Cascade)
+  ogImage MediaAsset? @relation("SeoOgImage", fields: [ogImageId], references: [id], onDelete: SetNull)
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  updatedById String?
+
+  @@unique([siteId, path])
+  @@index([ownerType, ownerId])
+  @@index([siteId, robotsIndex, sitemapPriority(sort: Desc)])
+}
+
+/// @@unique([entityType, oldSlug, locale]) is load-bearing: without it an old
+/// slug can point at two entities and the 301 becomes non-deterministic.
+model SlugHistory {
+  id           String           @id @default(cuid())
+  entityType   OwnerType
+  entityId     String
+  oldSlug      String
+  newSlug      String
+  locale       Locale           @default(EN)
+  redirectType Int              @default(301)
+  reason       SlugChangeReason
+  isActive     Boolean          @default(true) // false once the chain is collapsed
+  changedById  String?
+  createdAt    DateTime         @default(now())
+
+  @@unique([entityType, oldSlug, locale])
+  @@index([entityType, entityId, createdAt(sort: Desc)])
+  @@index([isActive])
+}
+
+model Redirect {
+  id         String    @id @default(cuid())
+  siteId     String
+  fromPath   String
+  toPath     String
+  statusCode Int       @default(301)
+  isActive   Boolean   @default(true)
+  reason     String? // "slug-change" | "manual" | "merge"
+  hitCount   Int       @default(0)
+  lastHitAt  DateTime?
+
+  site Site @relation(fields: [siteId], references: [id], onDelete: Cascade)
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  createdById String?
+
+  @@unique([siteId, fromPath])
+  @@index([siteId, isActive])
+}
+
+/// Canonical, provider-agnostic search index. PostgreSQL FTS reads it directly
+/// via the generated `search_vector` column (see 001_raw_constraints.sql).
+/// Meilisearch / Elasticsearch, when needed, are FED from this table by a
+/// second OutboxEvent consumer — migration is a new consumer, not a schema
+/// change.
+model SearchDocument {
+  id          String    @id @default(cuid())
+  siteId      String
+  ownerType   OwnerType
+  ownerId     String
+  locale      Locale    @default(EN)
+  path        String
+  title       String
+  summary     String?
+  body        String?   @db.Text
+  keywords    String[]
+  entityLabel String // "Exam" | "Previous Year Paper"
+  imageUrl    String?
+
+  /// One JSONB column keeps the table stable as filters evolve.
+  /// { examId, boardId, year, subjectId, state, level, ... }
+  facets Json?
+
+  popularity  Int       @default(0) // views + downloads, refreshed nightly
+  boost       Float     @default(1.0) // manual editorial weighting
+  isActive    Boolean   @default(true) // unpublish without deleting the row
+  publishedAt DateTime?
+  indexedAt   DateTime  @default(now())
+  sourceHash  String? // skip no-op reindexes
+
+  /// GENERATED ALWAYS AS ... STORED, with weighting (title A, keywords B,
+  /// summary C, body D) and a locale branch — PostgreSQL ships no Hindi
+  /// stemmer, so Devanagari must use the 'simple' configuration.
+  searchVector Unsupported("tsvector")?
+
+  site Site @relation(fields: [siteId], references: [id], onDelete: Cascade)
+
+  updatedAt DateTime @updatedAt
+
+  @@unique([siteId, ownerType, ownerId, locale])
+  @@index([siteId, path])
+  @@index([isActive, entityLabel, popularity(sort: Desc)])
+  @@index([locale, isActive])
+}
+
+model SearchSynonym {
+  id       String   @id @default(cuid())
+  term     String // "pyq"
+  synonyms String[] // ["previous year question", "past paper"]
+  locale   Locale   @default(EN)
+  isActive Boolean  @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([term, locale])
+}
+
+/// Append-only. RANGE-PARTITIONED BY MONTH on createdAt (composite PK).
+/// Zero-result queries are content gaps — this feeds SearchTermDailyStat.
+model SearchQueryLog {
+  id              BigInt   @default(autoincrement())
+  rawQuery        String
+  normalizedQuery String
+  locale          Locale   @default(EN)
+  resultCount     Int
+  clickedPath     String?
+  userId          String?
+  createdAt       DateTime @default(now())
+
+  @@id([id, createdAt])
+  @@index([normalizedQuery, createdAt(sort: Desc)])
+  @@index([resultCount, createdAt(sort: Desc)])
+}
+
+/// Daily page rollup. RANGE-PARTITIONED BY MONTH on date (composite PK).
+model PageStat {
+  id          BigInt   @default(autoincrement())
+  siteId      String?
+  path        String
+  date        DateTime @db.Date
+  views       Int      @default(0)
+  uniqueViews Int      @default(0)
+
+  @@id([id, date])
+  @@index([path, date(sort: Desc)])
+  @@index([date(sort: Desc), views(sort: Desc)])
+}
+
+/// Automated contextual interlinking: keyword -> target path, applied by the
+/// content renderer at most `maxPerPage` times.
+model InternalLinkRule {
+  id         String  @id @default(cuid())
+  siteId     String
+  keyword    String
+  targetPath String
+  locale     Locale  @default(EN)
+  priority   Int     @default(0)
+  maxPerPage Int     @default(1)
+  isActive   Boolean @default(true)
+
+  site Site @relation(fields: [siteId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([siteId, keyword, locale])
+  @@index([siteId, isActive, priority(sort: Desc)])
+}

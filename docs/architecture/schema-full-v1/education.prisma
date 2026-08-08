@@ -1,0 +1,256 @@
+// ---------------------------------------------------------------------------
+// EDUCATION — Boards, classes, streams, subjects, chapters, topics.
+//
+// This file defines the URL spine for the school silo:
+//   /board/[boardSlug]
+//   /board/[boardSlug]/class/[classSlug]
+//   /board/[boardSlug]/class/[classSlug]/notes/[subjectSlug]/[chapterSlug]
+//
+// `onDelete: Restrict` on Subject and ClassLevel is deliberate: these are
+// reference data. Deleting "Physics" while 4,000 chapters point at it must
+// fail loudly, not cascade-wipe content.
+// ---------------------------------------------------------------------------
+
+model State {
+  id     String  @id @default(cuid())
+  name   String  @unique
+  slug   String  @unique
+  code   String  @unique // "MH", "UP"
+  region String?
+
+  boards       Board[]
+  colleges     College[]
+  jobs         Job[]
+  scholarships Scholarship[]
+}
+
+model Board {
+  id              String  @id @default(cuid())
+  slug            String  @unique
+  name            String
+  shortName       String
+  type            BoardType
+  stateId         String?
+  establishedYear Int?
+  headquarters    String?
+  officialWebsite String?
+  logoId          String?
+  description     String? @db.Text
+  popularityScore Int     @default(0) // refreshed nightly from ContentDailyStat
+
+  state        State?             @relation(fields: [stateId], references: [id], onDelete: SetNull)
+  logo         MediaAsset?        @relation("BoardLogo", fields: [logoId], references: [id], onDelete: SetNull)
+  classes      BoardClass[]
+  exams        Exam[]
+  results      Result[]
+  papers       QuestionPaper[]
+  entries      ContentEntry[]
+  translations BoardTranslation[]
+
+  status      PublishStatus @default(DRAFT)
+  publishedAt DateTime?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  createdById String?
+  updatedById String?
+  deletedAt   DateTime?
+
+  @@index([status, deletedAt])
+  @@index([stateId, type, status])
+  @@index([popularityScore(sort: Desc)])
+}
+
+model BoardTranslation {
+  id              String            @id @default(cuid())
+  boardId         String
+  locale          Locale
+  name            String
+  shortName       String?
+  description     String?           @db.Text
+  metaTitle       String?
+  metaDescription String?
+  status          TranslationStatus @default(DRAFT)
+  sourceHash      String? // staleness detector — see README
+  translatedById  String?
+  reviewedAt      DateTime?
+
+  board Board @relation(fields: [boardId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([boardId, locale])
+  @@index([locale, status])
+}
+
+model ClassLevel {
+  id    String      @id @default(cuid())
+  name  String      @unique // "Class 10"
+  slug  String      @unique // "class-10"
+  order Int         @unique // 10
+  stage SchoolStage
+
+  boardClasses BoardClass[]
+}
+
+model Stream {
+  id   String @id @default(cuid())
+  name String @unique // "Science"
+  slug String @unique
+
+  boardClasses BoardClass[]
+  courses      Course[]
+  careers      Career[]
+}
+
+/// A board + class (+ optional stream). NOTE: the identity uniqueness is
+/// enforced by a raw-SQL `UNIQUE ... NULLS NOT DISTINCT` index, because
+/// PostgreSQL treats NULL streamId values as distinct and a plain @@unique
+/// would enforce nothing for Class 1–10. See 001_raw_constraints.sql.
+model BoardClass {
+  id           String  @id @default(cuid())
+  boardId      String
+  classLevelId String
+  streamId     String?
+  slug         String // "class-12-science"
+
+  board      Board               @relation(fields: [boardId], references: [id], onDelete: Cascade)
+  classLevel ClassLevel          @relation(fields: [classLevelId], references: [id], onDelete: Restrict)
+  stream     Stream?             @relation(fields: [streamId], references: [id], onDelete: SetNull)
+  subjects   BoardClassSubject[]
+  papers     QuestionPaper[]
+  results    Result[]
+
+  status    PublishStatus @default(DRAFT)
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+  createdById String?
+  updatedById String?
+  deletedAt DateTime?
+
+  @@unique([boardId, slug])
+  @@index([status, deletedAt])
+  @@index([classLevelId])
+}
+
+model Subject {
+  id             String         @id @default(cuid())
+  name           String
+  slug           String         @unique
+  code           String?
+  educationLevel EducationLevel
+  iconUrl        String?
+
+  boardClasses BoardClassSubject[]
+  examSubjects ExamSubject[]
+  papers       QuestionPaper[]
+  translations SubjectTranslation[]
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  createdById String?
+  updatedById String?
+  deletedAt DateTime?
+
+  @@index([educationLevel, deletedAt])
+}
+
+model SubjectTranslation {
+  id         String            @id @default(cuid())
+  subjectId  String
+  locale     Locale
+  name       String
+  status     TranslationStatus @default(DRAFT)
+  sourceHash String?
+
+  subject Subject @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([subjectId, locale])
+}
+
+/// The anchor for notes, syllabus and chapter-level content.
+model BoardClassSubject {
+  id           String  @id @default(cuid())
+  boardClassId String
+  subjectId    String
+  slug         String
+  isOptional   Boolean @default(false)
+
+  boardClass BoardClass     @relation(fields: [boardClassId], references: [id], onDelete: Cascade)
+  subject    Subject        @relation(fields: [subjectId], references: [id], onDelete: Restrict)
+  chapters   Chapter[]
+  entries    ContentEntry[]
+
+  status    PublishStatus @default(DRAFT)
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+  createdById String?
+  updatedById String?
+  deletedAt DateTime?
+
+  @@unique([boardClassId, subjectId])
+  @@unique([boardClassId, slug])
+  @@index([subjectId])
+  @@index([status, deletedAt])
+}
+
+model Chapter {
+  id                  String  @id @default(cuid())
+  boardClassSubjectId String
+  name                String
+  slug                String
+  order               Int
+  description         String? @db.Text
+
+  boardClassSubject BoardClassSubject    @relation(fields: [boardClassSubjectId], references: [id], onDelete: Cascade)
+  topics            Topic[]
+  entries           ContentEntry[]
+  translations      ChapterTranslation[]
+
+  status    PublishStatus @default(DRAFT)
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+  createdById String?
+  updatedById String?
+  deletedAt DateTime?
+
+  @@unique([boardClassSubjectId, slug])
+  @@index([boardClassSubjectId, order])
+  @@index([status, deletedAt])
+}
+
+model ChapterTranslation {
+  id          String            @id @default(cuid())
+  chapterId   String
+  locale      Locale
+  name        String
+  description String?           @db.Text
+  status      TranslationStatus @default(DRAFT)
+  sourceHash  String?
+
+  chapter Chapter @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([chapterId, locale])
+}
+
+model Topic {
+  id        String @id @default(cuid())
+  chapterId String
+  name      String
+  slug      String
+  order     Int
+
+  chapter Chapter @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([chapterId, slug])
+  @@index([chapterId, order])
+}

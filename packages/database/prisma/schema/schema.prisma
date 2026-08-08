@@ -1,0 +1,239 @@
+// ---------------------------------------------------------------------------
+// SchoolToCareer — Schema v1.0-LAUNCH  (30 models)
+//
+// SCOPE: this is the deliberately reduced launch cut. The full 89-model design
+// is preserved at docs/architecture/schema-full-v1/ and is the roadmap for:
+//   Phase 2 — Careers, Colleges, Courses, Scholarships, Jobs, cutoffs, tags,
+//             answer keys, media folders/links, RBAC tables, internal linking
+//   Phase 3 — Analytics, AI, embeddings, translations, real multi-site
+//
+// Everything deferred is ADDITIVE. The one thing kept early despite being
+// unused is `siteId`, because it lives inside composite unique constraints —
+// adding a column to a populated table is trivial, altering a unique index on
+// one is not.
+//
+// Constraints PostgreSQL supports but Prisma cannot express live in
+//   prisma/migrations/manual/001_raw_constraints.sql
+// ---------------------------------------------------------------------------
+
+// Default output (node_modules/.prisma/client) on purpose: it keeps
+// `@prisma/client` a normal external dependency, so the API bundler can mark it
+// external instead of trying to bundle the query engine binary.
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["prismaSchemaFolder", "relationJoins", "postgresqlExtensions"]
+}
+
+datasource db {
+  provider   = "postgresql"
+  url        = env("DATABASE_URL")        // Neon POOLED (PgBouncer) — runtime
+  directUrl  = env("DIRECT_DATABASE_URL") // Neon UNPOOLED — migrations only
+  extensions = [pg_trgm, unaccent]
+}
+
+// ── Publishing ─────────────────────────────────────────────────────────────
+
+enum PublishStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+enum ContentType {
+  ARTICLE
+  NEWS
+  NOTE
+  SYLLABUS
+  GUIDE
+  STATIC_PAGE
+}
+
+/// Owner discriminator for the CLOSED allowlist of polymorphic tables:
+/// ContentRevision, ContentDraft, FaqItem, PageSection, SlugHistory,
+/// SearchDocument, OutboxEvent.
+/// Adding this field pair to any OTHER model is an ESLint error.
+/// Values for deferred entities (COLLEGE, COURSE, CAREER…) are intentionally
+/// present so Phase 2 adds tables, not enum migrations.
+enum OwnerType {
+  BOARD
+  BOARD_CLASS
+  BOARD_CLASS_SUBJECT
+  CHAPTER
+  SUBJECT
+  EXAM
+  EXAM_YEAR
+  QUESTION_PAPER
+  RESULT
+  CONTENT_ENTRY
+  CATEGORY
+  COLLEGE
+  COURSE
+  CAREER
+  SCHOLARSHIP
+  JOB
+  /// Added for the Media module (Phase 5). Purely additive.
+  /// MIGRATION NOTE: PostgreSQL cannot USE a new enum value in the same
+  /// transaction that ADDs it, and Prisma wraps migrations in a transaction.
+  /// This value must therefore ship in its own migration, before any migration
+  /// or backfill that writes it.
+  MEDIA_ASSET
+}
+
+enum Locale {
+  EN
+  HI
+}
+
+// ── Education ──────────────────────────────────────────────────────────────
+
+enum EducationLevel {
+  SCHOOL
+  CERTIFICATE
+  DIPLOMA
+  UNDERGRADUATE
+  POSTGRADUATE
+  DOCTORATE
+}
+
+enum BoardType {
+  CENTRAL
+  STATE
+  INTERNATIONAL
+  OPEN_SCHOOLING
+}
+
+enum SchoolStage {
+  PRIMARY
+  MIDDLE
+  SECONDARY
+  SENIOR_SECONDARY
+}
+
+/// Stream is a field on BoardClass rather than its own table in the launch
+/// cut — three values, no stream-level pages yet.
+enum StreamType {
+  SCIENCE
+  COMMERCE
+  ARTS
+  VOCATIONAL
+}
+
+// ── Exam ───────────────────────────────────────────────────────────────────
+
+enum ExamLevel {
+  NATIONAL
+  STATE
+  UNIVERSITY
+  BOARD
+  INTERNATIONAL
+}
+
+enum ExamMode {
+  ONLINE
+  OFFLINE
+  HYBRID
+}
+
+enum ExamFrequency {
+  ANNUAL
+  BIANNUAL
+  QUARTERLY
+  MULTIPLE_SESSIONS
+  ONE_TIME
+}
+
+enum ExamEventType {
+  NOTIFICATION
+  APPLICATION_START
+  APPLICATION_END
+  CORRECTION_WINDOW
+  ADMIT_CARD
+  EXAM_DATE
+  ANSWER_KEY
+  RESULT
+  COUNSELLING
+}
+
+enum PaperType {
+  PREVIOUS_YEAR
+  SAMPLE
+  MODEL
+  MOCK
+  PRACTICE
+}
+
+enum PaperFileRole {
+  PAPER
+  SOLUTION
+  ANSWER_KEY
+}
+
+enum ResultType {
+  EXAM
+  BOARD
+  MERIT_LIST
+  SCORECARD
+}
+
+// ── Media ──────────────────────────────────────────────────────────────────
+
+enum MediaType {
+  IMAGE
+  PDF
+  DOCUMENT
+  VIDEO
+  OTHER
+}
+
+// ── Identity ───────────────────────────────────────────────────────────────
+
+/// A single enum column replaces the four-table RBAC design for launch.
+/// Phase 2 swaps this for Role/Permission/RolePermission/UserRole; the
+/// migration is additive because authorisation is already funnelled through
+/// one `can(user, 'exam:publish')` helper.
+enum UserRole {
+  ADMIN
+  EDITOR
+  AUTHOR
+}
+
+enum UserStatus {
+  ACTIVE
+  SUSPENDED
+  DEACTIVATED
+}
+
+// ── Editorial ──────────────────────────────────────────────────────────────
+
+enum RevisionType {
+  MANUAL
+  PUBLISHED
+  ROLLBACK
+  IMPORT
+}
+
+enum SlugChangeReason {
+  MANUAL_RENAME
+  NORMALIZATION
+  MERGE
+  SOFT_DELETE
+  RESTORE
+  IMPORT_CORRECTION
+}
+
+// ── Platform ───────────────────────────────────────────────────────────────
+
+enum OutboxEventType {
+  SEARCH_UPSERT
+  SEARCH_DELETE
+  CACHE_REVALIDATE
+  SITEMAP_PING
+}
+
+enum OutboxStatus {
+  PENDING
+  PROCESSING
+  DONE
+  FAILED
+  DEAD
+}

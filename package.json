@@ -1,0 +1,37 @@
+{
+  "name": "schooltocareer",
+  "version": "0.1.0",
+  "private": true,
+  "description": "SchoolToCareer — India education portal. pnpm monorepo.",
+  "packageManager": "pnpm@9.15.4",
+  "engines": {
+    "node": ">=20.11.0",
+    "pnpm": ">=9"
+  },
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "arch:check": "tsx tooling/scripts/arch-check.ts",
+    "test": "turbo run test",
+    "format": "prettier --write \"**/*.{ts,tsx,md,json,prisma}\"",
+    "db:generate": "pnpm --filter @stc/database generate",
+    "db:migrate": "pnpm --filter @stc/database db:migrate:dev",
+    "db:deploy": "pnpm --filter @stc/database db:migrate:deploy",
+    "db:constraints": "pnpm --filter @stc/database db:constraints",
+    "db:seed": "pnpm --filter @stc/database db:seed",
+    "db:plans": "tsx tooling/scripts/capture-plans.ts",
+    "verify:e2e": "tsx tooling/scripts/verify-e2e.ts",
+    "db:studio": "pnpm --filter @stc/database db:studio",
+    "clean": "turbo run clean && rimraf node_modules"
+  },
+  "devDependencies": {
+    "prettier": "^3.4.2",
+    "prettier-plugin-prisma": "^5.0.0",
+    "rimraf": "^6.0.1",
+    "tsx": "^4.19.2",
+    "turbo": "^2.3.3",
+    "typescript": "^5.7.3"
+  }
+}

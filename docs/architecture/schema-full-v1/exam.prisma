@@ -1,0 +1,405 @@
+// ---------------------------------------------------------------------------
+// EXAM — exams, cycles, patterns, papers (versioned files), results, cutoffs.
+//
+// URL spine:
+//   /exam/[examSlug]                       /exam/[examSlug]/syllabus
+//   /exam/[examSlug]/previous-year-papers  /exam/[examSlug]/result
+//   /previous-year-papers/[paperSlug]      /results/[resultSlug]
+// ---------------------------------------------------------------------------
+
+model ExamCategory {
+  id       String  @id @default(cuid())
+  name     String
+  slug     String  @unique
+  parentId String?
+  order    Int     @default(0)
+
+  parent       ExamCategory?             @relation("ExamCategoryTree", fields: [parentId], references: [id], onDelete: SetNull)
+  children     ExamCategory[]            @relation("ExamCategoryTree")
+  exams        Exam[]
+  translations ExamCategoryTranslation[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([parentId, order])
+}
+
+model ExamCategoryTranslation {
+  id             String            @id @default(cuid())
+  examCategoryId String
+  locale         Locale
+  name           String
+  status         TranslationStatus @default(DRAFT)
+  sourceHash     String?
+
+  examCategory ExamCategory @relation(fields: [examCategoryId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([examCategoryId, locale])
+}
+
+model Exam {
+  id              String         @id @default(cuid())
+  slug            String         @unique // "jee-main" — tombstoned on soft delete
+  name            String
+  shortName       String
+  fullName        String?
+  conductingBody  String
+  categoryId      String?
+  boardId         String? // set for board exams
+  level           ExamLevel
+  mode            ExamMode
+  frequency       ExamFrequency
+  educationLevel  EducationLevel
+  officialWebsite String?
+  logoId          String?
+  overview        String?        @db.Text
+  popularityScore Int            @default(0) // drives generateStaticParams top-N
+  isActive        Boolean        @default(true)
+
+  category ExamCategory? @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  board    Board?        @relation(fields: [boardId], references: [id], onDelete: SetNull)
+  logo     MediaAsset?   @relation("ExamLogo", fields: [logoId], references: [id], onDelete: SetNull)
+
+  years        ExamYear[]
+  subjects     ExamSubject[]
+  patterns     ExamPatternSection[]
+  eligibility  ExamEligibility[]
+  papers       QuestionPaper[]
+  results      Result[]
+  acceptedBy   CollegeExamAcceptance[]
+  careers      CareerExam[]
+  entries      ContentEntry[]
+  translations ExamTranslation[]
+
+  status      PublishStatus @default(DRAFT)
+  publishedAt DateTime?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  createdById String?
+  updatedById String?
+  deletedAt   DateTime?
+
+  @@index([status, deletedAt])
+  @@index([categoryId, status, popularityScore(sort: Desc)])
+  @@index([level, educationLevel, status])
+  @@index([boardId, status])
+  @@index([popularityScore(sort: Desc)])
+}
+
+model ExamTranslation {
+  id              String            @id @default(cuid())
+  examId          String
+  locale          Locale
+  name            String
+  shortName       String?
+  fullName        String?
+  conductingBody  String?
+  overview        String?           @db.Text
+  metaTitle       String?
+  metaDescription String?
+  status          TranslationStatus @default(DRAFT)
+  sourceHash      String?
+  translatedById  String?
+  reviewedAt      DateTime?
+
+  exam Exam @relation(fields: [examId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([examId, locale])
+  @@index([locale, status])
+}
+
+model ExamSubject {
+  examId    String
+  subjectId String
+  weightage Float?
+
+  exam    Exam    @relation(fields: [examId], references: [id], onDelete: Cascade)
+  subject Subject @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+
+  @@id([examId, subjectId])
+  @@index([subjectId])
+}
+
+/// One exam cycle / session, e.g. "JEE Main 2026 Session 1".
+/// Identity uniqueness uses NULLS NOT DISTINCT (nullable sessionName) — see
+/// 001_raw_constraints.sql.
+model ExamYear {
+  id              String  @id @default(cuid())
+  examId          String
+  year            Int
+  sessionName     String?
+  slug            String // "2026-session-1"
+  isCurrent       Boolean @default(false)
+  applicationFee  Json? // { GENERAL: 1000, SC: 500 }
+  notificationUrl String?
+
+  exam       Exam         @relation(fields: [examId], references: [id], onDelete: Cascade)
+  events     ExamEvent[]
+  cutoffs    ExamCutoff[]
+  answerKeys AnswerKey[]
+  results    Result[]
+
+  status    PublishStatus @default(DRAFT)
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+  createdById String?
+  updatedById String?
+  deletedAt DateTime?
+
+  @@unique([examId, slug])
+  @@index([year(sort: Desc), isCurrent])
+  @@index([examId, year(sort: Desc)])
+}
+
+/// Powers the "Important Dates" table on every exam page.
+model ExamEvent {
+  id          String        @id @default(cuid())
+  examYearId  String
+  type        ExamEventType
+  title       String
+  startDate   DateTime?
+  endDate     DateTime?
+  isTentative Boolean       @default(false)
+  officialUrl String?
+  order       Int           @default(0)
+
+  examYear ExamYear @relation(fields: [examYearId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([examYearId, startDate])
+  @@index([type, startDate])
+}
+
+model ExamPatternSection {
+  id            String  @id @default(cuid())
+  examId        String
+  name          String // "Physics"
+  questions     Int?
+  marks         Int?
+  durationMin   Int?
+  markingScheme String?
+  order         Int     @default(0)
+
+  exam Exam @relation(fields: [examId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([examId, order])
+}
+
+model ExamEligibility {
+  id           String               @id @default(cuid())
+  examId       String
+  criteriaType String // AGE | QUALIFICATION | ATTEMPTS | NATIONALITY
+  category     ReservationCategory?
+  description  String               @db.Text
+  minAge       Int?
+  maxAge       Int?
+  order        Int                  @default(0)
+
+  exam Exam @relation(fields: [examId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([examId, order])
+}
+
+/// v1.0 scope: EDITORIAL / AGGREGATE cutoffs, not round-wise counselling
+/// ingestion. Partition-ready (BigInt PK, indexed on examYearId) but NOT
+/// partitioned. Full JoSAA-grade data is a separate product with its own
+/// pipeline; see README "Deferred".
+model ExamCutoff {
+  id          BigInt              @id @default(autoincrement())
+  examYearId  String
+  collegeId   String?
+  courseId    String?
+  category    ReservationCategory
+  quota       String? // HOME_STATE | ALL_INDIA
+  gender      String?
+  round       Int?
+  openingRank Int?
+  closingRank Int?
+  cutoffMarks Float?
+  percentile  Float?
+
+  examYear ExamYear @relation(fields: [examYearId], references: [id], onDelete: Cascade)
+  college  College? @relation(fields: [collegeId], references: [id], onDelete: SetNull)
+  course   Course?  @relation(fields: [courseId], references: [id], onDelete: SetNull)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([examYearId, category, round])
+  @@index([collegeId, courseId, category])
+}
+
+model AnswerKey {
+  id          String    @id @default(cuid())
+  examYearId  String
+  slug        String
+  title       String
+  keyType     String // PROVISIONAL | FINAL
+  shift       String?
+  setCode     String?
+  fileId      String?
+  officialUrl String?
+  releasedAt  DateTime?
+
+  examYear ExamYear    @relation(fields: [examYearId], references: [id], onDelete: Cascade)
+  file     MediaAsset? @relation("AnswerKeyFile", fields: [fileId], references: [id], onDelete: SetNull)
+
+  status      PublishStatus @default(DRAFT)
+  publishedAt DateTime?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  createdById String?
+  updatedById String?
+  deletedAt   DateTime?
+
+  @@unique([examYearId, slug])
+  @@index([status, releasedAt(sort: Desc)])
+}
+
+/// `dedupeKey` is NOT cosmetic. In PostgreSQL, NULLs are distinct in a unique
+/// constraint, so @@unique([examId, year, shift, setCode, locale]) would accept
+/// ten identical rows whenever shift/setCode are null — which is most bulk
+/// imports. dedupeKey is a normalised string built in the repository with an
+/// explicit "-" for nulls, and it doubles as the import upsert key.
+model QuestionPaper {
+  id        String    @id @default(cuid())
+  slug      String    @unique // tombstoned on soft delete
+  dedupeKey String    @unique // "jee-main|2024|s1|-|EN|PREVIOUS_YEAR"
+  title     String
+  paperType PaperType
+  year      Int
+  shift     String?
+  setCode   String?
+  locale    Locale    @default(EN)
+
+  examId       String?
+  boardId      String?
+  boardClassId String?
+  subjectId    String?
+
+  totalQuestions Int?
+  totalMarks     Int?
+  durationMin    Int?
+  hasSolution    Boolean @default(false)
+  downloadCount  Int     @default(0) // denormalised; batched worker, never sync
+
+  exam       Exam?       @relation(fields: [examId], references: [id], onDelete: SetNull)
+  board      Board?      @relation(fields: [boardId], references: [id], onDelete: SetNull)
+  boardClass BoardClass? @relation(fields: [boardClassId], references: [id], onDelete: SetNull)
+  subject    Subject?    @relation(fields: [subjectId], references: [id], onDelete: SetNull)
+
+  files QuestionPaperFile[]
+
+  status      PublishStatus @default(DRAFT)
+  publishedAt DateTime?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  createdById String?
+  updatedById String?
+  deletedAt   DateTime?
+
+  @@index([examId, year(sort: Desc), status])
+  @@index([boardClassId, subjectId, year(sort: Desc)])
+  @@index([paperType, status, year(sort: Desc)])
+  @@index([status, publishedAt(sort: Desc)])
+  @@index([downloadCount(sort: Desc)])
+}
+
+/// Versioned file attachment. Files are NEVER overwritten — a corrected PDF
+/// creates version N+1 and marks the previous one isCurrent = false, so the
+/// history of what students actually downloaded is preserved.
+/// `onDelete: Restrict` on media: you cannot delete an asset that is a
+/// published paper version.
+/// Exactly one current row per (paper, role, locale) is enforced by a partial
+/// unique index in 001_raw_constraints.sql.
+model QuestionPaperFile {
+  id              String        @id @default(cuid())
+  questionPaperId String
+  mediaId         String
+  fileRole        PaperFileRole
+  locale          Locale        @default(EN)
+  version         Int
+  isCurrent       Boolean       @default(true)
+  changeNote      String?
+  supersededById  String?       @unique
+  publishedAt     DateTime?
+
+  questionPaper QuestionPaper      @relation(fields: [questionPaperId], references: [id], onDelete: Cascade)
+  media         MediaAsset         @relation("PaperFileMedia", fields: [mediaId], references: [id], onDelete: Restrict)
+  supersededBy  QuestionPaperFile? @relation("PaperFileSupersede", fields: [supersededById], references: [id], onDelete: SetNull)
+  supersedes    QuestionPaperFile? @relation("PaperFileSupersede")
+
+  createdAt   DateTime @default(now())
+  createdById String?
+
+  @@unique([questionPaperId, fileRole, locale, version])
+  @@index([questionPaperId, fileRole, isCurrent])
+  @@index([mediaId])
+}
+
+model Result {
+  id           String     @id @default(cuid())
+  slug         String     @unique
+  title        String
+  resultType   ResultType
+  year         Int
+  examId       String?
+  examYearId   String?
+  boardId      String?
+  boardClassId String?
+  isDeclared   Boolean    @default(false)
+  declaredAt   DateTime?
+  expectedAt   DateTime?
+  officialUrl  String?
+  statistics   Json? // pass %, toppers, appeared count
+
+  exam       Exam?        @relation(fields: [examId], references: [id], onDelete: SetNull)
+  examYear   ExamYear?    @relation(fields: [examYearId], references: [id], onDelete: SetNull)
+  board      Board?       @relation(fields: [boardId], references: [id], onDelete: SetNull)
+  boardClass BoardClass?  @relation(fields: [boardClassId], references: [id], onDelete: SetNull)
+  links      ResultLink[]
+
+  status      PublishStatus @default(DRAFT)
+  publishedAt DateTime?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  createdById String?
+  updatedById String?
+  deletedAt   DateTime?
+
+  @@index([year(sort: Desc), isDeclared, status])
+  @@index([examId, year(sort: Desc)])
+  @@index([boardId, year(sort: Desc)])
+  @@index([status, declaredAt(sort: Desc)])
+}
+
+model ResultLink {
+  id       String  @id @default(cuid())
+  resultId String
+  label    String
+  url      String
+  region   String?
+  order    Int     @default(0)
+
+  result Result @relation(fields: [resultId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([resultId, order])
+}

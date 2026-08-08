@@ -1,0 +1,200 @@
+// ---------------------------------------------------------------------------
+// CONTENT — the publishing spine.
+//
+// ContentEntry carries slug/path/status/SEO/publishing for ALL authored
+// content (blogs, news, notes, syllabus, guides, static pages). One spine
+// means sitemap generation, the search indexer, "latest updates" feeds and the
+// admin content list are each ONE indexed query instead of six UNIONed ones.
+//
+// Typed satellites (Article/Note/SyllabusDoc) are deferred — the `type` enum
+// plus `categoryId` and `attributes` cover launch. Tags are deferred: weak SEO
+// value, two extra tables.
+//
+// Editorial scope at launch: autosave + append-only history + rollback.
+// No review queue, no scheduling, no locks — those are Phase 2.
+// ---------------------------------------------------------------------------
+
+model ContentEntry {
+  id             String      @id @default(cuid())
+  siteId         String
+  type           ContentType
+  slug           String
+  path           String // canonical URL path — drives sitemap + redirects
+  title          String
+  subtitle       String?
+  excerpt        String?     @db.Text
+  bodyHtml       String?     @db.Text
+  bodyJson       Json? // editor AST — source of truth for editing
+  attributes     Json? // type-specific fields until satellites land
+  readingMinutes Int?
+  locale         Locale      @default(EN)
+
+  status      PublishStatus @default(DRAFT)
+  publishedAt DateTime?
+  version     Int           @default(1)
+  isFeatured  Boolean       @default(false)
+  viewCount   Int           @default(0) // denormalised; batched worker
+
+  authorId        String
+  categoryId      String?
+  featuredImageId String?
+
+  /// Populated on publish. The read path uses `bodyHtml` directly for now;
+  /// this column exists so switching to revision-backed reads later is a code
+  /// change, not a migration + backfill.
+  publishedRevisionId BigInt?
+
+  // entity anchors — REAL FKs, these are hot-path filters
+  examId              String?
+  boardId             String?
+  boardClassSubjectId String?
+  chapterId           String?
+
+  site          Site             @relation(fields: [siteId], references: [id], onDelete: Cascade)
+  author        User             @relation("ContentAuthor", fields: [authorId], references: [id], onDelete: Restrict)
+  category      Category?        @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  featuredImage MediaAsset?      @relation("ContentFeaturedImage", fields: [featuredImageId], references: [id], onDelete: SetNull)
+  publishedRevision ContentRevision? @relation("PublishedRevision", fields: [publishedRevisionId], references: [id], onDelete: SetNull)
+
+  exam              Exam?              @relation(fields: [examId], references: [id], onDelete: Cascade)
+  board             Board?             @relation(fields: [boardId], references: [id], onDelete: Cascade)
+  boardClassSubject BoardClassSubject? @relation(fields: [boardClassSubjectId], references: [id], onDelete: Cascade)
+  chapter           Chapter?           @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  createdById String?
+  updatedById String?
+  deletedAt   DateTime?
+
+  @@unique([siteId, path])
+  @@unique([siteId, type, slug, locale])
+  @@index([siteId, status, publishedAt(sort: Desc)])
+  @@index([siteId, type, status, publishedAt(sort: Desc)])
+  @@index([categoryId, status, publishedAt(sort: Desc)])
+  @@index([examId, type, status])
+  @@index([boardClassSubjectId, type, status])
+  @@index([chapterId, type, status])
+  @@index([authorId, status])
+  @@index([isFeatured, status, publishedAt(sort: Desc)])
+  @@index([deletedAt])
+}
+
+model Category {
+  id          String  @id @default(cuid())
+  siteId      String
+  name        String
+  slug        String
+  parentId    String?
+  type        String // BLOG | NEWS | GUIDE
+  description String? @db.Text
+  order       Int     @default(0)
+
+  site     Site           @relation(fields: [siteId], references: [id], onDelete: Cascade)
+  parent   Category?      @relation("CategoryTree", fields: [parentId], references: [id], onDelete: SetNull)
+  children Category[]     @relation("CategoryTree")
+  entries  ContentEntry[]
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  createdById String?
+  updatedById String?
+  deletedAt   DateTime?
+
+  @@unique([siteId, slug])
+  @@index([siteId, type, order])
+  @@index([parentId])
+}
+
+/// Editable prose blocks on ENTITY pages — exam eligibility, exam pattern, how
+/// to apply, board overview. This is what lets 100 exams × 10 sub-pages exist
+/// without 10 more tables.
+model PageSection {
+  id        String    @id @default(cuid())
+  siteId    String
+  ownerType OwnerType
+  ownerId   String
+  key       String // "eligibility" | "exam-pattern" | "how-to-apply"
+  locale    Locale    @default(EN)
+  heading   String?
+  bodyHtml  String    @db.Text
+  order     Int       @default(0)
+  isVisible Boolean   @default(true)
+
+  site Site @relation(fields: [siteId], references: [id], onDelete: Cascade)
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  createdById String?
+  updatedById String?
+
+  @@unique([siteId, ownerType, ownerId, key, locale])
+  @@index([ownerType, ownerId, locale, order])
+}
+
+/// FAQPage JSON-LD is direct SERP real estate — this earns its place at launch.
+model FaqItem {
+  id         String    @id @default(cuid())
+  siteId     String
+  ownerType  OwnerType
+  ownerId    String
+  locale     Locale    @default(EN)
+  question   String
+  answerHtml String    @db.Text
+  order      Int       @default(0)
+  inSchema   Boolean   @default(true)
+
+  site Site @relation(fields: [siteId], references: [id], onDelete: Cascade)
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  createdById String?
+  updatedById String?
+
+  @@index([ownerType, ownerId, locale, order])
+  @@index([siteId, inSchema])
+}
+
+/// Volatile autosave. One row per (content, editor) — the table never grows
+/// unboundedly, and the browser crashing at blog #400 stops being a loss.
+/// baseVersion is the optimistic-concurrency guard.
+model ContentDraft {
+  id          String    @id @default(cuid())
+  ownerType   OwnerType
+  ownerId     String
+  authorId    String
+  payload     Json
+  baseVersion Int
+  savedAt     DateTime  @updatedAt
+  createdAt   DateTime  @default(now())
+
+  author User @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  @@unique([ownerType, ownerId, authorId])
+  @@index([savedAt]) // stale-draft cleanup (30 days)
+}
+
+/// Append-only history. Full JSON snapshots, not diffs: restore is a single
+/// write with no chain replay. Autosave is NOT written here — that is what
+/// ContentDraft is for.
+model ContentRevision {
+  id                BigInt        @id @default(autoincrement())
+  ownerType         OwnerType
+  ownerId           String
+  version           Int
+  revisionType      RevisionType
+  status            PublishStatus
+  snapshot          Json
+  changedFields     String[]
+  changeNote        String?
+  rollbackOfVersion Int?
+  publishedAt       DateTime?
+  authorId          String?
+  createdAt         DateTime      @default(now())
+
+  author      User?          @relation(fields: [authorId], references: [id], onDelete: SetNull)
+  publishedOn ContentEntry[] @relation("PublishedRevision")
+
+  @@unique([ownerType, ownerId, version])
+  @@index([ownerType, ownerId, createdAt(sort: Desc)])
+}

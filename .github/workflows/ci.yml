@@ -1,0 +1,81 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  # Prisma needs these defined to generate a client; no connection is made.
+  DATABASE_URL: postgresql://ci:ci@localhost:5432/ci
+  DIRECT_DATABASE_URL: postgresql://ci:ci@localhost:5432/ci
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9.15.4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      # Structure before behaviour: a layer violation makes the test results
+      # much less interesting, and this takes under a second.
+      - name: Architecture metrics
+        run: pnpm arch:check
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Unit tests
+        run: pnpm test
+
+      - name: Build
+        run: pnpm build
+
+      # Catches a schema edit committed without its migration.
+      - name: Prisma schema is valid
+        run: pnpm --filter @stc/database run validate
+
+  migration-guard:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # Destructive migrations require an explicit, reviewable opt-in. Without
+      # this, a DROP COLUMN reaches production as an ordinary-looking diff.
+      - name: Block unmarked destructive migrations
+        run: |
+          FILES=$(git diff --name-only origin/${{ github.base_ref }}...HEAD \
+            -- 'packages/database/prisma/migrations/**/*.sql' || true)
+          if [ -z "$FILES" ]; then
+            echo "No migration changes."
+            exit 0
+          fi
+          FAILED=0
+          for f in $FILES; do
+            [ -f "$f" ] || continue
+            if grep -Eiq 'DROP (TABLE|COLUMN)' "$f" && ! grep -q '@allow-destructive' "$f"; then
+              echo "::error file=$f::Destructive migration without '-- @allow-destructive'"
+              FAILED=1
+            fi
+          done
+          exit $FAILED

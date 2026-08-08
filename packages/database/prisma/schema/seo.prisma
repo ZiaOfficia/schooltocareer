@@ -1,0 +1,147 @@
+// ---------------------------------------------------------------------------
+// SEO — metadata overrides, slug history, redirects, search.
+//
+// SlugHistory vs Redirect — both exist, different grains:
+//   SlugHistory  entity-level, one row per rename. Source of truth.
+//   Redirect     URL-level, one row per path. Serves the 301 in middleware.
+// A rename produces ONE SlugHistory row and N Redirect rows — one per
+// registered sub-path template in packages/config/src/routes.ts. Adding a new
+// sub-page therefore extends redirect coverage for all past renames on the
+// next regeneration.
+//
+// Deferred to Phase 2: SearchSynonym, InternalLinkRule, PageStat.
+// ---------------------------------------------------------------------------
+
+model SeoMeta {
+  id              String     @id @default(cuid())
+  siteId          String
+  path            String // "/exam/jee-main/syllabus" — locale encoded in path
+  ownerType       OwnerType?
+  ownerId         String?
+  title           String?
+  description     String?
+  keywords        String[]
+  canonicalUrl    String?
+  robotsIndex     Boolean    @default(true)
+  robotsFollow    Boolean    @default(true)
+  ogTitle         String?
+  ogDescription   String?
+  ogImageId       String?
+  twitterCard     String?    @default("summary_large_image")
+  schemaOverride  Json?
+  sitemapPriority Float?     @default(0.5)
+  changeFrequency String?    @default("weekly")
+
+  site    Site        @relation(fields: [siteId], references: [id], onDelete: Cascade)
+  ogImage MediaAsset? @relation("SeoOgImage", fields: [ogImageId], references: [id], onDelete: SetNull)
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  updatedById String?
+
+  @@unique([siteId, path])
+  @@index([ownerType, ownerId])
+  @@index([siteId, robotsIndex, sitemapPriority(sort: Desc)])
+}
+
+/// @@unique([entityType, oldSlug, locale]) is load-bearing: without it an old
+/// slug can point at two entities and the 301 becomes non-deterministic.
+model SlugHistory {
+  id           String           @id @default(cuid())
+  entityType   OwnerType
+  entityId     String
+  oldSlug      String
+  newSlug      String
+  locale       Locale           @default(EN)
+  redirectType Int              @default(301)
+  reason       SlugChangeReason
+  isActive     Boolean          @default(true) // false once the chain is collapsed
+  changedById  String?
+  createdAt    DateTime         @default(now())
+
+  @@unique([entityType, oldSlug, locale])
+  @@index([entityType, entityId, createdAt(sort: Desc)])
+  @@index([isActive])
+}
+
+model Redirect {
+  id         String    @id @default(cuid())
+  siteId     String
+  fromPath   String
+  toPath     String
+  statusCode Int       @default(301)
+  isActive   Boolean   @default(true)
+  reason     String? // "slug-change" | "manual" | "merge"
+  hitCount   Int       @default(0)
+  lastHitAt  DateTime?
+
+  site Site @relation(fields: [siteId], references: [id], onDelete: Cascade)
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  createdById String?
+
+  @@unique([siteId, fromPath])
+  @@index([siteId, isActive])
+}
+
+/// Canonical, provider-agnostic search index.
+///   Now:   PostgreSQL FTS reads it directly via the generated `searchVector`
+///          (weighted A/B/C/D, locale-branched — 001_raw_constraints.sql).
+///   Later: Meilisearch/Elasticsearch becomes a SECOND consumer of
+///          OutboxEvent(SEARCH_UPSERT) behind ISearchProvider. Backfill from
+///          this table, dual-read behind a flag, cut over. Zero migration.
+model SearchDocument {
+  id          String    @id @default(cuid())
+  siteId      String
+  ownerType   OwnerType
+  ownerId     String
+  locale      Locale    @default(EN)
+  path        String
+  title       String
+  summary     String?
+  body        String?   @db.Text
+  keywords    String[]
+  entityLabel String // "Exam" | "Previous Year Paper" | "Blog"
+  imageUrl    String?
+
+  /// One JSONB column keeps the table stable as filters evolve.
+  /// { examId, boardId, year, subjectId, level, ... }
+  facets Json?
+
+  popularity  Int       @default(0) // views + downloads, refreshed nightly
+  boost       Float     @default(1.0) // manual editorial weighting
+  isActive    Boolean   @default(true) // unpublish without deleting the row
+  publishedAt DateTime?
+  indexedAt   DateTime  @default(now())
+  sourceHash  String? // skip no-op reindexes
+
+  /// GENERATED ALWAYS ... STORED. PostgreSQL ships no Hindi stemmer, so the
+  /// generator branches to the 'simple' configuration for Devanagari.
+  searchVector Unsupported("tsvector")?
+
+  site Site @relation(fields: [siteId], references: [id], onDelete: Cascade)
+
+  updatedAt DateTime @updatedAt
+
+  @@unique([siteId, ownerType, ownerId, locale])
+  @@index([siteId, path])
+  @@index([isActive, entityLabel, popularity(sort: Desc)])
+  @@index([locale, isActive])
+}
+
+/// Zero-result queries are content gaps. For an SEO-first build this is the
+/// highest-ROI table in the schema: it tells you what to write next, in your
+/// users' own words. Append-only; partition when it gets large.
+model SearchQueryLog {
+  id              BigInt   @id @default(autoincrement())
+  rawQuery        String
+  normalizedQuery String
+  locale          Locale   @default(EN)
+  resultCount     Int
+  clickedPath     String?
+  createdAt       DateTime @default(now())
+
+  @@index([normalizedQuery, createdAt(sort: Desc)])
+  @@index([resultCount, createdAt(sort: Desc)])
+}

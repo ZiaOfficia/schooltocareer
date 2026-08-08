@@ -1,0 +1,16 @@
+﻿{
+  "name": "@stc/ui",
+  "version": "0.1.0",
+  "private": true,
+  "description": "shadcn/ui primitives shared by web + admin.",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": { ".": "./src/index.ts" },
+  "scripts": {
+    "lint": "eslint src",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.3"
+  }
+}
