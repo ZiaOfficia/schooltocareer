@@ -15,6 +15,18 @@ export default function robots(): MetadataRoute.Robots {
   // duplicate content pointing at a host that will disappear, and it competes
   // with production for the same keywords while it lasts.
   if (!indexable) {
+    // Loud, because the failure is silent otherwise. A production deployment
+    // missing NEXT_PUBLIC_SITE_URL serves `Disallow: /` and looks completely
+    // healthy — 200s everywhere, pages render, nothing errors — while being
+    // invisible to every crawler. This line is the only warning you get.
+    if (process.env.NODE_ENV === 'production') {
+      console.warn(
+        `[robots] EMITTING "Disallow: /" — the entire site is blocked from crawlers.\n` +
+          `         NEXT_PUBLIC_SITE_URL is "${process.env.NEXT_PUBLIC_SITE_URL ?? '(unset)'}"\n` +
+          `         and must be exactly "${SITE.ORIGIN}" for this deployment to be indexable.\n` +
+          `         If this IS a preview deployment, that is correct — ignore.`,
+      );
+    }
     return { rules: [{ userAgent: '*', disallow: '/' }] };
   }
 
