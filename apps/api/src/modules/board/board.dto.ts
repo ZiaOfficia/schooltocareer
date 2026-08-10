@@ -1,5 +1,11 @@
 import { ROUTES } from '@stc/constants';
-import type { BoardType, PublishStatus, SchoolStage, StreamType } from '@stc/types';
+import type {
+  BoardListItemDto,
+  BoardType,
+  PublishStatus,
+  SchoolStage,
+  StreamType,
+} from '@stc/types';
 import { toIsoDate } from '@stc/utils';
 
 import type {
@@ -18,20 +24,9 @@ import type {
  * makes a board rename a server-side concern rather than 40 template edits.
  */
 
-export type BoardListItemDto = {
-  id: string;
-  slug: string;
-  path: string;
-  name: string;
-  shortName: string;
-  type: BoardType;
-  popularityScore: number;
-  status: PublishStatus;
-  publishedAt: string | null;
-  updatedAt: string;
-  state: { id: string; name: string; slug: string; code: string } | null;
-  logo: { url: string; alt: string | null; blurDataUrl: string | null } | null;
-};
+/** Shape lives in @stc/types so apps/web consumes the same definition.
+ *  The MAPPERS stay here — turning a row into the public shape is API work. */
+export type { BoardListItemDto } from '@stc/types';
 
 export type BoardDto = BoardListItemDto & {
   establishedYear: number | null;

@@ -3,6 +3,22 @@ import Link from 'next/link';
 import { ROUTES, SITE } from '@stc/constants';
 import { Wrap } from '@stc/ui';
 
+/**
+ * ONLY routes that resolve.
+ *
+ * This previously linked to /news, /about, /contact, /privacy-policy,
+ * /terms-and-conditions and /disclaimer — none of which have been built. Every
+ * one was a 404 on every page of the site, which is both a bad visitor
+ * experience and a steady supply of crawl errors from the most-linked element
+ * on the domain.
+ *
+ * ROUTES defines the whole URL map including pages that do not exist yet, so
+ * "it's in ROUTES" is not evidence the page is there. Add a link here on the
+ * same commit that adds the page.
+ *
+ * STILL OWED, and needed before AdSense review: privacy policy, terms,
+ * disclaimer, contact. Tracked in docs/PROJECT-STATUS.md.
+ */
 const GROUPS = [
   {
     title: 'Exams',
@@ -17,22 +33,6 @@ const GROUPS = [
     links: [
       { label: 'All boards', href: ROUTES.boards() },
       { label: 'Articles', href: ROUTES.blog() },
-      { label: 'News', href: ROUTES.news() },
-    ],
-  },
-  {
-    title: 'About',
-    links: [
-      { label: 'About us', href: ROUTES.about() },
-      { label: 'Contact', href: ROUTES.contact() },
-      { label: 'Disclaimer', href: ROUTES.disclaimer() },
-    ],
-  },
-  {
-    title: 'Legal',
-    links: [
-      { label: 'Privacy policy', href: ROUTES.privacy() },
-      { label: 'Terms & conditions', href: ROUTES.terms() },
     ],
   },
 ] as const;

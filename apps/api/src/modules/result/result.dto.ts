@@ -1,5 +1,5 @@
 import { ROUTES } from '@stc/constants';
-import type { PublishStatus, ResultType } from '@stc/types';
+import type { PublishStatus, ResultListItemDto, ResultType } from '@stc/types';
 import { daysUntil, toIsoDate } from '@stc/utils';
 
 import { phaseOf, type ResultPhase } from './result.service.js';
@@ -14,22 +14,9 @@ import type { ResultLink, ResultListRecord, ResultRecord, ResultStatistics } fro
  * the three would disagree.
  */
 
-export type ResultListItemDto = {
-  id: string;
-  slug: string;
-  path: string;
-  title: string;
-  resultType: ResultType;
-  year: number;
-  phase: ResultPhase;
-  isDeclared: boolean;
-  declaredAt: string | null;
-  expectedAt: string | null;
-  daysUntilExpected: number | null;
-  status: PublishStatus;
-  exam: { id: string; slug: string; shortName: string; path: string } | null;
-  board: { id: string; slug: string; shortName: string; path: string } | null;
-};
+/** Shape lives in @stc/types so apps/web consumes the same definition.
+ *  The MAPPERS stay here — turning a row into the public shape is API work. */
+export type { ResultListItemDto } from '@stc/types';
 
 export type ResultDto = ResultListItemDto & {
   officialUrl: string | null;

@@ -6,38 +6,42 @@ import type { ExamListItemDto } from '@stc/types';
 import { listExams } from '@/lib/api';
 
 /**
- * Sharded sitemaps.
+ * ONE sitemap, served at /sitemap.xml.
  *
- * A sitemap file is capped at 50,000 URLs and 50MB. This site targets six
- * figures, so a single file is not a "later" problem — it is a launch problem.
- * `generateSitemaps` emits /sitemap/0.xml, /sitemap/1.xml … and Next builds
- * the index automatically.
+ * WHY NOT SHARDED. The previous version used `generateSitemaps()`, which emits
+ * /sitemap/0.xml, /sitemap/1.xml … and — critically — does NOT generate an
+ * index at /sitemap.xml. So robots.txt advertised a URL that 404'd, and the
+ * only working sitemap was one nothing linked to.
  *
- * Two deliberate omissions:
+ * It also carried a silent bug. Next passes the shard `id` as a STRING from
+ * the route segment, but the handler was typed `{ id: number }` and gated the
+ * static routes behind `id === 0`. `"0" === 0` is false, so every static route
+ * was skipped on every shard — the live sitemap contained exactly 160 exam
+ * URLs and nothing else. TypeScript could not catch it because the type
+ * annotation on a framework-supplied parameter is an assertion, not a check.
  *
- *   priority     Google has said for years that it ignores it. Emitting it
- *                is noise that implies a control we do not have.
- *   changefreq   Same. `lastModified` is the only freshness signal that is
- *                actually consumed, and it comes from the row's updatedAt so
- *                it cannot be inflated.
+ * A single file is correct until 50,000 URLs (the protocol limit). Current
+ * live count is ~180; the launch projection is ~60,000, so sharding WILL be
+ * needed. When it is, the fix is a hand-written `app/sitemap.xml/route.ts`
+ * emitting a <sitemapindex> plus these shards — not `generateSitemaps` alone,
+ * which is what created this problem.
  *
- * Only PUBLISHED entities appear. The API's public routes never return drafts,
- * so this cannot leak an unpublished page even by mistake.
+ * Two deliberate omissions: `priority` and `changefreq`. Google has said for
+ * years that it ignores both. `lastModified` comes from the row's updatedAt,
+ * so it cannot be inflated.
  */
 
-/**
- * Generated per request, not at build time.
- *
- * Two reasons. A build must not fail because the API happened to be
- * redeploying, and — more importantly — a sitemap frozen at build time goes
- * stale the moment an editor publishes. `revalidate` caches the result, so the
- * cost is one API call per hour, not one per crawl.
- */
-export const dynamic = 'force-dynamic';
 export const revalidate = 3600;
 
-const PER_SITEMAP = 20_000;
+/** 50,000 is the protocol limit. Warn well before it, not at it. */
+const SHARD_THRESHOLD = 45_000;
 
+/**
+ * Only routes that actually RESOLVE. A sitemap listing a 404 is worse than
+ * omitting it: it spends crawl budget and reports as an error in Search
+ * Console. Legal pages are absent because they are not built yet — add them
+ * here on the same commit that adds the page, never before.
+ */
 const STATIC_ROUTES = [
   ROUTES.home(),
   ROUTES.exams(),
@@ -45,65 +49,46 @@ const STATIC_ROUTES = [
   ROUTES.papers(),
   ROUTES.results(),
   ROUTES.blog(),
-  ROUTES.about(),
-  ROUTES.contact(),
-  ROUTES.privacy(),
-  ROUTES.terms(),
-  ROUTES.disclaimer(),
 ] as const;
 
-export async function generateSitemaps(): Promise<Array<{ id: number }>> {
-  // Shard 0 always exists. If the API is unreachable while the route list is
-  // being computed, one shard is still declared — the request-time handler
-  // below is what decides whether that shard can be served honestly.
-  try {
-    const exams = await listExams<ExamListItemDto>('limit=1');
-    return Array.from({ length: Math.max(1, Math.ceil(exams.length / PER_SITEMAP)) }, (_, id) => ({
-      id,
-    }));
-  } catch {
-    return [{ id: 0 }];
-  }
-}
+/** Cluster pages that exist for every exam. Generated from ROUTES so adding a
+ *  cluster page is one edit there, not two. */
+const EXAM_CLUSTER = [
+  ROUTES.examSyllabus,
+  ROUTES.examPattern,
+  ROUTES.examEligibility,
+  ROUTES.examAdmitCard,
+  ROUTES.examAnswerKey,
+  ROUTES.examResult,
+  ROUTES.examPapers,
+] as const;
 
-export default async function sitemap({ id }: { id: number }): Promise<MetadataRoute.Sitemap> {
-  const entries: MetadataRoute.Sitemap = [];
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const now = new Date();
+  const entries: MetadataRoute.Sitemap = STATIC_ROUTES.map((path) => ({
+    url: absoluteUrl(path),
+    lastModified: now,
+  }));
 
-  // NOTE: errors from listExams below are deliberately NOT caught.
-  //
-  // The tempting "degrade to the static routes" fallback is actively harmful
-  // here: submitting a sitemap listing 11 URLs when the site has six figures
-  // tells Google the rest were removed. Failing the request instead returns a
-  // 5xx, which Google treats as temporary and retries — the crawler is built
-  // for that, and it is the one behaviour that cannot cost us the index.
-
-  if (id === 0) {
-    for (const path of STATIC_ROUTES) {
-      entries.push({ url: absoluteUrl(path), lastModified: new Date() });
-    }
-  }
-
-  const exams = await listExams<ExamListItemDto>(
-    `limit=${PER_SITEMAP}&offset=${id * PER_SITEMAP}`,
-  );
+  // Deliberately NOT wrapped in try/catch. The tempting fallback — return the
+  // static routes when the API is down — submits a six-URL sitemap for a site
+  // with thousands, which reads to Google as mass removal. Throwing returns a
+  // 5xx, which the crawler treats as temporary and retries.
+  const exams = await listExams<ExamListItemDto>('limit=1000');
 
   for (const exam of exams) {
-    entries.push({ url: absoluteUrl(exam.path), lastModified: new Date(exam.updatedAt) });
-
-    // The cluster pages are real URLs and must be discoverable. Generating them
-    // from ROUTES rather than listing them by hand means a new cluster page is
-    // added in one place and appears here automatically.
-    for (const path of [
-      ROUTES.examSyllabus(exam.slug),
-      ROUTES.examPattern(exam.slug),
-      ROUTES.examEligibility(exam.slug),
-      ROUTES.examAdmitCard(exam.slug),
-      ROUTES.examAnswerKey(exam.slug),
-      ROUTES.examResult(exam.slug),
-      ROUTES.examPapers(exam.slug),
-    ]) {
-      entries.push({ url: absoluteUrl(path), lastModified: new Date(exam.updatedAt) });
+    const lastModified = new Date(exam.updatedAt);
+    entries.push({ url: absoluteUrl(exam.path), lastModified });
+    for (const route of EXAM_CLUSTER) {
+      entries.push({ url: absoluteUrl(route(exam.slug)), lastModified });
     }
+  }
+
+  if (entries.length > SHARD_THRESHOLD) {
+    console.warn(
+      `[sitemap] ${entries.length} URLs — approaching the 50,000 limit. ` +
+        'Split into shards plus a hand-written /sitemap.xml index before this grows further.',
+    );
   }
 
   return entries;

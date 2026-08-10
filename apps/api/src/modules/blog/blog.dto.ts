@@ -1,29 +1,11 @@
-import type { ContentType, Locale, PublishStatus } from '@stc/types';
+import type { ContentType, Locale, PostListItemDto, PublishStatus } from '@stc/types';
 import { toIsoDate } from '@stc/utils';
 
 import type { PostListRecord, PostRecord } from './blog.types.js';
 
-export type PostListItemDto = {
-  id: string;
-  slug: string;
-  path: string;
-  type: ContentType;
-  title: string;
-  subtitle: string | null;
-  excerpt: string | null;
-  locale: Locale;
-  status: PublishStatus;
-  publishedAt: string | null;
-  /** True while status is DRAFT and publishedAt is still in the future. */
-  isScheduled: boolean;
-  readingMinutes: number | null;
-  isFeatured: boolean;
-  viewCount: number;
-  version: number;
-  author: { id: string; name: string; slug: string | null; path: string | null } | null;
-  category: { id: string; name: string; slug: string } | null;
-  featuredImage: { url: string; alt: string | null; blurDataUrl: string | null } | null;
-};
+/** Shape lives in @stc/types so apps/web consumes the same definition.
+ *  The MAPPERS stay here — turning a row into the public shape is API work. */
+export type { PostListItemDto } from '@stc/types';
 
 export type PostDto = PostListItemDto & {
   bodyHtml: string | null;

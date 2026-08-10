@@ -125,6 +125,30 @@ export async function listPapers<T>(query = ''): Promise<T[]> {
   return result?.data ?? [];
 }
 
+export async function listBoards<T>(query = ''): Promise<T[]> {
+  const result = await requestOptional<Envelope<T[]>>(
+    `${API_ROUTES.boards}${query ? `?${query}` : ''}`,
+    { tags: [CACHE_TAGS.entityList('BOARD')] },
+  );
+  return result?.data ?? [];
+}
+
+export async function listResults<T>(query = ''): Promise<T[]> {
+  const result = await requestOptional<Envelope<T[]>>(
+    `${API_ROUTES.results}${query ? `?${query}` : ''}`,
+    { tags: [CACHE_TAGS.entityList('RESULT')] },
+  );
+  return result?.data ?? [];
+}
+
+export async function listPosts<T>(query = ''): Promise<T[]> {
+  const result = await requestOptional<Envelope<T[]>>(
+    `${API_ROUTES.content}${query ? `?${query}` : ''}`,
+    { tags: [CACHE_TAGS.entityList('CONTENT_ENTRY')] },
+  );
+  return result?.data ?? [];
+}
+
 export async function search<T>(query: string): Promise<T | null> {
   const result = await requestOptional<Envelope<T>>(
     `${API_ROUTES.search}?q=${encodeURIComponent(query)}`,

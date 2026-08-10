@@ -1,5 +1,5 @@
 import { CACHE_TAGS, PERMISSIONS, REVALIDATE, ROUTES } from '@stc/constants';
-import type { FacetGroup, FacetedResult, PageMeta, ResultType } from '@stc/types';
+import type { FacetGroup, FacetedResult, PageMeta, ResultPhase, ResultType } from '@stc/types';
 import { tombstoneSlug } from '@stc/utils';
 import type {
   ResultCreateInput,
@@ -515,7 +515,10 @@ export class ResultService {
 
 // Pure helpers
 
-export type ResultPhase = 'AWAITED' | 'EXPECTED' | 'DECLARED';
+// Defined in @stc/types: it crosses the wire inside ResultListItemDto, so it
+// is public contract even though it is computed here. Re-exported so existing
+// imports from this module keep working.
+export type { ResultPhase } from '@stc/types';
 
 /** Derived from the data, not stored — one less field that can disagree. */
 export function phaseOf(record: {

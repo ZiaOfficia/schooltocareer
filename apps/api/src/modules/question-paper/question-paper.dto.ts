@@ -1,5 +1,5 @@
 import { ROUTES } from '@stc/constants';
-import type { Locale, PaperType, PublishStatus } from '@stc/types';
+import type { Locale, PaperListItemDto, PaperType, PublishStatus } from '@stc/types';
 import { formatBytes, toIsoDate } from '@stc/utils';
 
 import type { PaperListRecord, PaperRecord } from './question-paper.types.js';
@@ -21,23 +21,9 @@ export type PaperFileDto = {
   version: number;
 };
 
-export type PaperListItemDto = {
-  id: string;
-  slug: string;
-  path: string;
-  title: string;
-  paperType: PaperType;
-  year: number;
-  shift: string | null;
-  setCode: string | null;
-  locale: Locale;
-  hasSolution: boolean;
-  downloadCount: number;
-  status: PublishStatus;
-  publishedAt: string | null;
-  exam: { id: string; slug: string; shortName: string; path: string } | null;
-  subject: { id: string; slug: string; name: string } | null;
-};
+/** Shape lives in @stc/types so apps/web consumes the same definition.
+ *  The MAPPERS stay here — turning a row into the public shape is API work. */
+export type { PaperListItemDto } from '@stc/types';
 
 export type PaperDto = PaperListItemDto & {
   totalQuestions: number | null;
