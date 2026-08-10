@@ -11,7 +11,25 @@ import { LOCALE, PUBLISH_STATUS } from '@stc/types';
  * definition, no drift.
  */
 
-export const cuidSchema = z.string().cuid2().or(z.string().cuid());
+/**
+ * An entity id.
+ *
+ * Deliberately NOT `.cuid2()`. Validating the FORMAT of an opaque identifier
+ * buys almost nothing — ids are looked up, never interpreted — while hard-
+ * coupling every endpoint to one generation strategy. It broke the moment
+ * something legitimate used a different one: the deterministic seed uses
+ * stable ids like `seed_exam_jee-main` so re-running converges, and every
+ * `?examId=` filter returned 400 "Invalid cuid2" against seeded data.
+ *
+ * The sanitisation that actually matters is kept: bounded length and a safe
+ * charset, so an id cannot smuggle punctuation into anything downstream.
+ * A wrong-but-well-formed id is a 404, which is the correct answer anyway.
+ */
+export const cuidSchema = z
+  .string()
+  .min(1)
+  .max(64)
+  .regex(/^[A-Za-z0-9_-]+$/, 'Must be an identifier: letters, digits, underscore or hyphen');
 
 export const slugSchema = z
   .string()

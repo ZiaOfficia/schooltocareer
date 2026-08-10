@@ -140,7 +140,10 @@ export const API_ROUTES = {
   board: (slug: string) => `${API_PREFIX}/boards/${slug}`,
   papers: `${API_PREFIX}/question-papers`,
   results: `${API_PREFIX}/results`,
-  content: `${API_PREFIX}/content`,
+  /** The blog module is mounted at /posts. `content` was wrong and 404'd, which
+   *  the web client swallowed into an empty list — /blog rendered its empty
+   *  state on a database holding 300 posts. */
+  posts: `${API_PREFIX}/posts`,
   categories: `${API_PREFIX}/categories`,
   media: `${API_PREFIX}/media`,
   search: `${API_PREFIX}/search`,

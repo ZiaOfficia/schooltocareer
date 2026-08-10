@@ -143,7 +143,7 @@ export async function listResults<T>(query = ''): Promise<T[]> {
 
 export async function listPosts<T>(query = ''): Promise<T[]> {
   const result = await requestOptional<Envelope<T[]>>(
-    `${API_ROUTES.content}${query ? `?${query}` : ''}`,
+    `${API_ROUTES.posts}${query ? `?${query}` : ''}`,
     { tags: [CACHE_TAGS.entityList('CONTENT_ENTRY')] },
   );
   return result?.data ?? [];

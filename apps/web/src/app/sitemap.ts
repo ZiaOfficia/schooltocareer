@@ -4,6 +4,7 @@ import { ROUTES, absoluteUrl } from '@stc/constants';
 import type { ExamListItemDto } from '@stc/types';
 
 import { listExams } from '@/lib/api';
+import { EXAM_SECTIONS } from '@/lib/exam-sections';
 
 /**
  * ONE sitemap, served at /sitemap.xml.
@@ -51,17 +52,20 @@ const STATIC_ROUTES = [
   ROUTES.blog(),
 ] as const;
 
-/** Cluster pages that exist for every exam. Generated from ROUTES so adding a
- *  cluster page is one edit there, not two. */
-const EXAM_CLUSTER = [
-  ROUTES.examSyllabus,
-  ROUTES.examPattern,
-  ROUTES.examEligibility,
-  ROUTES.examAdmitCard,
-  ROUTES.examAnswerKey,
-  ROUTES.examResult,
-  ROUTES.examPapers,
-] as const;
+/**
+ * Cluster pages come from EXAM_SECTIONS — the SAME registry the route uses to
+ * decide what renders.
+ *
+ * This previously listed all seven cluster routes from ROUTES, including
+ * syllabus, exam-pattern and eligibility, none of which had a page. That put
+ * 140 URLs in the sitemap that returned 404. ROUTES describes the whole
+ * intended URL space including pages not yet built, so it is the wrong source
+ * of truth for "what can be crawled today".
+ *
+ * Reading the registry means the two cannot drift: a section appears here only
+ * once it renders, and adding one is a single edit in exam-sections.ts.
+ */
+const EXAM_CLUSTER = Object.values(EXAM_SECTIONS).map((section) => section.path);
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
