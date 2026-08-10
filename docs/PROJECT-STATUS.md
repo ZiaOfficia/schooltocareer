@@ -132,7 +132,9 @@ Full 89-model design preserved at `docs/architecture/schema-full-v1/`.
 | Provenance untested | Every seeded date is `isTentative`, so the *official* branch has never rendered against real data. |
 | ESLint on tooling | `tooling/scripts` typechecks but has no `lint` script. |
 | Worker not deployed | Cache revalidation, Cloudinary round-trip and IndexNow are asserted as outbox rows only; delivery has never run. |
-| Nothing deployed | No Vercel, no Render, no DNS. The apex canonical policy is enforced in code but never exercised in production. **Now Phase A.** |
+| ~~Nothing deployed~~ | **Closed 10 Aug.** Live at schooltocareer.in (Vercel) + schooltocareer.onrender.com (Render, Singapore). Search Console verified as a **Domain property** via DNS TXT, so apex/www/http/https are all covered by one property. |
+| Apex redirects to www | `schooltocareer.in` 308s to `www`, which is backwards: every canonical the site emits points at the apex, so canonicals currently target a URL that redirects away from the page serving them. Google resolves it, but it is a contradiction sent on every page. Fix in Vercel → Domains: make the apex primary. |
+| Legal pages missing | privacy policy, terms, disclaimer, contact. Footer links removed rather than ship placeholder legal text. **Required before AdSense review.** |
 | Editorial workflow — UI only | The *workflow* exists: `ContentDraft`, `ContentRevision`, `PublishStatus`, scheduled publishing (verified in `verify:e2e`), and `EXAM_PUBLISH` separated from `EXAM_MANAGE` so an author can draft but not publish. What is missing is the admin UI, plus two steps that were never modelled: a **fact-check gate** and **update reminders** for pages that go stale. The second matters most — an exam page that was right in March and wrong in June is worse than no page. |
 | No question-level data | Blocks insights, chapter analytics and real recommendations. See "What the schema cannot do yet". |
 
