@@ -28,6 +28,44 @@ async function bootstrap(): Promise<void> {
   }
 
   const { env, logger } = container;
+
+  // SITE_ID must name a real Site row.
+  //
+  // The env schema only checks it is a non-empty string, so a wrong value
+  // passes validation and the process starts looking completely healthy — 200s
+  // everywhere, /health green — while every siteId-scoped module returns an
+  // empty set. That is exactly what happened in production: /api/v1/exams
+  // returned all 20 exams because ExamRepository does not scope by site, while
+  // /api/v1/posts returned 0 of 300 because BlogRepository does.
+  //
+  // A wrong id is a deployment mistake, and a deployment mistake should stop
+  // the deployment, not quietly serve an empty website.
+  try {
+    const site = await container.prisma.site.findUnique({
+      where: { id: env.SITE_ID },
+      select: { id: true },
+    });
+    if (!site) {
+      const available = await container.prisma.site.findMany({ select: { id: true, name: true } });
+      console.error(
+        `Startup failed: SITE_ID="${env.SITE_ID}" does not match any Site row.\n` +
+          '  Every site-scoped query would return nothing while the API looked healthy.\n' +
+          `  Sites in this database: ${
+            available.length > 0
+              ? available.map((s) => `"${s.id}" (${s.name})`).join(', ')
+              : 'NONE — the database has not been seeded'
+          }`,
+      );
+      process.exit(1);
+    }
+  } catch (error) {
+    console.error(
+      'Startup failed: could not verify SITE_ID against the database:',
+      error instanceof Error ? error.message : error,
+    );
+    process.exit(1);
+  }
+
   const app = createApp(container);
 
   const server: Server = app.listen(env.PORT, () => {
