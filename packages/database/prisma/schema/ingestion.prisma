@@ -1,0 +1,147 @@
+// ---------------------------------------------------------------------------
+// INGESTION — Phase 0: source intelligence.
+//
+// Deliberately contains NO parsing and NO link to any content table. This
+// phase answers one question and nothing else: which official pages actually
+// change, and how often?
+//
+// A month of hashes tells you which sources are worth a parser, which are dead,
+// which honour ETag, which need a headless browser, and what their failure rate
+// is. Every one of those is a guess today, and each guess would otherwise be
+// baked into a parser before there was evidence for it.
+//
+// Parsing (Evidence, ChangeProposal, approval, publish) lands in Phase 1 and
+// attaches to SourceSnapshot. Nothing here writes to a user-facing row — that
+// separation is the point, not an accident of ordering.
+// ---------------------------------------------------------------------------
+
+enum SourceKind {
+  HTML
+  PDF
+  JSON
+  RSS
+}
+
+enum SourceStatus {
+  ACTIVE
+  /// Temporarily off. Kept so history and the reason survive.
+  PAUSED
+  /// Consecutive failures past the threshold. Still polled, but slowly.
+  FAILING
+  /// Gone for good — domain dead, page permanently 404.
+  DEAD
+}
+
+enum FetchOutcome {
+  /// 200 and the hash differs from the last snapshot.
+  CHANGED
+  /// 200 but the body hashed identically. The overwhelmingly common case.
+  UNCHANGED
+  /// 304 from a conditional request. Cheapest possible answer.
+  NOT_MODIFIED
+  /// Reached the server, got a non-2xx.
+  HTTP_ERROR
+  /// Never reached it — DNS, TLS, timeout, connection refused.
+  NETWORK_ERROR
+  /// robots.txt disallows this path. Recorded, never fetched.
+  BLOCKED_BY_ROBOTS
+}
+
+/// An official page we watch. One row per URL, not per authority: NTA publishes
+/// JEE and NEET on different pages that change on completely different clocks.
+model Source {
+  id        String @id @default(cuid())
+  siteId    String
+  /// Human label for the review queue: "NTA — JEE Main notifications".
+  name      String
+  /// The authority, for grouping: "NTA", "CBSE", "UPSC".
+  authority String
+  url       String
+  kind      SourceKind   @default(HTML)
+  status    SourceStatus @default(ACTIVE)
+
+  /// How often to poll, in minutes. Per-source because a results page during
+  /// declaration week deserves a different cadence from an eligibility page
+  /// that changes once a year.
+  cadenceMinutes Int @default(180)
+
+  /// Result of the last robots.txt check. NULL means never checked, which is
+  /// treated as "do not fetch" — absence of a decision is not permission.
+  robotsAllowed Boolean?
+  robotsCheckedAt DateTime?
+
+  /// Denormalised from the newest snapshot so the scheduler can pick due rows
+  /// without a correlated subquery per source.
+  lastFetchedAt DateTime?
+  lastHash      String?
+  lastOutcome   FetchOutcome?
+  /// Reset to 0 on any success. Drives the FAILING transition and backoff.
+  consecutiveFailures Int @default(0)
+
+  /// Conditional-request headers echoed back on the next fetch. Honouring
+  /// these is both politeness and the difference between downloading a 2 MB
+  /// PDF every three hours and getting a 304.
+  etag         String?
+  lastModified String?
+
+  notes String?
+
+  site      Site             @relation(fields: [siteId], references: [id], onDelete: Cascade)
+  snapshots SourceSnapshot[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  /// One row per URL per site. Re-running the seed converges instead of
+  /// duplicating the watch list.
+  @@unique([siteId, url])
+  /// The scheduler's only query: active sources whose next poll is due.
+  @@index([status, lastFetchedAt])
+  @@index([authority])
+}
+
+/// One fetch attempt. Written on EVERY attempt, including unchanged and failed
+/// ones — the failures and the no-ops are the data this phase exists to gather.
+model SourceSnapshot {
+  id        String @id @default(cuid())
+  sourceId  String
+  fetchedAt DateTime @default(now())
+
+  outcome    FetchOutcome
+  httpStatus Int?
+  /// Round trip in milliseconds. Slow sources need a different cadence and,
+  /// eventually, a different fetch strategy.
+  durationMs Int?
+
+  /// SHA-256 of the normalised body. NULL when nothing was retrieved.
+  contentHash String?
+  contentType String?
+  contentBytes Int?
+
+  etag         String?
+  lastModified String?
+
+  /// The body, kept ONLY when the hash changed.
+  ///
+  /// Storing every fetch would be ~58k copies a year per source for no benefit,
+  /// since an unchanged body is by definition already known. Keeping the
+  /// changed ones means Phase 1 can develop and re-run parsers against real
+  /// historical inputs instead of waiting for the next live change.
+  rawContent String?
+  /// True when rawContent hit the size cap. A truncated body must never be
+  /// parsed as if it were complete.
+  rawTruncated Boolean @default(false)
+  /// Set once bodies move to object storage instead of a column.
+  rawLocation String?
+
+  /// First line of the failure, verbatim. Paraphrasing an error into
+  /// "fetch failed" destroys the one artefact that makes it fixable.
+  error String?
+
+  source Source @relation(fields: [sourceId], references: [id], onDelete: Cascade)
+
+  /// The two queries this table serves: a source's timeline, and "what changed
+  /// across everything last night".
+  @@index([sourceId, fetchedAt(sort: Desc)])
+  @@index([outcome, fetchedAt(sort: Desc)])
+}

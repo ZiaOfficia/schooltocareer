@@ -24,7 +24,9 @@
     "db:plans": "tsx tooling/scripts/capture-plans.ts",
     "verify:e2e": "tsx tooling/scripts/verify-e2e.ts",
     "db:studio": "pnpm --filter @stc/database db:studio",
-    "clean": "turbo run clean && rimraf node_modules"
+    "clean": "turbo run clean && rimraf node_modules",
+    "sources:seed": "tsx tooling/scripts/seed-sources.ts",
+    "sources:report": "tsx tooling/scripts/sources-report.ts"
   },
   "devDependencies": {
     "prettier": "^3.4.2",

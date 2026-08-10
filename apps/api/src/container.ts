@@ -15,8 +15,10 @@ import { DEFAULT_WORKER_OPTIONS, OutboxWorker } from './workers/outbox.worker.js
 import { SearchService } from './modules/search/search.service.js';
 import { MediaRepository } from './modules/media/media.repository.js';
 import { MediaService } from './modules/media/media.service.js';
+import { fetchSourcesTask } from './workers/tasks/fetch-sources.task.js';
 import { reconcileMediaTask } from './workers/tasks/reconcile-media.task.js';
 import { BlogRepository } from './modules/blog/blog.repository.js';
+import { SourceRepository } from './modules/source/source.repository.js';
 import { BlogSearchSource } from './modules/blog/blog.search-source.js';
 import { BlogService } from './modules/blog/blog.service.js';
 import { DraftRepository } from './modules/draft/draft.repository.js';
@@ -113,6 +115,7 @@ export function createContainer(overrides: Partial<AppContainer> = {}): AppConta
   const cache: ICacheProvider = overrides.providers?.cache ?? new MemoryCacheProvider();
 
   const outboxRepository = new OutboxRepository(db);
+  const sourceRepository = new SourceRepository(db);
   const queue: IQueueProvider =
     overrides.providers?.queue ?? new OutboxQueueProvider(outboxRepository);
 
@@ -301,6 +304,7 @@ export function createContainer(overrides: Partial<AppContainer> = {}): AppConta
       const periodic = new PeriodicTaskRunner(logger).register(
         publishScheduledTask({ repository: blogRepository, service: blog, logger }),
         reconcileMediaTask({ service: media }),
+        fetchSourcesTask({ repository: sourceRepository, logger }),
       );
       periodic.start();
 

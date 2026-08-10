@@ -10,7 +10,8 @@
   },
   "dependencies": {
     "@prisma/client": "^6.3.0",
-    "@stc/database": "workspace:*"
+    "@stc/database": "workspace:*",
+    "@stc/constants": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^22.10.5",
