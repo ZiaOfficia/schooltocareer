@@ -60,7 +60,10 @@ async function request<T>(path: string, options: FetchOptions = {}): Promise<T> 
   }
 
   if (!response.ok) {
-    throw new ApiError(response.status, path, `GET ${path} failed with ${response.status}`);
+    // The FULL url, not the path. When this surfaces in a Vercel log the first
+    // question is always "which API did it call" — a wrong or missing
+    // API_BASE_URL is indistinguishable from a broken endpoint otherwise.
+    throw new ApiError(response.status, path, `GET ${url} failed with ${response.status}`);
   }
 
   return (await response.json()) as T;

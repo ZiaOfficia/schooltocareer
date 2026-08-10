@@ -20,11 +20,13 @@ export function generateMetadata() {
 
 export default async function BoardsIndex() {
   let boards: BoardListItemDto[] = [];
+  let failed = false;
   try {
     boards = await listBoards<BoardListItemDto>('limit=200&sort=popularityScore&dir=desc');
   } catch (error) {
     if (!(error instanceof ApiError)) throw error;
-    console.warn(`[boards] list unavailable: ${error.message}`);
+    failed = true;
+    console.error(`[boards] list request failed`, error);
   }
 
   const items: IndexItem[] = boards.map((board) => ({
@@ -41,7 +43,8 @@ export default async function BoardsIndex() {
       lede="National and state school boards. Each opens onto its classes, subjects and papers."
       items={items}
       unit="boards"
-      emptyNote="The board list could not be loaded. This is a temporary backend problem, not a missing page — try again shortly."
+      failed={failed}
+      emptyNote="No boards have been published yet."
     />
   );
 }

@@ -20,11 +20,13 @@ export function generateMetadata() {
 
 export default async function BlogIndex() {
   let posts: PostListItemDto[] = [];
+  let failed = false;
   try {
     posts = await listPosts<PostListItemDto>('limit=60&sort=publishedAt&dir=desc');
   } catch (error) {
     if (!(error instanceof ApiError)) throw error;
-    console.warn(`[blog] list unavailable: ${error.message}`);
+    failed = true;
+    console.error(`[blog] list request failed`, error);
   }
 
   const items: IndexItem[] = posts.map((post) => ({
@@ -43,7 +45,8 @@ export default async function BlogIndex() {
       lede="Strategy, subject guides and exam analysis. Each one exists to answer a question a student actually asked."
       items={items}
       unit="articles"
-      emptyNote="The article list could not be loaded. This is a temporary backend problem, not a missing page — try again shortly."
+      failed={failed}
+      emptyNote="No articles have been published yet."
     />
   );
 }

@@ -34,6 +34,7 @@ export function IndexPage({
   total,
   unit,
   emptyNote,
+  failed = false,
   children,
 }: {
   kind: EntityKind;
@@ -44,8 +45,17 @@ export function IndexPage({
   total?: number | null;
   /** Plural noun for the count line: "exams", "papers". */
   unit: string;
-  /** Shown when the list is empty. Say WHY, not "no results". */
+  /** Shown when the list is genuinely empty — no rows exist yet. */
   emptyNote: string;
+  /**
+   * True when the fetch FAILED, as opposed to returning nothing.
+   *
+   * These were conflated before: every page rendered "could not be loaded"
+   * whenever the list was empty, so a working API with no rows looked
+   * identical to a broken one. That cost real debugging time on /blog, where
+   * the API was returning 300 posts and the page said it could not load them.
+   */
+  failed?: boolean;
   children?: ReactNode;
 }) {
   return (
@@ -85,9 +95,19 @@ export function IndexPage({
       {children}
 
       {items.length === 0 ? (
-        <div className="border border-dashed border-rule-hard bg-paper p-5">
-          <Eyebrow>Nothing to show</Eyebrow>
-          <p className="mt-2 max-w-[60ch] text-[14px] text-ink-soft">{emptyNote}</p>
+        <div
+          className="border border-dashed p-5"
+          style={{
+            borderColor: failed ? 'var(--color-urgent)' : 'var(--color-rule-hard)',
+            background: failed ? 'var(--color-urgent-bg)' : 'var(--color-paper)',
+          }}
+        >
+          <Eyebrow>{failed ? 'Could not load' : 'Nothing to show'}</Eyebrow>
+          <p className="mt-2 max-w-[60ch] text-[14px] text-ink-soft">
+            {failed
+              ? 'This list could not be loaded — the problem is on our side, not yours. Please try again shortly.'
+              : emptyNote}
+          </p>
         </div>
       ) : (
         <ul className="grid gap-px border border-rule bg-rule sm:grid-cols-2 lg:grid-cols-3">

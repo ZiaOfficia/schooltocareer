@@ -33,11 +33,13 @@ function phaseLabel(result: ResultListItemDto): string {
 
 export default async function ResultsIndex() {
   let results: ResultListItemDto[] = [];
+  let failed = false;
   try {
     results = await listResults<ResultListItemDto>('limit=60&sort=year&dir=desc');
   } catch (error) {
     if (!(error instanceof ApiError)) throw error;
-    console.warn(`[results] list unavailable: ${error.message}`);
+    failed = true;
+    console.error(`[results] list request failed`, error);
   }
 
   const items: IndexItem[] = results.map((result) => ({
@@ -54,7 +56,8 @@ export default async function ResultsIndex() {
       lede="Declaration dates and direct links. Where a result has not been announced, this says so rather than estimating."
       items={items}
       unit="results"
-      emptyNote="The result list could not be loaded. This is a temporary backend problem, not a missing page — try again shortly."
+      failed={failed}
+      emptyNote="No results have been published yet."
     />
   );
 }

@@ -20,11 +20,13 @@ export function generateMetadata() {
 
 export default async function ExamsIndex() {
   let exams: ExamListItemDto[] = [];
+  let failed = false;
   try {
     exams = await listExams<ExamListItemDto>('limit=200&sort=popularityScore&dir=desc');
   } catch (error) {
     if (!(error instanceof ApiError)) throw error;
-    console.warn(`[exams] list unavailable: ${error.message}`);
+    failed = true;
+    console.error(`[exams] list request failed`, error);
   }
 
   const items: IndexItem[] = exams.map((exam) => ({
@@ -41,7 +43,8 @@ export default async function ExamsIndex() {
       lede="Every exam we cover, most searched first. Each links to dates, syllabus, eligibility, previous papers and results."
       items={items}
       unit="exams"
-      emptyNote="The exam list could not be loaded. This is a temporary backend problem, not a missing page — try again shortly."
+      failed={failed}
+      emptyNote="The exam list is empty. No exams have been published yet."
     />
   );
 }

@@ -20,13 +20,15 @@ export function generateMetadata() {
 
 export default async function PapersIndex() {
   let papers: PaperListItemDto[] = [];
+  let failed = false;
   try {
     // Newest first — a paper's value decays with age, so the default order
     // should match what most people are looking for.
     papers = await listPapers<PaperListItemDto>('limit=60&sort=year&dir=desc');
   } catch (error) {
     if (!(error instanceof ApiError)) throw error;
-    console.warn(`[papers] list unavailable: ${error.message}`);
+    failed = true;
+    console.error(`[papers] list request failed`, error);
   }
 
   const items: IndexItem[] = papers.map((paper) => ({
@@ -43,7 +45,8 @@ export default async function PapersIndex() {
       lede="Free PDFs, no registration. Solutions are included where the conducting body published an official answer key — and only then."
       items={items}
       unit="papers"
-      emptyNote="The paper list could not be loaded. This is a temporary backend problem, not a missing page — try again shortly."
+      failed={failed}
+      emptyNote="No question papers have been published yet."
     />
   );
 }
