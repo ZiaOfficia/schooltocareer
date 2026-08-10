@@ -134,6 +134,19 @@ export function buildMetadata(input: BuildInput): Metadata {
   };
 }
 
+/**
+ * Google Search Console verification.
+ *
+ * NOT a secret — it is emitted in the HTML of every page, which is how Google
+ * reads it. It proves control of the property; it grants nothing. Safe to
+ * commit, and it must stay committed: removing the tag un-verifies the
+ * property and Search Console stops reporting.
+ *
+ * The value Search Console shows as `google-site-verification=TOKEN` is the
+ * DNS TXT form. The meta tag takes the TOKEN alone.
+ */
+const GOOGLE_SITE_VERIFICATION = 'SkeZiHCIrXkGqq3Zuyky7ozuP3p0VBY-Li4NM9QVrjE';
+
 /** Root metadata. The title template applies to every child route. */
 export const rootMetadata: Metadata = {
   metadataBase: new URL(SITE.ORIGIN),
@@ -142,6 +155,7 @@ export const rootMetadata: Metadata = {
   applicationName: SITE.NAME,
   referrer: 'strict-origin-when-cross-origin',
   formatDetection: { telephone: false, address: false, email: false },
+  verification: { google: GOOGLE_SITE_VERIFICATION },
   // `.in` is a ccTLD, so India geo-targeting is implicit and cannot be
   // overridden in Search Console. Stated here so nobody adds a conflicting
   // hreflang later expecting it to help.
