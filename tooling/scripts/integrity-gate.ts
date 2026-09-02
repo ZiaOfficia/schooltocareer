@@ -34,6 +34,28 @@ const prisma = new PrismaClient();
 const LIVE = process.argv.includes('--live');
 const ORIGIN = process.env['SITE_ORIGIN'] ?? 'https://www.schooltocareer.in';
 
+/**
+ * Live pages are server-rendered against an API on a free tier that cold
+ * starts, so a single slow response must not abort the gate. A request that
+ * cannot be completed is reported as UNKNOWN, never as a pass — the one thing
+ * this file must never do is report a clean result it did not verify.
+ */
+async function fetchText(url: string): Promise<{ ok: true; body: string } | { ok: false; why: string }> {
+  for (let attempt = 1; attempt <= 3; attempt++) {
+    try {
+      const response = await fetch(url, { signal: AbortSignal.timeout(60_000) });
+      if (!response.ok) return { ok: false, why: `HTTP ${response.status}` };
+      return { ok: true, body: await response.text() };
+    } catch (error) {
+      if (attempt === 3) {
+        return { ok: false, why: error instanceof Error ? error.name : String(error) };
+      }
+      await new Promise((resolve) => setTimeout(resolve, 3_000 * attempt));
+    }
+  }
+  return { ok: false, why: 'unreachable' };
+}
+
 type CheckResult = { count: number; detail?: string[] };
 type Check = { label: string; run: () => Promise<CheckResult> };
 
@@ -176,21 +198,26 @@ const checks: Check[] = [
       }
 
       const leaked: string[] = [];
+      const unreachable: string[] = [];
       for (const exam of incomplete) {
-        const response = await fetch(`${ORIGIN}/exam/${exam.slug}`, {
-          signal: AbortSignal.timeout(30_000),
-        });
-        if (!response.ok) continue;
-        const html = await response.text();
-        const robots = /<meta name="robots" content="([^"]*)"/.exec(html)?.[1] ?? '(none)';
+        const page = await fetchText(`${ORIGIN}/exam/${exam.slug}`);
+        if (!page.ok) {
+          unreachable.push(`${exam.slug} (${page.why})`);
+          continue;
+        }
+        const robots = /<meta name="robots" content="([^"]*)"/.exec(page.body)?.[1] ?? '(none)';
         if (!robots.includes('noindex')) leaked.push(`${exam.slug} → "${robots}"`);
       }
+      // An unverifiable page counts as a failure. "Could not check" is not
+      // "fine", and treating it as fine is how the original problem stayed
+      // invisible for three weeks.
       return {
-        count: leaked.length,
-        detail:
-          leaked.length > 0
-            ? leaked
-            : [`${incomplete.length} incomplete exam pages checked, all serving noindex`],
+        count: leaked.length + unreachable.length,
+        detail: [
+          ...leaked,
+          ...unreachable.map((u) => `could not verify ${u}`),
+          `${incomplete.length - unreachable.length}/${incomplete.length} incomplete exam pages verified as noindex`,
+        ],
       };
     },
   },
