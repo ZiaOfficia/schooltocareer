@@ -92,6 +92,21 @@ export const OG_IMAGE = {
   TYPE: 'image/png',
 } as const;
 
+/**
+ * The AdSense publisher id.
+ *
+ * A constant rather than env-only because it is public by definition — it ships
+ * in the page source of every ad-serving site — and it is a property of THIS
+ * site, exactly like SITE.ORIGIN. `NEXT_PUBLIC_ADSENSE_CLIENT` still overrides
+ * it, so a fork or a second property needs no code change.
+ *
+ * Individual SLOT ids stay in env: those vary per placement and per experiment,
+ * which is what the comment below is about.
+ */
+export const ADSENSE = {
+  CLIENT: 'ca-pub-4770371506244609',
+} as const;
+
 /** AdSense placement slots. Keys, not raw slot ids — ids live in env. */
 export const AD_SLOTS = {
   HEADER: 'header',

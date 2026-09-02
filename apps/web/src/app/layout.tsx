@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 
+import { AdSense } from '@/components/adsense';
 import { SiteFooter } from '@/components/site-footer';
 import { SiteHeader } from '@/components/site-header';
 import { JsonLd, organizationSchema, websiteSchema } from '@/lib/seo/json-ld';
@@ -28,6 +29,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         {/* Site-wide graph, emitted once. Page-level schema references these
             nodes by @id rather than repeating the publisher on every page. */}
         <JsonLd data={[organizationSchema(), websiteSchema()]} />
+
+        {/* Renders nothing off production — see the component. */}
+        <AdSense />
       </body>
     </html>
   );
