@@ -197,16 +197,25 @@ const checks: Check[] = [
         };
       }
 
+      // Every route the exam cluster serves, not just the hub. Checking only
+      // /exam/<slug> reported a clean gate while all 80 cluster pages —
+      // /result, /admit-card, /answer-key, /previous-year-papers — were still
+      // serving "index, follow".
+      const SECTIONS = ['', '/result', '/admit-card', '/answer-key', '/previous-year-papers'];
+      const targets = incomplete.flatMap((exam) =>
+        SECTIONS.map((section) => `/exam/${exam.slug}${section}`),
+      );
+
       const leaked: string[] = [];
       const unreachable: string[] = [];
-      for (const exam of incomplete) {
-        const page = await fetchText(`${ORIGIN}/exam/${exam.slug}`);
+      for (const path of targets) {
+        const page = await fetchText(`${ORIGIN}${path}`);
         if (!page.ok) {
-          unreachable.push(`${exam.slug} (${page.why})`);
+          unreachable.push(`${path} (${page.why})`);
           continue;
         }
         const robots = /<meta name="robots" content="([^"]*)"/.exec(page.body)?.[1] ?? '(none)';
-        if (!robots.includes('noindex')) leaked.push(`${exam.slug} → "${robots}"`);
+        if (!robots.includes('noindex')) leaked.push(`${path} → "${robots}"`);
       }
       // An unverifiable page counts as a failure. "Could not check" is not
       // "fine", and treating it as fine is how the original problem stayed
@@ -216,7 +225,7 @@ const checks: Check[] = [
         detail: [
           ...leaked,
           ...unreachable.map((u) => `could not verify ${u}`),
-          `${incomplete.length - unreachable.length}/${incomplete.length} incomplete exam pages verified as noindex`,
+          `${targets.length - unreachable.length - leaked.length}/${targets.length} cluster pages verified as noindex`,
         ],
       };
     },

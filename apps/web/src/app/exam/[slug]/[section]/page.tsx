@@ -71,6 +71,14 @@ export async function generateMetadata({ params }: { params: Promise<Params> }) 
     title: heading,
     description: `${heading}. ${config.blurb}`,
     modifiedTime: exam.updatedAt,
+    // A cluster page inherits its parent's readiness. A result or admit-card
+    // page for an exam whose facts are not sourced has nothing to say beyond
+    // its own heading — it is the thinnest page on the site, and indexing it
+    // spends crawl budget to tell a searcher we do not know.
+    //
+    // This was missed when noindex was wired into the hub: the hubs went
+    // noindex while all 80 section pages kept serving "index, follow".
+    noindex: !exam.isIndexable,
   });
 }
 
