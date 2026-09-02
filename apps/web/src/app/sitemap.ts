@@ -80,7 +80,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // 5xx, which the crawler treats as temporary and retries.
   const exams = await listExams<ExamListItemDto>('limit=1000');
 
-  for (const exam of exams) {
+  // Only pages that will actually serve `index, follow`.
+  //
+  // A sitemap entry for a URL that responds `noindex` is a contradiction sent
+  // on every crawl, and it is how this file came to advertise 100 exam URLs
+  // built from placeholder seed data. `isIndexable` is computed once in the
+  // API, so this filter and the page's own decision cannot drift apart.
+  const indexable = exams.filter((exam) => exam.isIndexable);
+
+  for (const exam of indexable) {
     const lastModified = new Date(exam.updatedAt);
     entries.push({ url: absoluteUrl(exam.path), lastModified });
     for (const route of EXAM_CLUSTER) {

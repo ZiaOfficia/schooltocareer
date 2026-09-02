@@ -46,7 +46,56 @@ const SITE_ID = 'seed_site_stc';
 const ADMIN_ID = 'seed_user_admin';
 const CURRENT_YEAR = new Date().getFullYear();
 
+/**
+ * Refuses to run against a database that is not a throwaway.
+ *
+ * WHY THIS EXISTS. This seed writes PUBLISHED rows whose job is query-plan
+ * realism, not truth: every exam gets `conductingBody: 'National Testing
+ * Agency'` and `officialWebsite: https://example.test/<slug>`, and every
+ * ExamEvent gets a random date, with only the current year marked tentative.
+ *
+ * On 2026-08-11 a `prisma migrate reset` emptied the production database and
+ * this seed was run to refill it. The rows went in as PUBLISHED, and the live
+ * site spent three weeks serving 100 indexable exam pages that stated a
+ * fabricated exam date, named the wrong conducting body for 15 of 20 exams,
+ * and offered a reserved-TLD domain as the official link. Nothing failed;
+ * everything returned 200.
+ *
+ * The guard lives INSIDE the seed rather than in a wrapper because
+ * `prisma migrate reset` invokes prisma.seed directly and would walk straight
+ * past a wrapper — which is precisely the path that caused the incident.
+ *
+ * A local database is fair game. For anything else, say so explicitly:
+ *   ALLOW_REMOTE_SEED=1 pnpm db:seed
+ */
+function guardRemoteSeed(): void {
+  if (process.env['ALLOW_REMOTE_SEED'] === '1') {
+    console.warn('ALLOW_REMOTE_SEED=1 — writing placeholder content to a non-local database.\n');
+    return;
+  }
+
+  const url = process.env['DIRECT_DATABASE_URL'] ?? process.env['DATABASE_URL'] ?? '';
+  if (/@(localhost|127\.0\.0\.1|host\.docker\.internal)[:/]/.test(url)) return;
+
+  const host = url.replace(/^.*@/, '').replace(/\/.*$/, '') || '(no DATABASE_URL set)';
+  console.error(
+    `\nREFUSED: db:seed against ${host}\n\n` +
+      '  This seed generates VOLUME, not content. It publishes exams whose\n' +
+      '  official website is https://example.test/<slug>, whose conducting body\n' +
+      '  is hardcoded to one agency, and whose dates are random — all with\n' +
+      "  status PUBLISHED, because query plans need rows that pass the API's\n" +
+      '  publicOnly filter.\n\n' +
+      '  Against a live database that means students are shown fabricated exam\n' +
+      '  dates and a fake official link. It has happened once.\n\n' +
+      '  For a throwaway database, point DATABASE_URL at localhost.\n' +
+      '  If you are certain, run: ALLOW_REMOTE_SEED=1 pnpm db:seed\n',
+  );
+  process.exit(1);
+}
+
 async function main(): Promise<void> {
+  guardRemoteSeed();
+
   const started = Date.now();
   const rng = createRandom();
 

@@ -6,7 +6,7 @@ import type {
   ExamListItemDto,
   ExamYearDto,
 } from '@stc/types';
-import { toIsoDate } from '@stc/utils';
+import { evaluateIndexability, toIsoDate } from '@stc/utils';
 
 import type { ExamDetailRecord, ExamListRecord, ExamRecord } from './exam.types.js';
 
@@ -60,7 +60,42 @@ export function toExamListItemDto(record: ExamListRecord): ExamListItemDto {
     logo: record.logo
       ? { url: record.logo.secureUrl, alt: record.logo.altText, blurDataUrl: record.logo.blurDataUrl }
       : null,
+    isIndexable: isExamHubIndexable(record),
   };
+}
+
+/**
+ * Computed HERE, not on the page, because two consumers need the same answer:
+ * `generateMetadata` decides between index and noindex, and the sitemap decides
+ * whether to advertise the URL at all. When those disagree the sitemap submits
+ * URLs that serve `noindex` — which is what happened, for 100 exam URLs built
+ * entirely from placeholder seed data.
+ *
+ * Reuses `evaluateIndexability` and `REQUIRED_FIELDS.EXAM_HUB` rather than
+ * restating the rules. The body is the overview because that is the only prose
+ * unique to an exam hub; the rest of the page is the same tables and headings
+ * on every exam, which is exactly what the UNIQUENESS signal exists to discount.
+ */
+function isExamHubIndexable(record: {
+  name: string;
+  conductingBody: string | null;
+  overview?: string | null;
+  level: string;
+  mode: string;
+}): boolean {
+  return evaluateIndexability({
+    kind: 'EXAM_HUB',
+    body: record.overview ?? '',
+    fields: {
+      name: record.name,
+      conductingBody: record.conductingBody,
+      overview: record.overview ?? null,
+      level: record.level,
+      mode: record.mode,
+    },
+    // The exam hub template always emits these three. Constant, not measured.
+    structuredDataTypes: ['BreadcrumbList', 'FAQPage', 'EducationalOccupationalProgram'],
+  }).indexable;
 }
 
 export function toExamDto(record: ExamRecord): ExamDto {

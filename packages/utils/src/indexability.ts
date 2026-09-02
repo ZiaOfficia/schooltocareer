@@ -159,3 +159,29 @@ function clamp01(n: number): number {
 function round(n: number): number {
   return Math.round(n * 10) / 10;
 }
+
+/**
+ * Reserved and placeholder hosts that must never reach a student as an
+ * "official" link.
+ *
+ * `https://example.test/<slug>` shipped to production as every exam's official
+ * website, from a volume seed whose job was query-plan realism. `.test` is a
+ * reserved TLD (RFC 6761), so a value here can never be a real authority — it
+ * is always a fixture that escaped.
+ *
+ * Deliberately NOT part of the indexability score. A placeholder URL is not a
+ * quality signal to be weighed against others; it is a data-integrity failure,
+ * and the integrity gate treats it as one.
+ */
+const PLACEHOLDER_HOSTS = ['example.test', 'example.com', 'example.org', 'example.net'] as const;
+
+export function isPlaceholderUrl(url: string | null | undefined): boolean {
+  if (!url) return false;
+  let host: string;
+  try {
+    host = new URL(url).hostname.toLowerCase();
+  } catch {
+    return false;
+  }
+  return PLACEHOLDER_HOSTS.some((bad) => host === bad || host.endsWith(`.${bad}`));
+}

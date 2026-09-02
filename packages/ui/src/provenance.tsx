@@ -8,11 +8,20 @@
  * Making this a component rather than a convention means a page cannot quietly
  * omit it: `confidence` is required, so every rendered fact has to declare one.
  *
- *   official   published by the conducting body; `sourceUrl` should be present
+ *   official   published by the conducting body; `sourceUrl` is REQUIRED
  *   tentative  announced but not finalised — the agency itself calls it so
  *   estimated  our own analysis, clearly not an official figure
+ *   unsourced  we do not have this from the authority yet, and say so
+ *
+ * "should be present" used to describe sourceUrl on `official`, which is a
+ * convention a caller can forget. It was forgotten: an exam page derived
+ * confidence as `events.some(isTentative) ? 'tentative' : 'official'`, so an
+ * exam with NO events at all rendered a green "Official" badge — over
+ * fabricated seed dates, pointing at a placeholder domain. The props below are
+ * now a discriminated union, so claiming "Official" without a source URL does
+ * not typecheck.
  */
-export type Confidence = 'official' | 'tentative' | 'estimated';
+export type Confidence = 'official' | 'tentative' | 'estimated' | 'unsourced';
 
 const COPY: Record<Confidence, { label: string; tone: string; bg: string; explain: string }> = {
   official: {
@@ -33,19 +42,29 @@ const COPY: Record<Confidence, { label: string; tone: string; bg: string; explai
     bg: 'var(--color-urgent-bg)',
     explain: 'Our estimate from previous years, not an official figure.',
   },
+  unsourced: {
+    label: 'Not sourced',
+    // Matches StatusStamp's 'quiet' tone — no state worth colouring. A
+    // missing fact must not compete visually with a confirmed one.
+    tone: 'var(--color-ink-mute)',
+    bg: 'transparent',
+    explain: 'Not yet confirmed from the official source. Check the authority before acting.',
+  },
 };
 
-export function Provenance({
-  confidence,
-  sourceUrl,
-  sourceName,
-  className = '',
-}: {
-  confidence: Confidence;
-  sourceUrl?: string | null;
-  sourceName?: string | null;
-  className?: string;
-}) {
+/**
+ * `official` demands a source URL; every other state may omit it.
+ *
+ * This is the whole point of the union — the badge that tells a student "you
+ * can act on this" cannot be rendered without the link that proves it.
+ */
+export type ProvenanceProps = { className?: string } & (
+  | { confidence: 'official'; sourceUrl: string; sourceName?: string | null }
+  | { confidence: 'tentative' | 'estimated'; sourceUrl?: string | null; sourceName?: string | null }
+  | { confidence: 'unsourced'; sourceUrl?: null; sourceName?: string | null }
+);
+
+export function Provenance({ confidence, sourceUrl, sourceName, className = '' }: ProvenanceProps) {
   const { label, tone, bg, explain } = COPY[confidence];
 
   return (

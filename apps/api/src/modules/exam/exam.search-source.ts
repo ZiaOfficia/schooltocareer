@@ -43,7 +43,7 @@ export class ExamSearchSource implements ISearchDocumentSource {
       locale: 'EN',
       path: ROUTES.exam(exam.slug),
       title: exam.name,
-      summary: buildExcerpt(exam.overview ?? exam.conductingBody, 200),
+      summary: buildExcerpt(exam.overview ?? exam.conductingBody ?? '', 200),
       body,
       // Keywords carry weight B in the tsvector — the abbreviations people
       // actually type ("NTA", "JEE") rarely appear in the prose body.

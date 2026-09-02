@@ -36,7 +36,11 @@ model Exam {
   name            String
   shortName       String
   fullName        String?
-  conductingBody  String
+  /// NULLABLE because "we have not sourced this yet" is a real state and the
+  /// alternative is a guess. assertPublishable already refuses to publish an
+  /// exam without one, so nullable here does not weaken the published set — it
+  /// stops an unsourced value being invented to satisfy a NOT NULL.
+  conductingBody  String?
   categoryId      String?
   boardId         String? // set for board exams
   level           ExamLevel

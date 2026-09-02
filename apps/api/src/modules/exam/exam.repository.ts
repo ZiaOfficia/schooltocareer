@@ -39,18 +39,20 @@ const LIST_SELECT = {
   updatedAt: true,
   category: { select: { id: true, name: true, slug: true } },
   logo: { select: { id: true, secureUrl: true, altText: true, blurDataUrl: true } },
+  // Read by the EXAM_HUB indexability score, which the list DTO carries so the
+  // sitemap and the page cannot disagree about what is indexable.
+  conductingBody: true,
+  overview: true,
 } satisfies Prisma.ExamSelect;
 
 const FULL_SELECT = {
   ...LIST_SELECT,
   fullName: true,
-  conductingBody: true,
   categoryId: true,
   boardId: true,
   frequency: true,
   officialWebsite: true,
   logoId: true,
-  overview: true,
   createdAt: true,
   deletedAt: true,
   board: { select: { id: true, name: true, shortName: true, slug: true } },

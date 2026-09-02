@@ -69,6 +69,10 @@ export async function generateMetadata({ params }: { params: Promise<Params> }) 
     path: exam.path,
     modifiedTime: exam.updatedAt,
     image: exam.logo ? { url: exam.logo.url, alt: exam.logo.alt ?? exam.name } : null,
+    // Scored by the API against REQUIRED_FIELDS.EXAM_HUB. The scoring engine
+    // existed in @stc/utils from the start and was simply never called here,
+    // which is how 100 pages of placeholder data went out as "index, follow".
+    noindex: !exam.isIndexable,
   });
 }
 
@@ -143,6 +147,18 @@ export default async function ExamPage({ params }: { params: Promise<Params> }) 
   const closingIn = daysUntil(deadline);
   const isClosingSoon = closingIn !== null && closingIn >= 0 && closingIn <= 14;
 
+  // What we can honestly claim about where these dates came from.
+  //
+  // "Official" requires BOTH dates and a source to point at. Without either,
+  // the honest badge is "Not sourced" — which is also what tells a student to
+  // go and check the authority themselves.
+  const provenance: { confidence: 'official'; sourceUrl: string } | { confidence: 'tentative' | 'unsourced' } =
+    events.length > 0 && exam.officialWebsite
+      ? events.some((e) => e.isTentative)
+        ? { confidence: 'tentative' }
+        : { confidence: 'official', sourceUrl: exam.officialWebsite }
+      : { confidence: 'unsourced' };
+
   const trail = [
     { name: 'Home', path: ROUTES.home() },
     { name: 'Exams', path: ROUTES.exams() },
@@ -162,20 +178,27 @@ export default async function ExamPage({ params }: { params: Promise<Params> }) 
         ? `${exam.name} ${year} is scheduled for ${formatDate(eventDate(examDate))}${
             examDate?.isTentative ? '. This date is tentative and may change.' : '.'
           }`
-        : `The ${exam.name} ${year} exam date has not been announced by ${exam.conductingBody} yet. This page is updated when the official notification is released.`,
+        : `The ${exam.name} ${year} exam date has not been announced${
+            exam.conductingBody ? ` by ${exam.conductingBody}` : ''
+          } yet. This page is updated when the official notification is released.`,
     },
     {
       question: `Who conducts ${exam.name}?`,
       // A phrase map, not `frequency.toLowerCase()` — that produced
       // "conducted by the National Testing Agency, annual", which is the kind
       // of machine-generated sentence that makes a page read as spun.
-      answer: `${exam.name} is conducted by ${exam.conductingBody}, held ${
-        FREQUENCY_PHRASE[exam.frequency] ?? 'on a published schedule'
-      }.`,
+      answer: exam.conductingBody
+        ? `${exam.name} is conducted by ${exam.conductingBody}, held ${
+            FREQUENCY_PHRASE[exam.frequency] ?? 'on a published schedule'
+          }.`
+        : `The conducting authority for ${exam.name} is not recorded on this page yet. We publish it once it is confirmed from the official notification.`,
     },
     {
       question: `Where can I download ${exam.name} previous year question papers?`,
-      answer: `Year-wise and shift-wise ${exam.name} papers are available on this site, free and without registration. Solutions are included where the conducting body published an official answer key.`,
+      // Describes the policy, not an inventory. The page has no paper count,
+      // so "papers are available on this site" was a claim it could not check
+      // — and it stayed on screen when the paper table was empty.
+      answer: `Where we hold ${exam.name} papers they are listed year-wise and shift-wise on this site, free and without registration. Solutions are included where the conducting body published an official answer key.`,
     },
   ];
 
@@ -197,7 +220,10 @@ export default async function ExamPage({ params }: { params: Promise<Params> }) 
           breadcrumbSchema(trail),
           examPageSchema({
             name: `${exam.name} ${year}`,
-            description: exam.overview ?? `${exam.name} ${year} exam information.`,
+            // No overview means no description. A generated one adds nothing
+            // a crawler cannot already read from the page, and asserts the
+            // page has content when it may not.
+            description: exam.overview,
             path: exam.path,
             modifiedTime: exam.updatedAt,
             conductingBody: exam.conductingBody,
@@ -253,9 +279,11 @@ export default async function ExamPage({ params }: { params: Promise<Params> }) 
           ) : null}
 
           <p className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-[13px] text-ink-soft">
-            <span>
-              Conducted by <strong className="text-ink">{exam.conductingBody}</strong>
-            </span>
+            {exam.conductingBody ? (
+              <span>
+                Conducted by <strong className="text-ink">{exam.conductingBody}</strong>
+              </span>
+            ) : null}
             <LastUpdated iso={exam.updatedAt} />
           </p>
 
@@ -285,13 +313,27 @@ export default async function ExamPage({ params }: { params: Promise<Params> }) 
 
             {/* Provenance is required by the component's type, so a page
                 physically cannot render dates without declaring where they
-                came from. */}
-            <Provenance
-              className="mt-2"
-              confidence={events.some((e) => e.isTentative) ? 'tentative' : 'official'}
-              sourceUrl={exam.officialWebsite}
-              sourceName={exam.conductingBody}
-            />
+                came from.
+
+                The confidence is derived from what we ACTUALLY hold. The
+                previous expression — `events.some(isTentative) ? … : 'official'`
+                — returned 'official' for an exam with no events at all, since
+                `[].some()` is false. That stamped a green Official badge on a
+                page whose dates did not exist. */}
+            {provenance.confidence === 'official' ? (
+              <Provenance
+                className="mt-2"
+                confidence="official"
+                sourceUrl={provenance.sourceUrl}
+                sourceName={exam.conductingBody}
+              />
+            ) : (
+              <Provenance
+                className="mt-2"
+                confidence={provenance.confidence}
+                sourceName={exam.conductingBody}
+              />
+            )}
           </div>
         </header>
 
@@ -332,8 +374,8 @@ export default async function ExamPage({ params }: { params: Promise<Params> }) 
         >
           {events.length === 0 ? (
             <p className="border border-rule bg-paper p-4 text-[14px] text-ink-soft">
-              {exam.conductingBody} has not published the {year} schedule yet. This page updates
-              when the official notification is released.
+              {exam.conductingBody ?? 'The conducting body'} has not published the {year} schedule
+              yet. This page updates when the official notification is released.
             </p>
           ) : (
             <ol className="border-t-2 border-rule-hard">
@@ -380,7 +422,7 @@ export default async function ExamPage({ params }: { params: Promise<Params> }) 
 
         <Section
           title="Previous year question papers"
-          lede="Year-wise and shift-wise PDFs, free and without registration. Solutions are included where an official answer key was published."
+          lede="Where we hold them: year-wise and shift-wise PDFs, free and without registration. Solutions are included where an official answer key was published."
           actions={
             <Link href={ROUTES.examPapers(exam.slug)} className="text-[13.5px]">
               All {exam.shortName} papers →
@@ -421,8 +463,11 @@ export default async function ExamPage({ params }: { params: Promise<Params> }) 
         <Section title="Official source">
           <Eyebrow>Always confirm before a deadline</Eyebrow>
           <p className="mt-2 max-w-[70ch] text-[14px] text-ink-soft">
-            {exam.conductingBody} is the authority for {exam.name}. Everything on this page is
-            compiled from its notifications and may lag a same-day change.
+            {exam.conductingBody
+              ? `${exam.conductingBody} is the authority for ${exam.name}.`
+              : `The conducting body for ${exam.name} is not recorded yet.`}{' '}
+            Everything on this page is compiled from official notifications and may lag a same-day
+            change.
           </p>
           {exam.officialWebsite ? (
             <a
@@ -431,7 +476,7 @@ export default async function ExamPage({ params }: { params: Promise<Params> }) 
               target="_blank"
               className="mt-3 inline-block border-2 border-rule-hard px-3 py-1.5 text-[13.5px] font-semibold no-underline hover:bg-ink hover:text-paper"
             >
-              Visit {exam.conductingBody} →
+              Visit {exam.conductingBody ?? 'official website'} →
             </a>
           ) : null}
         </Section>

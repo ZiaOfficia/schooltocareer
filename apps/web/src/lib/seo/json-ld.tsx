@@ -131,19 +131,28 @@ export function articleSchema(input: {
  * ticket to, and marking up 100 exam sittings that way invites a structured
  * data manual action. This describes the page truthfully and claims nothing.
  */
+/**
+ * Structured data omits what it does not know.
+ *
+ * `description` and `conductingBody` are optional because an exam we have not
+ * sourced yet has neither, and the alternatives are both worse: emitting an
+ * empty string publishes a blank claim, and synthesising one from the exam name
+ * feeds a crawler a sentence no human wrote. An absent property is honest;
+ * `subjectOf: { name: null }` is not.
+ */
 export function examPageSchema(input: {
   name: string;
-  description: string;
+  description?: string | null;
   path: string;
   modifiedTime: string;
-  conductingBody: string;
+  conductingBody?: string | null;
   officialWebsite?: string | null;
 }): Json {
   return {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
     name: input.name,
-    description: input.description,
+    ...(input.description ? { description: input.description } : {}),
     url: absoluteUrl(input.path),
     dateModified: input.modifiedTime,
     isPartOf: { '@id': SITE_ID },
@@ -153,7 +162,9 @@ export function examPageSchema(input: {
       '@type': 'Thing',
       name: input.name,
       ...(input.officialWebsite ? { sameAs: input.officialWebsite } : {}),
-      subjectOf: { '@type': 'Organization', name: input.conductingBody },
+      ...(input.conductingBody
+        ? { subjectOf: { '@type': 'Organization', name: input.conductingBody } }
+        : {}),
     },
   };
 }

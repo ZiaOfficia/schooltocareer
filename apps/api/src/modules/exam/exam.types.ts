@@ -22,7 +22,7 @@ export type ExamRecord = {
   name: string;
   shortName: string;
   fullName: string | null;
-  conductingBody: string;
+  conductingBody: string | null;
   categoryId: string | null;
   boardId: string | null;
   level: ExamLevel;
@@ -61,6 +61,10 @@ export type ExamListRecord = Pick<
   | 'updatedAt'
   | 'category'
   | 'logo'
+  // Read only by the indexability score the list DTO carries. Not exposed
+  // as list fields — the DTO maps them to a single boolean.
+  | 'conductingBody'
+  | 'overview'
 >;
 
 export type ExamDetailRecord = ExamRecord & {
@@ -117,7 +121,7 @@ export type ExamWriteData = {
   name: string;
   shortName: string;
   fullName: string | null;
-  conductingBody: string;
+  conductingBody: string | null;
   categoryId: string | null;
   boardId: string | null;
   level: ExamLevel;

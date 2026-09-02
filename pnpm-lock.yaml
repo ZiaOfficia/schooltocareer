@@ -276,6 +276,9 @@ importers:
       '@stc/database':
         specifier: workspace:*
         version: link:../../packages/database
+      '@stc/utils':
+        specifier: workspace:*
+        version: link:../../packages/utils
     devDependencies:
       '@types/node':
         specifier: ^22.10.5

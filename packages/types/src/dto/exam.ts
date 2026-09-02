@@ -29,11 +29,19 @@ export type ExamListItemDto = {
   updatedAt: string;
   category: { id: string; name: string; slug: string } | null;
   logo: { url: string; alt: string | null; blurDataUrl: string | null } | null;
+  /**
+   * Whether this page has earned a place in the index, scored by
+   * `evaluateIndexability` against REQUIRED_FIELDS.EXAM_HUB.
+   *
+   * Carried on the LIST item deliberately: the sitemap only has list data, and
+   * it must make the same call the page makes.
+   */
+  isIndexable: boolean;
 };
 
 export type ExamDto = ExamListItemDto & {
   fullName: string | null;
-  conductingBody: string;
+  conductingBody: string | null;
   frequency: ExamFrequency;
   officialWebsite: string | null;
   overview: string | null;

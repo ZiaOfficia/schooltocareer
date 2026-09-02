@@ -1,0 +1,12 @@
+-- Make Exam.conductingBody nullable so "not sourced yet" is representable.
+--
+-- Production held 'National Testing Agency' for all 20 seeded exams — correct
+-- for five of them and wrong for CAT, GATE, UPSC, SSC, IBPS, SBI, RRB, CTET,
+-- BITSAT, VITEEE, WBJEE, MHT-CET, NIFT, CLAT and NDA. The value was a seed
+-- placeholder that a NOT NULL column made unavoidable.
+--
+-- With this column nullable the honest state is expressible, and the existing
+-- assertPublishable gate (overview >= 200 chars, conductingBody, category)
+-- still prevents an exam without one from being published. Nullable widens
+-- what can be STORED, not what can be published.
+ALTER TABLE "Exam" ALTER COLUMN "conductingBody" DROP NOT NULL;

@@ -117,6 +117,8 @@ export default async function ExamSectionPage({ params }: { params: Promise<Para
 
   const heading = config.heading(exam.shortName, year);
 
+  const sourceUrl = event?.officialUrl ?? exam.officialWebsite;
+
   return (
     <>
       <JsonLd
@@ -180,12 +182,34 @@ export default async function ExamSectionPage({ params }: { params: Promise<Para
                 <StatusStamp tone="quiet">Awaited</StatusStamp>
               )}
             </div>
-            <Provenance
-              className="mt-3"
-              confidence={!date ? 'estimated' : event?.isTentative ? 'tentative' : 'official'}
-              sourceUrl={event?.officialUrl ?? exam.officialWebsite}
-              sourceName={exam.conductingBody}
-            />
+            {/* "Estimated" used to be the no-date case, which claims an
+                analysis we never made — the Estimated badge reads "our estimate
+                from previous years". With no date and no source the honest
+                badge is "Not sourced". And "official" now requires a URL by
+                type, so it cannot be claimed with nothing to link to. */}
+            {sourceUrl && date ? (
+              event?.isTentative ? (
+                <Provenance
+                  className="mt-3"
+                  confidence="tentative"
+                  sourceUrl={sourceUrl}
+                  sourceName={exam.conductingBody}
+                />
+              ) : (
+                <Provenance
+                  className="mt-3"
+                  confidence="official"
+                  sourceUrl={sourceUrl}
+                  sourceName={exam.conductingBody}
+                />
+              )
+            ) : (
+              <Provenance
+                className="mt-3"
+                confidence="unsourced"
+                sourceName={exam.conductingBody}
+              />
+            )}
             {!date ? (
               <p className="mt-3 max-w-[66ch] text-[14px] text-ink-soft">
                 {exam.conductingBody} has not announced this yet. This page is updated when the
