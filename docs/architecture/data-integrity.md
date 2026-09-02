@@ -166,8 +166,54 @@ because it is the same failure in miniature:
   overview. Every templated overview opens with its own exam's short name, so
   no two matched and it also reported **0**. It groups on the tail now.
 
+A third made the same mistake at a different level: the live "unintentionally
+indexed" check fetched only `/exam/<slug>`. The 20 hubs went `noindex` and the
+gate reported zero while all **80 cluster pages** — `/result`, `/admit-card`,
+`/answer-key`, `/previous-year-papers` — were still serving `index, follow`,
+because `noindex` had been wired into the hub's `generateMetadata` and not the
+section route's. A full sweep of every published page caught it; the gate had
+not. It now walks all five routes per exam.
+
 A check that cannot fail is worse than no check, because it is reported as a
-pass.
+pass. All three of these reported a clean result over a live problem.
+
+## Verified
+
+3 Sep 2026, after deploy and cache revalidation:
+
+```
++========================================+
+|     PRODUCTION DATA INTEGRITY GATE     |
++========================================+
+| Fake dates:                         0 |
+| Fake official URLs:                 0 |
+| Fake conducting bodies:             0 |
+| Placeholder domains:                0 |
+| Fabricated fallback facts:          0 |
+| Unintentionally indexed:            0 |
+| Sitemap fake URLs:                  0 |
++========================================+
+```
+
+Independently swept: **100/100 exam pages** (20 exams x 5 routes) contain no
+placeholder data and serve `noindex, follow`. The sitemap is 6 URLs, none of
+them an exam.
+
+### Two things this exposed on the way
+
+**Order matters when widening a column.** The data was nulled before the API
+that tolerates nulls had deployed, so the live API returned Prisma `P2032`
+("expected non-nullable, found null") for every exam detail request until
+Render finished building. For a widening change the order is: deploy the
+tolerant code, *then* migrate the data.
+
+**Vercel's Data Cache survives deployments.** Redeploying did not flush pages
+rendered during that window; they kept serving `example.test` from cached
+fetch responses. Flushing them needs `/api/revalidate` — which the worker had
+been calling since the cache layer was built, and which **did not exist**. It
+does now. `REVALIDATE_SECRET` is set correctly on Vercel and the route
+accepted the purge; without it, every call is rejected and pages only refresh
+on the one-hour TTL.
 
 ## What this does not fix
 
