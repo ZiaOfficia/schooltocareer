@@ -26,6 +26,7 @@
     "db:studio": "pnpm --filter @stc/database db:studio",
     "clean": "turbo run clean && rimraf node_modules",
     "sources:seed": "tsx tooling/scripts/seed-sources.ts",
+    "sources:fetch": "tsx tooling/scripts/fetch-sources-now.ts",
     "sources:report": "tsx tooling/scripts/sources-report.ts"
   },
   "devDependencies": {

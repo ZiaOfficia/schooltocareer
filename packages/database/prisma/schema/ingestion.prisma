@@ -43,8 +43,19 @@ enum FetchOutcome {
   HTTP_ERROR
   /// Never reached it — DNS, TLS, timeout, connection refused.
   NETWORK_ERROR
-  /// robots.txt disallows this path. Recorded, never fetched.
+  /// robots.txt was READ and it disallows this path. A decision by the site.
+  /// Never fetched, and not worth retrying until that file itself changes.
   BLOCKED_BY_ROBOTS
+  /// robots.txt could NOT be read — 403 from an edge WAF, a TLS failure, a
+  /// timeout. We refused to fetch, but nobody actually told us not to.
+  ///
+  /// Split from BLOCKED_BY_ROBOTS because collapsing the two makes the Phase 0
+  /// report assert something false. "The site disallows us" is a settled
+  /// answer that ends the conversation; "we could not ask" is a fixable
+  /// condition that needs someone to look at it. The first cycle reported
+  /// seven sources as disallowed — including JEE Main, NEET and all of CBSE.
+  /// Not one of them was.
+  ROBOTS_UNAVAILABLE
 }
 
 /// An official page we watch. One row per URL, not per authority: NTA publishes
@@ -69,6 +80,13 @@ model Source {
   /// treated as "do not fetch" — absence of a decision is not permission.
   robotsAllowed Boolean?
   robotsCheckedAt DateTime?
+  /// Why the last check failed to produce an answer. NULL when robots.txt was
+  /// read successfully, whatever it then said.
+  ///
+  /// `robotsAllowed = false` alone cannot tell "Disallow: /" apart from "the
+  /// CDN returned 403 to our client", and those need opposite responses: one
+  /// is settled policy, the other is a bug report.
+  robotsError String?
 
   /// Denormalised from the newest snapshot so the scheduler can pick due rows
   /// without a correlated subquery per source.

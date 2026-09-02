@@ -22,8 +22,20 @@ import type { PeriodicTask, TaskOutcome } from '../periodic-task.js';
 const USER_AGENT =
   'SchoolToCareerBot/1.0 (+https://schooltocareer.in/about; monitors official exam notices)';
 
-/** Bodies larger than this are hashed in full but stored truncated. */
-const MAX_STORED_BYTES = 512 * 1024;
+/**
+ * Bodies larger than this are hashed in full but stored truncated.
+ *
+ * Raised from 512 kB after measurement. NTA's notice archive is 2.2 MB, and at
+ * the old cap we kept 23% of it — while `rawTruncated` correctly forbids
+ * parsing a partial body, which left the single most valuable fetchable source
+ * on the list unusable by Phase 1. The exam subdomains it would have to
+ * substitute for are behind a bot wall (docs/architecture/source-acquisition.md),
+ * so this page is not one option among several.
+ *
+ * Cost is modest: bodies are stored ONLY on a change, and HTML TOASTs well.
+ * `rawLocation` exists for the point where this stops being true.
+ */
+const MAX_STORED_BYTES = 4 * 1024 * 1024;
 const FETCH_TIMEOUT_MS = 20_000;
 /** Gap between requests. Twenty sources at 1.5s is 30s of wall clock, and no
  *  official site should ever see a burst from us. */
@@ -48,6 +60,37 @@ function normalise(body: string): string {
     .replace(/\b\d{1,2}:\d{2}(:\d{2})?\s*(AM|PM)?\b/gi, '')
     .replace(/\s+/g, ' ')
     .trim();
+}
+
+/**
+ * The most specific line a thrown fetch error carries.
+ *
+ * undici reports every transport failure as "fetch failed", which names
+ * nothing. The cause holds the certificate mismatch or the DNS error that
+ * actually has to be fixed, and that string is the whole value of the record.
+ */
+function describe(error: unknown): string {
+  const cause = (error as { cause?: unknown } | null)?.cause;
+  if (cause instanceof Error && cause.message) return cause.message.split('\n')[0] ?? cause.message;
+  if (error instanceof Error && error.message) return error.message.split('\n')[0] ?? error.message;
+  return String(error);
+}
+
+/**
+ * Truncates to a UTF-8 BYTE budget, without splitting a character.
+ *
+ * `String.prototype.slice` counts UTF-16 code units, so slicing to a limit
+ * meant as bytes silently stored up to three times the budget for Devanagari —
+ * which is exactly what NTA publishes half its notices in.
+ */
+export function truncateToBytes(input: string, maxBytes: number): string {
+  const buffer = Buffer.from(input, 'utf8');
+  if (buffer.byteLength <= maxBytes) return input;
+  // Decoding a buffer cut mid-character yields U+FFFD; dropping a trailing
+  // replacement char removes the partial sequence rather than storing a
+  // corrupt one.
+  const decoded = buffer.subarray(0, maxBytes).toString('utf8');
+  return decoded.endsWith('\uFFFD') ? decoded.slice(0, -1) : decoded;
 }
 
 function sha256(input: string): string {
@@ -101,21 +144,50 @@ export function isAllowedByRobots(robotsTxt: string, path: string): boolean {
   return permit >= deny;
 }
 
-async function robotsAllows(url: string, logger: AppLogger): Promise<boolean> {
+/**
+ * The outcome of asking a site whether we may crawl a path.
+ *
+ * Three states, not two. "Allowed" and "disallowed" are both answers; failing
+ * to reach robots.txt is not an answer at all, and recording it as a disallow
+ * attributes to the site a decision it never made.
+ */
+export type RobotsVerdict =
+  | { allowed: true }
+  | { allowed: false; reason: 'DISALLOWED' }
+  | { allowed: false; reason: 'UNAVAILABLE'; detail: string };
+
+export async function checkRobots(url: string, logger: AppLogger): Promise<RobotsVerdict> {
+  let target: URL;
   try {
-    const target = new URL(url);
+    target = new URL(url);
+  } catch {
+    return { allowed: false, reason: 'UNAVAILABLE', detail: `malformed source URL: ${url}` };
+  }
+
+  try {
     const response = await fetch(`${target.origin}/robots.txt`, {
       headers: { 'user-agent': USER_AGENT },
       signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
     });
-    // No robots.txt is permission by omission — that is the standard's
-    // position, not an assumption of ours.
-    if (response.status === 404) return true;
-    if (!response.ok) return false;
-    return isAllowedByRobots(await response.text(), target.pathname);
+
+    // No robots.txt is permission by omission — the standard's position, not
+    // an assumption of ours.
+    if (response.status === 404 || response.status === 410) return { allowed: true };
+
+    if (!response.ok) {
+      return {
+        allowed: false,
+        reason: 'UNAVAILABLE',
+        detail: `HTTP ${response.status} fetching robots.txt`,
+      };
+    }
+
+    return isAllowedByRobots(await response.text(), target.pathname)
+      ? { allowed: true }
+      : { allowed: false, reason: 'DISALLOWED' };
   } catch (error) {
-    logger.warn({ url, err: error }, 'robots.txt unreachable — refusing to fetch');
-    return false;
+    logger.warn({ url, detail: describe(error) }, 'robots.txt unreadable — refusing to fetch');
+    return { allowed: false, reason: 'UNAVAILABLE', detail: describe(error) };
   }
 }
 
@@ -130,16 +202,26 @@ async function fetchOne(
     Date.now() - new Date(source.robotsCheckedAt).getTime() > ROBOTS_TTL_MS;
 
   if (robotsStale) {
-    const allowed = await robotsAllows(source.url, logger);
-    await repository.recordRobots(source.id, allowed);
-    source.robotsAllowed = allowed;
+    const verdict = await checkRobots(source.url, logger);
+    const error =
+      verdict.allowed === false && verdict.reason === 'UNAVAILABLE' ? verdict.detail : null;
+    await repository.recordRobots(source.id, verdict.allowed, error);
+    source.robotsAllowed = verdict.allowed;
+    source.robotsError = error;
   }
 
+  // Still cautious: anything short of an explicit yes means we do not fetch.
+  // What changed is what gets WRITTEN DOWN. Declining to crawl on a 403 from a
+  // CDN is the right call; filing it as "the site disallows this path" is not,
+  // because that reads as settled policy and stops anyone from looking again.
   if (source.robotsAllowed !== true) {
+    const unreadable = source.robotsAllowed === null || source.robotsError !== null;
     await repository.recordFetch({
       sourceId: source.id,
-      outcome: 'BLOCKED_BY_ROBOTS',
-      error: 'robots.txt disallows this path',
+      outcome: unreadable ? 'ROBOTS_UNAVAILABLE' : 'BLOCKED_BY_ROBOTS',
+      error: unreadable
+        ? (source.robotsError ?? 'robots.txt has never been checked')
+        : 'robots.txt disallows this path',
     });
     return 'skipped';
   }
@@ -196,7 +278,7 @@ async function fetchOne(
       // Bodies are kept only when something changed — an unchanged body is by
       // definition already known, and storing it every poll would be ~58k
       // identical copies a year per source.
-      rawContent: changed ? body.slice(0, MAX_STORED_BYTES) : null,
+      rawContent: changed ? truncateToBytes(body, MAX_STORED_BYTES) : null,
       rawTruncated: changed && bytes > MAX_STORED_BYTES,
     });
 
@@ -212,7 +294,7 @@ async function fetchOne(
       sourceId: source.id,
       outcome: 'NETWORK_ERROR',
       durationMs: Date.now() - started,
-      error: error instanceof Error ? (error.message.split('\n')[0] ?? 'unknown') : String(error),
+      error: describe(error),
     });
     return 'failed';
   }

@@ -41,19 +41,28 @@ export const SOURCE_SEEDS: readonly SourceSeed[] = [
   // ── Boards ────────────────────────────────────────────────────────────────
   { name: 'CBSE — main', authority: 'CBSE', url: 'https://www.cbse.gov.in/', kind: 'HTML', cadenceMinutes: THRICE_DAILY },
   { name: 'CBSE — academic circulars', authority: 'CBSE', url: 'https://www.cbse.gov.in/cbsenew/circulars.html', kind: 'HTML', cadenceMinutes: DAILY },
-  { name: 'CBSE — results portal', authority: 'CBSE', url: 'https://results.cbse.nic.in/', kind: 'HTML', cadenceMinutes: HOURLY },
+  // results.cbse.nic.in does not resolve — NXDOMAIN, not a redirect. The
+  // live results host is cbseresults.nic.in, verified 200.
+  { name: 'CBSE — results portal', authority: 'CBSE', url: 'https://cbseresults.nic.in/', kind: 'HTML', cadenceMinutes: HOURLY },
   { name: 'CISCE — main', authority: 'CISCE', url: 'https://cisce.org/', kind: 'HTML', cadenceMinutes: DAILY },
 
   // ── Commissions and services ──────────────────────────────────────────────
-  { name: 'UPSC — what is new', authority: 'UPSC', url: 'https://upsc.gov.in/whats-new', kind: 'HTML', cadenceMinutes: THRICE_DAILY },
-  { name: 'UPSC — examinations', authority: 'UPSC', url: 'https://upsc.gov.in/examinations/active-examinations', kind: 'HTML', cadenceMinutes: DAILY },
+  // The apex 307s to www and DROPS THE PATH, so both of these resolved to the
+  // UPSC home page rather than the notice list. Addressing www directly keeps
+  // the path. (Both still 403 behind the WAF — see docs/architecture/
+  // source-acquisition.md — but the URL itself is now correct.)
+  { name: 'UPSC — what is new', authority: 'UPSC', url: 'https://www.upsc.gov.in/whats-new', kind: 'HTML', cadenceMinutes: THRICE_DAILY },
+  { name: 'UPSC — examinations', authority: 'UPSC', url: 'https://www.upsc.gov.in/examinations/active-examinations', kind: 'HTML', cadenceMinutes: DAILY },
   { name: 'SSC — main', authority: 'SSC', url: 'https://ssc.gov.in/', kind: 'HTML', cadenceMinutes: THRICE_DAILY },
   { name: 'SSC — notice board', authority: 'SSC', url: 'https://ssc.gov.in/candidate-portal/notice-board', kind: 'HTML', cadenceMinutes: THRICE_DAILY },
 
   // ── Banking and railways ──────────────────────────────────────────────────
   { name: 'IBPS — main', authority: 'IBPS', url: 'https://www.ibps.in/', kind: 'HTML', cadenceMinutes: DAILY },
   { name: 'SBI — careers', authority: 'SBI', url: 'https://sbi.co.in/web/careers', kind: 'HTML', cadenceMinutes: DAILY },
-  { name: 'RRB — Chennai', authority: 'RRB', url: 'https://www.rrbchennai.gov.in/', kind: 'HTML', cadenceMinutes: DAILY },
+  // The certificate's altnames list rrbchennai.gov.in but NOT www, so the www
+  // form fails TLS verification outright. The apex serves 200 and redirects to
+  // rrb.indianrailways.gov.in/chennai/.
+  { name: 'RRB — Chennai', authority: 'RRB', url: 'https://rrbchennai.gov.in/', kind: 'HTML', cadenceMinutes: DAILY },
 
   // ── Engineering and management ────────────────────────────────────────────
   { name: 'GATE — official', authority: 'IIT', url: 'https://gate2026.iitg.ac.in/', kind: 'HTML', cadenceMinutes: DAILY },

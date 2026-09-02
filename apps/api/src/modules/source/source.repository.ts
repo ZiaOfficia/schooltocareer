@@ -15,6 +15,7 @@ export type DueSource = {
   kind: string;
   robotsAllowed: boolean | null;
   robotsCheckedAt: Date | null;
+  robotsError: string | null;
   etag: string | null;
   lastModified: string | null;
   lastHash: string | null;
@@ -55,7 +56,7 @@ export class SourceRepository {
   async findDue(limit: number, now: Date = new Date()): Promise<DueSource[]> {
     return this.prisma.$queryRaw<DueSource[]>`
       SELECT id, name, authority, url, kind::text AS kind,
-             "robotsAllowed", "robotsCheckedAt", etag, "lastModified",
+             "robotsAllowed", "robotsCheckedAt", "robotsError", etag, "lastModified",
              "lastHash", "consecutiveFailures"
         FROM "Source"
        WHERE status IN ('ACTIVE', 'FAILING')
@@ -139,10 +140,17 @@ export class SourceRepository {
     });
   }
 
-  async recordRobots(sourceId: string, allowed: boolean): Promise<void> {
+  /**
+   * `error` is the reason the check could not produce an answer, and NULL
+   * whenever robots.txt was read — including when it said no.
+   *
+   * The pair is what makes the two failures distinguishable downstream:
+   * (false, null) is the site's decision, (false, "HTTP 403 ...") is ours.
+   */
+  async recordRobots(sourceId: string, allowed: boolean, error: string | null): Promise<void> {
     await this.prisma.source.update({
       where: { id: sourceId },
-      data: { robotsAllowed: allowed, robotsCheckedAt: new Date() },
+      data: { robotsAllowed: allowed, robotsCheckedAt: new Date(), robotsError: error },
     });
   }
 
