@@ -37,6 +37,18 @@ export const PERMISSIONS = {
   MEDIA_UPLOAD: 'media:upload',
   MEDIA_DELETE: 'media:delete',
 
+  // Official facts
+  /** See the review queue and one change's evidence. */
+  FACT_REVIEW: 'fact:review',
+  /**
+   * Write a source-derived value into canonical data.
+   *
+   * Separate from FACT_REVIEW for the same reason EXAM_PUBLISH is separate from
+   * EXAM_MANAGE: reading a proposed exam date is harmless, and putting one in
+   * front of a student who will book travel around it is not.
+   */
+  FACT_APPROVE: 'fact:approve',
+
   // SEO
   SEO_MANAGE: 'seo:manage',
   REDIRECT_MANAGE: 'redirect:manage',
@@ -77,6 +89,8 @@ const EDITOR_PERMISSIONS: readonly Permission[] = [
   PERMISSIONS.RESULT_PUBLISH,
   PERMISSIONS.MEDIA_DELETE,
   PERMISSIONS.SEO_MANAGE,
+  PERMISSIONS.FACT_REVIEW,
+  PERMISSIONS.FACT_APPROVE,
 ];
 
 export const ROLE_PERMISSIONS: Record<UserRole, readonly Permission[]> = {

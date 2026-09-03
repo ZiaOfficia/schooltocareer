@@ -13,6 +13,8 @@ import { requestLogger } from './middleware/request-logger.js';
 import { boardRoutes } from './modules/board/board.routes.js';
 import { categoryRoutes } from './modules/category/category.routes.js';
 import { examRoutes } from './modules/exam/exam.routes.js';
+import { factRoutes } from './modules/fact/fact.routes.js';
+import { authRoutes } from './modules/auth/auth.routes.js';
 import { questionPaperRoutes } from './modules/question-paper/question-paper.routes.js';
 import { resultRoutes } from './modules/result/result.routes.js';
 import { blogRoutes } from './modules/blog/blog.routes.js';
@@ -85,6 +87,10 @@ export function createApp(container: AppContainer): Express {
   //    there is no global "everything under /admin is protected" rule, because
   //    one misplaced mount would then silently expose a whole module.
   const jwtSecret = new TextEncoder().encode(env.JWT_ACCESS_SECRET);
+  // Auth first: it is the one module every other admin route depends on, and
+  // it carries its own tighter limiter rather than the generous publicRead one
+  // applied above.
+  app.use(`${API_PREFIX}/auth`, authRoutes(container.services.auth, jwtSecret, limiters.auth));
   app.use(`${API_PREFIX}/exams`, examRoutes(container.services.exam, jwtSecret));
   app.use(`${API_PREFIX}/boards`, boardRoutes(container.services.board, jwtSecret));
   app.use(`${API_PREFIX}/categories`, categoryRoutes(container.services.category, jwtSecret));
@@ -102,6 +108,10 @@ export function createApp(container: AppContainer): Express {
     `${API_PREFIX}/search`,
     searchRoutes(container.services.search, jwtSecret, env.IP_HASH_SALT),
   );
+  // Admin-only, and mounted under /admin/ rather than beside the public
+  // modules so the URL itself says so. There is no public fact endpoint by
+  // design — see fact.routes.ts.
+  app.use(`${API_PREFIX}/admin/fact-changes`, factRoutes(container.services.fact, jwtSecret));
 
   // 7. Terminal handlers, always last and in this order.
   app.use(notFoundHandler());

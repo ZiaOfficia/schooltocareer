@@ -20,6 +20,23 @@ export type SourceSeed = {
   url: string;
   kind: 'HTML' | 'PDF' | 'JSON' | 'RSS';
   cadenceMinutes: number;
+  /**
+   * The exam slug this page is AUTHORITATIVE for, when it is authoritative for
+   * exactly one.
+   *
+   * WHY THIS LIVES HERE AND NOT ON `Source`. The registry already owns "which
+   * official page we watch"; "what that page is authoritative about" is the
+   * same fact, and splitting it across a constants file and a database column
+   * gives it two owners. There is also nothing to edit: a notice board does not
+   * become an exam-specific page because someone changed a dropdown.
+   *
+   * ABSENT ON PURPOSE for multi-exam pages. nta.ac.in and ssc.gov.in carry
+   * notices for a dozen exams at once, and attributing a date on such a page to
+   * one exam is not a deterministic operation — it is a guess with an exam name
+   * near it. The fact extractor only runs where this field is set, which is the
+   * mechanism that keeps that guess out of the database.
+   */
+  watchesExamSlug?: string;
 };
 
 const HOURLY = 60;
@@ -31,11 +48,13 @@ export const SOURCE_SEEDS: readonly SourceSeed[] = [
   // ── National Testing Agency ───────────────────────────────────────────────
   // The highest-value authority on the list: JEE, NEET, CUET and UGC NET all
   // run through it, and its notice board moves during admission season.
+  // No `watchesExamSlug` on the two notice boards: they cover JEE, NEET, CUET
+  // and UGC NET simultaneously.
   { name: 'NTA — main notice board', authority: 'NTA', url: 'https://nta.ac.in/', kind: 'HTML', cadenceMinutes: THRICE_DAILY },
   { name: 'NTA — latest notifications', authority: 'NTA', url: 'https://nta.ac.in/NoticeBoardArchive', kind: 'HTML', cadenceMinutes: THRICE_DAILY },
-  { name: 'JEE Main — official', authority: 'NTA', url: 'https://jeemain.nta.nic.in/', kind: 'HTML', cadenceMinutes: HOURLY },
-  { name: 'NEET UG — official', authority: 'NTA', url: 'https://neet.nta.nic.in/', kind: 'HTML', cadenceMinutes: HOURLY },
-  { name: 'CUET UG — official', authority: 'NTA', url: 'https://cuet.nta.nic.in/', kind: 'HTML', cadenceMinutes: THRICE_DAILY },
+  { name: 'JEE Main — official', authority: 'NTA', url: 'https://jeemain.nta.nic.in/', kind: 'HTML', cadenceMinutes: HOURLY, watchesExamSlug: 'jee-main' },
+  { name: 'NEET UG — official', authority: 'NTA', url: 'https://neet.nta.nic.in/', kind: 'HTML', cadenceMinutes: HOURLY, watchesExamSlug: 'neet-ug' },
+  { name: 'CUET UG — official', authority: 'NTA', url: 'https://cuet.nta.nic.in/', kind: 'HTML', cadenceMinutes: THRICE_DAILY, watchesExamSlug: 'cuet-ug' },
   { name: 'UGC NET — official', authority: 'NTA', url: 'https://ugcnet.nta.nic.in/', kind: 'HTML', cadenceMinutes: DAILY },
 
   // ── Boards ────────────────────────────────────────────────────────────────
@@ -58,14 +77,33 @@ export const SOURCE_SEEDS: readonly SourceSeed[] = [
 
   // ── Banking and railways ──────────────────────────────────────────────────
   { name: 'IBPS — main', authority: 'IBPS', url: 'https://www.ibps.in/', kind: 'HTML', cadenceMinutes: DAILY },
-  { name: 'SBI — careers', authority: 'SBI', url: 'https://sbi.co.in/web/careers', kind: 'HTML', cadenceMinutes: DAILY },
+  // SBI's careers page is authoritative for SBI PO, but the fetched body is
+  // corporate PR — the only dates in it are award-ceremony dates. Bound anyway
+  // so a future recruitment notice is picked up; the extractor finds nothing
+  // today, which is the correct outcome rather than a defect.
+  { name: 'SBI — careers', authority: 'SBI', url: 'https://sbi.co.in/web/careers', kind: 'HTML', cadenceMinutes: DAILY, watchesExamSlug: 'sbi-po' },
   // The certificate's altnames list rrbchennai.gov.in but NOT www, so the www
   // form fails TLS verification outright. The apex serves 200 and redirects to
   // rrb.indianrailways.gov.in/chennai/.
   { name: 'RRB — Chennai', authority: 'RRB', url: 'https://rrbchennai.gov.in/', kind: 'HTML', cadenceMinutes: DAILY },
 
   // ── Engineering and management ────────────────────────────────────────────
-  { name: 'GATE — official', authority: 'IIT', url: 'https://gate2026.iitg.ac.in/', kind: 'HTML', cadenceMinutes: DAILY },
-  { name: 'JEE Advanced — official', authority: 'IIT', url: 'https://jeeadv.ac.in/', kind: 'HTML', cadenceMinutes: DAILY },
-  { name: 'CAT — official', authority: 'IIM', url: 'https://iimcat.ac.in/', kind: 'HTML', cadenceMinutes: WEEKLY },
+  // The single most productive source on this list. Robots-allowed, 44 kB of
+  // server-rendered HTML, and it carries a labelled IMPORTANT DATES table —
+  // the only watched page that does. Everything the fact extractor can do
+  // today, it can do because of this page.
+  { name: 'GATE — official', authority: 'IIT', url: 'https://gate2026.iitg.ac.in/', kind: 'HTML', cadenceMinutes: DAILY, watchesExamSlug: 'gate' },
+  { name: 'JEE Advanced — official', authority: 'IIT', url: 'https://jeeadv.ac.in/', kind: 'HTML', cadenceMinutes: DAILY, watchesExamSlug: 'jee-advanced' },
+  { name: 'CAT — official', authority: 'IIM', url: 'https://iimcat.ac.in/', kind: 'HTML', cadenceMinutes: WEEKLY, watchesExamSlug: 'cat' },
 ];
+
+/**
+ * Sources the fact extractor may read, i.e. those bound to exactly one exam.
+ *
+ * Derived, never hand-maintained — a second list would drift from the first,
+ * and the failure mode of that drift is a date attributed to the wrong exam.
+ */
+export const EXTRACTABLE_SOURCE_SEEDS: readonly Required<Pick<SourceSeed, 'url' | 'watchesExamSlug'>>[] =
+  SOURCE_SEEDS.filter(
+    (seed): seed is SourceSeed & { watchesExamSlug: string } => seed.watchesExamSlug !== undefined,
+  ).map((seed) => ({ url: seed.url, watchesExamSlug: seed.watchesExamSlug }));

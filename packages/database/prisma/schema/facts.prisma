@@ -1,0 +1,207 @@
+// ---------------------------------------------------------------------------
+// FACTS — the semantic layer that sits between "a source changed" and
+// "an exam date changed".
+//
+// Phase 0 (ingestion.prisma) can already answer the first question. It cannot
+// answer the second, and the difference is the whole product: a student does
+// not care that jeeadv.ac.in shipped new markup, they care that the exam moved
+// from 23 June to 24 June.
+//
+// TWO MODELS, TWO DIFFERENT JOBS, and keeping them apart is the point:
+//
+//   ExtractedFact  what ONE snapshot said, at one moment, per one extractor
+//                  version. An observation. Immutable. Never read by a page.
+//   FactChange     a semantic DIFFERENCE between an observation and the
+//                  canonical value a page actually serves. Reviewable, and the
+//                  ONLY thing that may cause a canonical write.
+//
+// The canonical published value is NOT here. It stays in ExamEvent / ExamYear /
+// Result, which already own it — see docs/CANONICAL-FACT-OWNERSHIP.md. Adding
+// `Exam.examDate` "for convenience" would create a second owner of the one
+// number on the site that must never disagree with itself.
+//
+// WHY THERE IS NO `OfficialFact` MODEL. It was considered and rejected: it
+// would be a third store of the same value, sitting between the observation and
+// the canonical row with no reader of its own. An observation plus a canonical
+// owner is sufficient, and two stores cannot drift the way three can.
+// ---------------------------------------------------------------------------
+
+/// What kind of fact an observation is about.
+///
+/// Deliberately six values, not sixteen. Each one has a verified canonical
+/// owner, a deterministic extractor and a page that reads it. Adding a seventh
+/// before those three exist produces rows nothing consumes.
+enum FactType {
+  EXAM_DATE
+  APPLICATION_START
+  APPLICATION_END
+  RESULT_DATE
+  OFFICIAL_APPLICATION_URL
+  OFFICIAL_RESULT_URL
+}
+
+/// How sure the EXTRACTOR is that it read the page correctly.
+///
+/// This is a statement about parsing, not about importance. It is separate from
+/// FactRisk because the two are genuinely independent: a perfectly-parsed exam
+/// date is still the most dangerous value on the site to get wrong.
+enum FactConfidence {
+  /// One label, one date, no ambiguity.
+  HIGH
+  /// A window inferred from several dates under one label — normal for a
+  /// multi-day exam, so not a defect.
+  MEDIUM
+  /// The label matched several DIFFERENT values for a fact that can only have
+  /// one. Real example: gate2026.iitg.ac.in renders its important-dates table
+  /// twice, so "ONLINE REGISTRATION CLOSES (WITHOUT LATE FEE)" resolves to four
+  /// distinct dates. Picking one silently would be fabrication; this records
+  /// the ambiguity and forces a human to resolve it against the evidence.
+  LOW
+}
+
+/// What publishing the value wrong would cost a student.
+///
+/// Fixed per fact type, never derived from confidence. A student who acts on a
+/// wrong APPLICATION_END loses a year, which is why it is CRITICAL even when
+/// the extraction was clean.
+enum FactRisk {
+  CRITICAL
+  HIGH
+  MEDIUM
+  LOW
+}
+
+enum FactChangeKind {
+  /// Canonical holds nothing; the source states a value.
+  ADDED
+  /// Canonical holds a different value.
+  CHANGED
+  /// Canonical holds a value the source no longer states. Never auto-applied —
+  /// a page that dropped its dates table is far more likely than an authority
+  /// un-announcing an exam.
+  REMOVED
+}
+
+enum FactReviewStatus {
+  PENDING_REVIEW
+  APPROVED
+  REJECTED
+  /// Reviewed and deliberately not acted on — a duplicate, or a value we
+  /// already hold from a better source. Distinct from REJECTED, which means
+  /// "the source is wrong".
+  IGNORED
+  /// The canonical value moved on before anyone reviewed this. Kept rather than
+  /// deleted so the audit trail shows what was proposed and why it lapsed.
+  SUPERSEDED
+}
+
+/// One observation, from one snapshot, by one extractor version.
+///
+/// Append-only. Re-running extraction over the same snapshot must not create a
+/// second row — hence the unique key. That idempotency is what lets the worker
+/// retry freely and lets a new extractor version be replayed over months of
+/// stored bodies without duplicating history.
+model ExtractedFact {
+  id         String @id @default(cuid())
+  sourceId   String
+  snapshotId String
+
+  /// `ownerType`/`ownerId` rather than entityType/entityId, matching
+  /// PageSection, FaqItem, ContentRevision and OutboxEvent. One polymorphic
+  /// naming convention across the schema.
+  ownerType OwnerType
+  ownerId   String
+  factType  FactType
+
+  /// Verbatim, as it appeared. Kept alongside the normalised form because a
+  /// reviewer needs to see what the page actually said — "27.04.2026" and
+  /// "2026-04-27" are the same fact but not the same evidence, and a
+  /// normalisation bug is invisible if the input is discarded.
+  rawValue String @db.Text
+  /// Machine-comparable. ISO-8601 for dates ("2026-06-23", or
+  /// "2026-02-07/2026-02-15" for a window); the absolute URL for link facts.
+  /// Canonical comparison reads ONLY this, so "23 June 2026" and "23/06/2026"
+  /// cannot register as a change.
+  normalizedValue String @db.Text
+
+  confidence FactConfidence
+  /// True when the page itself hedged — "tentative", "expected", "liable to
+  /// change". Carried through to ExamEvent.isTentative so the page can label it
+  /// instead of presenting a provisional date as settled.
+  isTentative Boolean @default(false)
+
+  /// The surrounding text the value was read from, plus every rival candidate.
+  /// This is what a reviewer actually looks at, and without it an approval is a
+  /// coin flip.
+  evidence String @db.Text
+
+  /// Which extractor produced this. A parser fix must be attributable and
+  /// replayable, which is impossible if every row claims to come from "the
+  /// extractor".
+  extractorVersion String
+  extractedAt      DateTime @default(now())
+
+  source   Source         @relation(fields: [sourceId], references: [id], onDelete: Cascade)
+  snapshot SourceSnapshot @relation(fields: [snapshotId], references: [id], onDelete: Cascade)
+  changes  FactChange[]
+
+  /// IDEMPOTENCY. One observation per fact per snapshot. Re-running the task
+  /// converges instead of appending; a page listing the same date twice yields
+  /// one row, not two.
+  @@unique([snapshotId, ownerId, factType])
+  @@index([ownerType, ownerId, factType, extractedAt(sort: Desc)])
+  @@index([sourceId, extractedAt(sort: Desc)])
+}
+
+/// A semantic difference that needs a human decision.
+///
+/// Rows exist ONLY where the normalised observation differs from the canonical
+/// value. An unchanged source produces no row, and neither does a changed
+/// source that happens to still state the same date — which is the distinction
+/// this whole file exists to make.
+model FactChange {
+  id              String @id @default(cuid())
+  extractedFactId String
+
+  ownerType OwnerType
+  ownerId   String
+  factType  FactType
+  kind      FactChangeKind
+
+  /// Canonical value at DETECTION time. NULL for ADDED.
+  previousValue String? @db.Text
+  /// What the source says. NULL for REMOVED.
+  proposedValue String? @db.Text
+
+  risk       FactRisk
+  confidence FactConfidence
+  status     FactReviewStatus @default(PENDING_REVIEW)
+
+  /// Which canonical row an approval would write. Resolved at detection and
+  /// re-resolved at approval — a change that cannot name its target is a change
+  /// nobody can safely apply.
+  canonicalModel String
+  /// NULL when the row does not exist yet and approval must create it.
+  canonicalId String?
+  /// The target row's `updatedAt` when this change was detected.
+  ///
+  /// THE STALE-APPROVAL GUARD. A change sitting in the queue for a week must
+  /// not silently overwrite an edit an editor made yesterday. Approval compares
+  /// this against the live row and refuses on a mismatch.
+  canonicalVersion DateTime?
+
+  reviewedById   String?
+  reviewedAt     DateTime?
+  decisionReason String?   @db.Text
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  extractedFact ExtractedFact @relation(fields: [extractedFactId], references: [id], onDelete: Cascade)
+  reviewedBy    User?         @relation("FactReviewer", fields: [reviewedById], references: [id], onDelete: SetNull)
+
+  /// The review queue's only query: what is pending, worst first.
+  @@index([status, risk, createdAt(sort: Desc)])
+  @@index([ownerType, ownerId, factType, status])
+  @@index([extractedFactId])
+}

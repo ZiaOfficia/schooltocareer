@@ -48,6 +48,21 @@ CREATE UNIQUE INDEX CONCURRENTLY IF NOT EXISTS uq_paperfile_current
   ON "QuestionPaperFile" ("questionPaperId", "fileRole", "locale")
   WHERE "isCurrent" = true;
 
+-- At most ONE open review item per (entity, fact).
+--
+-- The service already checks for an existing pending change and refreshes it
+-- rather than inserting a second — this is the database making that guarantee
+-- true under concurrency. Two extraction passes overlapping (a retry racing the
+-- next scheduled run) would otherwise both read "no pending change" and both
+-- insert, putting two contradictory proposed exam dates in front of a reviewer
+-- with no way to tell which is current.
+--
+-- Partial on PENDING_REVIEW: decided rows accumulate on purpose, and the whole
+-- history of what was proposed and rejected must stay insertable.
+CREATE UNIQUE INDEX CONCURRENTLY IF NOT EXISTS uq_factchange_open
+  ON "FactChange" ("ownerId", "factType")
+  WHERE "status" = 'PENDING_REVIEW';
+
 -- ---------------------------------------------------------------------------
 -- 3. Partial indexes for the live-content hot path.
 --

@@ -8,3 +8,4 @@ export * from './result.js';
 export * from './blog.js';
 export * from './media.js';
 export * from './search.js';
+export * from './fact.js';

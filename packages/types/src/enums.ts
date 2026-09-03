@@ -142,3 +142,39 @@ export type OutboxEventType = (typeof OUTBOX_EVENT_TYPE)[number];
 
 export const OUTBOX_STATUS = ['PENDING', 'PROCESSING', 'DONE', 'FAILED', 'DEAD'] as const;
 export type OutboxStatus = (typeof OUTBOX_STATUS)[number];
+
+// ── Semantic facts ──────────────────────────────────────────────────────────
+// Mirrors of the enums in packages/database/prisma/schema/facts.prisma.
+// Restated here for the same reason as every other enum in this file: the
+// validation package and the admin UI must not import Prisma to know what a
+// valid fact type is.
+
+export const FACT_TYPE = [
+  'EXAM_DATE',
+  'APPLICATION_START',
+  'APPLICATION_END',
+  'RESULT_DATE',
+  'OFFICIAL_APPLICATION_URL',
+  'OFFICIAL_RESULT_URL',
+] as const;
+export type FactType = (typeof FACT_TYPE)[number];
+
+/** Extraction certainty. Says nothing about how much the value matters. */
+export const FACT_CONFIDENCE = ['HIGH', 'MEDIUM', 'LOW'] as const;
+export type FactConfidence = (typeof FACT_CONFIDENCE)[number];
+
+/** Publication impact. Fixed per fact type, independent of confidence. */
+export const FACT_RISK = ['CRITICAL', 'HIGH', 'MEDIUM', 'LOW'] as const;
+export type FactRisk = (typeof FACT_RISK)[number];
+
+export const FACT_CHANGE_KIND = ['ADDED', 'CHANGED', 'REMOVED'] as const;
+export type FactChangeKind = (typeof FACT_CHANGE_KIND)[number];
+
+export const FACT_REVIEW_STATUS = [
+  'PENDING_REVIEW',
+  'APPROVED',
+  'REJECTED',
+  'IGNORED',
+  'SUPERSEDED',
+] as const;
+export type FactReviewStatus = (typeof FACT_REVIEW_STATUS)[number];

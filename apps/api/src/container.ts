@@ -1,5 +1,6 @@
 import { prisma, type PrismaClient } from '@stc/database';
 import { loadEnv, apiEnvSchema, type ApiEnv } from '@stc/config';
+import { EXTRACTABLE_SOURCE_SEEDS } from '@stc/constants';
 
 import { AuditHandler } from './core/events/handlers/audit.handler.js';
 import { CacheInvalidationHandler } from './core/events/handlers/cache-invalidation.handler.js';
@@ -16,7 +17,12 @@ import { SearchService } from './modules/search/search.service.js';
 import { MediaRepository } from './modules/media/media.repository.js';
 import { MediaService } from './modules/media/media.service.js';
 import { fetchSourcesTask } from './workers/tasks/fetch-sources.task.js';
+import { extractFactsTask } from './workers/tasks/extract-facts.task.js';
 import { reconcileMediaTask } from './workers/tasks/reconcile-media.task.js';
+import { FactRepository } from './modules/fact/fact.repository.js';
+import { FactService } from './modules/fact/fact.service.js';
+import { AuthRepository } from './modules/auth/auth.repository.js';
+import { AuthService } from './modules/auth/auth.service.js';
 import { BlogRepository } from './modules/blog/blog.repository.js';
 import { SourceRepository } from './modules/source/source.repository.js';
 import { BlogSearchSource } from './modules/blog/blog.search-source.js';
@@ -87,6 +93,8 @@ export type AppContainer = {
     blog: BlogService;
     media: MediaService;
     search: SearchService;
+    fact: FactService;
+    auth: AuthService;
   };
   searchSources: SearchSourceRegistry;
   startWorker: () => OutboxWorker;
@@ -243,6 +251,30 @@ export function createContainer(overrides: Partial<AppContainer> = {}): AppConta
     logger,
   });
 
+  // The semantic trust layer. `bindings` comes from the source registry, which
+  // is the single owner of "which official page speaks for which exam" — the
+  // extractor reads nothing that is not on this list, so a notice board serving
+  // a dozen exams can never have one of its dates attributed to one of them.
+  // Reviewer authentication. Signs the token that the existing authenticate()
+  // middleware verifies — same secret, same algorithm — so authorisation is
+  // untouched. Exists because the fact-review API is correctly gated and
+  // nothing could previously issue a token to reach it.
+  const auth = new AuthService({
+    repository: new AuthRepository(db),
+    accessSecret: new TextEncoder().encode(env.JWT_ACCESS_SECRET),
+    accessTtl: env.ACCESS_TOKEN_TTL,
+    logger,
+  });
+
+  const factRepository = new FactRepository(db);
+  const fact = new FactService({
+    repository: factRepository,
+    bindings: EXTRACTABLE_SOURCE_SEEDS,
+    queue,
+    cache,
+    logger,
+  });
+
   // Search sources
   // Each indexable module registers one. The outbox worker resolves the source
   // by ownerType, so adding a module to search is a single line here plus a
@@ -270,7 +302,7 @@ export function createContainer(overrides: Partial<AppContainer> = {}): AppConta
     logger,
     prisma: db,
     providers: { cache, queue, storage, search },
-    services: { health, exam, board, category, questionPaper, result, blog, media, search: searchService },
+    services: { health, exam, board, category, questionPaper, result, blog, media, search: searchService, fact, auth },
     searchSources,
 
     /**
@@ -305,6 +337,9 @@ export function createContainer(overrides: Partial<AppContainer> = {}): AppConta
         publishScheduledTask({ repository: blogRepository, service: blog, logger }),
         reconcileMediaTask({ service: media }),
         fetchSourcesTask({ repository: sourceRepository, logger }),
+        // Reads what fetch-sources stored. Registered as a second STAGE on the
+        // same runner — one worker process, one scheduler, no new transport.
+        extractFactsTask({ service: fact, logger }),
       );
       periodic.start();
 

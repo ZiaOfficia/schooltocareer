@@ -106,6 +106,10 @@ model Source {
 
   site      Site             @relation(fields: [siteId], references: [id], onDelete: Cascade)
   snapshots SourceSnapshot[]
+  /// Back-relation only. Phase 0's rule — ingestion writes nothing user-facing
+  /// — is unchanged: ExtractedFact is an OBSERVATION, not a published value,
+  /// and the semantic layer owns it (facts.prisma).
+  facts     ExtractedFact[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -156,7 +160,11 @@ model SourceSnapshot {
   /// "fetch failed" destroys the one artefact that makes it fixable.
   error String?
 
-  source Source @relation(fields: [sourceId], references: [id], onDelete: Cascade)
+  source Source          @relation(fields: [sourceId], references: [id], onDelete: Cascade)
+  /// Back-relation. What the semantic layer read OUT of this body — see
+  /// facts.prisma. A snapshot with `rawTruncated = true` is never extracted
+  /// from, so those rows correctly have none.
+  facts  ExtractedFact[]
 
   /// The two queries this table serves: a source's timeline, and "what changed
   /// across everything last night".
