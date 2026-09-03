@@ -43,6 +43,24 @@ function eventDate(event: ExamEventDto | undefined): string | null {
   return event ? (event.endDate ?? event.startDate) : null;
 }
 
+/**
+ * Papers by year, newest first.
+ *
+ * The API already returns them sorted by year descending, so this preserves
+ * that order rather than re-sorting — a Map keeps insertion order, and the one
+ * thing that must not happen is the groups appearing in a different order from
+ * the year tiles that link into them.
+ */
+function groupByYear(papers: readonly PaperListItemDto[]): Array<[number, PaperListItemDto[]]> {
+  const byYear = new Map<number, PaperListItemDto[]>();
+  for (const paper of papers) {
+    const bucket = byYear.get(paper.year);
+    if (bucket) bucket.push(paper);
+    else byYear.set(paper.year, [paper]);
+  }
+  return [...byYear.entries()];
+}
+
 function formatDate(iso: string | null): string {
   if (!iso) return 'Not announced yet';
   return new Intl.DateTimeFormat('en-IN', {
@@ -167,10 +185,17 @@ export default async function ExamSectionPage({ params }: { params: Promise<Para
             {heading}
           </h1>
           <p className="mt-3 max-w-[66ch] text-[15.5px] text-ink-soft">{config.blurb}</p>
+          {/* `conductingBody` is nullable — "we have not sourced this yet" is a
+              real state, and the hub page already handles it. This did not,
+              and rendered a bare "Conducted by" followed by nothing on every
+              exam whose authority is not yet recorded. Today that is all of
+              them, so the string was on all 80 cluster pages. */}
           <p className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-[13px] text-ink-soft">
-            <span>
-              Conducted by <strong className="text-ink">{exam.conductingBody}</strong>
-            </span>
+            {exam.conductingBody ? (
+              <span>
+                Conducted by <strong className="text-ink">{exam.conductingBody}</strong>
+              </span>
+            ) : null}
             <LastUpdated iso={exam.updatedAt} />
           </p>
         </header>
@@ -220,8 +245,9 @@ export default async function ExamSectionPage({ params }: { params: Promise<Para
             )}
             {!date ? (
               <p className="mt-3 max-w-[66ch] text-[14px] text-ink-soft">
-                {exam.conductingBody} has not announced this yet. This page is updated when the
-                official notification is released — it does not carry a guessed date.
+                {exam.conductingBody ?? 'The conducting body'} has not announced this yet. This
+                page is updated when the official notification is released — it does not carry a
+                guessed date.
               </p>
             ) : null}
           </Section>
@@ -237,23 +263,38 @@ export default async function ExamSectionPage({ params }: { params: Promise<Para
                 No papers are published for {exam.shortName} yet.
               </p>
             ) : (
-              <ul className="grid gap-px border border-rule bg-rule sm:grid-cols-2">
-                {papers.map((paper) => (
-                  <li key={paper.id} className="bg-surface">
-                    <Link
-                      href={paper.path}
-                      className="flex flex-col gap-1 p-3 no-underline hover:bg-row-hover"
-                    >
-                      <span className="text-[14.5px] font-semibold text-ink">{paper.title}</span>
-                      <span className="num text-[12px] text-ink-mute">
-                        {paper.year}
-                        {paper.shift ? ` · ${paper.shift}` : ''}
-                        {paper.hasSolution ? ' · solved' : ''}
-                      </span>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+              // GROUPED BY YEAR, with an `id` per group. The hub's year tiles
+              // link to `#year-<year>`; without these headings those anchors
+              // would resolve to the top of the page, which is the quiet
+              // version of the dead link they replaced.
+              groupByYear(papers).map(([year, forYear]) => (
+                <div key={year} id={`year-${year}`} className="mb-5 scroll-mt-4">
+                  <h3 className="mb-2 num text-[15px] font-bold text-ink">
+                    {year}
+                    <span className="ml-2 font-normal text-[12.5px] text-ink-mute">
+                      {forYear.length} {forYear.length === 1 ? 'paper' : 'papers'}
+                    </span>
+                  </h3>
+                  <ul className="grid gap-px border border-rule bg-rule sm:grid-cols-2">
+                    {forYear.map((paper) => (
+                      <li key={paper.id} className="bg-surface">
+                        <Link
+                          href={paper.path}
+                          className="flex flex-col gap-1 p-3 no-underline hover:bg-row-hover"
+                        >
+                          <span className="text-[14.5px] font-semibold text-ink">
+                            {paper.title}
+                          </span>
+                          <span className="num text-[12px] text-ink-mute">
+                            {paper.shift ? `${paper.shift}` : 'All shifts'}
+                            {paper.hasSolution ? ' · solved' : ''}
+                          </span>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))
             )}
           </Section>
         ) : null}
@@ -313,8 +354,10 @@ export default async function ExamSectionPage({ params }: { params: Promise<Para
         {exam.officialWebsite ? (
           <Section title="Official source">
             <p className="max-w-[70ch] text-[14px] text-ink-soft">
-              {exam.conductingBody} is the authority for {exam.name}. Confirm anything on this page
-              against its site before acting on a deadline.
+              {exam.conductingBody
+                ? `${exam.conductingBody} is the authority for ${exam.name}.`
+                : `This is the official site for ${exam.name}.`}{' '}
+              Confirm anything on this page against it before acting on a deadline.
             </p>
             <a
               href={exam.officialWebsite}
@@ -322,7 +365,7 @@ export default async function ExamSectionPage({ params }: { params: Promise<Para
               target="_blank"
               className="mt-3 inline-block border-2 border-rule-hard px-3 py-1.5 text-[13.5px] font-semibold no-underline hover:bg-ink hover:text-paper"
             >
-              Visit {exam.conductingBody} →
+              Visit {exam.conductingBody ?? 'official website'} →
             </a>
           </Section>
         ) : null}

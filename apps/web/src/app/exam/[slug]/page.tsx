@@ -15,6 +15,7 @@ import {
 } from '@stc/ui';
 
 import { getExam } from '@/lib/api';
+import { EXAM_SECTIONS, EXAM_SECTION_SLUGS, type ExamSection } from '@/lib/exam-sections';
 import { JsonLd, breadcrumbSchema, examPageSchema, faqSchema } from '@/lib/seo/json-ld';
 import { buildMetadata } from '@/lib/seo/metadata';
 
@@ -121,6 +122,20 @@ function eventDate(event: ExamEventDto | undefined): string | null {
   return event.endDate ?? event.startDate;
 }
 
+/**
+ * The one-line hint under each cluster link.
+ *
+ * Kept here rather than in EXAM_SECTIONS because it is hub-page copy, not part
+ * of the section's own contract — the section route renders its `blurb`, which
+ * is a full sentence and far too long for a card.
+ */
+const SECTION_NOTE: Record<ExamSection, string> = {
+  'previous-year-papers': 'Year-wise PDFs',
+  result: 'Date and direct link',
+  'admit-card': 'Download and issues',
+  'answer-key': 'Official and unofficial',
+};
+
 const FREQUENCY_PHRASE: Record<string, string> = {
   ANNUAL: 'once a year',
   BIANNUAL: 'twice a year',
@@ -202,16 +217,26 @@ export default async function ExamPage({ params }: { params: Promise<Params> }) 
     },
   ];
 
-  const clusterLinks = [
-    { label: 'Syllabus', href: ROUTES.examSyllabus(exam.slug), note: 'Subject-wise topics' },
-    { label: 'Exam pattern', href: ROUTES.examPattern(exam.slug), note: 'Marks and duration' },
-    { label: 'Eligibility', href: ROUTES.examEligibility(exam.slug), note: 'Age and qualification' },
-    { label: 'Application form', href: ROUTES.examApplication(exam.slug), note: 'How to apply' },
-    { label: 'Admit card', href: ROUTES.examAdmitCard(exam.slug), note: 'Download and issues' },
-    { label: 'Answer key', href: ROUTES.examAnswerKey(exam.slug), note: 'Official and unofficial' },
-    { label: 'Result', href: ROUTES.examResult(exam.slug), note: 'Date and direct link' },
-    { label: 'Previous papers', href: ROUTES.examPapers(exam.slug), note: 'Year-wise PDFs' },
-  ];
+  /**
+   * Built from EXAM_SECTIONS — the same registry the section route and the
+   * sitemap read.
+   *
+   * This list used to be written out by hand from ROUTES, and named all eight
+   * intended cluster pages. Only four of them render: syllabus, exam-pattern,
+   * eligibility and application-form have no content behind them, so
+   * `isExamSection` rejects those slugs and the route calls `notFound()`.
+   * The hub was therefore shipping four 404s per exam, in the one block on the
+   * page whose entire job is internal linking — 80 dead links across the
+   * cluster, all of them followed by a crawler on every pass.
+   *
+   * The sitemap had already been moved onto this registry for exactly this
+   * reason. The page had not, which is how the two came to disagree again.
+   */
+  const clusterLinks = EXAM_SECTION_SLUGS.map((key) => ({
+    label: EXAM_SECTIONS[key].label,
+    href: EXAM_SECTIONS[key].path(exam.slug),
+    note: SECTION_NOTE[key],
+  }));
 
   return (
     <>
@@ -429,11 +454,25 @@ export default async function ExamPage({ params }: { params: Promise<Params> }) 
             </Link>
           }
         >
+          {/* Year tiles jump to an ANCHOR on the papers page, not to a
+              per-year URL.
+
+              They used to use ROUTES.examPapersByYear, which builds
+              /exam/<slug>/previous-year-papers/<year> — a three-segment path
+              with no route behind it. Every tile was a 404, up to six per exam
+              hub, in a block whose whole purpose is to send a visitor deeper
+              into the cluster. Same failure as the section grid above: ROUTES
+              describes the URL space we INTEND, and linking to it before the
+              route exists ships dead ends.
+
+              An anchor is also the better answer on its own merits: a per-year
+              page for an exam we hold no papers for would be a thin page, and
+              there would be one for every exam-year pair. */}
           <ul className="grid gap-px border border-rule bg-rule sm:grid-cols-3 lg:grid-cols-6">
             {exam.years.slice(0, 6).map((y) => (
               <li key={y.id} className="bg-surface">
                 <Link
-                  href={ROUTES.examPapersByYear(exam.slug, y.year)}
+                  href={`${ROUTES.examPapers(exam.slug)}#year-${y.year}`}
                   className="flex flex-col gap-0.5 p-3 no-underline hover:bg-row-hover"
                 >
                   <span className="num text-[15px] font-bold text-ink">{y.year}</span>
