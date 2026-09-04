@@ -244,44 +244,93 @@ describe('extractFacts — ambiguity, measured from the real GATE page', () => {
    * genuinely resolves to several different dates. This is the case that makes
    * the confidence signal necessary rather than decorative.
    */
-  // Date-first rows, a duplicated label, and a multi-day exam cell — the three
-  // things the real page does that a naive reading gets wrong.
+  /**
+   * THE REAL GATE TABLE, reproduced structurally.
+   *
+   * Verbatim wording and ordering from the stored snapshot of
+   * gate2026.iitg.ac.in, with the real 2025/2026 dates — this fixture is
+   * pinned to those actual dates rather than to the clock, because the whole
+   * point is the relationship between the values.
+   *
+   * Three separate traps in one table:
+   *   1. rows are DATE-then-LABEL
+   *   2. single-value rows are RESTATED once per revision, with the superseded
+   *      entries struck through — formatting that text extraction destroys
+   *   3. the exam row is genuinely multi-day
+   */
   const gateBody =
     `${PAD}<h3>IMPORTANT DATES</h3>` +
-    `<div>August 25, ${Y}</div><div>Online registration opens</div>` +
-    `<div>August 28, ${Y}</div><div>Online registration opens</div>` +
-    `<div>September 25, ${Y}</div><div>Online registration closes (without late fee)</div>` +
-    `<div>September 28, ${Y}</div><div>Online registration closes (without late fee)</div>` +
-    `<div>GATE ${Y} Examinations</div><div>February 07, ${Y} February 08, ${Y}</div>` +
-    `<div>March 19, ${Y}</div><div>Announcement of results</div>` +
+    `<div>August 25, 2025:</div><div>ONLINE REGISTRATION OPENS</div>` +
+    `<div>August 28, 2025:</div><div>ONLINE REGISTRATION OPENS</div>` +
+    `<div>September 25, 2025:</div><div>ONLINE REGISTRATION CLOSES (WITHOUT LATE FEE)</div>` +
+    `<div>September 28, 2025:</div><div>ONLINE REGISTRATION CLOSES (WITHOUT LATE FEE)</div>` +
+    `<div>October 06, 2025:</div><div>ONLINE REGISTRATION CLOSES (WITHOUT LATE FEE)</div>` +
+    `<div>October 07, 2025:</div><div>ONLINE REGISTRATION CLOSES (WITHOUT LATE FEE)</div>` +
+    `<div>October 06, 2025:</div><div>ONLINE REGISTRATION CLOSES (WITH LATE FEE)</div>` +
+    `<div>October 13, 2025:</div><div>ONLINE REGISTRATION CLOSES (WITH LATE FEE)</div>` +
+    `<div>January 13, 2026:</div><div>Admit Cards available for download</div>` +
+    // Each date and weekday in its OWN cell, exactly as the stored snapshot
+    // renders them. An earlier version of this fixture packed them into one
+    // cell, which let a broken extractor pass: against the real page it
+    // returned 7 February alone and called that the exam date.
+    `<div>GATE 2026 Examinations</div>` +
+    `<div>February 07, 2026</div><div>Saturday</div>` +
+    `<div>February 08, 2026</div><div>Sunday</div>` +
+    `<div>February 14, 2026</div><div>Saturday</div>` +
+    `<div>February 15, 2026</div><div>Sunday</div>` +
+    `<div>March 19, 2026:</div><div>ANNOUNCEMENT OF RESULTS</div>` +
     `<p>Dates are liable to change.</p>`;
 
-  it('marks a deadline with rival dates LOW, and keeps every candidate', () => {
+  it('reads a restated deadline as a revision history and takes the LATEST', () => {
+    // THE DEFECT THIS FIXES. The page restates the row each time the deadline
+    // moves: 25 Sep -> 28 Sep -> 6 Oct -> 7 Oct. Read as rival values that is
+    // an unresolvable contradiction, and the extractor emitted the nonsense
+    // range "2025-09-25/2025-10-07". Read as an extension history — which is
+    // the only thing a strictly increasing restated series can be — the answer
+    // is 7 October.
     const result = extractFacts({ body: gateBody, truncated: false });
     expect(result.ok).toBe(true);
     if (!result.ok) return;
 
     const close = result.observations.find((o) => o.factType === 'APPLICATION_END');
-    // A deadline can only have one value. The page states two, so we cannot
-    // tell which — and silently picking one would be fabrication.
-    expect(close?.confidence).toBe('LOW');
-    expect(close?.normalizedValue).toBe(`${Y}-09-25/${Y}-09-28`);
-    // The reviewer's whole basis for a decision.
-    expect(close?.evidence).toContain(`${Y}-09-25`);
-    expect(close?.evidence).toContain(`${Y}-09-28`);
+    expect(close?.normalizedValue).toBe('2025-10-07');
+    expect(close?.confidence).toBe('MEDIUM');
+    // Every superseded value stays in the evidence: the reviewer must be able
+    // to see that the date moved three times.
+    expect(close?.evidence).toContain('2025-09-25');
+    expect(close?.evidence).toContain('2025-10-07');
   });
 
-  it('treats several dates in ONE exam cell as a window, not a contradiction', () => {
+  it('never lets the with-late-fee deadline become the deadline', () => {
+    // 13 October is the extended, fee-paying deadline. Publishing it as "the"
+    // last date tells a student they have another week and costs them the fee.
+    const result = extractFacts({ body: gateBody, truncated: false });
+    expect(result.ok).toBe(true);
+    if (!result.ok) return;
+
+    const close = result.observations.find((o) => o.factType === 'APPLICATION_END');
+    expect(close?.normalizedValue).not.toContain('2025-10-13');
+  });
+
+  it('reads a restated opening date the same way', () => {
+    const result = extractFacts({ body: gateBody, truncated: false });
+    expect(result.ok).toBe(true);
+    if (!result.ok) return;
+
+    const open = result.observations.find((o) => o.factType === 'APPLICATION_START');
+    expect(open?.normalizedValue).toBe('2025-08-28');
+  });
+
+  it('treats the multi-day exam row as a SPAN, not a revision series', () => {
+    // Same shape of data, opposite meaning. An exam can occupy four days; a
+    // deadline cannot, which is why only EXAM_DATE keeps the full range.
     const result = extractFacts({ body: gateBody, truncated: false });
     expect(result.ok).toBe(true);
     if (!result.ok) return;
 
     const exam = result.observations.find((o) => o.factType === 'EXAM_DATE');
-    // GATE genuinely sits over several days, and they share a cell on one side
-    // of the label. Same multiplicity as the deadline above, opposite meaning —
-    // hence MEDIUM, not LOW.
+    expect(exam?.normalizedValue).toBe('2026-02-07/2026-02-15');
     expect(exam?.confidence).toBe('MEDIUM');
-    expect(exam?.normalizedValue).toBe(`${Y}-02-07/${Y}-02-08`);
   });
 
   it('still reads the unambiguous row on an otherwise messy page', () => {
@@ -292,8 +341,69 @@ describe('extractFacts — ambiguity, measured from the real GATE page', () => {
     if (!result.ok) return;
 
     const declared = result.observations.find((o) => o.factType === 'RESULT_DATE');
-    expect(declared?.normalizedValue).toBe(`${Y}-03-19`);
+    expect(declared?.normalizedValue).toBe('2026-03-19');
     expect(declared?.confidence).toBe('HIGH');
+  });
+
+  /**
+   * THE FUTURE-REVISION TEST.
+   *
+   * Proves the extractor UNDERSTANDS the table rather than happening to match
+   * today's values. When the authority extends the deadline again, the newly
+   * appended row must become the answer and the comparison must see a change.
+   */
+  it('follows the deadline when the authority extends it again', () => {
+    const extended = gateBody.replace(
+      `<div>October 07, 2025:</div><div>ONLINE REGISTRATION CLOSES (WITHOUT LATE FEE)</div>`,
+      `<div>October 07, 2025:</div><div>ONLINE REGISTRATION CLOSES (WITHOUT LATE FEE)</div>` +
+        `<div>October 20, 2025:</div><div>ONLINE REGISTRATION CLOSES (WITHOUT LATE FEE)</div>`,
+    );
+
+    const before = extractFacts({ body: gateBody, truncated: false });
+    const after = extractFacts({ body: extended, truncated: false });
+    expect(before.ok && after.ok).toBe(true);
+    if (!before.ok || !after.ok) return;
+
+    const was = before.observations.find((o) => o.factType === 'APPLICATION_END');
+    const now = after.observations.find((o) => o.factType === 'APPLICATION_END');
+
+    expect(was?.normalizedValue).toBe('2025-10-07');
+    expect(now?.normalizedValue).toBe('2025-10-20');
+    // Different normalised values is precisely what the semantic comparison
+    // turns into a FactChange. Identical ones produce nothing, however much
+    // the surrounding markup moved.
+    expect(now?.normalizedValue).not.toBe(was?.normalizedValue);
+  });
+
+  it('produces NO change when the page is restyled but states the same dates', () => {
+    // The other half of the contract, and the reason the comparison is on the
+    // normalised value rather than on the body hash.
+    const restyled = gateBody
+      .replace(/<div>/g, '<td class="dt">')
+      .replace(/<\/div>/g, '</td>')
+      .replace('September 25, 2025:', '25 September 2025');
+
+    const a = extractFacts({ body: gateBody, truncated: false });
+    const b = extractFacts({ body: restyled, truncated: false });
+    expect(a.ok && b.ok).toBe(true);
+    if (!a.ok || !b.ok) return;
+
+    const va = a.observations.find((o) => o.factType === 'APPLICATION_END')?.normalizedValue;
+    const vb = b.observations.find((o) => o.factType === 'APPLICATION_END')?.normalizedValue;
+    expect(vb).toBe(va);
+  });
+
+  it('rejects a date that contradicts the weekday printed beside it', () => {
+    // The page's own checksum. 7 February 2026 is a Saturday; a parse that
+    // yields 2 July would be silently wrong without this, since both are real
+    // dates. Twelve of twelve dates in the real table agree with their day.
+    const wrong = `${PAD}<div>GATE 2026 Examinations</div><div>February 07, 2026 Tuesday</div>`;
+    const result = extractFacts({ body: wrong, truncated: false });
+    expect(result.ok).toBe(true);
+    if (!result.ok) return;
+
+    expect(result.observations.find((o) => o.factType === 'EXAM_DATE')).toBeUndefined();
+    expect(result.rejected).toBeGreaterThan(0);
   });
 
   it('carries an explicit schedule disclaimer through to every date', () => {
@@ -370,5 +480,33 @@ describe('toDateRange', () => {
   it('returns null rather than an Invalid Date', () => {
     expect(toDateRange('not-a-date')).toBeNull();
     expect(toDateRange('')).toBeNull();
+  });
+});
+
+describe('notice headlines are not schedules — the CUET false positive', () => {
+  it('does not read a rescheduling notice as the exam date', () => {
+    // Verbatim from cuet.nta.nic.in. The words "CUET (UG) 2026 Examination"
+    // really are present, so the label matched and produced a HIGH-confidence
+    // exam date of 30 May — for an exam that runs across many days, taken from
+    // a notice about a server fault affecting one shift.
+    const body =
+      `${PAD}<p>Re-scheduling of examination for the candidates affected due to ` +
+      `technical glitch in CUET (UG) &#8211; 2026 Examination on 30.05.2026 (Shift-I)-reg.</p>`;
+
+    const result = extractFacts({ body, truncated: false });
+    expect(result.ok).toBe(true);
+    if (!result.ok) return;
+    expect(result.observations.find((o) => o.factType === 'EXAM_DATE')).toBeUndefined();
+  });
+
+  it('still reads a genuine exam-date statement on the same kind of page', () => {
+    // The deny terms must not blind the extractor to the real thing.
+    const body = `${PAD}<p>CUET (UG) 2026 Examination will be held on 15.05.2026.</p>`;
+    const result = extractFacts({ body, truncated: false });
+    expect(result.ok).toBe(true);
+    if (!result.ok) return;
+    expect(result.observations.find((o) => o.factType === 'EXAM_DATE')?.normalizedValue).toBe(
+      '2026-05-15',
+    );
   });
 });

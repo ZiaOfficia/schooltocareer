@@ -86,7 +86,30 @@ const LABELS: Record<FactType, { allow: RegExp[]; deny?: RegExp[] }> = {
     ],
     // A mock/practice test date is not the exam date, and an admit-card or
     // answer-key heading sits next to a date on every one of these pages.
-    deny: [/\bmock\b/i, /\bpractice\b/i, /\badmit\s*card\b/i, /\banswer\s*key\b/i, /\baat\b/i],
+    //
+    // The notice-headline terms are the CUET false positive, and it is the
+    // clearest example of why label matching alone is not enough. The page
+    // states: "Re-scheduling of examination for the candidates affected due to
+    // technical glitch in CUET (UG) – 2026 on 30.05.2026 (Shift-I)-reg." The
+    // words "CUET (UG) 2026 Examination" really are in there, so the label
+    // matched and produced a HIGH-confidence exam date of 30 May — for an exam
+    // that runs across many days, from a notice about a server fault.
+    //
+    // A rescheduling, corrigendum or postponement notice is ABOUT the schedule;
+    // it is not the schedule.
+    deny: [
+      /\bmock\b/i,
+      /\bpractice\b/i,
+      /\badmit\s*card\b/i,
+      /\banswer\s*key\b/i,
+      /\baat\b/i,
+      /\bre-?scheduling\b/i,
+      /\bre-?scheduled\b/i,
+      /\bpostpone(?:d|ment)?\b/i,
+      /\bcorrigendum\b/i,
+      /\bglitch\b/i,
+      /-reg\.?\b/i,
+    ],
   },
   APPLICATION_START: {
     allow: [
@@ -314,6 +337,9 @@ function countBoundaries(text: string): number {
   return (text.match(/\|/g) ?? []).length;
 }
 
+/** A date found in the body, with its absolute offset for context checks. */
+type Found = { raw: string; at: number };
+
 /** Every date in a fragment, with the offset it was found at. */
 function datesIn(fragment: string): Array<{ raw: string; index: number }> {
   return [...fragment.matchAll(new RegExp(DATE_RE.source, 'gi'))].map((m) => ({
@@ -339,6 +365,74 @@ const PUBLICATION_STAMP = /\b(posted|published|updated|uploaded|revised|dated)\s
 
 function isPublicationStamp(text: string, at: number): boolean {
   return PUBLICATION_STAMP.test(text.slice(Math.max(0, at - 24), at));
+}
+
+/**
+ * A date used as a row KEY, i.e. immediately followed by a colon.
+ *
+ * `August 25, 2025: | ONLINE REGISTRATION OPENS` — the date introduces the
+ * label rather than answering one. It is the page's own statement of which way
+ * its rows read, and it is the only reliable way to tell a date-first table
+ * from a label-first one without guessing.
+ */
+function isRowKey(text: string, endOfDate: number): boolean {
+  return /^\s*:/.test(text.slice(endOfDate, endOfDate + 3));
+}
+
+const DAY_NAMES = [
+  'sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday',
+] as const;
+
+/**
+ * The bounds of the block the given offset sits in.
+ *
+ * Proximity alone is not enough on a dense table: "within 22 characters" and
+ * "within 90 characters" both reach straight into the neighbouring row. Two
+ * real misreads came from exactly that —
+ *
+ *   the weekday "Sunday", printed after 15 February in the exam row, sat close
+ *   enough to "March 19, 2026" in the NEXT row to be taken as its weekday, and
+ *   the result date was discarded as a day mismatch;
+ *
+ *   the qualifier "(WITHOUT LATE FEE)", belonging to the closing row, fell
+ *   inside the opening row's deny window and suppressed it.
+ *
+ * A cell boundary is the real limit of what a value can be qualified by.
+ */
+function cellBounds(text: string, at: number): { start: number; end: number } {
+  const start = text.lastIndexOf('|', at);
+  const end = text.indexOf('|', at);
+  return { start: start === -1 ? 0 : start + 1, end: end === -1 ? text.length : end };
+}
+
+/**
+ * The page's own checksum, and the cheapest correctness signal available.
+ *
+ * GATE prints a day beside every date — "February 07, 2026 | Saturday". All
+ * twelve dates in its table agree with their stated day, which is strong
+ * independent confirmation that the parse is right. More usefully, a
+ * DISAGREEMENT is proof it is wrong: a misparsed numeric date (07/02 read as
+ * 2 July rather than 7 February) lands on the wrong weekday and can be thrown
+ * out before it ever becomes a candidate.
+ *
+ * Returns `true` when no day is stated, because most pages state none. Absence
+ * of the checksum is not a failure of it.
+ */
+function dayOfWeekAgrees(iso: string, text: string, at: number, rawLength: number): boolean {
+  // Nearby AND inside the same cell. The exam row packs four dates and four
+  // weekdays into one cell, so proximity is what pairs them — but proximity
+  // alone reaches into the next row, which is how a Sunday from 15 February
+  // came to be read as the weekday of 19 March.
+  const cell = cellBounds(text, at);
+  const before = text.slice(Math.max(cell.start, at - 22), at);
+  const after = text.slice(at + rawLength, Math.min(cell.end, at + rawLength + 22));
+  const around = `${before} ${after}`;
+
+  const stated = DAY_NAMES.find((day) => new RegExp(`\\b${day}\\b`, 'i').test(around));
+  if (!stated) return true;
+
+  const actual = DAY_NAMES[new Date(`${iso}T00:00:00.000Z`).getUTCDay()];
+  return actual === stated;
 }
 
 /** Cuts a forward window at the next label of ANY type. */
@@ -374,19 +468,80 @@ function sincePreviousLabel(window: string): string {
  * Several dates in ONE cell are all kept — GATE lists its four exam days
  * together, and that is a genuine window rather than a contradiction.
  */
-function datesAfter(text: string, labelEnd: number): string[] {
+function datesAfter(text: string, labelEnd: number): Found[] {
   const window = untilNextLabel(text.slice(labelEnd, labelEnd + WINDOW_CHARS));
-  const found = datesIn(window).filter((d) => !isPublicationStamp(text, labelEnd + d.index));
+  const found = datesIn(window)
+    .map((d) => ({ raw: d.raw, at: labelEnd + d.index, index: d.index }))
+    .filter((d) => !isPublicationStamp(text, d.at))
+    // A date written as a ROW KEY — "August 25, 2025:" — introduces the label
+    // that follows it. It is emphatically not the value of the label above.
+    //
+    // This is what made the restated rows unfixable: for "REGISTRATION OPENS"
+    // the date after it is the CLOSING row's key, so the opening fact picked up
+    // 25 September and the revision series resolved to the wrong end of the
+    // table. The trailing colon is the page telling us which way the row reads.
+    .filter((d) => !isRowKey(text, d.at + d.raw.length));
   const first = found[0];
   if (!first) return [];
   if (countBoundaries(window.slice(0, first.index)) > MAX_BOUNDARY_HOPS) return [];
 
   const closes = window.indexOf('|', first.index + first.raw.length);
-  return found.filter((d) => closes === -1 || d.index < closes).map((d) => d.raw);
+  return found
+    .filter((d) => closes === -1 || d.index < closes)
+    .map((d) => ({ raw: d.raw, at: d.at }));
+}
+
+/**
+ * Continues a multi-day schedule across cell boundaries.
+ *
+ * The real GATE exam row is not one cell — it is eight:
+ *
+ *   GATE 2026 Examinations | February 07, 2026 | Saturday | February 08, 2026
+ *   | Sunday | February 14, 2026 | Saturday | February 15, 2026 | Sunday |
+ *
+ * Stopping at the first boundary yields 7 February and calls it the exam date,
+ * which misleads every candidate whose paper sits on the 15th. So a run of
+ * cells that contain NOTHING BUT a date or a weekday is read as one schedule.
+ *
+ * The run ends at the first cell containing anything else — here "March 19,
+ * 2026:", which is a row key and therefore the next row's label. That is what
+ * stops the exam date swallowing the result date.
+ *
+ * Only EXAM_DATE uses this. A deadline restated across cells is a revision
+ * history, not a span, and is handled separately.
+ */
+function scheduleRun(text: string, from: number): Found[] {
+  const out: Found[] = [];
+  let cursor = from;
+  const limit = from + WINDOW_CHARS * 3;
+
+  while (cursor < text.length && cursor < limit) {
+    const next = text.indexOf('|', cursor);
+    if (next === -1) break;
+    const start = next + 1;
+    const end = text.indexOf('|', start);
+    const cell = text.slice(start, end === -1 ? text.length : end).trim();
+    if (cell.length === 0) break;
+
+    // A weekday on its own continues the run without contributing a value.
+    if (DAY_NAMES.some((day) => new RegExp(`^${day}$`, 'i').test(cell))) {
+      cursor = start + (end === -1 ? cell.length : end - start);
+      continue;
+    }
+
+    const dates = datesIn(cell);
+    const only = dates.length === 1 && dates[0]!.raw.trim() === cell;
+    if (!only || isRowKey(text, start + dates[0]!.index + dates[0]!.raw.length)) break;
+
+    out.push({ raw: dates[0]!.raw, at: start + dates[0]!.index });
+    cursor = start + (end === -1 ? cell.length : end - start);
+  }
+
+  return out;
 }
 
 /** The dates in the cell immediately BEFORE a label, if any. */
-function datesBefore(text: string, labelStart: number): string[] {
+function datesBefore(text: string, labelStart: number): Found[] {
   const from = Math.max(0, labelStart - WINDOW_CHARS);
   const raw = text.slice(from, labelStart);
   const window = sincePreviousLabel(raw);
@@ -394,13 +549,15 @@ function datesBefore(text: string, labelStart: number): string[] {
   // the characters that precede a date even when they fall outside the window.
   const base = from + (raw.length - window.length);
 
-  const found = datesIn(window).filter((d) => !isPublicationStamp(text, base + d.index));
+  const found = datesIn(window)
+    .map((d) => ({ raw: d.raw, at: base + d.index, index: d.index }))
+    .filter((d) => !isPublicationStamp(text, d.at));
   const last = found[found.length - 1];
   if (!last) return [];
   if (countBoundaries(window.slice(last.index + last.raw.length)) > MAX_BOUNDARY_HOPS) return [];
 
   const opens = window.lastIndexOf('|', last.index);
-  return found.filter((d) => d.index > opens).map((d) => d.raw);
+  return found.filter((d) => d.index > opens).map((d) => ({ raw: d.raw, at: d.at }));
 }
 
 /** Below this, the body is a JavaScript shell — iimcat.ac.in yields 12 chars. */
@@ -433,6 +590,8 @@ export function extractFacts(input: {
     if (config.allow.length === 0) continue;
 
     const candidates: Candidate[] = [];
+    /** How many times a label for this fact type matched. See isRevisionSeries. */
+    let labelHits = 0;
 
     for (const label of config.allow) {
       // A fresh global clone per label — reusing a /g regex across calls
@@ -447,8 +606,16 @@ export function extractFacts(input: {
         // The label itself plus a little context, for the deny check. A deny
         // term ("WITH LATE FEE") can precede or follow the label depending on
         // how the table is laid out.
-        const context = text.slice(Math.max(0, labelStart - 90), labelEnd + 90);
+        // The label's OWN cell. A qualifier that changes what a label means —
+        // "(WITH LATE FEE)", "provisional", "mock" — is printed inside the cell
+        // with it. Reaching 90 characters either way instead pulled in the
+        // neighbouring row and suppressed the opening date because the row
+        // below it mentioned a late fee.
+        const cell = cellBounds(text, labelStart);
+        const context = text.slice(cell.start, Math.max(cell.end, labelEnd));
         if (config.deny?.some((pattern) => pattern.test(context))) continue;
+
+        labelHits += 1;
 
         // BOTH DIRECTIONS, because real pages disagree about which way round a
         // table goes — and gate2026.iitg.ac.in disagrees WITH ITSELF. Its
@@ -461,15 +628,30 @@ export function extractFacts(input: {
         // When both sides offer a date we do not know which is the label's, so
         // both become candidates and the ambiguity surfaces as LOW confidence
         // rather than as a coin flip resolved in private.
-        const sides: Array<{ side: 'before' | 'after'; raws: string[] }> = [
-          { side: 'before', raws: datesBefore(text, labelStart) },
-          { side: 'after', raws: datesAfter(text, labelEnd) },
+        const after = datesAfter(text, labelEnd);
+        // A multi-day exam continues past its first cell. Anchored at the last
+        // date already accepted, so it extends the run rather than restarting.
+        const last = after[after.length - 1];
+        const run =
+          factType === 'EXAM_DATE' && last
+            ? scheduleRun(text, last.at + last.raw.length)
+            : [];
+
+        const sides: Array<{ side: 'before' | 'after'; found: Found[] }> = [
+          { side: 'before', found: datesBefore(text, labelStart) },
+          { side: 'after', found: [...after, ...run] },
         ];
 
-        for (const { side, raws } of sides) {
-          for (const raw of raws) {
+        for (const { side, found } of sides) {
+          for (const { raw, at } of found) {
             const iso = parseDate(raw);
             if (!iso) {
+              rejected += 1;
+              continue;
+            }
+            // The page's own checksum. A date that contradicts the weekday
+            // printed beside it is a misparse, not a fact.
+            if (!dayOfWeekAgrees(iso, text, at, raw.length)) {
               rejected += 1;
               continue;
             }
@@ -490,28 +672,73 @@ export function extractFacts(input: {
     const distinct = [...new Set(candidates.map((c) => c.iso))].sort();
     const first = candidates[0]!;
 
-    // A date on BOTH sides of a label means the row's orientation is genuinely
-    // undecidable from the text, whatever the values are. Even when both sides
-    // happen to agree, the agreement is a coincidence rather than evidence, so
-    // this alone caps confidence at LOW.
-    const bothSides =
-      candidates.some((c) => c.side === 'before') && candidates.some((c) => c.side === 'after');
+    /**
+     * A REVISION HISTORY, not a set of rival values.
+     *
+     * This is the defect that produced an application deadline of
+     * "25 September – 7 October". gate2026.iitg.ac.in restates a deadline row
+     * every time the deadline moves, and renders the superseded entries struck
+     * through. Strikethrough is formatting, so text extraction keeps all four
+     * and loses the one thing that said which was current:
+     *
+     *   September 25 → September 28 → October 06 → October 07
+     *
+     * Read as rival values that is an unresolvable contradiction. Read as what
+     * it is — a deadline extended three times — the answer is unambiguous and
+     * is the LAST one. The signature is that the values are strictly
+     * increasing, which is what an extension can only ever be. A set that is
+     * not ordered is not a revision history, and stays ambiguous.
+     *
+     * Verified against the page's own weekday column: Thu, Sun, Mon, Tue match
+     * 25 Sep, 28 Sep, 6 Oct and 7 Oct exactly.
+     */
+    const strictlyIncreasing = distinct.every(
+      (value, index) => index === 0 || value > distinct[index - 1]!,
+    );
+    // An exam can genuinely occupy several days; a deadline cannot. So the same
+    // shape of data means different things per fact type, and only EXAM_DATE
+    // keeps the full span.
+    const isSchedule = factType === 'EXAM_DATE';
 
-    // A window is expected for an exam that runs over several days (GATE sits
-    // four Saturdays and Sundays); it is a contradiction for a deadline, which
-    // can only have one value. Same data, different meaning, so the same
-    // multiplicity maps to different confidence.
+    /**
+     * THE LABEL MUST ACTUALLY REPEAT.
+     *
+     * A revision history is a row RESTATED — the label appears once per
+     * revision. Requiring that is what keeps the rule narrow: two unrelated
+     * dates that happen to be in date order, found on either side of a single
+     * label, are not a revision series and stay LOW. GATE restates
+     * "REGISTRATION CLOSES (WITHOUT LATE FEE)" four times and "REGISTRATION
+     * OPENS" twice, which is exactly the signature.
+     */
+    const isRevisionSeries =
+      !isSchedule && labelHits > 1 && distinct.length > 1 && strictlyIncreasing;
+
+    /**
+     * Dates on both sides of a label are NOT evidence of ambiguity here.
+     *
+     * In a DATE-then-LABEL table the date after row N is the date before row
+     * N+1, so a restated label always reports both sides. An earlier version
+     * capped that at LOW, which permanently pinned the most structured page on
+     * the watch list to its least usable confidence. Multiplicity is explained
+     * by the layout; what matters is whether the values form a schedule, a
+     * revision series, or a genuine contradiction.
+     */
     const confidence: FactConfidence =
-      distinct.length === 1 && !bothSides
+      distinct.length === 1
         ? 'HIGH'
-        : factType === 'EXAM_DATE' && !bothSides
-          ? 'MEDIUM'
+        : isSchedule || isRevisionSeries
+          ? // A span across a multi-day exam, or the latest of a restated
+            // series: well-founded readings, but each is an inference from
+            // layout rather than a value the page states outright.
+            'MEDIUM'
           : 'LOW';
 
     const normalizedValue =
       distinct.length === 1
         ? distinct[0]!
-        : `${distinct[0]}/${distinct[distinct.length - 1]}`;
+        : isRevisionSeries
+          ? distinct[distinct.length - 1]!
+          : `${distinct[0]}/${distinct[distinct.length - 1]}`;
 
     observations.push({
       factType,
