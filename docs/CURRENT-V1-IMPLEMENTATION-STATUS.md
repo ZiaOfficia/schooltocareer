@@ -1,5 +1,7 @@
 # SchoolToCareer Current V1 Implementation Status
 
+> **Authoritative current handoff:** See [PROJECT-COMPLETION-STATUS-2026-09-04.md](./PROJECT-COMPLETION-STATUS-2026-09-04.md) for the validated queue, checks, and remaining path to V1. This document retains the broader implementation history.
+
 ## Report Purpose
 
 This document consolidates the current implementation status of SchoolToCareer against the master V1 execution prompt.
@@ -381,7 +383,8 @@ The repository already has:
 - scheduling concepts
 - audit/event foundations
 
-But the fact-review operation and operational editorial console do not yet exist.
+The fact-review API and read-only `pnpm facts:review` operation now exist. A
+complete operational editorial console does not yet exist.
 
 ## Completed in Phase 1 + 2A (2026-09-04)
 
@@ -1050,8 +1053,8 @@ Keep verifying:
 ## Current Verification Results (2026-09-04)
 
 ```text
-Package typechecks (9/9 direct):  passed
-Full API tests:                   195/195 passed  (was 139; +56 fact tests)
+Package typechecks (direct):       passed (API, web, database, tooling)
+Full API tests:                   238/238 passed
 Architecture checks:              5/5 passed
 Prisma validation:                passed
 Prisma migration status:          6 migrations, up to date
