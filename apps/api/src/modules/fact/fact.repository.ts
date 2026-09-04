@@ -326,6 +326,19 @@ export class FactRepository extends BaseRepository {
     input: {
       extractedFactId: string;
       previousValue: string | null;
+      /**
+       * REQUIRED. An earlier version of this method updated everything about a
+       * queued change EXCEPT the value being proposed, which is the one field a
+       * reviewer actually decides on.
+       *
+       * The consequence was not cosmetic. Fixing the GATE extractor produced a
+       * corrected observation (2026-02-07/2026-02-15), the change row kept the
+       * superseded one (2026-02-07), and `approve()` writes `proposedValue` —
+       * so the queue would have shown a reviewer one value and published
+       * another.
+       */
+      proposedValue: string | null;
+      kind: string;
       confidence: string;
       canonicalId: string | null;
       canonicalVersion: Date | null;
@@ -338,6 +351,8 @@ export class FactRepository extends BaseRepository {
       data: {
         extractedFactId: input.extractedFactId,
         previousValue: input.previousValue,
+        proposedValue: input.proposedValue,
+        kind: input.kind as never,
         confidence: input.confidence as never,
         canonicalId: input.canonicalId,
         canonicalVersion: input.canonicalVersion,

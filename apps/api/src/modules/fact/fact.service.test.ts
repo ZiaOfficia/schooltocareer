@@ -577,3 +577,34 @@ describe('JEE Advanced end-to-end: source → snapshot → fact → change → a
     expect(tally.silent).toBe(1);
   });
 });
+
+describe('a fixed extractor must be able to correct a change already in the queue', () => {
+  it('updates the PROPOSED value, not just the surrounding metadata', async () => {
+    // The bug this pins. refreshChange updated everything except the one field
+    // a reviewer decides on, so after the GATE extractor was corrected the
+    // queue still offered the superseded value — and approve() writes
+    // proposedValue, so the reviewer would have seen one date and published
+    // another.
+    const { service, changes } = buildHarness({
+      body: BODY_AFTER,
+      canonical: { eventId: 'evt_1', value: null, version: null },
+      pending: {
+        id: 'chg_1',
+        // What the broken extractor had proposed.
+        proposedValue: `${Y}-06-23`,
+        previousValue: null,
+        factType: 'EXAM_DATE',
+      },
+    });
+
+    await service.detect();
+
+    const refreshed = changes.find((c) => c['refreshed']);
+    expect(refreshed).toBeDefined();
+    expect(refreshed).toMatchObject({
+      id: 'chg_1',
+      // The corrected reading from the new extractor.
+      proposedValue: `${Y}-06-24`,
+    });
+  });
+});

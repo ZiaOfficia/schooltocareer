@@ -238,6 +238,11 @@ export class FactService {
       await this.deps.repository.refreshChange(pending.id, {
         extractedFactId: fact.id,
         previousValue: canonical.value,
+        // The corrected reading. A fixed extractor must be able to correct a
+        // change already sitting in the queue, or the reviewer decides on a
+        // value the system no longer believes.
+        proposedValue: observation.normalizedValue,
+        kind,
         confidence: observation.confidence,
         canonicalId: canonical.eventId,
         canonicalVersion: canonical.version,
