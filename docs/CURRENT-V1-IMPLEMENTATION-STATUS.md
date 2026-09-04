@@ -43,6 +43,35 @@ Lifecycle product                  FUTURE
 Universal search execution         FUTURE
 ```
 
+## The review queue, after the GATE extractor fix
+
+Extraction and semantic comparison were re-run against the stored snapshots.
+Five of the six values changed or were confirmed; one is now orphaned.
+
+| # | Exam | Fact | Value | Conf. | Recommended |
+|---|---|---|---|---|---|
+| 1 | JEE Advanced | `EXAM_DATE` | `2026-05-17` | HIGH | **approve** |
+| 2 | GATE | `RESULT_DATE` | `2026-03-19` | HIGH | **approve** |
+| 3 | GATE | `EXAM_DATE` | `2026-02-07/2026-02-15` | MEDIUM | **approve** — was `2026-02-07` |
+| 4 | GATE | `APPLICATION_END` | `2025-10-07` | MEDIUM | **approve** — was `2025-09-25/2025-10-07` |
+| 5 | GATE | `APPLICATION_START` | `2025-08-28` | MEDIUM | **approve** — was `2025-08-25/2025-08-28` |
+| 6 | CUET UG | `EXAM_DATE` | `2026-05-30` | HIGH | **reject** — orphaned |
+
+Every value agrees with the official page, including the weekday column it
+prints beside each date.
+
+**#6 is orphaned on purpose.** The corrected extractor no longer produces that
+observation — it came from a rescheduling notice, not a schedule — so nothing
+refreshes it and nothing will re-propose it. It stands as a stale proposal
+awaiting a human rejection.
+
+Note that rejection alone does not suppress a bad fact: a `REJECTED` row is not
+`PENDING`, so the next detection pass would create a fresh change for the same
+value. The extractor has to stop producing it, which is why the CUET fix is in
+the parser rather than only in the queue.
+
+All six still await a named human. Nothing here has been approved.
+
 ## Executive Verdict
 
 The trust foundation is built. **The student-facing product is not, and it is
