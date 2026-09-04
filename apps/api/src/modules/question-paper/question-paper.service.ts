@@ -1,6 +1,6 @@
 import { CACHE_TAGS, PERMISSIONS, REVALIDATE, ROUTES } from '@stc/constants';
 import type { FacetGroup, FacetedResult, PageMeta, PaperType } from '@stc/types';
-import { buildPaperDedupeKey, tombstoneSlug } from '@stc/utils';
+import { buildPaperDedupeKey, isPlaceholderUrl, isSeedFixtureId, tombstoneSlug } from '@stc/utils';
 import type {
   QuestionPaperCreateInput,
   QuestionPaperFeedQuery,
@@ -616,6 +616,44 @@ export function assertPublishable(record: PaperRecord): void {
     throw new BusinessRuleError('Cannot publish: attach the paper to an exam or a board class', {
       missing: ['examId|boardClassId'],
     });
+  }
+
+  /**
+   * A FIXTURE MAY NOT BECOME A PUBLISHED PAGE.
+   *
+   * The database holds 3,000 DRAFT papers from the volume seed — titled
+   * "Question Paper 1582 — 2026", with every file pointing at
+   * `cdn.example.test`. They are harmless while they stay drafts, and the
+   * integrity gate cannot see them precisely because it only inspects what a
+   * student could read.
+   *
+   * That is a landmine, not a safeguard: one bulk publish and 3,000 pages go
+   * live promising downloads that resolve to a reserved TLD, with nothing
+   * having warned anyone first. The check belongs HERE, at the moment a row
+   * becomes student-facing, rather than in a gate that runs afterwards and
+   * reports what already happened.
+   */
+  // The exhaustive check: every fixture row carries the seed id namespace, and
+  // nothing an editor creates can.
+  if (isSeedFixtureId(record.id)) {
+    throw new BusinessRuleError(
+      'Cannot publish: this is seed fixture data, not a real paper. ' +
+        'The 3,000 seeded papers exist for query-plan realism and must never reach a student.',
+      { fixtureId: record.id },
+    );
+  }
+
+  // And the belt-and-braces one, for a real row an editor pasted a bad link
+  // into. `data:purge-placeholder` NULLs fixture URLs, so this check alone
+  // would let a cleaned fixture through — measured: 0 of 200 seeded results
+  // were caught by URL, 200 of 200 by id.
+  const placeholder = record.files.find((file) => isPlaceholderUrl(file.media.secureUrl));
+  if (placeholder) {
+    throw new BusinessRuleError(
+      'Cannot publish: this paper’s file is a placeholder URL ' +
+        `(${placeholder.media.secureUrl}). It is seed or fixture data, not a real paper.`,
+      { placeholderUrl: placeholder.media.secureUrl, fileRole: placeholder.fileRole },
+    );
   }
 }
 

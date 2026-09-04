@@ -11,7 +11,13 @@ import type { ISearchProvider } from '../../providers/search/search.provider.js'
 import type { SlugRepository } from '../slug/slug.repository.js';
 import { SlugService } from '../slug/slug.service.js';
 
-import { cacheTtlFor, phaseOf, ResultService, type ResultRepositoryPort } from './result.service.js';
+import {
+  assertPublishable,
+  cacheTtlFor,
+  phaseOf,
+  ResultService,
+  type ResultRepositoryPort,
+} from './result.service.js';
 import type { ResultFacetField, ResultRecord } from './result.types.js';
 
 /**
@@ -303,5 +309,62 @@ describe('ResultService.getById', () => {
   it('404s an unknown id', async () => {
     const { service } = buildService({ record: null });
     await expect(service.getById('nope')).rejects.toBeInstanceOf(NotFoundError);
+  });
+});
+
+describe('ResultService — publish gate keeps fixtures out of production', () => {
+  it('publishes a result with a real official URL', () => {
+    expect(() => assertPublishable(baseResult)).not.toThrow();
+  });
+
+  it('REFUSES a result whose official URL is a placeholder', () => {
+    // 200 seeded DRAFT rows titled "Result 0 2024" sit behind this gate. A
+    // result page exists to send a student to the official scorecard, so a
+    // placeholder here is the whole page being a lie.
+    const seeded: ResultRecord = {
+      ...baseResult,
+      officialUrl: 'https://example.test/result/seed-0',
+    };
+    expect(() => assertPublishable(seeded)).toThrow(BusinessRuleError);
+    expect(() => assertPublishable(seeded)).toThrow(/placeholder URL/);
+  });
+
+  it('REFUSES a placeholder hiding in the regional links array', () => {
+    // Easier to miss than officialUrl, and exactly as harmful — this is the
+    // link a student in that region actually clicks.
+    const seeded: ResultRecord = {
+      ...baseResult,
+      links: [
+        { label: 'Scorecard', url: 'https://cbseresults.nic.in/x' },
+        { label: 'Regional mirror', url: 'https://example.test/mirror' },
+      ],
+    };
+    expect(() => assertPublishable(seeded)).toThrow(/placeholder URL/);
+  });
+
+  it('still refuses a result with no date and no declaration', () => {
+    expect(() =>
+      assertPublishable({ ...baseResult, expectedAt: null, isDeclared: false }),
+    ).toThrow(BusinessRuleError);
+  });
+});
+
+describe('publish gate — the exhaustive fixture check', () => {
+  it('REFUSES a seeded result even after its placeholder URL was cleaned', () => {
+    // The gap this closes. `pnpm data:purge-placeholder` NULLs fabricated
+    // officialUrls, so a URL-only guard caught 0 of the 200 seeded results —
+    // measured against the live database. All 200 are caught by id.
+    const cleaned: ResultRecord = {
+      ...baseResult,
+      id: 'seed_result_0',
+      officialUrl: null,
+      links: null,
+      isDeclared: true,
+    };
+    expect(() => assertPublishable(cleaned)).toThrow(/seed fixture data/);
+  });
+
+  it('lets a real editor-created row through', () => {
+    expect(() => assertPublishable({ ...baseResult, id: 'clx9a8b7c6d5e4f3g2h1' })).not.toThrow();
   });
 });

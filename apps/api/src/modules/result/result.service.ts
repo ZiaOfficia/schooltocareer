@@ -1,6 +1,6 @@
 import { CACHE_TAGS, PERMISSIONS, REVALIDATE, ROUTES } from '@stc/constants';
 import type { FacetGroup, FacetedResult, PageMeta, ResultPhase, ResultType } from '@stc/types';
-import { tombstoneSlug } from '@stc/utils';
+import { isPlaceholderUrl, isSeedFixtureId, tombstoneSlug } from '@stc/utils';
 import type {
   ResultCreateInput,
   ResultDeclareInput,
@@ -570,6 +570,34 @@ export function assertPublishable(record: ResultRecord): void {
     throw new BusinessRuleError(`Cannot publish: ${missing.join(', ')} must be set first`, {
       missing,
     });
+  }
+
+  /**
+   * Same fixture guard as papers, for the same reason: 200 seeded DRAFT rows
+   * titled "Result 0 2024" are one bulk publish away from being live pages.
+   *
+   * Both the headline link and every entry in `links` are checked. A result
+   * page's entire purpose is to send a student to the official scorecard, so a
+   * placeholder in the regional links array is exactly as harmful as one in
+   * `officialUrl` — and easier to miss.
+   */
+  if (isSeedFixtureId(record.id)) {
+    throw new BusinessRuleError(
+      'Cannot publish: this is seed fixture data, not a real result.',
+      { fixtureId: record.id },
+    );
+  }
+
+  const badLink =
+    (isPlaceholderUrl(record.officialUrl) ? record.officialUrl : null) ??
+    record.links?.find((link) => isPlaceholderUrl(link.url))?.url;
+
+  if (badLink) {
+    throw new BusinessRuleError(
+      `Cannot publish: this result links to a placeholder URL (${badLink}). ` +
+        'It is seed or fixture data, not a real result.',
+      { placeholderUrl: badLink },
+    );
   }
 }
 

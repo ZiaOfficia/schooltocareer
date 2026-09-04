@@ -175,6 +175,29 @@ function round(n: number): number {
  */
 const PLACEHOLDER_HOSTS = ['example.test', 'example.com', 'example.org', 'example.net'] as const;
 
+/**
+ * The id namespace every synthetic row carries: `seed_<kind>_<key>`.
+ *
+ * WHY AN ID PREFIX AND NOT A CONTENT HEURISTIC. It is exact. The seed generates
+ * these deterministically so re-running converges, and nothing else in the
+ * system produces them — an editor's row gets a cuid. Guessing from titles
+ * ("Result 0 2024" looks fake) would both miss fixtures and eventually refuse
+ * something real.
+ *
+ * WHY A URL CHECK IS NOT ENOUGH ON ITS OWN. `pnpm data:purge-placeholder`
+ * already NULLed the fabricated officialUrls, so all 200 seeded results now
+ * have no placeholder URL to detect — and every one of them passed the publish
+ * gate on measurement. They are still fabricated. The id is what survives a
+ * partial cleanup.
+ *
+ * Both checks are kept: this one is exhaustive for fixtures, and
+ * `isPlaceholderUrl` catches a real placeholder an editor pastes by hand into
+ * a genuine row.
+ */
+export function isSeedFixtureId(id: string | null | undefined): boolean {
+  return typeof id === 'string' && id.startsWith('seed_');
+}
+
 export function isPlaceholderUrl(url: string | null | undefined): boolean {
   if (!url) return false;
   let host: string;

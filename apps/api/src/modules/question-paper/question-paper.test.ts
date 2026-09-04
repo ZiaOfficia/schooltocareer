@@ -11,7 +11,11 @@ import type { ISearchProvider } from '../../providers/search/search.provider.js'
 import type { SlugRepository } from '../slug/slug.repository.js';
 import { SlugService } from '../slug/slug.service.js';
 
-import { QuestionPaperService, type PaperRepositoryPort } from './question-paper.service.js';
+import {
+  QuestionPaperService,
+  assertPublishable,
+  type PaperRepositoryPort,
+} from './question-paper.service.js';
 import type { PaperFacetField, PaperRecord } from './question-paper.types.js';
 
 /**
@@ -300,5 +304,55 @@ describe('QuestionPaperService.create — import de-duplication', () => {
   it('404s an unknown id', async () => {
     const { service } = buildService({ record: null });
     await expect(service.getById('nope')).rejects.toBeInstanceOf(NotFoundError);
+  });
+});
+
+describe('QuestionPaperService — publish gate keeps fixtures out of production', () => {
+  it('publishes a paper whose file is a real URL', () => {
+    expect(() => assertPublishable(basePaper)).not.toThrow();
+  });
+
+  it('REFUSES a paper whose file points at a placeholder host', () => {
+    // The database holds 3,000 seeded DRAFT papers, every one of them with a
+    // file on cdn.example.test. They are invisible to the integrity gate,
+    // which by design only inspects what a student can already read — so one
+    // bulk publish would put 3,000 pages live promising downloads that resolve
+    // to a reserved TLD, with nothing having warned anyone first.
+    const seeded: PaperRecord = {
+      ...basePaper,
+      files: [
+        {
+          ...basePaper.files[0]!,
+          media: {
+            ...basePaper.files[0]!.media,
+            secureUrl: 'https://cdn.example.test/seed/asset-381.png',
+          },
+        },
+      ],
+    };
+
+    expect(() => assertPublishable(seeded)).toThrow(BusinessRuleError);
+    expect(() => assertPublishable(seeded)).toThrow(/placeholder URL/);
+  });
+
+  it('still refuses a paper with no file at all', () => {
+    expect(() => assertPublishable({ ...basePaper, files: [] })).toThrow(BusinessRuleError);
+  });
+
+  it('still refuses a paper attached to neither an exam nor a board class', () => {
+    expect(() =>
+      assertPublishable({ ...basePaper, examId: null, boardClassId: null }),
+    ).toThrow(BusinessRuleError);
+  });
+});
+
+describe('publish gate — the exhaustive fixture check', () => {
+  it('REFUSES a seeded paper by id, regardless of its file URL', () => {
+    const cleaned: PaperRecord = { ...basePaper, id: 'seed_paper_1582' };
+    expect(() => assertPublishable(cleaned)).toThrow(/seed fixture data/);
+  });
+
+  it('lets a real editor-created row through', () => {
+    expect(() => assertPublishable({ ...basePaper, id: 'clx9a8b7c6d5e4f3g2h1' })).not.toThrow();
   });
 });

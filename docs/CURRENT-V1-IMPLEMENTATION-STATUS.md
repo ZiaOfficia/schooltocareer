@@ -15,26 +15,53 @@ It distinguishes:
 
 The repository is not greenfield. Existing infrastructure must be preserved and extended.
 
-## Executive Verdict
-
-SchoolToCareer is beyond the original infrastructure-only stage, but the student-facing V1 is not complete.
-
-The repository has a strong and verified foundation for:
-
-- source acquisition
-- source history
-- data integrity
-- SEO safeguards
-- revalidation
-- deployment architecture
-- API and worker infrastructure
-
-The largest remaining gaps are product and semantic-trust work:
+## Status at a glance (2026-09-04)
 
 ```text
-Master search/product map
-    -> universal exam product
-    -> semantic fact engine
+Source monitoring                  COMPLETE
+Semantic fact extraction           COMPLETE
+ExtractedFact                      COMPLETE
+FactChange                         COMPLETE
+Fact review API                    COMPLETE
+Reviewer authentication            COMPLETE
+Atomic approval                    COMPLETE
+Audit                              COMPLETE
+Outbox/revalidation                COMPLETE
+Integrity gate                     COMPLETE
+Sitemap audit                      COMPLETE
+Publish-time fixture protection    COMPLETE
+Master Search Product Map          COMPLETE
+
+Pending fact changes               6
+Human dispositions                 PENDING
+Exam activation                    IN PROGRESS
+
+Admin UI                           NOT IMPLEMENTED
+Paper importer                     NOT IMPLEMENTED
+Board expansion                    FUTURE
+Lifecycle product                  FUTURE
+Universal search execution         FUTURE
+```
+
+## Executive Verdict
+
+The trust foundation is built. **The student-facing product is not, and it is
+blocked on human review rather than on engineering.**
+
+Complete and verified: source acquisition and history, the semantic fact engine,
+canonical ownership, reviewer authentication, atomic approval with stale-version
+protection, outbox revalidation, data-integrity and indexability safeguards, and
+the search/product map.
+
+The one thing standing between this repository and its first real page is six
+pending `FactChange` rows awaiting a named human decision. No further
+engineering changes that.
+
+```text
+six facts reviewed by a human
+    -> three exam identities completed
+    -> first indexable pages
+    -> universal exam product across the cohort
     -> paper product
     -> results/lifecycle
     -> boards
@@ -44,25 +71,29 @@ Master search/product map
     -> V1 completion audit
 ```
 
-V1 must not be declared complete until the selected high-value student search intents are served by useful, trustworthy, measurable pages and workflows.
+V1 must not be declared complete until the selected high-value student search
+intents are served by useful, trustworthy, measurable pages and workflows.
 
 ## Current Git State
 
 Current branch:
 
 ```text
-main
+feat/semantic-fact-engine
 ```
 
-Current HEAD and origin are aligned at the latest verified commit.
-
-The current worktree contains one untracked planning file:
+Two commits ahead of `main`:
 
 ```text
-IMPLEMENTATION_PLAN.md
+50df140  fix(web): stop linking to exam pages that do not exist
+9f9d1cd  feat(facts): semantic fact engine, with the login needed to reach it
 ```
 
-No unrelated implementation changes were made during this status audit.
+**The database is ahead of `main`.** The `20260904090000_semantic_facts`
+migration has been applied and six `FactChange` rows exist. A checkout of
+pre-merge `main` will find tables its code knows nothing about. Additive, so
+harmless — but it is the reverse of the deploy-ordering lesson recorded in
+`0d3435f`, so merge rather than leaving the branch parked.
 
 ## Completed Work
 
@@ -536,17 +567,43 @@ reads from the TTY with echo off — never argv, never an environment variable,
 never stdin from a pipe — and writes only the hash. The seed placeholder stays
 invalid.
 
-## Open risk: the 3000 seeded question papers
+## Seeded fixtures: isolated, not deleted
 
-`QuestionPaper` holds 3000 fabricated rows ("Question Paper 1582 — 2026") whose
-media points at `cdn.example.test`, plus 200 fabricated `Result` rows. All are
-`DRAFT`, so no student can see them and the integrity gate — which by design
-only inspects what a student could read — reports zero.
+`QuestionPaper` holds 3,000 fabricated rows ("Question Paper 1582 — 2026") with
+media on `cdn.example.test`, plus 200 fabricated `Result` rows and 300
+`ContentEntry` rows. All are `DRAFT`, and the integrity gate cannot see them
+because it only inspects what a student could read.
 
-That is correct today and a landmine tomorrow: a bulk publish would put 3000
-fake papers live and the gate would not have warned anyone first. Before Phase 3
-either purge them or extend the publish gate to refuse a paper whose current
-file resolves to a placeholder host.
+**They are kept deliberately.** They are the dataset the index design was
+measured against — `001_raw_constraints.sql` sizes `idx_paper_live_year` against
+"all 3,000 seeded rows", and `pnpm db:plans` reads them. Deleting them would
+throw away the performance baseline. This is the brief's "isolate it explicitly
+as test/fixture data" case, not its "remove it" case.
+
+Isolation is now three layers deep:
+
+1. every fixture row is `DRAFT`, so no student can reach one
+2. **`assertPublishable` refuses them at the moment of publish** (new)
+3. the integrity gate audits whatever did become published
+
+Layer 2 was the missing one, and it closes a real landmine: a bulk publish would
+have put 3,000 pages live promising downloads that resolve to a reserved TLD,
+with nothing warning anyone first.
+
+The check is by **id namespace**, not by URL. Every synthetic row carries
+`seed_<kind>_<key>` and nothing an editor creates can. That distinction is
+load-bearing: `pnpm data:purge-placeholder` has already NULLed the fabricated
+`officialUrl`s, so a URL-only guard caught **0 of 200** seeded results when
+measured against the live database. By id: **200 of 200**, and **3,000 of
+3,000** papers. `isPlaceholderUrl` is retained alongside it to catch a bad link
+pasted by hand into a genuine row.
+
+Verified against the live database after the change:
+
+```text
+DRAFT papers  3000: blocked 3000, would publish 0
+DRAFT results  200: blocked  200, would publish 0
+```
 
 ## Recommended V1 Roadmap
 
