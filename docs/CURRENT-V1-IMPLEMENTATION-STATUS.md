@@ -55,8 +55,8 @@ Five of the six values changed or were confirmed; one is now orphaned.
 | 1 | JEE Advanced | `EXAM_DATE` | `2026-05-17` | HIGH | **approve** |
 | 2 | GATE | `RESULT_DATE` | `2026-03-19` | HIGH | **approve** |
 | 3 | GATE | `EXAM_DATE` | `2026-02-07/2026-02-15` | MEDIUM | **approve** — was `2026-02-07` |
-| 4 | GATE | `APPLICATION_END` | `2025-10-07` | MEDIUM | **approve** — was `2025-09-25/2025-10-07` |
-| 5 | GATE | `APPLICATION_START` | `2025-08-28` | MEDIUM | **approve** — was `2025-08-25/2025-08-28` |
+| 4 | GATE | `APPLICATION_END` | `2025-10-07` | MEDIUM | **verify, then approve if confirmed** — was `2025-09-25/2025-10-07` |
+| 5 | GATE | `APPLICATION_START` | `2025-08-28` | MEDIUM | **verify, then approve if confirmed** — was `2025-08-25/2025-08-28` |
 | 6 | CUET UG | `EXAM_DATE` | `2026-05-30` | HIGH | **reject** — orphaned |
 
 Every value agrees with the official page, including the weekday column it
@@ -84,13 +84,23 @@ canonical ownership, reviewer authentication, atomic approval with stale-version
 protection, outbox revalidation, data-integrity and indexability safeguards, and
 the search/product map.
 
-The one thing standing between this repository and its first real page is six
-pending `FactChange` rows awaiting a named human decision. No further
-engineering changes that.
+Six pending `FactChange` rows await a named human decision, and nothing moves
+until they are resolved.
+
+**Resolving them does not by itself make any page indexable.** That framing
+appeared in an earlier draft of this document and was wrong. Approving a date
+populates `ExamEvent`; it does not supply `conductingBody`, `officialWebsite` or
+an overview, and `evaluateIndexability` requires those. A page becomes
+indexable only after identity, canonical event data, page completeness,
+provenance and the indexability gate all pass — each on its own evidence.
+
+The fact review is the first gate of several, not the last.
 
 ```text
 six facts reviewed by a human
-    -> three exam identities completed
+    -> exam identities verified and completed (separate evidence)
+    -> page completeness and provenance
+    -> indexability gate
     -> first indexable pages
     -> universal exam product across the cohort
     -> paper product
