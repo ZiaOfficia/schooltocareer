@@ -608,3 +608,38 @@ describe('a fixed extractor must be able to correct a change already in the queu
     });
   });
 });
+
+describe('an approved date carries its provenance onto the canonical row', () => {
+  it('writes the source URL to ExamEvent.officialUrl for a DATE fact', async () => {
+    // The integrity gate requires a published date to be traceable to
+    // something. Approving one used to leave officialUrl NULL, and the gate
+    // flagged five real approvals for exactly that — "the extractor said so"
+    // is not provenance a student can check.
+    const { service, applied } = buildHarness();
+
+    await asReviewer(() => service.approve('chg_1', {}));
+
+    expect(applied[0]).toMatchObject({
+      field: 'dateRange',
+      officialUrl: 'https://jeeadv.ac.in/',
+    });
+  });
+
+  it('still writes the approved VALUE for a URL fact, not the source page', async () => {
+    // The URL branch must be unaffected: when the fact itself is a link, the
+    // approved value is the link — not the page it was found on.
+    const { service, applied } = buildHarness({
+      detail: {
+        factType: 'OFFICIAL_APPLICATION_URL',
+        proposedValue: 'https://gate2026.iitg.ac.in/apply',
+      },
+    });
+
+    await asReviewer(() => service.approve('chg_1', {}));
+
+    expect(applied[0]).toMatchObject({
+      field: 'officialUrl',
+      officialUrl: 'https://gate2026.iitg.ac.in/apply',
+    });
+  });
+});

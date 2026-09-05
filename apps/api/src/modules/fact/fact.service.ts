@@ -417,7 +417,14 @@ export class FactService {
           field: owner.field,
           start: range?.start ?? null,
           end: range?.end ?? null,
-          officialUrl: owner.field === 'officialUrl' ? change.proposedValue : null,
+          // For a URL fact the approved value IS the URL. For a date fact it is
+          // the page the date was read from — which is the provenance the
+          // integrity gate requires, and the link the exam page renders as
+          // "Official notice".
+          officialUrl:
+            owner.field === 'officialUrl'
+              ? change.proposedValue
+              : change.extractedFact.source.url,
           isTentative: change.extractedFact.isTentative,
         },
         tx,

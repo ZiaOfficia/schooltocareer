@@ -465,10 +465,26 @@ export class FactRepository extends BaseRepository {
   ): Promise<{ eventId: string; updatedAt: Date }> {
     const client = asTx(tx);
 
+    /**
+     * A date carries its provenance with it.
+     *
+     * `officialUrl` used to be written only by the two URL fact types, so an
+     * approved date landed with NULL provenance and the integrity gate flagged
+     * it — correctly. Its rule is that a published date must be traceable to
+     * something, and "the extractor said so" is not traceable to a student.
+     *
+     * The URL branch still wins where the fact IS a URL, so an explicit
+     * OFFICIAL_APPLICATION_URL approval is unaffected.
+     */
     const data =
       input.field === 'officialUrl'
         ? { officialUrl: input.officialUrl }
-        : { startDate: input.start, endDate: input.end, isTentative: input.isTentative };
+        : {
+            startDate: input.start,
+            endDate: input.end,
+            isTentative: input.isTentative,
+            officialUrl: input.officialUrl,
+          };
 
     if (input.eventId) {
       const updated = await client.examEvent.update({
