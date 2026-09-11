@@ -17,8 +17,11 @@ import { EntityBadge, Eyebrow, Wrap, type EntityKind } from '@stc/ui';
  */
 
 export type IndexItem = {
-  /** Stable key and link target. */
-  href: string;
+  /**
+   * Link target, and the React key. `null` when the destination page is not
+   * built yet: the card renders unlinked rather than pointing at a 404.
+   */
+  href: string | null;
   title: string;
   /** One line under the title — a category, a state, a year. */
   meta?: string | null;
@@ -111,12 +114,9 @@ export function IndexPage({
         </div>
       ) : (
         <ul className="grid gap-px border border-rule bg-rule sm:grid-cols-2 lg:grid-cols-3">
-          {items.map((item) => (
-            <li key={item.href} className="bg-surface">
-              <Link
-                href={item.href}
-                className="flex h-full flex-col gap-1 p-3 no-underline hover:bg-row-hover"
-              >
+          {items.map((item) => {
+            const body = (
+              <>
                 <span className="text-[15px] font-semibold leading-snug text-ink">
                   {item.title}
                 </span>
@@ -130,9 +130,23 @@ export function IndexPage({
                     <span className="num text-[12px] text-ink-mute">{item.aside}</span>
                   ) : null}
                 </span>
-              </Link>
-            </li>
-          ))}
+              </>
+            );
+            return (
+              <li key={item.href ?? item.title} className="bg-surface">
+                {item.href ? (
+                  <Link
+                    href={item.href}
+                    className="flex h-full flex-col gap-1 p-3 no-underline hover:bg-row-hover"
+                  >
+                    {body}
+                  </Link>
+                ) : (
+                  <div className="flex h-full flex-col gap-1 p-3">{body}</div>
+                )}
+              </li>
+            );
+          })}
         </ul>
       )}
 

@@ -174,12 +174,12 @@ export default async function ExamPage({ params }: { params: Promise<Params> }) 
         : { confidence: 'official', sourceUrl: exam.officialWebsite }
       : { confidence: 'unsourced' };
 
+  // No category crumb: /exams/[category] has no route yet, so it rendered a
+  // 404 link here and a 404 `item` in the BreadcrumbList JSON-LD. Put it back
+  // when the category page exists.
   const trail = [
     { name: 'Home', path: ROUTES.home() },
     { name: 'Exams', path: ROUTES.exams() },
-    ...(exam.category
-      ? [{ name: exam.category.name, path: ROUTES.examCategory(exam.category.slug) }]
-      : []),
     { name: exam.name, path: exam.path },
   ];
 
@@ -285,13 +285,11 @@ export default async function ExamPage({ params }: { params: Promise<Params> }) 
                 Closes in {closingIn} {closingIn === 1 ? 'day' : 'days'}
               </StatusStamp>
             ) : null}
+            {/* A label, not a link, until /exams/[category] exists. */}
             {exam.category ? (
-              <Link
-                href={ROUTES.examCategory(exam.category.slug)}
-                className="border border-rule px-2 py-px font-data text-[10px] uppercase tracking-[0.09em] text-ink-soft no-underline hover:border-rule-hard"
-              >
+              <span className="border border-rule px-2 py-px font-data text-[10px] uppercase tracking-[0.09em] text-ink-soft">
                 {exam.category.name}
-              </Link>
+              </span>
             ) : null}
           </div>
 

@@ -30,7 +30,9 @@ export default async function BoardsIndex() {
   }
 
   const items: IndexItem[] = boards.map((board) => ({
-    href: board.path,
+    // No /board/[slug] route exists yet, so board.path is a 404. List the
+    // boards unlinked until the board hub is built, then pass board.path.
+    href: null,
     title: board.name,
     meta: board.state?.name ?? 'National',
     aside: board.shortName !== board.name ? board.shortName : null,
@@ -40,7 +42,7 @@ export default async function BoardsIndex() {
     <IndexPage
       kind="board"
       title="Boards"
-      lede="National and state school boards. Each opens onto its classes, subjects and papers."
+      lede="National and state school boards. Pages for each board are not built yet."
       items={items}
       unit="boards"
       failed={failed}
