@@ -5,6 +5,7 @@ import { ROUTES, SITE } from '@stc/constants';
 import type { ExamDetailDto, ExamEventDto } from '@stc/types';
 import {
   EntityBadge,
+  EntityMark,
   Eyebrow,
   FactGrid,
   LastUpdated,
@@ -12,8 +13,11 @@ import {
   Section,
   StatusStamp,
   Wrap,
+  type EntityKind,
 } from '@stc/ui';
 
+import { ArrowRightIcon, ArrowUpRightIcon, PlusIcon } from '@/components/icons';
+import { PageHero } from '@/components/page-hero';
 import { getExam } from '@/lib/api';
 import { EXAM_SECTIONS, EXAM_SECTION_SLUGS, type ExamSection } from '@/lib/exam-sections';
 import { JsonLd, breadcrumbSchema, examPageSchema, faqSchema } from '@/lib/seo/json-ld';
@@ -136,6 +140,18 @@ const SECTION_NOTE: Record<ExamSection, string> = {
   'answer-key': 'Official and unofficial',
 };
 
+/**
+ * Which entity mark each cluster card wears. A result is a result; the other
+ * three are documents the conducting body issues, so they share the paper mark
+ * — the same split the section route uses for its badge.
+ */
+const SECTION_KIND: Record<ExamSection, EntityKind> = {
+  'previous-year-papers': 'paper',
+  result: 'result',
+  'admit-card': 'paper',
+  'answer-key': 'paper',
+};
+
 const FREQUENCY_PHRASE: Record<string, string> = {
   ANNUAL: 'once a year',
   BIANNUAL: 'twice a year',
@@ -167,7 +183,8 @@ export default async function ExamPage({ params }: { params: Promise<Params> }) 
   // "Official" requires BOTH dates and a source to point at. Without either,
   // the honest badge is "Not sourced" — which is also what tells a student to
   // go and check the authority themselves.
-  const provenance: { confidence: 'official'; sourceUrl: string } | { confidence: 'tentative' | 'unsourced' } =
+  const provenance:
+    { confidence: 'official'; sourceUrl: string } | { confidence: 'tentative' | 'unsourced' } =
     events.length > 0 && exam.officialWebsite
       ? events.some((e) => e.isTentative)
         ? { confidence: 'tentative' }
@@ -236,6 +253,7 @@ export default async function ExamPage({ params }: { params: Promise<Params> }) 
     label: EXAM_SECTIONS[key].label,
     href: EXAM_SECTIONS[key].path(exam.slug),
     note: SECTION_NOTE[key],
+    kind: SECTION_KIND[key],
   }));
 
   return (
@@ -258,27 +276,11 @@ export default async function ExamPage({ params }: { params: Promise<Params> }) 
         ]}
       />
 
-      <Wrap>
-        {/* Breadcrumb leads; it places the page faster than the title does. */}
-        <nav aria-label="Breadcrumb" className="pt-5 text-[12.5px] text-ink-soft">
-          <ol className="flex flex-wrap items-center gap-x-1.5">
-            {trail.map((crumb, index) => (
-              <li key={crumb.path} className="flex items-center gap-1.5">
-                {index > 0 ? <span className="text-ink-mute">›</span> : null}
-                {index === trail.length - 1 ? (
-                  <span className="font-semibold text-ink">{crumb.name}</span>
-                ) : (
-                  <Link href={crumb.path} className="text-inherit no-underline hover:underline">
-                    {crumb.name}
-                  </Link>
-                )}
-              </li>
-            ))}
-          </ol>
-        </nav>
-
-        <header className="py-6">
-          <div className="flex flex-wrap items-center gap-2">
+      {/* Breadcrumb leads; it places the page faster than the title does. */}
+      <PageHero
+        trail={trail}
+        badges={
+          <>
             <EntityBadge kind="exam" />
             {isClosingSoon ? (
               <StatusStamp tone="urgent" dot>
@@ -286,55 +288,47 @@ export default async function ExamPage({ params }: { params: Promise<Params> }) 
               </StatusStamp>
             ) : null}
             {/* A label, not a link, until /exams/[category] exists. */}
-            {exam.category ? (
-              <span className="border border-rule px-2 py-px font-data text-[10px] uppercase tracking-[0.09em] text-ink-soft">
-                {exam.category.name}
-              </span>
-            ) : null}
-          </div>
-
-          <h1 className="mt-3 text-[clamp(28px,5vw,42px)] leading-[1.08] tracking-tight">
-            {exam.name} {year}
-          </h1>
-
-          {exam.fullName ? (
-            <p className="mt-1 text-[15px] text-ink-mute">{exam.fullName}</p>
-          ) : null}
-
-          <p className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-[13px] text-ink-soft">
+            {exam.category ? <span className="chip">{exam.category.name}</span> : null}
+          </>
+        }
+        title={`${exam.name} ${year}`}
+        subtitle={exam.fullName}
+        meta={
+          <>
             {exam.conductingBody ? (
               <span>
                 Conducted by <strong className="text-ink">{exam.conductingBody}</strong>
               </span>
             ) : null}
             <LastUpdated iso={exam.updatedAt} />
-          </p>
-
-          {/* The four dates, above the fold. This is the answer for most
+          </>
+        }
+      >
+        {/* The four dates, above the fold. This is the answer for most
               visitors, and burying it under prose is the commonest mistake on
               competing exam pages. */}
-          <div className="mt-5">
-            <FactGrid
-              items={[
-                {
-                  label: 'Registration',
-                  value: deadline
-                    ? `Ends ${formatDate(deadline)}`
-                    : applicationOpens
-                      ? `Opens ${formatDate(eventDate(applicationOpens))}`
-                      : 'To be announced',
-                  tone: isClosingSoon ? 'urgent' : 'plain',
-                },
-                { label: 'Exam', value: formatDate(eventDate(examDate)) },
-                { label: 'Result', value: formatDate(eventDate(result)) },
-                {
-                  label: 'Cycle',
-                  value: cycle?.sessionName ? `${year} · ${cycle.sessionName}` : String(year),
-                },
-              ]}
-            />
+        <div>
+          <FactGrid
+            items={[
+              {
+                label: 'Registration',
+                value: deadline
+                  ? `Ends ${formatDate(deadline)}`
+                  : applicationOpens
+                    ? `Opens ${formatDate(eventDate(applicationOpens))}`
+                    : 'To be announced',
+                tone: isClosingSoon ? 'urgent' : 'plain',
+              },
+              { label: 'Exam', value: formatDate(eventDate(examDate)) },
+              { label: 'Result', value: formatDate(eventDate(result)) },
+              {
+                label: 'Cycle',
+                value: cycle?.sessionName ? `${year} · ${cycle.sessionName}` : String(year),
+              },
+            ]}
+          />
 
-            {/* Provenance is required by the component's type, so a page
+          {/* Provenance is required by the component's type, so a page
                 physically cannot render dates without declaring where they
                 came from.
 
@@ -343,26 +337,30 @@ export default async function ExamPage({ params }: { params: Promise<Params> }) 
                 — returned 'official' for an exam with no events at all, since
                 `[].some()` is false. That stamped a green Official badge on a
                 page whose dates did not exist. */}
-            {provenance.confidence === 'official' ? (
-              <Provenance
-                className="mt-2"
-                confidence="official"
-                sourceUrl={provenance.sourceUrl}
-                sourceName={exam.conductingBody}
-              />
-            ) : (
-              <Provenance
-                className="mt-2"
-                confidence={provenance.confidence}
-                sourceName={exam.conductingBody}
-              />
-            )}
-          </div>
-        </header>
+          {provenance.confidence === 'official' ? (
+            <Provenance
+              className="mt-4"
+              confidence="official"
+              sourceUrl={provenance.sourceUrl}
+              sourceName={exam.conductingBody}
+            />
+          ) : (
+            <Provenance
+              className="mt-4"
+              confidence={provenance.confidence}
+              sourceName={exam.conductingBody}
+            />
+          )}
+        </div>
+      </PageHero>
 
+      <Wrap>
         {exam.overview ? (
           <Section title={`About ${exam.shortName}`} major>
-            <div className="max-w-[70ch] text-[15.5px] leading-relaxed text-ink-soft">
+            <div
+              data-reveal
+              className="card max-w-[78ch] p-6 text-[16px] leading-relaxed text-ink-soft"
+            >
               {exam.overview}
             </div>
           </Section>
@@ -376,15 +374,16 @@ export default async function ExamPage({ params }: { params: Promise<Params> }) 
           lede="Each section is a full page, kept current with the official notification."
           major
         >
-          <ul className="grid gap-px border border-rule bg-rule sm:grid-cols-2 lg:grid-cols-4">
+          <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {clusterLinks.map((link) => (
-              <li key={link.href} className="bg-surface">
-                <Link
-                  href={link.href}
-                  className="flex h-full flex-col gap-1 p-3 no-underline hover:bg-row-hover"
-                >
-                  <span className="text-[14px] font-semibold text-ink">{link.label}</span>
-                  <span className="text-[12.5px] text-ink-mute">{link.note}</span>
+              <li key={link.href} data-reveal>
+                <Link href={link.href} data-tilt className="card flex h-full flex-col gap-3 p-5">
+                  <EntityMark kind={link.kind} />
+                  <span className="mt-1 flex items-center justify-between gap-2 font-display text-[16.5px] font-semibold text-ink">
+                    {link.label}
+                    <ArrowRightIcon width={16} height={16} className="card-arrow text-ink-mute" />
+                  </span>
+                  <span className="text-[13.5px] text-ink-soft">{link.note}</span>
                 </Link>
               </li>
             ))}
@@ -396,21 +395,32 @@ export default async function ExamPage({ params }: { params: Promise<Params> }) 
           lede={`All announced ${exam.shortName} ${year} dates. Tentative entries are labelled — the agency has announced them but not finalised them.`}
         >
           {events.length === 0 ? (
-            <p className="border border-rule bg-paper p-4 text-[14px] text-ink-soft">
+            <p data-reveal className="card border-dashed p-5 text-[14.5px] text-ink-soft">
               {exam.conductingBody ?? 'The conducting body'} has not published the {year} schedule
               yet. This page updates when the official notification is released.
             </p>
           ) : (
-            <ol className="border-t-2 border-rule-hard">
+            // A timeline: the rail and its nodes are drawn by the list items
+            // themselves, so it is still an ordinary ordered list underneath.
+            <ol className="relative ml-2 border-l-2 border-rule pl-6">
               {events.map((event) => {
                 const until = daysUntil(event.endDate ?? event.startDate);
                 return (
                   <li
                     key={event.id}
-                    className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 border-b border-rule py-2.5"
+                    data-reveal
+                    className="card relative mb-3 flex flex-wrap items-center justify-between gap-x-4 gap-y-2 px-5 py-4"
                   >
+                    <span
+                      aria-hidden="true"
+                      className="absolute -left-[33px] top-1/2 h-3 w-3 -translate-y-1/2 rounded-full border-2 border-paper"
+                      style={{
+                        background:
+                          'linear-gradient(135deg, var(--color-brand), var(--color-cyan))',
+                      }}
+                    />
                     <div className="min-w-0">
-                      <span className="text-[14.5px] font-semibold text-ink">{event.title}</span>
+                      <span className="text-[15px] font-semibold text-ink">{event.title}</span>
                       {event.isTentative ? (
                         <StatusStamp tone="wait" className="ml-2 align-middle">
                           Tentative
@@ -433,7 +443,7 @@ export default async function ExamPage({ params }: { params: Promise<Params> }) 
                         ? ` – ${formatDate(event.endDate)}`
                         : ''}
                       {until !== null && until >= 0 && until <= 30 ? (
-                        <span className="ml-2 text-urgent">in {until}d</span>
+                        <span className="ml-2 font-semibold text-urgent">in {until}d</span>
                       ) : null}
                     </div>
                   </li>
@@ -447,8 +457,9 @@ export default async function ExamPage({ params }: { params: Promise<Params> }) 
           title="Previous year question papers"
           lede="Where we hold them: year-wise and shift-wise PDFs, free and without registration. Solutions are included where an official answer key was published."
           actions={
-            <Link href={ROUTES.examPapers(exam.slug)} className="text-[13.5px]">
-              All {exam.shortName} papers →
+            <Link href={ROUTES.examPapers(exam.slug)} className="btn btn-ghost">
+              All {exam.shortName} papers
+              <ArrowRightIcon width={16} height={16} />
             </Link>
           }
         >
@@ -466,15 +477,16 @@ export default async function ExamPage({ params }: { params: Promise<Params> }) 
               An anchor is also the better answer on its own merits: a per-year
               page for an exam we hold no papers for would be a thin page, and
               there would be one for every exam-year pair. */}
-          <ul className="grid gap-px border border-rule bg-rule sm:grid-cols-3 lg:grid-cols-6">
+          <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
             {exam.years.slice(0, 6).map((y) => (
-              <li key={y.id} className="bg-surface">
+              <li key={y.id} data-reveal>
                 <Link
                   href={`${ROUTES.examPapers(exam.slug)}#year-${y.year}`}
-                  className="flex flex-col gap-0.5 p-3 no-underline hover:bg-row-hover"
+                  data-tilt
+                  className="card flex flex-col gap-0.5 p-4"
                 >
-                  <span className="num text-[15px] font-bold text-ink">{y.year}</span>
-                  <span className="text-[12px] text-ink-mute">
+                  <span className="num text-[20px] font-bold text-ink">{y.year}</span>
+                  <span className="text-[12.5px] text-ink-mute">
                     {y.sessionName ?? 'All sessions'}
                   </span>
                 </Link>
@@ -487,35 +499,49 @@ export default async function ExamPage({ params }: { params: Promise<Params> }) 
           title="Frequently asked questions"
           lede="Answered here rather than linked away. If a question cannot be answered honestly yet, it is not listed."
         >
-          <dl className="border-t-2 border-rule-hard">
-            {faqs.map((faq) => (
-              <div key={faq.question} className="border-b border-rule py-3">
-                <dt className="text-[15px] font-semibold text-ink">{faq.question}</dt>
-                <dd className="mt-1 max-w-[70ch] text-[14px] text-ink-soft">{faq.answer}</dd>
-              </div>
+          {/* Native <details>, so every answer is in the HTML a crawler reads
+              and each one opens without JavaScript. The first starts open:
+              it is the exam date, the question most visitors arrived with. */}
+          <div className="grid gap-3">
+            {faqs.map((faq, index) => (
+              <details
+                key={faq.question}
+                data-reveal
+                open={index === 0}
+                className="faq card px-5 py-4"
+              >
+                <summary className="flex items-center justify-between gap-4 text-[15.5px] font-semibold text-ink">
+                  {faq.question}
+                  <PlusIcon className="faq-mark shrink-0 text-brand" />
+                </summary>
+                <p className="mt-3 max-w-[72ch] text-[14.5px] text-ink-soft">{faq.answer}</p>
+              </details>
             ))}
-          </dl>
+          </div>
         </Section>
 
         <Section title="Official source">
-          <Eyebrow>Always confirm before a deadline</Eyebrow>
-          <p className="mt-2 max-w-[70ch] text-[14px] text-ink-soft">
-            {exam.conductingBody
-              ? `${exam.conductingBody} is the authority for ${exam.name}.`
-              : `The conducting body for ${exam.name} is not recorded yet.`}{' '}
-            Everything on this page is compiled from official notifications and may lag a same-day
-            change.
-          </p>
-          {exam.officialWebsite ? (
-            <a
-              href={exam.officialWebsite}
-              rel="nofollow noopener"
-              target="_blank"
-              className="mt-3 inline-block border-2 border-rule-hard px-3 py-1.5 text-[13.5px] font-semibold no-underline hover:bg-ink hover:text-paper"
-            >
-              Visit {exam.conductingBody ?? 'official website'} →
-            </a>
-          ) : null}
+          <div data-reveal className="card p-6">
+            <Eyebrow>Always confirm before a deadline</Eyebrow>
+            <p className="mt-2 max-w-[70ch] text-[14.5px] text-ink-soft">
+              {exam.conductingBody
+                ? `${exam.conductingBody} is the authority for ${exam.name}.`
+                : `The conducting body for ${exam.name} is not recorded yet.`}{' '}
+              Everything on this page is compiled from official notifications and may lag a same-day
+              change.
+            </p>
+            {exam.officialWebsite ? (
+              <a
+                href={exam.officialWebsite}
+                rel="nofollow noopener"
+                target="_blank"
+                className="btn btn-primary mt-4"
+              >
+                Visit {exam.conductingBody ?? 'official website'}
+                <ArrowUpRightIcon width={16} height={16} />
+              </a>
+            ) : null}
+          </div>
         </Section>
       </Wrap>
     </>

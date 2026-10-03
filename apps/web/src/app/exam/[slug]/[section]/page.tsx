@@ -5,6 +5,8 @@ import { ROUTES, SITE } from '@stc/constants';
 import type { ExamDetailDto, ExamEventDto, PaperListItemDto, ResultListItemDto } from '@stc/types';
 import { EntityBadge, LastUpdated, Provenance, Section, StatusStamp, Wrap } from '@stc/ui';
 
+import { ArrowUpRightIcon } from '@/components/icons';
+import { PageHero } from '@/components/page-hero';
 import { ApiError, getExam, listPapers, listResults } from '@/lib/api';
 import { EXAM_SECTIONS, SECTION_EVENT, isExamSection, type ExamSection } from '@/lib/exam-sections';
 import { JsonLd, breadcrumbSchema, examPageSchema } from '@/lib/seo/json-ld';
@@ -84,7 +86,12 @@ export async function generateMetadata({ params }: { params: Promise<Params> }) 
 
   return buildMetadata({
     template: 'exam',
-    values: { name: exam.name, shortName: exam.shortName, year, siteName: SITE.NAME },
+    values: {
+      name: exam.name,
+      shortName: exam.shortName,
+      year,
+      siteName: SITE.NAME,
+    },
     path: config.path(exam.slug),
     title: heading,
     description: `${heading}. ${config.blurb}`,
@@ -161,95 +168,85 @@ export default async function ExamSectionPage({ params }: { params: Promise<Para
         ]}
       />
 
-      <Wrap>
-        <nav aria-label="Breadcrumb" className="pt-5 text-[12.5px] text-ink-soft">
-          <ol className="flex flex-wrap items-center gap-x-1.5">
-            {trail.map((crumb, i) => (
-              <li key={crumb.path} className="flex items-center gap-1.5">
-                {i > 0 ? <span className="text-ink-mute">›</span> : null}
-                {i === trail.length - 1 ? (
-                  <span className="font-semibold text-ink">{crumb.name}</span>
-                ) : (
-                  <Link href={crumb.path} className="text-inherit no-underline hover:underline">
-                    {crumb.name}
-                  </Link>
-                )}
-              </li>
-            ))}
-          </ol>
-        </nav>
-
-        <header className="py-6">
+      <PageHero
+        trail={trail}
+        badges={
           <EntityBadge kind={section === 'result' ? 'result' : 'paper'} label={config.label} />
-          <h1 className="mt-3 text-[clamp(26px,5vw,40px)] leading-[1.08] tracking-tight">
-            {heading}
-          </h1>
-          <p className="mt-3 max-w-[66ch] text-[15.5px] text-ink-soft">{config.blurb}</p>
-          {/* `conductingBody` is nullable — "we have not sourced this yet" is a
-              real state, and the hub page already handles it. This did not,
-              and rendered a bare "Conducted by" followed by nothing on every
-              exam whose authority is not yet recorded. Today that is all of
-              them, so the string was on all 80 cluster pages. */}
-          <p className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-[13px] text-ink-soft">
+        }
+        title={heading}
+        lede={config.blurb}
+        meta={
+          // `conductingBody` is nullable — "we have not sourced this yet" is a
+          // real state, and the hub page already handles it. This did not,
+          // and rendered a bare "Conducted by" followed by nothing on every
+          // exam whose authority is not yet recorded. Today that is all of
+          // them, so the string was on all 80 cluster pages.
+          <>
             {exam.conductingBody ? (
               <span>
                 Conducted by <strong className="text-ink">{exam.conductingBody}</strong>
               </span>
             ) : null}
             <LastUpdated iso={exam.updatedAt} />
-          </p>
-        </header>
+          </>
+        }
+      />
 
+      <Wrap>
         {/* The date this page exists to answer, stated once and sourced. */}
         {SECTION_EVENT[section as ExamSection] ? (
           <Section title={`${config.label} date`} major>
-            <div className="flex flex-wrap items-center gap-3">
-              <span className="num text-[22px] font-bold">{formatDate(date)}</span>
-              {event?.isTentative ? (
-                <StatusStamp tone="wait">Tentative</StatusStamp>
-              ) : date ? (
-                <StatusStamp tone="ok" dot>
-                  Announced
-                </StatusStamp>
-              ) : (
-                <StatusStamp tone="quiet">Awaited</StatusStamp>
-              )}
-            </div>
-            {/* "Estimated" used to be the no-date case, which claims an
+            <div data-reveal className="card p-6">
+              <div className="flex flex-wrap items-center gap-3">
+                <span className="num text-[clamp(24px,4vw,32px)] font-bold">
+                  {formatDate(date)}
+                </span>
+                {event?.isTentative ? (
+                  <StatusStamp tone="wait">Tentative</StatusStamp>
+                ) : date ? (
+                  <StatusStamp tone="ok" dot>
+                    Announced
+                  </StatusStamp>
+                ) : (
+                  <StatusStamp tone="quiet">Awaited</StatusStamp>
+                )}
+              </div>
+              {/* "Estimated" used to be the no-date case, which claims an
                 analysis we never made — the Estimated badge reads "our estimate
                 from previous years". With no date and no source the honest
                 badge is "Not sourced". And "official" now requires a URL by
                 type, so it cannot be claimed with nothing to link to. */}
-            {sourceUrl && date ? (
-              event?.isTentative ? (
-                <Provenance
-                  className="mt-3"
-                  confidence="tentative"
-                  sourceUrl={sourceUrl}
-                  sourceName={exam.conductingBody}
-                />
+              {sourceUrl && date ? (
+                event?.isTentative ? (
+                  <Provenance
+                    className="mt-3"
+                    confidence="tentative"
+                    sourceUrl={sourceUrl}
+                    sourceName={exam.conductingBody}
+                  />
+                ) : (
+                  <Provenance
+                    className="mt-3"
+                    confidence="official"
+                    sourceUrl={sourceUrl}
+                    sourceName={exam.conductingBody}
+                  />
+                )
               ) : (
                 <Provenance
                   className="mt-3"
-                  confidence="official"
-                  sourceUrl={sourceUrl}
+                  confidence="unsourced"
                   sourceName={exam.conductingBody}
                 />
-              )
-            ) : (
-              <Provenance
-                className="mt-3"
-                confidence="unsourced"
-                sourceName={exam.conductingBody}
-              />
-            )}
-            {!date ? (
-              <p className="mt-3 max-w-[66ch] text-[14px] text-ink-soft">
-                {exam.conductingBody ?? 'The conducting body'} has not announced this yet. This
-                page is updated when the official notification is released — it does not carry a
-                guessed date.
-              </p>
-            ) : null}
+              )}
+              {!date ? (
+                <p className="mt-3 max-w-[66ch] text-[14px] text-ink-soft">
+                  {exam.conductingBody ?? 'The conducting body'} has not announced this yet. This
+                  page is updated when the official notification is released — it does not carry a
+                  guessed date.
+                </p>
+              ) : null}
+            </div>
           </Section>
         ) : null}
 
@@ -259,7 +256,7 @@ export default async function ExamSectionPage({ params }: { params: Promise<Para
             lede={`${papers.length > 0 ? `${papers.length} papers` : 'Papers'} for ${exam.shortName}, newest first.`}
           >
             {papers.length === 0 ? (
-              <p className="border border-dashed border-rule-hard bg-paper p-4 text-[14px] text-ink-soft">
+              <p data-reveal className="card border-dashed p-5 text-[14.5px] text-ink-soft">
                 No papers are published for {exam.shortName} yet.
               </p>
             ) : (
@@ -268,24 +265,25 @@ export default async function ExamSectionPage({ params }: { params: Promise<Para
               // would resolve to the top of the page, which is the quiet
               // version of the dead link they replaced.
               groupByYear(papers).map(([year, forYear]) => (
-                <div key={year} id={`year-${year}`} className="mb-5 scroll-mt-4">
-                  <h3 className="mb-2 num text-[15px] font-bold text-ink">
+                // scroll-mt clears the sticky header, or the year heading an
+                // anchor jumps to would land underneath it.
+                <div key={year} id={`year-${year}`} className="mb-8 scroll-mt-24">
+                  <h3 data-reveal className="mb-3 num text-[20px] font-bold text-ink">
                     {year}
-                    <span className="ml-2 font-normal text-[12.5px] text-ink-mute">
+                    <span className="ml-2 font-normal text-[13px] text-ink-mute">
                       {forYear.length} {forYear.length === 1 ? 'paper' : 'papers'}
                     </span>
                   </h3>
-                  <ul className="grid gap-px border border-rule bg-rule sm:grid-cols-2">
+                  <ul className="grid gap-3 sm:grid-cols-2">
                     {forYear.map((paper) => (
-                      <li key={paper.id} className="bg-surface">
+                      <li key={paper.id} data-reveal>
                         <Link
                           href={paper.path}
-                          className="flex flex-col gap-1 p-3 no-underline hover:bg-row-hover"
+                          data-tilt
+                          className="card flex flex-col gap-1.5 p-4"
                         >
-                          <span className="text-[14.5px] font-semibold text-ink">
-                            {paper.title}
-                          </span>
-                          <span className="num text-[12px] text-ink-mute">
+                          <span className="text-[15px] font-semibold text-ink">{paper.title}</span>
+                          <span className="num text-[12.5px] text-ink-mute">
                             {paper.shift ? `${paper.shift}` : 'All shifts'}
                             {paper.hasSolution ? ' · solved' : ''}
                           </span>
@@ -300,19 +298,26 @@ export default async function ExamSectionPage({ params }: { params: Promise<Para
         ) : null}
 
         {section === 'result' ? (
-          <Section title="Declared results" lede={`${exam.shortName} results we hold, newest first.`}>
+          <Section
+            title="Declared results"
+            lede={`${exam.shortName} results we hold, newest first.`}
+          >
             {results.length === 0 ? (
-              <p className="border border-dashed border-rule-hard bg-paper p-4 text-[14px] text-ink-soft">
+              <p data-reveal className="card border-dashed p-5 text-[14.5px] text-ink-soft">
                 No results are published for {exam.shortName} yet.
               </p>
             ) : (
-              <ul className="border-t-2 border-rule-hard">
+              <ul className="grid gap-3">
                 {results.map((result) => (
                   <li
                     key={result.id}
-                    className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 border-b border-rule py-2.5"
+                    data-reveal
+                    className="card flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 px-5 py-4"
                   >
-                    <Link href={result.path} className="text-[14.5px] font-semibold no-underline">
+                    <Link
+                      href={result.path}
+                      className="text-[15px] font-semibold no-underline hover:underline"
+                    >
                       {result.title}
                     </Link>
                     <span className="num text-[13px] text-ink-soft">
@@ -326,23 +331,22 @@ export default async function ExamSectionPage({ params }: { params: Promise<Para
         ) : null}
 
         <Section title={`More about ${exam.shortName}`}>
-          <ul className="grid gap-px border border-rule bg-rule sm:grid-cols-2 lg:grid-cols-4">
-            <li className="bg-surface">
-              <Link href={exam.path} className="block p-3 no-underline hover:bg-row-hover">
-                <span className="text-[14px] font-semibold text-ink">Overview</span>
-                <span className="mt-0.5 block text-[12.5px] text-ink-mute">Dates and summary</span>
+          <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <li data-reveal>
+              <Link href={exam.path} data-tilt className="card block h-full p-5">
+                <span className="font-display text-[16px] font-semibold text-ink">Overview</span>
+                <span className="mt-1 block text-[13.5px] text-ink-soft">Dates and summary</span>
               </Link>
             </li>
             {Object.entries(EXAM_SECTIONS)
               .filter(([key]) => key !== section)
               .map(([key, cfg]) => (
-                <li key={key} className="bg-surface">
-                  <Link
-                    href={cfg.path(exam.slug)}
-                    className="block p-3 no-underline hover:bg-row-hover"
-                  >
-                    <span className="text-[14px] font-semibold text-ink">{cfg.label}</span>
-                    <span className="mt-0.5 block text-[12.5px] text-ink-mute">
+                <li key={key} data-reveal>
+                  <Link href={cfg.path(exam.slug)} data-tilt className="card block h-full p-5">
+                    <span className="font-display text-[16px] font-semibold text-ink">
+                      {cfg.label}
+                    </span>
+                    <span className="mt-1 block text-[13.5px] text-ink-soft">
                       {cfg.label === 'Previous year papers' ? 'Year-wise PDFs' : `${year} dates`}
                     </span>
                   </Link>
@@ -353,24 +357,25 @@ export default async function ExamSectionPage({ params }: { params: Promise<Para
 
         {exam.officialWebsite ? (
           <Section title="Official source">
-            <p className="max-w-[70ch] text-[14px] text-ink-soft">
-              {exam.conductingBody
-                ? `${exam.conductingBody} is the authority for ${exam.name}.`
-                : `This is the official site for ${exam.name}.`}{' '}
-              Confirm anything on this page against it before acting on a deadline.
-            </p>
-            <a
-              href={exam.officialWebsite}
-              rel="nofollow noopener"
-              target="_blank"
-              className="mt-3 inline-block border-2 border-rule-hard px-3 py-1.5 text-[13.5px] font-semibold no-underline hover:bg-ink hover:text-paper"
-            >
-              Visit {exam.conductingBody ?? 'official website'} →
-            </a>
+            <div data-reveal className="card p-6">
+              <p className="max-w-[70ch] text-[14.5px] text-ink-soft">
+                {exam.conductingBody
+                  ? `${exam.conductingBody} is the authority for ${exam.name}.`
+                  : `This is the official site for ${exam.name}.`}{' '}
+                Confirm anything on this page against it before acting on a deadline.
+              </p>
+              <a
+                href={exam.officialWebsite}
+                rel="nofollow noopener"
+                target="_blank"
+                className="btn btn-primary mt-4"
+              >
+                Visit {exam.conductingBody ?? 'official website'}
+                <ArrowUpRightIcon width={16} height={16} />
+              </a>
+            </div>
           </Section>
         ) : null}
-
-        <div className="h-10" />
       </Wrap>
     </>
   );

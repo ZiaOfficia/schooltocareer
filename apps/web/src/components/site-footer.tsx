@@ -39,18 +39,31 @@ const GROUPS = [
 
 export function SiteFooter() {
   return (
-    <footer className="mt-12 border-t-[3px] border-rule-hard bg-surface">
-      <Wrap className="py-10">
-        <div className="grid grid-cols-2 gap-8 sm:grid-cols-4">
+    <footer className="night hero-bg mt-16">
+      <Wrap className="py-14">
+        <div className="grid gap-10 md:grid-cols-[1.4fr_1fr_1fr]">
+          <div data-reveal>
+            <Link
+              href={ROUTES.home()}
+              className="font-display text-[20px] font-bold tracking-tight text-ink no-underline"
+            >
+              SchoolTo<span className="gradient-text">Career</span>
+            </Link>
+            <p className="mt-3 max-w-[38ch] text-[14px] text-ink-soft">{SITE.TAGLINE}</p>
+          </div>
+
           {GROUPS.map((group) => (
-            <div key={group.title}>
-              <h2 className="font-data text-[10px] font-semibold uppercase tracking-[0.14em] text-ink-mute">
+            <div key={group.title} data-reveal>
+              <h2 className="font-data text-[11px] font-semibold uppercase tracking-[0.16em] text-ink-mute">
                 {group.title}
               </h2>
-              <ul className="mt-3 space-y-1.5 text-[13.5px]">
+              <ul className="mt-4 space-y-2.5 text-[14px]">
                 {group.links.map((link) => (
                   <li key={link.href}>
-                    <Link href={link.href} className="text-ink-soft no-underline hover:text-link hover:underline">
+                    <Link
+                      href={link.href}
+                      className="text-ink-soft no-underline hover:text-ink hover:underline"
+                    >
                       {link.label}
                     </Link>
                   </li>
@@ -66,13 +79,16 @@ export function SiteFooter() {
           stale has a legitimate grievance. Saying plainly that the agency is
           authoritative is both honest and the correct legal posture.
         */}
-        <p className="mt-8 max-w-[80ch] border-l-2 border-rule-hard pl-4 text-[12.5px] text-ink-soft">
+        <p
+          data-reveal
+          className="glass mt-10 max-w-[86ch] rounded-[var(--radius-tile)] p-4 text-[13px] leading-relaxed text-ink-soft"
+        >
           {SITE.NAME} is an independent education portal. Exam dates, eligibility and results are
           compiled from official notifications and can change without notice. Always confirm against
           the conducting body&rsquo;s official website before acting on a deadline.
         </p>
 
-        <p className="mt-6 font-data text-[11px] text-ink-mute">
+        <p className="mt-8 border-t border-rule pt-6 font-data text-[11.5px] text-ink-mute">
           © {new Date().getFullYear()} {SITE.NAME} · {SITE.ORIGIN.replace('https://', '')}
         </p>
       </Wrap>
