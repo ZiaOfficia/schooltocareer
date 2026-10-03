@@ -79,7 +79,13 @@ function buildHarness(options: {
   /** `updatedAt` the row actually has when the approval transaction runs. */
   liveVersion?: Date | null;
   examYearId?: string | null;
+  /** The cycle the exam is on now. Defaults to the year the fixtures use. */
+  currentCycleYear?: number;
+  /** The cycle the source page is bound to in the registry. */
+  boundCycleYear?: number;
 } = {}): Harness {
+  const currentCycleYear = options.currentCycleYear ?? Y;
+  const boundCycleYear = options.boundCycleYear ?? Y;
   const published: OutboxMessage[] = [];
   const changes: Array<Record<string, unknown>> = [];
   const applied: Array<Record<string, unknown>> = [];
@@ -96,7 +102,8 @@ function buildHarness(options: {
     examId: 'exam_jeeadv',
     examSlug: 'jee-advanced',
     examYearId: options.examYearId === undefined ? 'year_1' : options.examYearId,
-    examYear: Y,
+    examYear: currentCycleYear,
+    boundCycleYear,
   };
 
   /**
@@ -187,6 +194,7 @@ function buildHarness(options: {
     findExamContext: vi.fn(async () => ({
       slug: 'jee-advanced',
       examYearId: options.examYearId === undefined ? 'year_1' : options.examYearId,
+      examYear: currentCycleYear,
     })),
     runInTransaction: vi.fn(async (fn) => fn('TX')),
     metrics: vi.fn(async () => ({ observations: 0, byStatus: [], byRisk: [], pendingOldestAt: null })),
@@ -206,7 +214,9 @@ function buildHarness(options: {
 
   const service = new FactService({
     repository,
-    bindings: [{ url: 'https://jeeadv.ac.in/', watchesExamSlug: 'jee-advanced' }],
+    bindings: [
+      { url: 'https://jeeadv.ac.in/', watchesExamSlug: 'jee-advanced', watchesCycleYear: boundCycleYear },
+    ],
     queue,
     cache: new MemoryCacheProvider(),
     logger: createLogger({ level: 'silent', pretty: false, service: 'test' }),
@@ -281,6 +291,24 @@ describe('detect — a changed source is not a changed fact', () => {
     await service.detect();
     // A change nobody can ever apply is queue noise, not a safeguard.
     expect(changes).toHaveLength(0);
+  });
+
+  it('skips a page bound to a different cycle from the exam, and counts it', async () => {
+    // The rollover case: the exam has moved to next year while the official
+    // site still lists this year's schedule. Every date on it is real, and
+    // every one would be wrong for the new cycle.
+    const { service, changes, repository } = buildHarness({
+      body: BODY_AFTER,
+      currentCycleYear: Y + 1,
+      boundCycleYear: Y,
+    });
+    const tally = await service.detect();
+
+    expect(changes).toHaveLength(0);
+    expect(tally.offCycle).toBe(1);
+    expect(tally.observations).toBe(0);
+    // Skipped before anything is recorded, not filtered afterwards.
+    expect(repository.upsertFact).not.toHaveBeenCalled();
   });
 });
 
@@ -375,6 +403,17 @@ describe('approve — canonical writes', () => {
 
     expect(applied[0]?.['start']).toEqual(new Date(`${Y}-06-24T00:00:00.000Z`));
     expect(applied[0]?.['end']).toEqual(new Date(`${Y}-06-24T00:00:00.000Z`));
+  });
+
+  it('refuses a change whose page spoke about a different cycle from the current one', async () => {
+    // Queued while the exam was on one cycle, approved after it rolled to the
+    // next: without this the old year's date would land on the new cycle.
+    const { service, applied } = buildHarness({ currentCycleYear: Y + 1, boundCycleYear: Y });
+
+    await expect(asReviewer(() => service.approve('chg_1', {}))).rejects.toThrow(
+      /about the \d{4} cycle/,
+    );
+    expect(applied).toHaveLength(0);
   });
 
   it('refuses an approval that nobody signed', async () => {

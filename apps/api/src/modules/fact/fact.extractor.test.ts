@@ -67,6 +67,80 @@ describe('htmlToText', () => {
     const text = htmlToText('<script>var d = "23 June 2026";</script><p>Nothing here</p>');
     expect(text).not.toContain('23 June');
   });
+
+  it('keeps an ordinal suffix attached to its day', () => {
+    // GATE 2027's markup. As a cell boundary this read "14 | th | August".
+    expect(htmlToText('<td>14<sup>th</sup> August 2026</td>')).toContain('14th August 2026');
+  });
+
+  it('drops struck-through text, which the authority has withdrawn', () => {
+    const text = htmlToText(
+      '<td><del><span>21<sup>st</sup> September 2026</span></del><br><span>5<sup>th</sup> October 2026</span></td>',
+    );
+    expect(text).not.toContain('September');
+    expect(text).toContain('5th October 2026');
+  });
+});
+
+/**
+ * The GATE 2027 IMPORTANT DATES table, as IIT Madras published it on
+ * 2026-10-03 — trimmed to the rows that matter, markup kept as served.
+ *
+ * Two things about it broke the v1 extractor outright: every day carries a
+ * <sup> ordinal, and revised deadlines keep the old dates struck through in
+ * <del> ahead of the new one.
+ */
+const GATE_2027_TABLE = `
+<table><tr><th>Activity</th><th>Date*</th><th>Day</th></tr>
+<tr><td><span>Opening Date of <a href="/guideline/"> GATE Online Application Processing System (GOAPS) </a></span></td>
+<td><del><span>14<sup>th</sup> August 2026</span></del><br><del><span>27<sup>th</sup> August 2026</span></del><br><span>2<sup>nd</sup> September 2026</span></td>
+<td><del><span>Friday</span></del><br><del><span>Thursday</span></del><br><span>Wednesday</span></td></tr>
+<tr><td><span>Closing Date of REGULAR online registration (without late fee)</span></td>
+<td><del><span>21<sup>st</sup> September 2026 <br> 27<sup>th</sup> September 2026</span></del><br><span>5<sup>th</sup> October 2026</span></td>
+<td><del><span>Monday<br>Sunday</span></del><br><span>Monday</span></td></tr>
+<tr><td><span>Closing Date of EXTENDED online registration (with late fee)</span></td>
+<td><del><span>30<sup>th</sup> September 2026 <br> 5<sup>th</sup> October 2026</span></del><br>12<sup>th</sup> October 2026</td>
+<td><del><span>Wednesday<br>Monday</span></del><br>Monday</td></tr>
+<tr><td><span>Opening Date of GATE 2027 Application rectification</span></td><td><span>14<sup>th</sup> October 2026</span></td><td><span>Wednesday</span></td></tr>
+<tr><td><span>Closing Date of GATE 2027 Application rectification</span></td><td><span>21<sup>st</sup> October 2026</span></td><td><span>Wednesday</span></td></tr>
+<tr><td><span>City allotment notification</span></td><td><span>4<sup>th</sup> January 2027</span></td><td><span>Monday</span></td></tr>
+<tr><td rowspan="3"><span>GATE 2027 Examinations</span></td><td>6<sup>th</sup> February 2027<br>7<sup>th</sup> February 2027</td><td>Saturday<br>Sunday</td></tr>
+<tr><td>13<sup>th</sup> February 2027<br>14<sup>th</sup> February 2027</td><td>Saturday<br>Sunday</td></tr>
+<tr><td>20<sup>th</sup> February 2027<br>21<sup>st</sup> February 2027</td><td>Saturday<br>Sunday</td></tr>
+<tr><td><span>Announcement of results</span></td><td><span>19<sup>th</sup> March 2027</span></td><td><span>Friday</span></td></tr>
+</table>
+<p>*All dates are liable to change</p>
+<p>${'Graduate Aptitude Test in Engineering, organised by IIT Madras. '.repeat(5)}</p>`;
+
+describe('extractFacts — the GATE 2027 table (struck-through revisions, <sup> ordinals)', () => {
+  const byType = (type: string) => {
+    const result = extractFacts({ body: GATE_2027_TABLE, truncated: false });
+    if (!result.ok) throw new Error(`expected ok, got ${result.reason}`);
+    return result.observations.find((o) => o.factType === type);
+  };
+
+  it('reads the current opening date, not the struck-through ones', () => {
+    expect(byType('APPLICATION_START')?.normalizedValue).toBe('2026-09-02');
+  });
+
+  it('reads the regular deadline — not the late-fee one, and not rectification', () => {
+    // 5 Oct. The late-fee close is 12 Oct, and the rectification window closes
+    // on 21 Oct; both are real dates under a "Closing Date" label.
+    expect(byType('APPLICATION_END')?.normalizedValue).toBe('2026-10-05');
+  });
+
+  it('reads the exam as the span of all six days', () => {
+    expect(byType('EXAM_DATE')?.normalizedValue).toBe('2027-02-06/2027-02-21');
+  });
+
+  it('reads the result date', () => {
+    expect(byType('RESULT_DATE')?.normalizedValue).toBe('2027-03-19');
+  });
+
+  it('marks every value tentative, because the page says all dates may change', () => {
+    const result = extractFacts({ body: GATE_2027_TABLE, truncated: false });
+    expect(result.ok && result.observations.every((o) => o.isTentative)).toBe(true);
+  });
 });
 
 describe('riskOf', () => {

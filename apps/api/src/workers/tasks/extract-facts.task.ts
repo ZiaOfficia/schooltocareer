@@ -56,6 +56,7 @@ export function extractFactsTask(deps: {
           invalid: tally.invalid,
           truncated: tally.truncated,
           silent: tally.silent,
+          offCycle: tally.offCycle,
         },
       };
     },

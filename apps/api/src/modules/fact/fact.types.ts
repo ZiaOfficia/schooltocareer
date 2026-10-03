@@ -91,6 +91,8 @@ export type ExtractionTarget = {
   /** The cycle an approval would write into. Null when the exam has no cycle. */
   examYearId: string | null;
   examYear: number | null;
+  /** The cycle the source page is bound to in the registry. */
+  boundCycleYear: number;
 };
 
 /** The canonical value as it stands right now, for one fact. */
@@ -171,5 +173,10 @@ export type ExtractionTally = {
   truncated: number;
   /** Read successfully and stated nothing about any watched fact. */
   silent: number;
+  /**
+   * Skipped because the page is bound to a different cycle from the exam's
+   * current one — usually a site that has not rolled to the new year yet.
+   */
+  offCycle: number;
   superseded: number;
 };

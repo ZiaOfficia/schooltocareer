@@ -82,8 +82,8 @@ export type FactRepositoryPort = Pick<
 
 export type FactServiceDeps = {
   repository: FactRepositoryPort;
-  /** Source URL → exam slug. Supplied by the container from the registry. */
-  bindings: ReadonlyArray<{ url: string; watchesExamSlug: string }>;
+  /** Source URL → exam slug and cycle. Supplied by the container from the registry. */
+  bindings: ReadonlyArray<{ url: string; watchesExamSlug: string; watchesCycleYear: number }>;
   queue: IQueueProvider;
   cache: ICacheProvider;
   logger: AppLogger;
@@ -115,6 +115,7 @@ export class FactService {
       truncated: 0,
       silent: 0,
       superseded: 0,
+      offCycle: 0,
     };
 
     const targets = await this.deps.repository.findExtractionTargets(
@@ -124,6 +125,23 @@ export class FactService {
 
     for (const target of targets) {
       tally.snapshots += 1;
+
+      // A page describing another cycle says nothing about this one, however
+      // clearly it states its dates. Checked before parsing, because the
+      // failure it prevents is a CORRECT reading of the WRONG year.
+      if (target.examYear !== null && target.examYear !== target.boundCycleYear) {
+        tally.offCycle += 1;
+        this.deps.logger.info(
+          {
+            exam: target.examSlug,
+            source: target.sourceName,
+            pageCycle: target.boundCycleYear,
+            examCycle: target.examYear,
+          },
+          'source is bound to a different cycle from the exam — skipped',
+        );
+        continue;
+      }
 
       const result = extractFacts({
         body: target.rawContent,
@@ -381,6 +399,21 @@ export class FactService {
       );
     }
     const examYearId = context.examYearId;
+
+    // The other half of the cycle rule. A change queued while the exam was on
+    // one cycle must not land on the next one just because the exam rolled
+    // over while it waited: "re-resolved at approval time" is right within a
+    // cycle and wrong across one. The page's binding says which cycle it spoke
+    // about; a source no longer in the registry cannot vouch for any.
+    const sourceUrl = change.extractedFact.source.url;
+    const binding = this.deps.bindings.find((b) => b.url === sourceUrl);
+    if (!binding || binding.watchesCycleYear !== context.examYear) {
+      throw new BusinessRuleError(
+        binding
+          ? `This value was read from a page about the ${binding.watchesCycleYear} cycle, but the exam is now on ${context.examYear ?? 'no cycle'}. Reject it; the next extraction pass re-proposes anything still true.`
+          : 'The page this value was read from is no longer a watched source for any cycle. Reject it.',
+      );
+    }
 
     const updated = await this.deps.repository.runInTransaction(async (tx) => {
       // Rule 6. The version is re-read INSIDE the transaction and the row is

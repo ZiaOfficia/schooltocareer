@@ -84,13 +84,14 @@ export class FactRepository extends BaseRepository {
    * attributed to another.
    */
   async findExtractionTargets(
-    bindings: ReadonlyArray<{ url: string; watchesExamSlug: string }>,
+    bindings: ReadonlyArray<{ url: string; watchesExamSlug: string; watchesCycleYear: number }>,
     limit: number,
   ): Promise<ExtractionTarget[]> {
     if (bindings.length === 0) return [];
 
     const urls = bindings.map((b) => b.url);
     const slugByUrl = new Map(bindings.map((b) => [b.url, b.watchesExamSlug]));
+    const cycleByUrl = new Map(bindings.map((b) => [b.url, b.watchesCycleYear]));
 
     const rows = await this.run(
       () =>
@@ -151,10 +152,11 @@ export class FactRepository extends BaseRepository {
 
     return rows.flatMap((row) => {
       const slug = slugByUrl.get(row.sourceUrl);
+      const boundCycleYear = cycleByUrl.get(row.sourceUrl);
       const exam = slug ? examBySlug.get(slug) : undefined;
       // A binding pointing at an exam that does not exist is a registry bug,
       // not a reason to invent an owner for the observation.
-      if (!slug || !exam) return [];
+      if (!slug || !exam || boundCycleYear === undefined) return [];
       const cycle = exam.years[0];
       return [
         {
@@ -163,6 +165,7 @@ export class FactRepository extends BaseRepository {
           examSlug: exam.slug,
           examYearId: cycle?.id ?? null,
           examYear: cycle?.year ?? null,
+          boundCycleYear,
         },
       ];
     });
@@ -181,7 +184,7 @@ export class FactRepository extends BaseRepository {
    */
   async findExamContext(
     examId: string,
-  ): Promise<{ slug: string; examYearId: string | null } | null> {
+  ): Promise<{ slug: string; examYearId: string | null; examYear: number | null } | null> {
     const exam = await this.run(
       () =>
         this.prisma.exam.findFirst({
@@ -192,14 +195,18 @@ export class FactRepository extends BaseRepository {
               where: { deletedAt: null },
               orderBy: [{ isCurrent: 'desc' }, { year: 'desc' }],
               take: 1,
-              select: { id: true },
+              select: { id: true, year: true },
             },
           },
         }),
       { resource: 'Exam', identifier: examId },
     );
     if (!exam) return null;
-    return { slug: exam.slug, examYearId: exam.years[0]?.id ?? null };
+    return {
+      slug: exam.slug,
+      examYearId: exam.years[0]?.id ?? null,
+      examYear: exam.years[0]?.year ?? null,
+    };
   }
 
   /**

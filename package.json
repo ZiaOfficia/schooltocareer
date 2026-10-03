@@ -33,6 +33,7 @@
     "facts:extract": "tsx tooling/scripts/extract-facts-now.ts",
     "facts:report": "tsx tooling/scripts/facts-report.ts",
     "facts:review": "tsx tooling/scripts/facts-review.ts",
+    "cycle:roll": "tsx tooling/scripts/roll-exam-cycle.ts",
     "admin:set-password": "tsx tooling/scripts/set-admin-password.ts"
   },
   "devDependencies": {

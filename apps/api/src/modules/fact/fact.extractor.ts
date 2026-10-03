@@ -41,7 +41,7 @@ import type { FactConfidence, FactRisk, FactType } from '@stc/types';
  * Stamped onto every observation. Without it, a parser fix cannot be told apart
  * from an authority changing its mind, and neither can be replayed.
  */
-export const EXTRACTOR_VERSION = 'exam-dates-v1';
+export const EXTRACTOR_VERSION = 'exam-dates-v2';
 
 /** Publication impact. Fixed per fact type; never derived from confidence. */
 const RISK_BY_TYPE: Record<FactType, FactRisk> = {
@@ -117,8 +117,14 @@ const LABELS: Record<FactType, { allow: RegExp[]; deny?: RegExp[] }> = {
       /\bapplication\s+(?:form\s+)?(?:begins?|opens?|starts?)\b/i,
       /\bstart(?:ing)?\s+date\s+(?:of|for)\s+(?:online\s+)?(?:registration|application)\b/i,
       /\bcommencement\s+of\s+(?:online\s+)?(?:registration|application)\b/i,
+      // GATE 2027: "Opening Date of GATE Online Application Processing System
+      // (GOAPS)". The exam name is a link, so a cell boundary can sit between
+      // "of" and the rest; one optional word covers "GATE".
+      /\bopening\s+date\s+of\s+(?:\|\s*)?(?:[a-z]+\s+)?(?:online\s+)?(?:application|registration)\b/i,
     ],
-    deny: [/\blate\s*fee\b/i, /\bcorrection\b/i],
+    // "Opening Date of GATE 2027 Application rectification" opens the
+    // correction window, not the application.
+    deny: [/\blate\s*fee\b/i, /\bcorrection\b/i, /\brectification\b/i],
   },
   APPLICATION_END: {
     allow: [
@@ -130,7 +136,9 @@ const LABELS: Record<FactType, { allow: RegExp[]; deny?: RegExp[] }> = {
     // The with-late-fee deadline is a DIFFERENT fact. Publishing it as "the"
     // deadline tells a student they have another week and costs them the fee
     // at best.
-    deny: [/\bwith\s+late\s*fee\b/i, /\bcorrection\b/i, /\bextended\b/i],
+    // "Closing Date of GATE 2027 Application rectification" closes the
+    // correction window, a fortnight after the real deadline.
+    deny: [/\bwith\s+late\s*fee\b/i, /\bcorrection\b/i, /\bextended\b/i, /\brectification\b/i],
   },
   RESULT_DATE: {
     allow: [
@@ -188,18 +196,32 @@ const SCHEDULE_DISCLAIMER_RE =
  * boundary is what makes the proximity rule below mean something.
  */
 export function htmlToText(html: string): string {
-  return html
-    .replace(/<script\b[\s\S]*?<\/script>/gi, ' ')
-    .replace(/<style\b[\s\S]*?<\/style>/gi, ' ')
-    .replace(/<!--[\s\S]*?-->/g, ' ')
-    .replace(/<[^>]+>/g, ' | ')
-    .replace(/&nbsp;/gi, ' ')
-    .replace(/&amp;/gi, '&')
-    .replace(/&#8217;|&rsquo;/gi, "'")
-    .replace(/&[a-z]+;/gi, ' ')
-    .replace(/\|(\s*\|)+/g, ' | ')
-    .replace(/[ \t\r\n]+/g, ' ')
-    .trim();
+  return (
+    html
+      .replace(/<script\b[\s\S]*?<\/script>/gi, ' ')
+      .replace(/<style\b[\s\S]*?<\/style>/gi, ' ')
+      .replace(/<!--[\s\S]*?-->/g, ' ')
+      // STRUCK-THROUGH TEXT IS WITHDRAWN TEXT. GATE 2027 revises a deadline by
+      // wrapping the old date in <del> and printing the new one after it, so
+      // the cell reads "~~21 Sep~~ ~~27 Sep~~ 5 Oct". Kept, the old dates are
+      // the FIRST dates after the label — the ones proximity prefers — and the
+      // page's own correction is undone. The authority's markup says which
+      // value stands; reading it is not a heuristic.
+      .replace(/<(del|s|strike)\b[^>]*>[\s\S]*?<\/\1\s*>/gi, ' ')
+      // An ordinal suffix is part of the date, not a cell. GATE 2027 writes
+      // "14<sup>th</sup> August 2026"; turned into a boundary like every other
+      // tag, that became "14 | th | August 2026", which no date shape matches,
+      // and the whole table read as silent.
+      .replace(/<\/?su[pb]\b[^>]*>/gi, '')
+      .replace(/<[^>]+>/g, ' | ')
+      .replace(/&nbsp;/gi, ' ')
+      .replace(/&amp;/gi, '&')
+      .replace(/&#8217;|&rsquo;/gi, "'")
+      .replace(/&[a-z]+;/gi, ' ')
+      .replace(/\|(\s*\|)+/g, ' | ')
+      .replace(/[ \t\r\n]+/g, ' ')
+      .trim()
+  );
 }
 
 const MONTHS: Record<string, number> = {

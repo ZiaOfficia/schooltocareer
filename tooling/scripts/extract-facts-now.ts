@@ -107,6 +107,7 @@ async function main(): Promise<void> {
   console.log(`  invalid values     ${tally.invalid}`);
   console.log(`  refused: truncated ${tally.truncated}`);
   console.log(`  read but silent    ${tally.silent}`);
+  console.log(`  skipped: off-cycle ${tally.offCycle}`);
   console.log(
     '\nNothing above has been published. Changes wait in the review queue at\n' +
       '  GET /api/v1/admin/fact-changes?status=PENDING_REVIEW\n',
