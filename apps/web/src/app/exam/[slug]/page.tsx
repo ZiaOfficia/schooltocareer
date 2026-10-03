@@ -123,6 +123,31 @@ function eventDate(event: ExamEventDto | undefined): string | null {
 }
 
 /**
+ * An event that runs over several days, stated as the whole span.
+ *
+ * `eventDate` is right for a deadline — the day it closes — and wrong for an
+ * exam: GATE 2027 runs 6–21 Feb, and showing its end date alone told a
+ * student the exam was on the 21st, a fortnight after the first paper.
+ */
+function formatSpan(event: ExamEventDto | undefined): string {
+  if (!event?.startDate) return formatDate(eventDate(event));
+  const end = event.endDate;
+  if (!end || end.slice(0, 10) === event.startDate.slice(0, 10)) return formatDate(event.startDate);
+
+  const part = (iso: string, options: Intl.DateTimeFormatOptions) =>
+    new Intl.DateTimeFormat('en-IN', { ...options, timeZone: 'Asia/Kolkata' }).format(
+      new Date(iso),
+    );
+  const sameMonth =
+    part(event.startDate, { month: 'numeric', year: 'numeric' }) ===
+    part(end, { month: 'numeric', year: 'numeric' });
+
+  return sameMonth
+    ? `${part(event.startDate, { day: 'numeric' })}–${formatDate(end)}`
+    : `${part(event.startDate, { day: 'numeric', month: 'short' })} – ${formatDate(end)}`;
+}
+
+/**
  * The one-line hint under each cluster link.
  *
  * Kept here rather than in EXAM_SECTIONS because it is hub-page copy, not part
@@ -167,7 +192,8 @@ export default async function ExamPage({ params }: { params: Promise<Params> }) 
   // "Official" requires BOTH dates and a source to point at. Without either,
   // the honest badge is "Not sourced" — which is also what tells a student to
   // go and check the authority themselves.
-  const provenance: { confidence: 'official'; sourceUrl: string } | { confidence: 'tentative' | 'unsourced' } =
+  const provenance:
+    { confidence: 'official'; sourceUrl: string } | { confidence: 'tentative' | 'unsourced' } =
     events.length > 0 && exam.officialWebsite
       ? events.some((e) => e.isTentative)
         ? { confidence: 'tentative' }
@@ -190,7 +216,7 @@ export default async function ExamPage({ params }: { params: Promise<Params> }) 
     {
       question: `What is the ${exam.name} ${year} exam date?`,
       answer: eventDate(examDate)
-        ? `${exam.name} ${year} is scheduled for ${formatDate(eventDate(examDate))}${
+        ? `${exam.name} ${year} is scheduled for ${formatSpan(examDate)}${
             examDate?.isTentative ? '. This date is tentative and may change.' : '.'
           }`
         : `The ${exam.name} ${year} exam date has not been announced${
@@ -299,9 +325,7 @@ export default async function ExamPage({ params }: { params: Promise<Params> }) 
             {exam.name} {year}
           </h1>
 
-          {exam.fullName ? (
-            <p className="mt-1 text-[15px] text-ink-mute">{exam.fullName}</p>
-          ) : null}
+          {exam.fullName ? <p className="mt-1 text-[15px] text-ink-mute">{exam.fullName}</p> : null}
 
           <p className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-[13px] text-ink-soft">
             {exam.conductingBody ? (
@@ -327,7 +351,7 @@ export default async function ExamPage({ params }: { params: Promise<Params> }) 
                       : 'To be announced',
                   tone: isClosingSoon ? 'urgent' : 'plain',
                 },
-                { label: 'Exam', value: formatDate(eventDate(examDate)) },
+                { label: 'Exam', value: formatSpan(examDate) },
                 { label: 'Result', value: formatDate(eventDate(result)) },
                 {
                   label: 'Cycle',
