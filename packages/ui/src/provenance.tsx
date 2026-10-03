@@ -60,7 +60,11 @@ const COPY: Record<Confidence, { label: string; tone: string; bg: string; explai
  */
 export type ProvenanceProps = { className?: string } & (
   | { confidence: 'official'; sourceUrl: string; sourceName?: string | null }
-  | { confidence: 'tentative' | 'estimated'; sourceUrl?: string | null; sourceName?: string | null }
+  | {
+      confidence: 'tentative' | 'estimated';
+      sourceUrl?: string | null;
+      sourceName?: string | null;
+    }
   | { confidence: 'unsourced'; sourceUrl?: null; sourceName?: string | null }
 );
 
@@ -68,21 +72,20 @@ export function Provenance({ confidence, sourceUrl, sourceName, className = '' }
   const { label, tone, bg, explain } = COPY[confidence];
 
   return (
-    <p className={`flex flex-wrap items-baseline gap-x-2 gap-y-1 text-[12.5px] ${className}`}>
+    <p className={`flex flex-wrap items-center gap-x-2 gap-y-1 text-[13px] ${className}`}>
       <span
-        className="border px-[6px] py-px font-data text-[9.5px] font-bold uppercase tracking-[0.09em]"
-        style={{ color: tone, background: bg, borderColor: 'currentColor' }}
+        className="rounded-full border px-[9px] py-[3px] font-data text-[10px] font-bold uppercase leading-none tracking-[0.09em]"
+        style={{
+          color: tone,
+          background: bg,
+          borderColor: `color-mix(in srgb, ${tone} 35%, transparent)`,
+        }}
       >
         {label}
       </span>
       <span className="text-ink-soft">{explain}</span>
       {sourceUrl ? (
-        <a
-          href={sourceUrl}
-          className="underline"
-          rel="nofollow noopener"
-          target="_blank"
-        >
+        <a href={sourceUrl} className="underline" rel="nofollow noopener" target="_blank">
           {sourceName ?? 'Source'}
         </a>
       ) : null}

@@ -4,6 +4,9 @@ import type { ReactNode } from 'react';
 import { ROUTES } from '@stc/constants';
 import { EntityBadge, Eyebrow, Wrap, type EntityKind } from '@stc/ui';
 
+import { ArrowRightIcon } from '@/components/icons';
+import { PageHero } from '@/components/page-hero';
+
 /**
  * The shared browse-page shell.
  *
@@ -17,8 +20,11 @@ import { EntityBadge, Eyebrow, Wrap, type EntityKind } from '@stc/ui';
  */
 
 export type IndexItem = {
-  /** Stable key and link target. */
-  href: string;
+  /**
+   * Link target, and the React key. `null` when the destination page is not
+   * built yet: the card renders unlinked rather than pointing at a 404.
+   */
+  href: string | null;
   title: string;
   /** One line under the title — a category, a state, a year. */
   meta?: string | null;
@@ -59,84 +65,108 @@ export function IndexPage({
   children?: ReactNode;
 }) {
   return (
-    <Wrap>
-      <nav aria-label="Breadcrumb" className="pt-5 text-[12.5px] text-ink-soft">
-        <ol className="flex flex-wrap items-center gap-x-1.5">
-          <li>
-            <Link href={ROUTES.home()} className="text-inherit no-underline hover:underline">
-              Home
-            </Link>
-          </li>
-          <li className="flex items-center gap-1.5">
-            <span className="text-ink-mute">›</span>
-            <span className="font-semibold text-ink">{title}</span>
-          </li>
-        </ol>
-      </nav>
+    <>
+      <PageHero
+        trail={[
+          { name: 'Home', path: ROUTES.home() },
+          // The last crumb is never rendered as a link; the path is its key.
+          { name: title, path: '#current' },
+        ]}
+        badges={<EntityBadge kind={kind} />}
+        title={title}
+        lede={lede}
+        meta={
+          items.length > 0 ? (
+            <p className="font-data text-[13px] text-ink-mute">
+              Showing{' '}
+              <span className="num text-ink" data-count={items.length}>
+                {items.length.toLocaleString('en-IN')}
+              </span>
+              {typeof total === 'number' && total > items.length ? (
+                <>
+                  {' '}
+                  of <span className="num text-ink">{total.toLocaleString('en-IN')}</span>
+                </>
+              ) : null}{' '}
+              {unit}
+            </p>
+          ) : null
+        }
+      />
 
-      <header className="py-6">
-        <EntityBadge kind={kind} />
-        <h1 className="mt-3 text-[clamp(28px,5vw,42px)] leading-[1.08] tracking-tight">{title}</h1>
-        <p className="mt-3 max-w-[62ch] text-[16px] text-ink-soft">{lede}</p>
-        {items.length > 0 ? (
-          <p className="mt-3 font-data text-[13px] text-ink-mute">
-            Showing <span className="num text-ink">{items.length}</span>
-            {typeof total === 'number' && total > items.length ? (
-              <>
-                {' '}
-                of <span className="num text-ink">{total.toLocaleString('en-IN')}</span>
-              </>
-            ) : null}{' '}
-            {unit}
-          </p>
-        ) : null}
-      </header>
+      <Wrap className="pt-10">
+        {children}
 
-      {children}
-
-      {items.length === 0 ? (
-        <div
-          className="border border-dashed p-5"
-          style={{
-            borderColor: failed ? 'var(--color-urgent)' : 'var(--color-rule-hard)',
-            background: failed ? 'var(--color-urgent-bg)' : 'var(--color-paper)',
-          }}
-        >
-          <Eyebrow>{failed ? 'Could not load' : 'Nothing to show'}</Eyebrow>
-          <p className="mt-2 max-w-[60ch] text-[14px] text-ink-soft">
-            {failed
-              ? 'This list could not be loaded — the problem is on our side, not yours. Please try again shortly.'
-              : emptyNote}
-          </p>
-        </div>
-      ) : (
-        <ul className="grid gap-px border border-rule bg-rule sm:grid-cols-2 lg:grid-cols-3">
-          {items.map((item) => (
-            <li key={item.href} className="bg-surface">
-              <Link
-                href={item.href}
-                className="flex h-full flex-col gap-1 p-3 no-underline hover:bg-row-hover"
-              >
-                <span className="text-[15px] font-semibold leading-snug text-ink">
-                  {item.title}
-                </span>
-                <span className="flex flex-wrap items-baseline justify-between gap-x-3">
-                  {item.meta ? (
-                    <span className="text-[12.5px] text-ink-mute">{item.meta}</span>
+        {items.length === 0 ? (
+          <div
+            data-reveal
+            className="card border-dashed p-6"
+            style={
+              failed
+                ? {
+                    borderColor: 'var(--color-urgent)',
+                    background: 'var(--color-urgent-bg)',
+                  }
+                : undefined
+            }
+          >
+            <Eyebrow>{failed ? 'Could not load' : 'Nothing to show'}</Eyebrow>
+            <p className="mt-2 max-w-[60ch] text-[14.5px] text-ink-soft">
+              {failed
+                ? 'This list could not be loaded — the problem is on our side, not yours. Please try again shortly.'
+                : emptyNote}
+            </p>
+          </div>
+        ) : (
+          <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {items.map((item) => {
+              const body = (
+                <>
+                  <span className="flex items-start justify-between gap-3">
+                    <span className="font-display text-[16.5px] font-semibold leading-snug text-ink">
+                      {item.title}
+                    </span>
+                    {item.href ? (
+                      <ArrowRightIcon
+                        width={16}
+                        height={16}
+                        className="card-arrow mt-1 shrink-0 text-ink-mute"
+                      />
+                    ) : null}
+                  </span>
+                  <span className="mt-auto flex flex-wrap items-baseline justify-between gap-x-3 pt-1">
+                    {item.meta ? (
+                      <span className="text-[13px] text-ink-mute">{item.meta}</span>
+                    ) : (
+                      <span />
+                    )}
+                    {item.aside ? (
+                      <span className="num rounded-full bg-row-hover px-2 py-0.5 text-[11.5px] text-ink-soft">
+                        {item.aside}
+                      </span>
+                    ) : null}
+                  </span>
+                </>
+              );
+              return (
+                <li key={item.href ?? item.title} data-reveal>
+                  {item.href ? (
+                    <Link
+                      href={item.href}
+                      data-tilt
+                      className="card flex h-full flex-col gap-2 p-5"
+                    >
+                      {body}
+                    </Link>
                   ) : (
-                    <span />
+                    <div className="card flex h-full flex-col gap-2 p-5">{body}</div>
                   )}
-                  {item.aside ? (
-                    <span className="num text-[12px] text-ink-mute">{item.aside}</span>
-                  ) : null}
-                </span>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      )}
-
-      <div className="h-10" />
-    </Wrap>
+                </li>
+              );
+            })}
+          </ul>
+        )}
+      </Wrap>
+    </>
   );
 }

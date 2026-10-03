@@ -1,11 +1,15 @@
 @import 'tailwindcss';
 
+/* @stc/ui ships source, and lives outside this app's directory. Named
+   explicitly so its classes are never dropped by source auto-detection. */
+@source '../../../../packages/ui/src';
+
 /* ═══════════════════════════════════════════════════════════════════════════
    DESIGN TOKENS
 
-   The single source for the visual language proven in the mockups. Tailwind 4
-   reads `@theme`, so every value here becomes a utility (`bg-surface`,
-   `text-t-exam`, `border-rule`) — components never carry raw hex.
+   The single source for the visual language. Tailwind 4 reads `@theme`, so
+   every value here becomes a utility (`bg-surface`, `text-t-exam`,
+   `border-rule`) — components never carry raw hex.
 
    Two rules that the whole system rests on:
 
@@ -14,131 +18,131 @@
    2. SEMANTIC hues (urgent/ok/wait) describe STATE. They appear only on filled,
       tinted stamps.
 
-   Exam and "closing soon" are both vermilion. They are never confusable
-   because they never share a shape. Break that and the palette stops working.
+   Exam and "closing soon" are both red. They are never confusable because
+   they never share a shape. Break that and the palette stops working.
+
+   BRAND hues (brand / brand-2 / accent) are for chrome only — buttons, links,
+   gradients, the hero. They never label an entity or a state.
    ═══════════════════════════════════════════════════════════════════════════ */
 
 @theme {
-  --color-ink: #10233f;
-  --color-ink-soft: #3d5372;
-  --color-ink-mute: #6b7c96;
-  --color-link: #2a4a7b;
+  --color-ink: #0e1330;
+  --color-ink-soft: #454d6d;
+  --color-ink-mute: #747c9a;
+  --color-link: #4338ca;
 
-  --color-paper: #f4f6f8;
+  --color-paper: #f5f6fc;
   --color-surface: #ffffff;
-  --color-rule: #d3dae3;
-  --color-rule-hard: #10233f;
-  --color-row-hover: #eef2f6;
+  --color-rule: #e2e5f1;
+  --color-rule-hard: #c5cbe2;
+  --color-row-hover: #f0f1fb;
 
-  --color-urgent: #c8322a;
-  --color-urgent-bg: #fbedec;
-  --color-ok: #0e7a5f;
-  --color-ok-bg: #e7f3ef;
-  --color-wait: #9a5a0b;
-  --color-wait-bg: #fbf1e2;
-  --color-mark-bg: #fbf1e2;
+  --color-brand: #4f46e5;
+  --color-brand-2: #7c3aed;
+  --color-accent: #f59e0b;
+  --color-cyan: #06b6d4;
 
-  --color-t-exam: #c8322a;
-  --color-t-result: #0e7a5f;
-  --color-t-paper: #1f6fb2;
-  --color-t-article: #9a5a0b;
-  --color-t-board: #6b7c96;
-  --color-t-syllabus: #2a4a7b;
+  --color-urgent: #dc2626;
+  --color-urgent-bg: #fef0f0;
+  --color-ok: #047857;
+  --color-ok-bg: #e6f7f0;
+  --color-wait: #b45309;
+  --color-wait-bg: #fff4de;
+  --color-mark-bg: #fff4de;
 
-  /* No webfonts. A font request is a render-blocking round trip on a 3G
-     connection in Bihar, and Georgia + system-ui already carry the identity. */
-  --font-display: Georgia, 'Noto Serif', 'Times New Roman', serif;
-  --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial, sans-serif;
+  --color-t-exam: #e11d48;
+  --color-t-result: #047857;
+  --color-t-paper: #2563eb;
+  --color-t-article: #c2700a;
+  --color-t-board: #5b6788;
+  --color-t-syllabus: #4f46e5;
+
+  /* Self-hosted through next/font: no third-party request, preloaded, and
+     `display: swap` so text paints in the fallback first. The fallbacks are
+     listed so a failed font load still looks intentional. */
+  --font-display: var(--font-sora), system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-sans:
+    var(--font-jakarta), system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial,
+    sans-serif;
   --font-data: ui-monospace, 'SF Mono', 'Cascadia Mono', 'Roboto Mono', Consolas, monospace;
 
-  --radius-none: 0px;
+  --radius-card: 18px;
+  --radius-tile: 12px;
+
+  --shadow-card: 0 1px 2px rgb(14 19 48 / 0.04), 0 10px 28px -16px rgb(14 19 48 / 0.16);
+  --shadow-lift: 0 2px 6px rgb(14 19 48 / 0.06), 0 26px 48px -22px rgb(79 70 229 / 0.45);
 }
 
-/* Dark theme. `prefers-color-scheme` carries the OS setting; the explicit
-   [data-theme] attributes must win in BOTH directions so a manual toggle can
-   override the OS rather than only agreeing with it. */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-ink: #e4eaf2;
-    --color-ink-soft: #a9b8cd;
-    --color-ink-mute: #7c8ca4;
-    --color-link: #8fb4e8;
-    --color-paper: #0c1626;
-    --color-surface: #121f33;
-    --color-rule: #26364f;
-    --color-rule-hard: #47617f;
-    --color-row-hover: #17263c;
-    --color-urgent: #f0837a;
-    --color-urgent-bg: #33191a;
-    --color-ok: #56c7a4;
-    --color-ok-bg: #102b25;
-    --color-wait: #e0a857;
-    --color-wait-bg: #2e2415;
-    --color-mark-bg: #3a2e12;
-    --color-t-exam: #f0837a;
-    --color-t-result: #56c7a4;
-    --color-t-paper: #6fa8dc;
-    --color-t-article: #e0a857;
-    --color-t-board: #93a4bc;
-    --color-t-syllabus: #8fb4e8;
-  }
-}
-
+/* Dark values. `.night` scopes them to one band (the hero is always dark, in
+   both themes), which is why every component inside a hero adapts without a
+   second set of classes. `[data-theme]` lets a manual toggle override the OS
+   in both directions. */
+.night,
 :root[data-theme='dark'] {
-  --color-ink: #e4eaf2;
-  --color-ink-soft: #a9b8cd;
-  --color-ink-mute: #7c8ca4;
-  --color-link: #8fb4e8;
-  --color-paper: #0c1626;
-  --color-surface: #121f33;
-  --color-rule: #26364f;
-  --color-rule-hard: #47617f;
-  --color-row-hover: #17263c;
-  --color-urgent: #f0837a;
-  --color-urgent-bg: #33191a;
-  --color-ok: #56c7a4;
-  --color-ok-bg: #102b25;
-  --color-wait: #e0a857;
-  --color-wait-bg: #2e2415;
-  --color-mark-bg: #3a2e12;
-  --color-t-exam: #f0837a;
-  --color-t-result: #56c7a4;
-  --color-t-paper: #6fa8dc;
-  --color-t-article: #e0a857;
-  --color-t-board: #93a4bc;
-  --color-t-syllabus: #8fb4e8;
+  --color-ink: #eef0fd;
+  --color-ink-soft: #b6bcd9;
+  --color-ink-mute: #858cad;
+  --color-link: #a5b4fc;
+  --color-paper: #080b1c;
+  --color-surface: #11152e;
+  --color-rule: #242a4d;
+  --color-rule-hard: #3b4273;
+  --color-row-hover: #181d3d;
+  --color-brand: #818cf8;
+  --color-brand-2: #a78bfa;
+  --color-accent: #fbbf24;
+  --color-cyan: #22d3ee;
+  --color-urgent: #f87171;
+  --color-urgent-bg: #3a1620;
+  --color-ok: #34d399;
+  --color-ok-bg: #0d2c2a;
+  --color-wait: #fbbf24;
+  --color-wait-bg: #33260f;
+  --color-mark-bg: #33260f;
+  --color-t-exam: #fb7185;
+  --color-t-result: #34d399;
+  --color-t-paper: #60a5fa;
+  --color-t-article: #fbbf24;
+  --color-t-board: #a3adcb;
+  --color-t-syllabus: #a5b4fc;
+  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.3), 0 10px 28px -16px rgb(0 0 0 / 0.6);
+  --shadow-lift: 0 2px 6px rgb(0 0 0 / 0.3), 0 26px 48px -22px rgb(129 140 248 / 0.5);
 }
 
-:root[data-theme='light'] {
-  --color-ink: #10233f;
-  --color-ink-soft: #3d5372;
-  --color-ink-mute: #6b7c96;
-  --color-link: #2a4a7b;
-  --color-paper: #f4f6f8;
-  --color-surface: #ffffff;
-  --color-rule: #d3dae3;
-  --color-rule-hard: #10233f;
-  --color-row-hover: #eef2f6;
-  --color-urgent: #c8322a;
-  --color-urgent-bg: #fbedec;
-  --color-ok: #0e7a5f;
-  --color-ok-bg: #e7f3ef;
-  --color-wait: #9a5a0b;
-  --color-wait-bg: #fbf1e2;
-  --color-mark-bg: #fbf1e2;
-  --color-t-exam: #c8322a;
-  --color-t-result: #0e7a5f;
-  --color-t-paper: #1f6fb2;
-  --color-t-article: #9a5a0b;
-  --color-t-board: #6b7c96;
-  --color-t-syllabus: #2a4a7b;
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --color-ink: #eef0fd;
+    --color-ink-soft: #b6bcd9;
+    --color-ink-mute: #858cad;
+    --color-link: #a5b4fc;
+    --color-paper: #080b1c;
+    --color-surface: #11152e;
+    --color-rule: #242a4d;
+    --color-rule-hard: #3b4273;
+    --color-row-hover: #181d3d;
+    --color-brand: #818cf8;
+    --color-brand-2: #a78bfa;
+    --color-accent: #fbbf24;
+    --color-cyan: #22d3ee;
+    --color-urgent: #f87171;
+    --color-urgent-bg: #3a1620;
+    --color-ok: #34d399;
+    --color-ok-bg: #0d2c2a;
+    --color-wait: #fbbf24;
+    --color-wait-bg: #33260f;
+    --color-mark-bg: #33260f;
+    --color-t-exam: #fb7185;
+    --color-t-result: #34d399;
+    --color-t-paper: #60a5fa;
+    --color-t-article: #fbbf24;
+    --color-t-board: #a3adcb;
+    --color-t-syllabus: #a5b4fc;
+    --shadow-card: 0 1px 2px rgb(0 0 0 / 0.3), 0 10px 28px -16px rgb(0 0 0 / 0.6);
+    --shadow-lift: 0 2px 6px rgb(0 0 0 / 0.3), 0 26px 48px -22px rgb(129 140 248 / 0.5);
+  }
 }
 
 @layer base {
-  * {
-    border-radius: 0;
-  }
-
   html {
     -webkit-text-size-adjust: 100%;
     scroll-behavior: smooth;
@@ -159,6 +163,7 @@
   h4 {
     font-family: var(--font-display);
     font-weight: 700;
+    letter-spacing: -0.02em;
     text-wrap: balance;
     margin: 0;
   }
@@ -168,8 +173,13 @@
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-link);
+    outline: 2px solid var(--color-brand);
     outline-offset: 2px;
+    border-radius: 6px;
+  }
+
+  ::selection {
+    background: color-mix(in srgb, var(--color-brand) 28%, transparent);
   }
 
   /* Digits that sit in a column must line up. This is why the data font is
@@ -179,6 +189,274 @@
     font-variant-numeric: tabular-nums;
     letter-spacing: -0.01em;
   }
+}
+
+@layer components {
+  /* ── The hero band ──────────────────────────────────────────────────────
+     Always dark. The gradient alone has to look finished, because the WebGL
+     scene on top of it is skipped on Save-Data, on reduced motion and wherever
+     a context cannot be created. */
+  .hero-bg {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    color: var(--color-ink);
+    background:
+      radial-gradient(1100px 620px at 88% -12%, rgb(124 58 237 / 0.55), transparent 62%),
+      radial-gradient(820px 520px at -6% 108%, rgb(6 182 212 / 0.26), transparent 60%),
+      radial-gradient(520px 320px at 52% 118%, rgb(245 158 11 / 0.16), transparent 70%),
+      linear-gradient(180deg, #090c22 0%, #10143a 100%);
+  }
+
+  .hero-bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-image:
+      linear-gradient(rgb(255 255 255 / 0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(255 255 255 / 0.045) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(ellipse 90% 80% at 50% 0%, #000 30%, transparent 78%);
+  }
+
+  .gradient-text {
+    background: linear-gradient(92deg, #a5b4fc 0%, #67e8f9 48%, #fcd34d 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .glass {
+    background: rgb(255 255 255 / 0.07);
+    border: 1px solid rgb(255 255 255 / 0.14);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+
+  /* ── Cards ────────────────────────────────────────────────────────────── */
+  .card {
+    position: relative;
+    background: var(--color-surface);
+    border: 1px solid var(--color-rule);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+    transition:
+      border-color 0.25s ease,
+      box-shadow 0.25s ease;
+  }
+
+  a.card {
+    color: inherit;
+    text-decoration: none;
+    will-change: transform;
+  }
+
+  a.card:hover,
+  a.card:focus-visible {
+    border-color: color-mix(in srgb, var(--color-brand) 50%, var(--color-rule));
+    box-shadow: var(--shadow-lift);
+  }
+
+  /* The pointer-following sheen. --mx/--my are written by the tilt handler. */
+  .card[data-tilt]::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(
+      260px circle at var(--mx, 50%) var(--my, 50%),
+      color-mix(in srgb, var(--color-brand) 16%, transparent),
+      transparent 70%
+    );
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    pointer-events: none;
+  }
+
+  .card[data-tilt]:hover::after {
+    opacity: 1;
+  }
+
+  .card-arrow {
+    transition: transform 0.25s ease;
+  }
+
+  a.card:hover .card-arrow {
+    transform: translateX(4px);
+  }
+
+  /* ── Buttons ──────────────────────────────────────────────────────────── */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 999px;
+    padding: 0.65rem 1.25rem;
+    font-size: 14.5px;
+    font-weight: 600;
+    line-height: 1.2;
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease,
+      background-color 0.2s ease,
+      border-color 0.2s ease;
+  }
+
+  .btn:active {
+    transform: scale(0.97);
+  }
+
+  .btn-primary {
+    color: #fff;
+    background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+    box-shadow: 0 10px 24px -10px rgb(99 71 232 / 0.75);
+  }
+
+  .btn-primary:hover {
+    box-shadow: 0 14px 30px -10px rgb(99 71 232 / 0.95);
+    transform: translateY(-1px);
+  }
+
+  .btn-ghost {
+    color: var(--color-ink);
+    border: 1px solid var(--color-rule-hard);
+    background: var(--color-surface);
+  }
+
+  .btn-ghost:hover {
+    border-color: var(--color-brand);
+    color: var(--color-brand);
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    border-radius: 999px;
+    border: 1px solid var(--color-rule);
+    padding: 0.2rem 0.7rem;
+    font-size: 12.5px;
+    color: var(--color-ink-soft);
+    text-decoration: none;
+    transition:
+      border-color 0.2s ease,
+      color 0.2s ease,
+      background-color 0.2s ease;
+  }
+
+  a.chip:hover {
+    border-color: var(--color-brand);
+    color: var(--color-ink);
+    background: color-mix(in srgb, var(--color-brand) 12%, transparent);
+  }
+
+  /* ── Header ───────────────────────────────────────────────────────────── */
+  .site-header {
+    background: color-mix(in srgb, var(--color-surface) 78%, transparent);
+    backdrop-filter: saturate(160%) blur(16px);
+    -webkit-backdrop-filter: saturate(160%) blur(16px);
+    border-bottom: 1px solid transparent;
+    transition:
+      border-color 0.25s ease,
+      box-shadow 0.25s ease;
+  }
+
+  .site-header[data-scrolled] {
+    border-bottom-color: var(--color-rule);
+    box-shadow: 0 10px 30px -22px rgb(14 19 48 / 0.5);
+  }
+
+  .nav-link {
+    position: relative;
+    color: var(--color-ink-soft);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -6px;
+    height: 2px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--color-brand), var(--color-cyan));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.25s ease;
+  }
+
+  .nav-link:hover {
+    color: var(--color-ink);
+  }
+
+  .nav-link:hover::after {
+    transform: scaleX(1);
+  }
+
+  .scroll-progress {
+    transform: scaleX(0);
+    transform-origin: left;
+    background: linear-gradient(90deg, #4f46e5, #06b6d4 55%, #f59e0b);
+  }
+
+  /* The FAQ disclosure marker: a plus that turns into a cross. */
+  .faq summary {
+    list-style: none;
+    cursor: pointer;
+  }
+
+  .faq summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-mark {
+    transition: transform 0.25s ease;
+  }
+
+  .faq[open] .faq-mark {
+    transform: rotate(45deg);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   MOTION — pre-animation states
+
+   An inline script in <head> adds `.js` before first paint, so these hidden
+   states apply from the first frame and nothing flashes. The same script
+   removes `.js` again if the motion code has not started within a few
+   seconds, and none of it applies under reduced motion — so content can be
+   delayed by an animation but never withheld by one.
+   ═══════════════════════════════════════════════════════════════════════════ */
+@media (prefers-reduced-motion: no-preference) {
+  .js [data-reveal]:not([data-revealed]) {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+
+  .js [data-words]:not([data-revealed]) .word-in {
+    transform: translateY(110%);
+  }
+}
+
+.word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  /* Room for descenders, which `overflow: hidden` would otherwise clip. */
+  padding-bottom: 0.12em;
+  margin-bottom: -0.12em;
+}
+
+.word-in {
+  display: inline-block;
+  will-change: transform;
 }
 
 @media (prefers-reduced-motion: reduce) {

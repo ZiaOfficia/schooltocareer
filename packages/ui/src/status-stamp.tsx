@@ -35,10 +35,19 @@ export function StatusStamp({
   const { fg, bg } = TONE[tone];
   return (
     <span
-      className={`inline-flex items-center gap-[5px] border px-[7px] py-px font-data text-[9.5px] font-bold uppercase tracking-[0.09em] whitespace-nowrap ${className}`}
-      style={{ color: fg, background: bg, borderColor: 'currentColor' }}
+      className={`inline-flex items-center gap-[6px] rounded-full border px-[9px] py-[3px] font-data text-[10px] font-bold uppercase leading-none tracking-[0.09em] whitespace-nowrap ${className}`}
+      style={{
+        color: fg,
+        background: bg,
+        borderColor: `color-mix(in srgb, ${fg} 35%, transparent)`,
+      }}
     >
-      {dot ? <span className="h-[5px] w-[5px] shrink-0 bg-current" aria-hidden="true" /> : null}
+      {dot ? (
+        <span
+          className="h-[6px] w-[6px] shrink-0 animate-pulse rounded-full bg-current"
+          aria-hidden="true"
+        />
+      ) : null}
       {children}
     </span>
   );

@@ -75,13 +75,53 @@ export function EntityBadge({
 }) {
   return (
     <span
-      className={`inline-flex items-center gap-[5px] border border-rule bg-surface px-2 py-px font-data text-[9.5px] font-semibold uppercase tracking-[0.09em] whitespace-nowrap ${className}`}
-      style={{ color: TONE[kind], borderLeft: `4px solid ${TONE[kind]}` }}
+      className={`inline-flex items-center gap-[6px] rounded-md border border-rule bg-surface py-[4px] pl-[5px] pr-2 font-data text-[10px] font-semibold uppercase leading-none tracking-[0.09em] whitespace-nowrap ${className}`}
+      style={{ color: TONE[kind] }}
     >
+      {/* The accent spine. A bar inside the badge rather than a thick left
+          border, which a rounded corner bends into a bracket. */}
+      <span aria-hidden="true" className="h-[11px] w-[3px] rounded-full bg-current" />
       <svg viewBox="0 0 12 12" width="11" height="11" fill="currentColor" aria-hidden="true">
         {MARK[kind]}
       </svg>
       {label ?? LABEL[kind]}
+    </span>
+  );
+}
+
+/**
+ * The entity's mark on its own, as a tinted tile.
+ *
+ * For places where the entity is the subject of a whole card — a browse tile,
+ * a section link — and the word is already the card's title. Same mark, same
+ * hue as the badge, so the two are recognisably one system.
+ */
+export function EntityMark({
+  kind,
+  size = 40,
+  className = '',
+}: {
+  kind: EntityKind;
+  /** Tile edge in px. The mark is drawn at 45% of it. */
+  size?: number;
+  className?: string;
+}) {
+  const mark = Math.round(size * 0.45);
+  return (
+    <span
+      aria-hidden="true"
+      className={`inline-flex shrink-0 items-center justify-center rounded-[12px] ${className}`}
+      style={{
+        width: size,
+        height: size,
+        color: TONE[kind],
+        background: `color-mix(in srgb, ${TONE[kind]} 13%, transparent)`,
+        border: `1px solid color-mix(in srgb, ${TONE[kind]} 28%, transparent)`,
+      }}
+    >
+      <svg viewBox="0 0 12 12" width={mark} height={mark} fill="currentColor">
+        {MARK[kind]}
+      </svg>
     </span>
   );
 }
