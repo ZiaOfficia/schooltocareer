@@ -3,6 +3,8 @@ import Link from 'next/link';
 import { ROUTES, SITE } from '@stc/constants';
 import { Wrap } from '@stc/ui';
 
+import { Logo } from '@/components/logo';
+
 /**
  * ONLY routes that resolve.
  *
@@ -43,11 +45,8 @@ export function SiteFooter() {
       <Wrap className="py-14">
         <div className="grid gap-10 md:grid-cols-[1.4fr_1fr_1fr]">
           <div data-reveal>
-            <Link
-              href={ROUTES.home()}
-              className="font-display text-[20px] font-bold tracking-tight text-ink no-underline"
-            >
-              SchoolTo<span className="gradient-text">Career</span>
+            <Link href={ROUTES.home()} className="inline-block text-logo no-underline">
+              <Logo className="h-10 w-auto" />
             </Link>
             <p className="mt-3 max-w-[38ch] text-[14px] text-ink-soft">{SITE.TAGLINE}</p>
           </div>

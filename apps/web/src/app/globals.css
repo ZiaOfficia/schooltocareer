@@ -41,6 +41,8 @@
   --color-brand-2: #7c3aed;
   --color-accent: #f59e0b;
   --color-cyan: #06b6d4;
+  /* The logo's own navy. Not a chrome colour — only the logo takes it. */
+  --color-logo: #12355b;
 
   --color-urgent: #dc2626;
   --color-urgent-bg: #fef0f0;
@@ -92,6 +94,7 @@
   --color-brand-2: #a78bfa;
   --color-accent: #fbbf24;
   --color-cyan: #22d3ee;
+  --color-logo: #ffffff;
   --color-urgent: #f87171;
   --color-urgent-bg: #3a1620;
   --color-ok: #34d399;
@@ -124,6 +127,7 @@
     --color-brand-2: #a78bfa;
     --color-accent: #fbbf24;
     --color-cyan: #22d3ee;
+    --color-logo: #ffffff;
     --color-urgent: #f87171;
     --color-urgent-bg: #3a1620;
     --color-ok: #34d399;

@@ -4,6 +4,7 @@ import { ROUTES, SITE } from '@stc/constants';
 import { Wrap } from '@stc/ui';
 
 import { MenuIcon, SearchIcon } from '@/components/icons';
+import { Logo } from '@/components/logo';
 
 const NAV = [
   { label: 'Exams', href: ROUTES.exams() },
@@ -28,20 +29,9 @@ export function SiteHeader() {
       <Wrap className="flex items-center gap-x-6 py-3">
         <Link
           href={ROUTES.home()}
-          className="flex items-center gap-2.5 font-display text-[17px] font-bold tracking-tight text-ink no-underline"
+          className="shrink-0 text-logo no-underline"
         >
-          <span
-            aria-hidden="true"
-            className="grid h-8 w-8 place-items-center rounded-[10px] text-[13px] font-bold text-white"
-            style={{
-              background: 'linear-gradient(135deg, #4f46e5, #7c3aed 55%, #06b6d4)',
-            }}
-          >
-            S
-          </span>
-          <span>
-            SchoolTo<span className="text-brand">Career</span>
-          </span>
+          <Logo className="h-[34px] w-auto" />
         </Link>
 
         <nav aria-label="Primary" className="hidden gap-6 text-[14px] font-medium md:flex">
