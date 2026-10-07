@@ -12,7 +12,9 @@ import {
   Provenance,
   Section,
   StatusStamp,
+  TableOfContents,
   Wrap,
+  contentsOf,
   type EntityKind,
 } from '@stc/ui';
 
@@ -435,6 +437,18 @@ export default async function ExamPage({ params }: { params: Promise<Params> }) 
       </PageHero>
 
       <Wrap>
+        <TableOfContents
+          className="mt-10"
+          items={contentsOf([
+            exam.overview ? `About ${exam.shortName}` : null,
+            `Everything about ${exam.shortName}`,
+            'Important dates',
+            'Previous year question papers',
+            'Frequently asked questions',
+            'Official source',
+          ])}
+        />
+
         {exam.overview ? (
           <Section title={`About ${exam.shortName}`} major>
             <div

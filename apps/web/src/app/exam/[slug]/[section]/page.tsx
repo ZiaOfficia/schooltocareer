@@ -3,7 +3,16 @@ import { notFound } from 'next/navigation';
 
 import { ROUTES, SITE } from '@stc/constants';
 import type { ExamDetailDto, ExamEventDto, PaperListItemDto, ResultListItemDto } from '@stc/types';
-import { EntityBadge, LastUpdated, Provenance, Section, StatusStamp, Wrap } from '@stc/ui';
+import {
+  EntityBadge,
+  LastUpdated,
+  Provenance,
+  Section,
+  StatusStamp,
+  TableOfContents,
+  Wrap,
+  contentsOf,
+} from '@stc/ui';
 
 import { ArrowUpRightIcon } from '@/components/icons';
 import { PageHero } from '@/components/page-hero';
@@ -203,6 +212,30 @@ export default async function ExamSectionPage({ params }: { params: Promise<Para
   const written = isEditorialSection(section) ? examContent(exam.slug, section) : undefined;
   const faqs = written?.faqs ?? guide?.faqs;
 
+  // The page's outline, in the order the sections render below. Built from the
+  // same conditions as the sections themselves, so it cannot list one that is
+  // not on the page. On the papers page each year is an entry of its own: a
+  // year is what a visitor is scrolling for.
+  const contents = [
+    ...contentsOf([
+      ...(written ? [...written.parts.map((part) => part.title), 'Questions students ask'] : []),
+      SECTION_EVENT[section as ExamSection] ? `${config.label} date` : null,
+      section === 'previous-year-papers' ? 'Papers' : null,
+    ]),
+    ...(section === 'previous-year-papers'
+      ? groupByYear(papers).map(([paperYear]) => ({
+          id: `year-${paperYear}`,
+          title: `${paperYear} papers`,
+        }))
+      : []),
+    ...contentsOf([
+      ...(guide ? [...guide.sections.map((part) => part.title), 'Questions students ask'] : []),
+      section === 'result' ? 'Declared results' : null,
+      `More about ${exam.shortName}`,
+      exam.officialWebsite ? 'Official source' : null,
+    ]),
+  ];
+
   return (
     <>
       <JsonLd
@@ -248,6 +281,8 @@ export default async function ExamSectionPage({ params }: { params: Promise<Para
       />
 
       <Wrap>
+        <TableOfContents className="mt-10" items={contents} />
+
         {written ? (
           <>
             {/* Where this page comes from, before anything it says. The badge

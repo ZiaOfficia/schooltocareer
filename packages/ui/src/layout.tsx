@@ -8,6 +8,67 @@ export function Wrap({ children, className = '' }: { children: ReactNode; classN
 }
 
 /**
+ * The anchor a section answers to, derived from its title.
+ *
+ * One function, used by Section to set the id and by a page to build its table
+ * of contents, so a contents link cannot point at an id nobody rendered.
+ */
+export function sectionId(title: string): string {
+  return title
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
+/**
+ * "On this page" — the list of sections, as links.
+ *
+ * Renders nothing under three entries. A contents box above two sections is
+ * longer than the scroll it saves, and on a short page it pushes the answer
+ * the visitor came for further down.
+ *
+ * Plain anchors, no script: it works before hydration and a crawler reads it
+ * as the page's outline. `scroll-mt` on Section keeps the sticky header from
+ * covering the heading a link lands on.
+ */
+export function TableOfContents({
+  items,
+  className = '',
+}: {
+  items: ReadonlyArray<{ id: string; title: string }>;
+  className?: string;
+}) {
+  if (items.length < 3) return null;
+
+  return (
+    <nav aria-label="On this page" data-reveal className={`card p-5 ${className}`}>
+      <Eyebrow>On this page</Eyebrow>
+      <ol className="mt-3 grid gap-x-8 gap-y-2 text-[14.5px] sm:grid-cols-2">
+        {items.map((item, index) => (
+          <li key={item.id} className="flex gap-2">
+            <span aria-hidden="true" className="num w-5 shrink-0 text-ink-mute">
+              {index + 1}
+            </span>
+            <a href={`#${item.id}`} className="text-ink no-underline hover:underline">
+              {item.title}
+            </a>
+          </li>
+        ))}
+      </ol>
+    </nav>
+  );
+}
+
+/** Builds contents entries from section titles, skipping any that are absent. */
+export function contentsOf(
+  titles: ReadonlyArray<string | null | undefined | false>,
+): Array<{ id: string; title: string }> {
+  return titles
+    .filter((title): title is string => typeof title === 'string' && title.length > 0)
+    .map((title) => ({ id: sectionId(title), title }));
+}
+
+/**
  * A titled band of content.
  *
  * `major` adds the gradient marker reserved for genuine top-level divisions.
@@ -32,7 +93,7 @@ export function Section({
   children: ReactNode;
 }) {
   return (
-    <section id={id} className="scroll-mt-24 py-10 sm:py-12">
+    <section id={id ?? sectionId(title)} className="scroll-mt-24 py-10 sm:py-12">
       <div data-reveal className="mb-6 flex flex-wrap items-end justify-between gap-x-6 gap-y-3">
         <div>
           {major ? (

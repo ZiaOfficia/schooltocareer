@@ -1,7 +1,16 @@
 import Link from 'next/link';
 
 import { ROUTES, SITE } from '@stc/constants';
-import { EntityBadge, LastUpdated, Provenance, ScrollX, Section, Wrap } from '@stc/ui';
+import {
+  EntityBadge,
+  LastUpdated,
+  Provenance,
+  ScrollX,
+  Section,
+  TableOfContents,
+  Wrap,
+  contentsOf,
+} from '@stc/ui';
 
 import { ArrowUpRightIcon } from '@/components/icons';
 import { PageHero } from '@/components/page-hero';
@@ -103,6 +112,14 @@ export default function NtaCalendarPage() {
             </a>
           </div>
         </div>
+
+        <TableOfContents
+          className="mt-6"
+          items={contentsOf([
+            ...NTA_CALENDAR.months.map((month) => month.month),
+            'Questions students ask',
+          ])}
+        />
 
         {NTA_CALENDAR.months.map((month, index) => (
           <Section key={month.month} title={month.month} major={index === 0}>
