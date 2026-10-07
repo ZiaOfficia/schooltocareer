@@ -19,7 +19,7 @@ import {
 import { ArrowRightIcon, ArrowUpRightIcon, PlusIcon } from '@/components/icons';
 import { PageHero } from '@/components/page-hero';
 import { getExam } from '@/lib/api';
-import { EXAM_SECTIONS, EXAM_SECTION_SLUGS, type ExamSection } from '@/lib/exam-sections';
+import { EXAM_SECTIONS, sectionsFor, type ExamSection } from '@/lib/exam-sections';
 import { JsonLd, breadcrumbSchema, examPageSchema, faqSchema } from '@/lib/seo/json-ld';
 import { buildMetadata } from '@/lib/seo/metadata';
 
@@ -159,6 +159,8 @@ function formatSpan(event: ExamEventDto | undefined): string {
  * is a full sentence and far too long for a card.
  */
 const SECTION_NOTE: Record<ExamSection, string> = {
+  'exam-pattern': 'Questions, marks, time',
+  syllabus: 'Unit-wise tables',
   'previous-year-papers': 'Year-wise PDFs',
   result: 'Date and direct link',
   'admit-card': 'Download and issues',
@@ -171,6 +173,8 @@ const SECTION_NOTE: Record<ExamSection, string> = {
  * — the same split the section route uses for its badge.
  */
 const SECTION_KIND: Record<ExamSection, EntityKind> = {
+  'exam-pattern': 'paper',
+  syllabus: 'syllabus',
   'previous-year-papers': 'paper',
   result: 'result',
   'admit-card': 'paper',
@@ -274,7 +278,7 @@ export default async function ExamPage({ params }: { params: Promise<Params> }) 
    * The sitemap had already been moved onto this registry for exactly this
    * reason. The page had not, which is how the two came to disagree again.
    */
-  const clusterLinks = EXAM_SECTION_SLUGS.map((key) => ({
+  const clusterLinks = sectionsFor(exam.slug).map((key) => ({
     label: EXAM_SECTIONS[key].label,
     href: EXAM_SECTIONS[key].path(exam.slug),
     note: SECTION_NOTE[key],

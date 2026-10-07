@@ -4,7 +4,7 @@ import { ROUTES, absoluteUrl } from '@stc/constants';
 import type { ExamListItemDto } from '@stc/types';
 
 import { listExams } from '@/lib/api';
-import { EXAM_SECTIONS } from '@/lib/exam-sections';
+import { EXAM_SECTIONS, sectionsFor } from '@/lib/exam-sections';
 
 /**
  * ONE sitemap, served at /sitemap.xml.
@@ -64,8 +64,10 @@ const STATIC_ROUTES = [
  *
  * Reading the registry means the two cannot drift: a section appears here only
  * once it renders, and adding one is a single edit in exam-sections.ts.
+ *
+ * It is asked PER EXAM: the written sections (pattern, syllabus) exist only for
+ * exams whose content has been written, and are a 404 for every other exam.
  */
-const EXAM_CLUSTER = Object.values(EXAM_SECTIONS).map((section) => section.path);
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
@@ -91,8 +93,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   for (const exam of indexable) {
     const lastModified = new Date(exam.updatedAt);
     entries.push({ url: absoluteUrl(exam.path), lastModified });
-    for (const route of EXAM_CLUSTER) {
-      entries.push({ url: absoluteUrl(route(exam.slug)), lastModified });
+    for (const section of sectionsFor(exam.slug)) {
+      entries.push({ url: absoluteUrl(EXAM_SECTIONS[section].path(exam.slug)), lastModified });
     }
   }
 

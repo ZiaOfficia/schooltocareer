@@ -8,7 +8,17 @@ import { EntityBadge, LastUpdated, Provenance, Section, StatusStamp, Wrap } from
 import { ArrowUpRightIcon } from '@/components/icons';
 import { PageHero } from '@/components/page-hero';
 import { ApiError, getExam, listAllPapers, listResults } from '@/lib/api';
-import { EXAM_SECTIONS, SECTION_EVENT, isExamSection, type ExamSection } from '@/lib/exam-sections';
+import { ContentBlocks } from '@/components/content-blocks';
+import { examContent } from '@/lib/exam-content';
+import {
+  EXAM_SECTIONS,
+  SECTION_EVENT,
+  hasSection,
+  isEditorialSection,
+  isExamSection,
+  sectionsFor,
+  type ExamSection,
+} from '@/lib/exam-sections';
 import { PAPER_GUIDES } from '@/lib/paper-guides';
 import { JsonLd, breadcrumbSchema, examPageSchema, faqSchema } from '@/lib/seo/json-ld';
 import { buildMetadata } from '@/lib/seo/metadata';
@@ -25,6 +35,13 @@ import { buildMetadata } from '@/lib/seo/metadata';
 export const revalidate = 3600;
 
 type Params = { slug: string; section: string };
+
+/** The line under each "More about" card. Sections without one show the year's dates. */
+const MORE_HINT: Partial<Record<ExamSection, string>> = {
+  'exam-pattern': 'Questions, marks, time',
+  syllabus: 'Unit-wise tables',
+  'previous-year-papers': 'Year-wise PDFs',
+};
 
 function currentYear(exam: ExamDetailDto): number {
   const current = exam.years.find((y) => y.isCurrent);
@@ -97,7 +114,7 @@ function formatDate(iso: string | null): string {
 
 export async function generateMetadata({ params }: { params: Promise<Params> }) {
   const { slug, section } = await params;
-  if (!isExamSection(section)) return {};
+  if (!isExamSection(section) || !hasSection(slug, section)) return {};
 
   const exam = await getExam<ExamDetailDto>(slug);
   if (!exam) return {};
@@ -105,6 +122,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }) 
   const year = currentYear(exam);
   const config = EXAM_SECTIONS[section];
   const heading = config.heading(exam.shortName, year);
+  const written = isEditorialSection(section) ? examContent(exam.slug, section) : undefined;
 
   return buildMetadata({
     template: 'exam',
@@ -116,8 +134,8 @@ export async function generateMetadata({ params }: { params: Promise<Params> }) 
     },
     path: config.path(exam.slug),
     title: heading,
-    description: `${heading}. ${config.blurb}`,
-    modifiedTime: exam.updatedAt,
+    description: `${heading}. ${written?.lede ?? config.blurb}`,
+    modifiedTime: written?.checkedOn ?? exam.updatedAt,
     // A cluster page inherits its parent's readiness. A result or admit-card
     // page for an exam whose facts are not sourced has nothing to say beyond
     // its own heading — it is the thinnest page on the site, and indexing it
@@ -132,10 +150,10 @@ export async function generateMetadata({ params }: { params: Promise<Params> }) 
 export default async function ExamSectionPage({ params }: { params: Promise<Params> }) {
   const { slug, section } = await params;
 
-  // An unknown section is a 404, not a redirect. /exam/jee-main/syllabus does
-  // not exist yet, and saying so honestly is better than silently sending the
-  // visitor somewhere they did not ask for.
-  if (!isExamSection(section)) notFound();
+  // An unknown section is a 404, not a redirect, and so is a written section
+  // nobody has written for this exam yet. /exam/neet/syllabus does not exist,
+  // and saying so honestly is better than a heading over an empty page.
+  if (!isExamSection(section) || !hasSection(slug, section)) notFound();
 
   const exam = await getExam<ExamDetailDto>(slug);
   if (!exam) notFound();
@@ -182,6 +200,9 @@ export default async function ExamSectionPage({ params }: { params: Promise<Para
   const guide =
     section === 'previous-year-papers' && papers.length > 0 ? PAPER_GUIDES[exam.slug] : undefined;
 
+  const written = isEditorialSection(section) ? examContent(exam.slug, section) : undefined;
+  const faqs = written?.faqs ?? guide?.faqs;
+
   return (
     <>
       <JsonLd
@@ -195,17 +216,20 @@ export default async function ExamSectionPage({ params }: { params: Promise<Para
             conductingBody: exam.conductingBody,
             officialWebsite: exam.officialWebsite,
           }),
-          ...(guide ? [faqSchema(guide.faqs)] : []),
+          ...(faqs ? [faqSchema(faqs)] : []),
         ]}
       />
 
       <PageHero
         trail={trail}
         badges={
-          <EntityBadge kind={section === 'result' ? 'result' : 'paper'} label={config.label} />
+          <EntityBadge
+            kind={section === 'result' ? 'result' : section === 'syllabus' ? 'syllabus' : 'paper'}
+            label={config.label}
+          />
         }
         title={heading}
-        lede={config.blurb}
+        lede={written?.lede ?? config.blurb}
         meta={
           // `conductingBody` is nullable — "we have not sourced this yet" is a
           // real state, and the hub page already handles it. This did not,
@@ -218,12 +242,48 @@ export default async function ExamSectionPage({ params }: { params: Promise<Para
                 Conducted by <strong className="text-ink">{exam.conductingBody}</strong>
               </span>
             ) : null}
-            <LastUpdated iso={exam.updatedAt} />
+            <LastUpdated iso={written?.checkedOn ?? exam.updatedAt} />
           </>
         }
       />
 
       <Wrap>
+        {written ? (
+          <>
+            {/* Where this page comes from, before anything it says. The badge
+              is "Official" because the link beside it is the conducting
+              body's own document, and the type will not let it render
+              without one. */}
+            <div data-reveal className="card mt-10 p-5">
+              <Provenance
+                confidence="official"
+                sourceUrl={written.source.url}
+                sourceName={written.source.name}
+              />
+              {written.cycleNote ? (
+                <p className="mt-2 max-w-[72ch] text-[13.5px] text-ink-mute">{written.cycleNote}</p>
+              ) : null}
+            </div>
+
+            {written.parts.map((part, index) => (
+              <Section key={part.title} title={part.title} major={index === 0}>
+                <ContentBlocks blocks={part.blocks} />
+              </Section>
+            ))}
+
+            <Section title="Questions students ask">
+              <dl className="grid max-w-[72ch] gap-5">
+                {written.faqs.map((faq) => (
+                  <div key={faq.question} data-reveal>
+                    <dt className="text-[16px] font-semibold text-ink">{faq.question}</dt>
+                    <dd className="mt-1.5 text-[15px] text-ink-soft">{faq.answer}</dd>
+                  </div>
+                ))}
+              </dl>
+            </Section>
+          </>
+        ) : null}
+
         {/* The date this page exists to answer, stated once and sourced. */}
         {SECTION_EVENT[section as ExamSection] ? (
           <Section title={`${config.label} date`} major>
@@ -411,16 +471,22 @@ export default async function ExamSectionPage({ params }: { params: Promise<Para
                 <span className="mt-1 block text-[13.5px] text-ink-soft">Dates and summary</span>
               </Link>
             </li>
-            {Object.entries(EXAM_SECTIONS)
-              .filter(([key]) => key !== section)
-              .map(([key, cfg]) => (
+            {/* Only the sections this exam has — a written section with no
+              content for this exam is a 404, and must not be linked. */}
+            {sectionsFor(exam.slug)
+              .filter((key) => key !== section)
+              .map((key) => (
                 <li key={key} data-reveal>
-                  <Link href={cfg.path(exam.slug)} data-tilt className="card block h-full p-5">
+                  <Link
+                    href={EXAM_SECTIONS[key].path(exam.slug)}
+                    data-tilt
+                    className="card block h-full p-5"
+                  >
                     <span className="font-display text-[16px] font-semibold text-ink">
-                      {cfg.label}
+                      {EXAM_SECTIONS[key].label}
                     </span>
                     <span className="mt-1 block text-[13.5px] text-ink-soft">
-                      {cfg.label === 'Previous year papers' ? 'Year-wise PDFs' : `${year} dates`}
+                      {MORE_HINT[key] ?? `${year} dates`}
                     </span>
                   </Link>
                 </li>
