@@ -19,6 +19,7 @@ import {
 import { ArrowRightIcon, ArrowUpRightIcon, PlusIcon } from '@/components/icons';
 import { PageHero } from '@/components/page-hero';
 import { getExam } from '@/lib/api';
+import { expectedFor } from '@/lib/exam-expected';
 import { EXAM_SECTIONS, sectionsFor, type ExamSection } from '@/lib/exam-sections';
 import { JsonLd, breadcrumbSchema, examPageSchema, faqSchema } from '@/lib/seo/json-ld';
 import { buildMetadata } from '@/lib/seo/metadata';
@@ -207,6 +208,13 @@ export default async function ExamPage({ params }: { params: Promise<Params> }) 
   const closingIn = daysUntil(deadline);
   const isClosingSoon = closingIn !== null && closingIn >= 0 && closingIn <= 14;
 
+  // Our own estimate, used ONLY for a tile the authority has left empty. An
+  // official date always wins; see lib/exam-expected.ts for the rules.
+  const expected = expectedFor(exam.slug, year);
+  const expectedRegistration = !deadline && !applicationOpens ? expected?.registration : undefined;
+  const expectedResult = !eventDate(result) ? expected?.result : undefined;
+  const showsEstimate = Boolean(expectedRegistration ?? expectedResult);
+
   // What we can honestly claim about where these dates came from.
   //
   // "Official" requires BOTH dates and a source to point at. Without either,
@@ -345,11 +353,14 @@ export default async function ExamPage({ params }: { params: Promise<Params> }) 
                   ? `Ends ${formatDate(deadline)}`
                   : applicationOpens
                     ? `Opens ${formatDate(eventDate(applicationOpens))}`
-                    : 'To be announced',
+                    : (expectedRegistration?.label ?? 'To be announced'),
                 tone: isClosingSoon ? 'urgent' : 'plain',
               },
               { label: 'Exam', value: formatSpan(examDate) },
-              { label: 'Result', value: formatDate(eventDate(result)) },
+              {
+                label: 'Result',
+                value: expectedResult?.label ?? formatDate(eventDate(result)),
+              },
               {
                 label: 'Cycle',
                 value: cycle?.sessionName ? `${year} · ${cycle.sessionName}` : String(year),
@@ -380,6 +391,32 @@ export default async function ExamPage({ params }: { params: Promise<Params> }) 
               sourceName={exam.conductingBody}
             />
           )}
+
+          {/* A second, separate line for anything above that is OUR guess.
+                It never shares a badge with the official dates: a student has
+                to be able to tell which tiles they can plan around. */}
+          {showsEstimate && expected ? (
+            <div className="mt-3 max-w-[78ch]">
+              <Provenance confidence="estimated" />
+              <p className="mt-1.5 text-[13.5px] text-ink-soft">
+                {expected.basis} Based on{' '}
+                {expected.sources.map((source, index) => (
+                  <span key={source.url}>
+                    {index > 0 ? ' and ' : ''}
+                    <a
+                      href={source.url}
+                      className="underline"
+                      rel="nofollow noopener"
+                      target="_blank"
+                    >
+                      {source.name}
+                    </a>
+                  </span>
+                ))}
+                .
+              </p>
+            </div>
+          ) : null}
         </div>
       </PageHero>
 

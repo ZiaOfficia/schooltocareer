@@ -1,0 +1,23 @@
+[
+  {
+    "source": {
+      "name": "NTA — Examination Calendar up to March 2027 (public notice, 16 Sep 2026)",
+      "authority": "NTA",
+      "url": "https://www.nta.ac.in/Download/Notice/Notice_20260916195948.pdf",
+      "kind": "PDF"
+    },
+    "readOn": "2026-10-08",
+    "observations": [
+      {
+        "examSlug": "jee-main",
+        "cycleYear": 2027,
+        "factType": "EXAM_DATE",
+        "rawValue": "22 – 24, 28 – 30 Jan 2027 (buffer: 31 Jan 2027)",
+        "normalizedValue": "2027-01-22/2027-01-30",
+        "isTentative": true,
+        "confidence": "MEDIUM",
+        "evidence": "Page 2, \"Examination Calendar 2027\", January 2027, row 9: \"JEE (Main) — Session 1 (January) | 22 – 24, 28 – 30 Jan 2027 (buffer: 31 Jan 2027) | 6 Days\". Footnote on the same page: \"Dates are tentative and may undergo changes owing to administrative, academic, statutory, logistical or other unforeseen circumstances.\" This covers Session 1 only; the calendar stops at March 2027. Read by eye from a scanned notice, which the fetcher cannot parse — open the PDF and check the row before approving."
+      }
+    ]
+  }
+]
