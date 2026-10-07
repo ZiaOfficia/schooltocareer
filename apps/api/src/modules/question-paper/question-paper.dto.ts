@@ -1,5 +1,5 @@
 import { ROUTES } from '@stc/constants';
-import type { Locale, PaperListItemDto, PaperType, PublishStatus } from '@stc/types';
+import type { PaperDetailDto, PaperListItemDto } from '@stc/types';
 import { formatBytes, toIsoDate } from '@stc/utils';
 
 import type { PaperListRecord, PaperRecord } from './question-paper.types.js';
@@ -12,28 +12,11 @@ import type { PaperListRecord, PaperRecord } from './question-paper.types.js';
  * it sees a download link.
  */
 
-export type PaperFileDto = {
-  role: string;
-  locale: Locale;
-  url: string;
-  sizeLabel: string | null;
-  pageCount: number | null;
-  version: number;
-};
-
-/** Shape lives in @stc/types so apps/web consumes the same definition.
+/** Shapes live in @stc/types so apps/web consumes the same definition.
  *  The MAPPERS stay here — turning a row into the public shape is API work. */
-export type { PaperListItemDto } from '@stc/types';
+export type { PaperFileDto, PaperListItemDto } from '@stc/types';
 
-export type PaperDto = PaperListItemDto & {
-  totalQuestions: number | null;
-  totalMarks: number | null;
-  durationMin: number | null;
-  board: { id: string; slug: string; shortName: string; path: string } | null;
-  files: PaperFileDto[];
-  createdAt: string;
-  updatedAt: string;
-};
+export type PaperDto = PaperDetailDto;
 
 export function toPaperListItemDto(record: PaperListRecord): PaperListItemDto {
   return {

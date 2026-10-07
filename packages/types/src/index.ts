@@ -6,3 +6,4 @@ export * from './auth.js';
 export * from './common.js';
 export * from './dto/exam.js';
 export * from './dto/listings.js';
+export * from './dto/paper.js';

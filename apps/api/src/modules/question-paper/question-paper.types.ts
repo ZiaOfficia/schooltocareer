@@ -1,8 +1,8 @@
-import type { Locale, PaperType, PublishStatus, SortDirection } from '@stc/types';
+import type { Locale, PaperFileRole, PaperType, PublishStatus, SortDirection } from '@stc/types';
 
 export type PaperFileRecord = {
   id: string;
-  fileRole: string;
+  fileRole: PaperFileRole;
   locale: Locale;
   version: number;
   publishedAt: Date | null;

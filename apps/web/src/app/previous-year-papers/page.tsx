@@ -24,7 +24,7 @@ export default async function PapersIndex() {
   try {
     // Newest first — a paper's value decays with age, so the default order
     // should match what most people are looking for.
-    papers = await listPapers<PaperListItemDto>('limit=60&sort=year&dir=desc');
+    papers = await listPapers<PaperListItemDto>('perPage=60&sortBy=year&sortDir=desc');
   } catch (error) {
     if (!(error instanceof ApiError)) throw error;
     failed = true;

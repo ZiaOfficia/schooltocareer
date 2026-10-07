@@ -7,9 +7,10 @@ import { EntityBadge, LastUpdated, Provenance, Section, StatusStamp, Wrap } from
 
 import { ArrowUpRightIcon } from '@/components/icons';
 import { PageHero } from '@/components/page-hero';
-import { ApiError, getExam, listPapers, listResults } from '@/lib/api';
+import { ApiError, getExam, listAllPapers, listResults } from '@/lib/api';
 import { EXAM_SECTIONS, SECTION_EVENT, isExamSection, type ExamSection } from '@/lib/exam-sections';
-import { JsonLd, breadcrumbSchema, examPageSchema } from '@/lib/seo/json-ld';
+import { PAPER_GUIDES } from '@/lib/paper-guides';
+import { JsonLd, breadcrumbSchema, examPageSchema, faqSchema } from '@/lib/seo/json-ld';
 import { buildMetadata } from '@/lib/seo/metadata';
 
 /**
@@ -60,7 +61,28 @@ function groupByYear(papers: readonly PaperListItemDto[]): Array<[number, PaperL
     if (bucket) bucket.push(paper);
     else byYear.set(paper.year, [paper]);
   }
-  return [...byYear.entries()];
+  return [...byYear.entries()].map(([year, forYear]) => [year, [...forYear].sort(byExamDate)]);
+}
+
+/**
+ * Within a year, newest sitting first.
+ *
+ * The API sorts by year only, so a year's 30 shifts arrive in no useful order.
+ * Where `shift` opens with a date ("27 Jan 2024, Shift 1") that date decides;
+ * papers without one fall back to their title, which keeps the order stable.
+ */
+function byExamDate(a: PaperListItemDto, b: PaperListItemDto): number {
+  const diff = examDateOf(b) - examDateOf(a);
+  if (diff !== 0) return diff;
+  return (a.shift ?? a.title).localeCompare(b.shift ?? b.title, 'en', {
+    numeric: true,
+  });
+}
+
+function examDateOf(paper: PaperListItemDto): number {
+  const match = paper.shift?.match(/^\d{1,2} [A-Za-z]{3,9} \d{4}/);
+  const time = match ? Date.parse(`${match[0]} UTC`) : Number.NaN;
+  return Number.isNaN(time) ? 0 : time;
 }
 
 function formatDate(iso: string | null): string {
@@ -128,8 +150,11 @@ export default async function ExamSectionPage({ params }: { params: Promise<Para
   let results: ResultListItemDto[] = [];
   try {
     if (section === 'previous-year-papers') {
-      papers = await listPapers<PaperListItemDto>(
-        `limit=40&sort=year&dir=desc&examId=${encodeURIComponent(exam.id)}`,
+      // Every paper, not one page of them: the API ignores `limit` and returns
+      // 20 rows by default, so the old `limit=40` request would have shown a
+      // fraction of an exam's papers under a heading that counted them.
+      papers = await listAllPapers<PaperListItemDto>(
+        `sortBy=year&sortDir=desc&examId=${encodeURIComponent(exam.id)}`,
       );
     } else if (section === 'result') {
       results = await listResults<ResultListItemDto>(
@@ -152,6 +177,11 @@ export default async function ExamSectionPage({ params }: { params: Promise<Para
 
   const sourceUrl = event?.officialUrl ?? exam.officialWebsite;
 
+  // Written guidance exists per exam, and only where we have papers to go with
+  // it — advice on using papers above an empty list is the thin page again.
+  const guide =
+    section === 'previous-year-papers' && papers.length > 0 ? PAPER_GUIDES[exam.slug] : undefined;
+
   return (
     <>
       <JsonLd
@@ -165,6 +195,7 @@ export default async function ExamSectionPage({ params }: { params: Promise<Para
             conductingBody: exam.conductingBody,
             officialWebsite: exam.officialWebsite,
           }),
+          ...(guide ? [faqSchema(guide.faqs)] : []),
         ]}
       />
 
@@ -274,18 +305,28 @@ export default async function ExamSectionPage({ params }: { params: Promise<Para
                       {forYear.length} {forYear.length === 1 ? 'paper' : 'papers'}
                     </span>
                   </h3>
-                  <ul className="grid gap-3 sm:grid-cols-2">
+                  <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                     {forYear.map((paper) => (
                       <li key={paper.id} data-reveal>
                         <Link
                           href={paper.path}
                           data-tilt
-                          className="card flex flex-col gap-1.5 p-4"
+                          className="card flex h-full flex-col gap-1.5 p-4"
                         >
-                          <span className="text-[15px] font-semibold text-ink">{paper.title}</span>
+                          {/* Under a year heading on the exam's own page, the
+                            exam name and year in a title are noise repeated on
+                            every card. The sitting is what tells two cards
+                            apart, so it leads where we have it. */}
+                          <span className="text-[15px] font-semibold text-ink">
+                            {paper.shift ?? paper.title}
+                          </span>
                           <span className="num text-[12.5px] text-ink-mute">
-                            {paper.shift ? `${paper.shift}` : 'All shifts'}
-                            {paper.hasSolution ? ' · solved' : ''}
+                            {[
+                              paper.setCode ?? (paper.shift ? 'Question paper' : 'All shifts'),
+                              paper.hasSolution ? 'solved' : null,
+                            ]
+                              .filter(Boolean)
+                              .join(' · ')}
                           </span>
                         </Link>
                       </li>
@@ -295,6 +336,38 @@ export default async function ExamSectionPage({ params }: { params: Promise<Para
               ))
             )}
           </Section>
+        ) : null}
+
+        {guide ? (
+          <>
+            {guide.sections.map((part) => (
+              <Section key={part.title} title={part.title}>
+                <div data-reveal className="grid max-w-[72ch] gap-4 text-[15.5px] text-ink-soft">
+                  {part.paragraphs.map((text) => (
+                    <p key={text}>{text}</p>
+                  ))}
+                  {part.points ? (
+                    <ul className="grid list-disc gap-2 pl-5">
+                      {part.points.map((point) => (
+                        <li key={point}>{point}</li>
+                      ))}
+                    </ul>
+                  ) : null}
+                </div>
+              </Section>
+            ))}
+
+            <Section title="Questions students ask">
+              <dl className="grid max-w-[72ch] gap-5">
+                {guide.faqs.map((faq) => (
+                  <div key={faq.question} data-reveal>
+                    <dt className="text-[16px] font-semibold text-ink">{faq.question}</dt>
+                    <dd className="mt-1.5 text-[15px] text-ink-soft">{faq.answer}</dd>
+                  </div>
+                ))}
+              </dl>
+            </Section>
+          </>
         ) : null}
 
         {section === 'result' ? (

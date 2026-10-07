@@ -128,6 +128,36 @@ export async function listPapers<T>(query = ''): Promise<T[]> {
   return result?.data ?? [];
 }
 
+/** The API caps a page at 100 rows (PAGINATION.MAX_PER_PAGE). */
+const PAPERS_PER_PAGE = 100;
+
+/**
+ * Every published paper matching `query`, not just the first page.
+ *
+ * An exam with two sessions and two shifts a day passes 100 papers in a few
+ * years, so one request cannot hold them. `maxPages` bounds the loop: a wrong
+ * `totalPages` from the API must not turn a page render into a crawl.
+ */
+export async function listAllPapers<T>(query = '', maxPages = 5): Promise<T[]> {
+  const all: T[] = [];
+  for (let page = 1; page <= maxPages; page += 1) {
+    const result = await requestOptional<Envelope<T[]>>(
+      `${API_ROUTES.papers}?perPage=${PAPERS_PER_PAGE}&page=${page}${query ? `&${query}` : ''}`,
+      { tags: [CACHE_TAGS.entityList('QUESTION_PAPER')] },
+    );
+    all.push(...(result?.data ?? []));
+    if (!result?.meta?.hasNext) break;
+  }
+  return all;
+}
+
+export async function getPaper<T>(slug: string): Promise<T | null> {
+  const result = await requestOptional<Envelope<T>>(API_ROUTES.paper(slug), {
+    tags: [CACHE_TAGS.entity('QUESTION_PAPER', slug)],
+  });
+  return result?.data ?? null;
+}
+
 export async function listBoards<T>(query = ''): Promise<T[]> {
   const result = await requestOptional<Envelope<T[]>>(
     `${API_ROUTES.boards}${query ? `?${query}` : ''}`,
