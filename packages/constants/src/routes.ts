@@ -41,6 +41,7 @@ export const ROUTES = {
   result: (result: string) => `/results/${result}`,
 
   blog: () => '/blog',
+  ntaCalendar: () => '/nta-exam-calendar',
   blogCategory: (category: string) => `/blog/${category}`,
   blogPost: (category: string, post: string) => `/blog/${category}/${post}`,
 

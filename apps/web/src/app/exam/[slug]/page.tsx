@@ -20,6 +20,7 @@ import { ArrowRightIcon, ArrowUpRightIcon, PlusIcon } from '@/components/icons';
 import { PageHero } from '@/components/page-hero';
 import { getExam } from '@/lib/api';
 import { expectedFor } from '@/lib/exam-expected';
+import { isOnNtaCalendar } from '@/lib/nta-calendar';
 import { EXAM_SECTIONS, sectionsFor, type ExamSection } from '@/lib/exam-sections';
 import { JsonLd, breadcrumbSchema, examPageSchema, faqSchema } from '@/lib/seo/json-ld';
 import { buildMetadata } from '@/lib/seo/metadata';
@@ -416,6 +417,19 @@ export default async function ExamPage({ params }: { params: Promise<Params> }) 
                 .
               </p>
             </div>
+          ) : null}
+
+          {/* NTA's calendar names this exam: point at the table and the
+                notice, so a visitor can see the proposed date in NTA's own
+                words even before it has been reviewed into the tiles above. */}
+          {isOnNtaCalendar(exam.slug) ? (
+            <p className="mt-3 text-[13.5px] text-ink-soft">
+              NTA has listed this exam in its calendar up to March 2027.{' '}
+              <Link href={ROUTES.ntaCalendar()} className="underline">
+                See the calendar and download the notice
+              </Link>
+              .
+            </p>
           ) : null}
         </div>
       </PageHero>

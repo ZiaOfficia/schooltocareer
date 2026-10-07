@@ -50,6 +50,7 @@ const STATIC_ROUTES = [
   ROUTES.papers(),
   ROUTES.results(),
   ROUTES.blog(),
+  ROUTES.ntaCalendar(),
 ] as const;
 
 /**
