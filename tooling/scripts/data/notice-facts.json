@@ -17,6 +17,16 @@
         "isTentative": true,
         "confidence": "MEDIUM",
         "evidence": "Page 2, \"Examination Calendar 2027\", January 2027, row 9: \"JEE (Main) — Session 1 (January) | 22 – 24, 28 – 30 Jan 2027 (buffer: 31 Jan 2027) | 6 Days\". Footnote on the same page: \"Dates are tentative and may undergo changes owing to administrative, academic, statutory, logistical or other unforeseen circumstances.\" This covers Session 1 only; the calendar stops at March 2027. Read by eye from a scanned notice, which the fetcher cannot parse — open the PDF and check the row before approving."
+      },
+      {
+        "examSlug": "nift",
+        "cycleYear": 2027,
+        "factType": "EXAM_DATE",
+        "rawValue": "10 January 2027",
+        "normalizedValue": "2027-01-10",
+        "isTentative": true,
+        "confidence": "MEDIUM",
+        "evidence": "Page 2, \"Examination Calendar 2027\", January 2027, row 8: \"NIFT Entrance Examination | 10 January 2027 | 1 Day\". Footnote on the same page: \"Dates are tentative and may undergo changes owing to administrative, academic, statutory, logistical or other unforeseen circumstances.\" Read by eye from a scanned notice, which the fetcher cannot parse — open the PDF and check the row before approving."
       }
     ]
   }
