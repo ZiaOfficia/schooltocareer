@@ -4,6 +4,7 @@ import { ROUTES, SITE } from '@stc/constants';
 import { Wrap } from '@stc/ui';
 
 import { Logo } from '@/components/logo';
+import { LIVE } from '@/lib/site-sections';
 
 /**
  * ONLY routes that resolve.
@@ -27,17 +28,18 @@ const GROUPS = [
     links: [
       { label: 'All exams', href: ROUTES.exams() },
       { label: 'Previous year papers', href: ROUTES.papers() },
-      { label: 'Results', href: ROUTES.results() },
+      { label: 'NTA exam calendar', href: ROUTES.ntaCalendar() },
+      ...(LIVE.results ? [{ label: 'Results', href: ROUTES.results() }] : []),
     ],
   },
   {
     title: 'Boards',
     links: [
       { label: 'All boards', href: ROUTES.boards() },
-      { label: 'Articles', href: ROUTES.blog() },
+      ...(LIVE.blog ? [{ label: 'Articles', href: ROUTES.blog() }] : []),
     ],
   },
-] as const;
+];
 
 export function SiteFooter() {
   return (

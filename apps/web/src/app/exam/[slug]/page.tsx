@@ -20,10 +20,10 @@ import {
 
 import { ArrowRightIcon, ArrowUpRightIcon, PlusIcon } from '@/components/icons';
 import { PageHero } from '@/components/page-hero';
-import { getExam } from '@/lib/api';
+import { examHoldings, getExam } from '@/lib/api';
 import { expectedFor } from '@/lib/exam-expected';
 import { isOnNtaCalendar } from '@/lib/nta-calendar';
-import { EXAM_SECTIONS, sectionsFor, type ExamSection } from '@/lib/exam-sections';
+import { EXAM_SECTIONS, liveSections, type ExamSection } from '@/lib/exam-sections';
 import { JsonLd, breadcrumbSchema, examPageSchema, faqSchema } from '@/lib/seo/json-ld';
 import { buildMetadata } from '@/lib/seo/metadata';
 
@@ -289,7 +289,8 @@ export default async function ExamPage({ params }: { params: Promise<Params> }) 
    * The sitemap had already been moved onto this registry for exactly this
    * reason. The page had not, which is how the two came to disagree again.
    */
-  const clusterLinks = sectionsFor(exam.slug).map((key) => ({
+  const holdings = await examHoldings(exam.id);
+  const clusterLinks = liveSections(exam, holdings).map((key) => ({
     label: EXAM_SECTIONS[key].label,
     href: EXAM_SECTIONS[key].path(exam.slug),
     note: SECTION_NOTE[key],
@@ -441,9 +442,9 @@ export default async function ExamPage({ params }: { params: Promise<Params> }) 
           className="mt-10"
           items={contentsOf([
             exam.overview ? `About ${exam.shortName}` : null,
-            `Everything about ${exam.shortName}`,
+            clusterLinks.length > 0 ? `Everything about ${exam.shortName}` : null,
             'Important dates',
-            'Previous year question papers',
+            holdings.papers > 0 ? 'Previous year question papers' : null,
             'Frequently asked questions',
             'Official source',
           ])}
@@ -462,27 +463,31 @@ export default async function ExamPage({ params }: { params: Promise<Params> }) 
 
         {/* PHASE 2 — the knowledge cluster, made navigable. Each of these is a
             page that links back here, so the hub is the centre of the cluster
-            rather than one more leaf. */}
-        <Section
-          title={`Everything about ${exam.shortName}`}
-          lede="Each section is a full page, kept current with the official notification."
-          major
-        >
-          <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {clusterLinks.map((link) => (
-              <li key={link.href} data-reveal>
-                <Link href={link.href} data-tilt className="card flex h-full flex-col gap-3 p-5">
-                  <EntityMark kind={link.kind} />
-                  <span className="mt-1 flex items-center justify-between gap-2 font-display text-[16.5px] font-semibold text-ink">
-                    {link.label}
-                    <ArrowRightIcon width={16} height={16} className="card-arrow text-ink-mute" />
-                  </span>
-                  <span className="text-[13.5px] text-ink-soft">{link.note}</span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </Section>
+            rather than one more leaf. Shown only when there is at least one
+            section with something on it — an "Everything about" heading over
+            nothing is worse than no heading. */}
+        {clusterLinks.length > 0 ? (
+          <Section
+            title={`Everything about ${exam.shortName}`}
+            lede="Each section is a full page, kept current with the official notification."
+            major
+          >
+            <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {clusterLinks.map((link) => (
+                <li key={link.href} data-reveal>
+                  <Link href={link.href} data-tilt className="card flex h-full flex-col gap-3 p-5">
+                    <EntityMark kind={link.kind} />
+                    <span className="mt-1 flex items-center justify-between gap-2 font-display text-[16.5px] font-semibold text-ink">
+                      {link.label}
+                      <ArrowRightIcon width={16} height={16} className="card-arrow text-ink-mute" />
+                    </span>
+                    <span className="text-[13.5px] text-ink-soft">{link.note}</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </Section>
+        ) : null}
 
         <Section
           title="Important dates"
@@ -547,17 +552,20 @@ export default async function ExamPage({ params }: { params: Promise<Params> }) 
           )}
         </Section>
 
-        <Section
-          title="Previous year question papers"
-          lede="Where we hold them: year-wise and shift-wise PDFs, free and without registration. Solutions are included where an official answer key was published."
-          actions={
-            <Link href={ROUTES.examPapers(exam.slug)} className="btn btn-ghost">
-              All {exam.shortName} papers
-              <ArrowRightIcon width={16} height={16} />
-            </Link>
-          }
-        >
-          {/* Year tiles jump to an ANCHOR on the papers page, not to a
+        {/* Only when we hold papers: the papers page is a 404 otherwise, and
+            every tile below would lead to it. */}
+        {holdings.papers > 0 ? (
+          <Section
+            title="Previous year question papers"
+            lede="Where we hold them: year-wise and shift-wise PDFs, free and without registration. Solutions are included where an official answer key was published."
+            actions={
+              <Link href={ROUTES.examPapers(exam.slug)} className="btn btn-ghost">
+                All {exam.shortName} papers
+                <ArrowRightIcon width={16} height={16} />
+              </Link>
+            }
+          >
+            {/* Year tiles jump to an ANCHOR on the papers page, not to a
               per-year URL.
 
               They used to use ROUTES.examPapersByYear, which builds
@@ -571,23 +579,24 @@ export default async function ExamPage({ params }: { params: Promise<Params> }) 
               An anchor is also the better answer on its own merits: a per-year
               page for an exam we hold no papers for would be a thin page, and
               there would be one for every exam-year pair. */}
-          <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
-            {exam.years.slice(0, 6).map((y) => (
-              <li key={y.id} data-reveal>
-                <Link
-                  href={`${ROUTES.examPapers(exam.slug)}#year-${y.year}`}
-                  data-tilt
-                  className="card flex flex-col gap-0.5 p-4"
-                >
-                  <span className="num text-[20px] font-bold text-ink">{y.year}</span>
-                  <span className="text-[12.5px] text-ink-mute">
-                    {y.sessionName ?? 'All sessions'}
-                  </span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </Section>
+            <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+              {exam.years.slice(0, 6).map((y) => (
+                <li key={y.id} data-reveal>
+                  <Link
+                    href={`${ROUTES.examPapers(exam.slug)}#year-${y.year}`}
+                    data-tilt
+                    className="card flex flex-col gap-0.5 p-4"
+                  >
+                    <span className="num text-[20px] font-bold text-ink">{y.year}</span>
+                    <span className="text-[12.5px] text-ink-mute">
+                      {y.sessionName ?? 'All sessions'}
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </Section>
+        ) : null}
 
         <Section
           title="Frequently asked questions"

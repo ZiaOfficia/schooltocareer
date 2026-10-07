@@ -151,6 +151,35 @@ export async function listAllPapers<T>(query = '', maxPages = 5): Promise<T[]> {
   return all;
 }
 
+/**
+ * How many published papers and results exist for one exam — the two numbers
+ * that decide whether those sections are pages or dead ends.
+ *
+ * One row each, read for its `meta.total`. A failed count is treated as zero:
+ * hiding a section for an hour is a smaller mistake than linking to an empty one.
+ */
+export async function examHoldings(examId: string): Promise<{ papers: number; results: number }> {
+  const total = async (route: string, tag: string): Promise<number> => {
+    try {
+      const result = await requestOptional<Envelope<unknown[]>>(
+        `${route}?perPage=1&examId=${encodeURIComponent(examId)}`,
+        { tags: [tag] },
+      );
+      const value = result?.meta?.total;
+      return typeof value === 'number' ? value : 0;
+    } catch (error) {
+      if (!(error instanceof ApiError)) throw error;
+      return 0;
+    }
+  };
+
+  const [papers, results] = await Promise.all([
+    total(API_ROUTES.papers, CACHE_TAGS.entityList('QUESTION_PAPER')),
+    total(API_ROUTES.results, CACHE_TAGS.entityList('RESULT')),
+  ]);
+  return { papers, results };
+}
+
 export async function getPaper<T>(slug: string): Promise<T | null> {
   const result = await requestOptional<Envelope<T>>(API_ROUTES.paper(slug), {
     tags: [CACHE_TAGS.entity('QUESTION_PAPER', slug)],

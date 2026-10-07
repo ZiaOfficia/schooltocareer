@@ -16,7 +16,7 @@ import {
 
 import { ArrowUpRightIcon } from '@/components/icons';
 import { PageHero } from '@/components/page-hero';
-import { ApiError, getExam, listAllPapers, listResults } from '@/lib/api';
+import { ApiError, examHoldings, getExam, listAllPapers, listResults } from '@/lib/api';
 import { ContentBlocks } from '@/components/content-blocks';
 import { examContent } from '@/lib/exam-content';
 import {
@@ -25,7 +25,7 @@ import {
   hasSection,
   isEditorialSection,
   isExamSection,
-  sectionsFor,
+  liveSections,
   type ExamSection,
 } from '@/lib/exam-sections';
 import { PAPER_GUIDES } from '@/lib/paper-guides';
@@ -133,6 +133,19 @@ export async function generateMetadata({ params }: { params: Promise<Params> }) 
   const heading = config.heading(exam.shortName, year);
   const written = isEditorialSection(section) ? examContent(exam.slug, section) : undefined;
 
+  const holdings = await examHoldings(exam.id);
+  if (!liveSections(exam, holdings).includes(section)) return {};
+
+  // A section is indexable on its own merit when it has real content: a
+  // written pattern or syllabus, or a papers page that lists papers under a
+  // written guide. Those are complete pages even while the exam's hub still
+  // waits on its dates. Everything else inherits the hub's readiness.
+  const standsAlone =
+    written !== undefined ||
+    (section === 'previous-year-papers' &&
+      holdings.papers > 0 &&
+      PAPER_GUIDES[exam.slug] !== undefined);
+
   return buildMetadata({
     template: 'exam',
     values: {
@@ -152,7 +165,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }) 
     //
     // This was missed when noindex was wired into the hub: the hubs went
     // noindex while all 80 section pages kept serving "index, follow".
-    noindex: !exam.isIndexable,
+    noindex: standsAlone ? false : !exam.isIndexable,
   });
 }
 
@@ -166,6 +179,12 @@ export default async function ExamSectionPage({ params }: { params: Promise<Para
 
   const exam = await getExam<ExamDetailDto>(slug);
   if (!exam) notFound();
+
+  // A section with nothing on it is a 404, the same as one that was never
+  // written. See liveSections() for why.
+  const holdings = await examHoldings(exam.id);
+  const live = liveSections(exam, holdings);
+  if (!live.includes(section)) notFound();
 
   const year = currentYear(exam);
   const config = EXAM_SECTIONS[section as ExamSection];
@@ -506,9 +525,9 @@ export default async function ExamSectionPage({ params }: { params: Promise<Para
                 <span className="mt-1 block text-[13.5px] text-ink-soft">Dates and summary</span>
               </Link>
             </li>
-            {/* Only the sections this exam has — a written section with no
-              content for this exam is a 404, and must not be linked. */}
-            {sectionsFor(exam.slug)
+            {/* Only the sections with something on them today: an empty
+              section is a 404, and must not be linked. */}
+            {live
               .filter((key) => key !== section)
               .map((key) => (
                 <li key={key} data-reveal>

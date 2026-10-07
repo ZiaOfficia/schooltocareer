@@ -1,10 +1,12 @@
 import type { MetadataRoute } from 'next';
 
 import { ROUTES, absoluteUrl } from '@stc/constants';
-import type { ExamListItemDto } from '@stc/types';
+import type { ExamDetailDto, ExamListItemDto } from '@stc/types';
 
-import { listExams } from '@/lib/api';
-import { EXAM_SECTIONS, sectionsFor } from '@/lib/exam-sections';
+import { examHoldings, getExam, listExams } from '@/lib/api';
+import { EXAM_SECTIONS, isEditorialSection, liveSections, sectionsFor } from '@/lib/exam-sections';
+import { PAPER_GUIDES } from '@/lib/paper-guides';
+import { LIVE } from '@/lib/site-sections';
 
 /**
  * ONE sitemap, served at /sitemap.xml.
@@ -48,10 +50,10 @@ const STATIC_ROUTES = [
   ROUTES.exams(),
   ROUTES.boards(),
   ROUTES.papers(),
-  ROUTES.results(),
-  ROUTES.blog(),
+  ...(LIVE.results ? [ROUTES.results()] : []),
+  ...(LIVE.blog ? [ROUTES.blog()] : []),
   ROUTES.ntaCalendar(),
-] as const;
+];
 
 /**
  * Cluster pages come from EXAM_SECTIONS — the SAME registry the route uses to
@@ -89,12 +91,31 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // on every crawl, and it is how this file came to advertise 100 exam URLs
   // built from placeholder seed data. `isIndexable` is computed once in the
   // API, so this filter and the page's own decision cannot drift apart.
-  const indexable = exams.filter((exam) => exam.isIndexable);
-
-  for (const exam of indexable) {
+  //
+  // The same two rules the section route applies, in the same order:
+  //   - a section must be LIVE (have something on it), or it is a 404;
+  //   - a live section is indexable if the exam is, OR if it stands alone —
+  //     a written pattern or syllabus, or a papers page with papers and a
+  //     written guide. Those are complete pages while the hub still waits.
+  for (const exam of exams) {
     const lastModified = new Date(exam.updatedAt);
+    const editorial = sectionsFor(exam.slug).filter(isEditorialSection);
+    const hasGuide = PAPER_GUIDES[exam.slug] !== undefined;
+
+    if (!exam.isIndexable) {
+      for (const section of editorial) {
+        entries.push({ url: absoluteUrl(EXAM_SECTIONS[section].path(exam.slug)), lastModified });
+      }
+      if (hasGuide && (await examHoldings(exam.id)).papers > 0) {
+        entries.push({ url: absoluteUrl(ROUTES.examPapers(exam.slug)), lastModified });
+      }
+      continue;
+    }
+
     entries.push({ url: absoluteUrl(exam.path), lastModified });
-    for (const section of sectionsFor(exam.slug)) {
+    const detail = await getExam<ExamDetailDto>(exam.slug);
+    if (!detail) continue;
+    for (const section of liveSections(detail, await examHoldings(exam.id))) {
       entries.push({ url: absoluteUrl(EXAM_SECTIONS[section].path(exam.slug)), lastModified });
     }
   }

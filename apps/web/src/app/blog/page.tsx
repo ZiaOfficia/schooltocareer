@@ -4,6 +4,7 @@ import type { PostListItemDto } from '@stc/types';
 import { IndexPage, type IndexItem } from '@/components/index-page';
 import { ApiError, listPosts } from '@/lib/api';
 import { buildMetadata } from '@/lib/seo/metadata';
+import { LIVE } from '@/lib/site-sections';
 
 export const revalidate = 3600;
 
@@ -15,6 +16,8 @@ export function generateMetadata() {
     title: 'Articles: Exam Strategy, Preparation & Guides',
     description:
       'Preparation strategy, subject guides and exam analysis for Indian entrance exams and school boards. Written to be useful, not to fill a keyword.',
+    // An empty list is not a page worth indexing. See lib/site-sections.ts.
+    noindex: !LIVE.blog,
   });
 }
 

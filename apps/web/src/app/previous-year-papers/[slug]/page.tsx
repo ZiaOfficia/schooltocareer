@@ -74,6 +74,12 @@ export async function generateMetadata({ params }: { params: Promise<Params> }) 
     title: `${paper.title} PDF`,
     description: `${paper.title}: free PDF download${hasKey ? ', with the official answer key' : ''}. No sign-up needed.`,
     modifiedTime: paper.updatedAt,
+    // A paper page is a title, a few facts and a download: useful to the
+    // student who clicks through, and far too little for a search result of
+    // its own. With 141 of them and little else indexable, they WERE the
+    // site as Google saw it. The exam's papers page, which lists them all
+    // with the written guide, is the page that should rank.
+    noindex: true,
   });
 }
 

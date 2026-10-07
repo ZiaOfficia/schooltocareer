@@ -14,6 +14,7 @@ import {
 import { Words } from '@/components/page-hero';
 import { Scene } from '@/components/scene';
 import { ApiError, listExams } from '@/lib/api';
+import { LIVE } from '@/lib/site-sections';
 import { buildMetadata } from '@/lib/seo/metadata';
 
 export const revalidate = 3600;
@@ -30,46 +31,61 @@ export function generateMetadata() {
 }
 
 /**
- * The five sections, as tiles. ONLY routes that resolve — the same rule the
- * footer follows, for the same reason.
+ * The sections, as tiles. ONLY routes that resolve AND have something in them
+ * — the same rule the header and footer follow, read from the same switch.
  */
-const BROWSE: ReadonlyArray<{
+const ALL_SECTIONS: ReadonlyArray<{
   kind: EntityKind;
   title: string;
   note: string;
   href: string;
+  live: boolean;
 }> = [
   {
     kind: 'exam',
     title: 'Exams',
     note: 'Dates and everything linked from them',
     href: ROUTES.exams(),
+    live: true,
   },
   {
     kind: 'board',
     title: 'Boards',
     note: 'National and state school boards',
     href: ROUTES.boards(),
+    live: true,
   },
   {
     kind: 'result',
     title: 'Results',
     note: 'Declared, or plainly marked awaited',
     href: ROUTES.results(),
+    live: LIVE.results,
   },
   {
     kind: 'paper',
     title: 'Papers',
     note: 'Previous year question papers',
     href: ROUTES.papers(),
+    live: true,
+  },
+  {
+    kind: 'exam',
+    title: 'Exam calendar',
+    note: 'NTA dates up to March 2027, as a table',
+    href: ROUTES.ntaCalendar(),
+    live: true,
   },
   {
     kind: 'article',
     title: 'Articles',
     note: 'Strategy and subject guides',
     href: ROUTES.blog(),
+    live: LIVE.blog,
   },
 ];
+
+const BROWSE = ALL_SECTIONS.filter((section) => section.live);
 
 /** What the hero already promises, said once each. No invented numbers. */
 const PROMISES = [
@@ -113,7 +129,7 @@ export default async function HomePage() {
           <div className="max-w-[640px]">
             <p data-reveal className="chip glass font-data text-[11px] uppercase tracking-[0.14em]">
               <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-accent" />
-              {SITE.COUNTRY === 'IN' ? 'India' : SITE.COUNTRY} · Exams · Boards · Results
+              {SITE.COUNTRY === 'IN' ? 'India' : SITE.COUNTRY} · Exams · Boards · Papers
             </p>
 
             <h1 data-words className="mt-6 text-[clamp(36px,7vw,68px)] leading-[1.02]">
@@ -126,28 +142,30 @@ export default async function HomePage() {
               without an account.
             </p>
 
-            <form
-              data-reveal
-              action={ROUTES.search()}
-              method="get"
-              role="search"
-              className="glass mt-8 flex max-w-[580px] items-center rounded-full p-1.5 pl-5 transition-colors focus-within:border-white/40"
-            >
-              <SearchIcon className="shrink-0 text-ink-mute" />
-              <label htmlFor="home-search" className="sr-only">
-                Search
-              </label>
-              <input
-                id="home-search"
-                name="q"
-                type="search"
-                placeholder="Try “JEE Main 2026” or “CBSE Class 10 Maths papers”"
-                className="min-w-0 flex-1 bg-transparent px-3 py-2.5 text-[16px] text-ink outline-none placeholder:text-ink-mute"
-              />
-              <button type="submit" className="btn btn-primary">
-                Search
-              </button>
-            </form>
+            {LIVE.search ? (
+              <form
+                data-reveal
+                action={ROUTES.search()}
+                method="get"
+                role="search"
+                className="glass mt-8 flex max-w-[580px] items-center rounded-full p-1.5 pl-5 transition-colors focus-within:border-white/40"
+              >
+                <SearchIcon className="shrink-0 text-ink-mute" />
+                <label htmlFor="home-search" className="sr-only">
+                  Search
+                </label>
+                <input
+                  id="home-search"
+                  name="q"
+                  type="search"
+                  placeholder="Try “JEE Main 2026” or “CBSE Class 10 Maths papers”"
+                  className="min-w-0 flex-1 bg-transparent px-3 py-2.5 text-[16px] text-ink outline-none placeholder:text-ink-mute"
+                />
+                <button type="submit" className="btn btn-primary">
+                  Search
+                </button>
+              </form>
+            ) : null}
 
             <ul data-reveal className="mt-6 flex flex-wrap gap-2">
               {BROWSE.map((item) => (
@@ -182,8 +200,8 @@ export default async function HomePage() {
           ))}
         </ul>
 
-        <Section title="Browse by section" lede="Five ways in. Each one opens a full list." major>
-          <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+        <Section title="Browse by section" lede="Each one opens a full list." major>
+          <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {BROWSE.map((item) => (
               <li key={item.href} data-reveal>
                 <Link href={item.href} data-tilt className="card flex h-full flex-col gap-3 p-5">

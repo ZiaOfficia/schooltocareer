@@ -106,3 +106,52 @@ export const SECTION_EVENT: Partial<Record<ExamSection, string>> = {
   'admit-card': 'ADMIT_CARD',
   'answer-key': 'ANSWER_KEY',
 };
+
+/** How many papers and results we hold for one exam. */
+export type ExamHoldings = { papers: number; results: number };
+
+/**
+ * THE SECTIONS AN EXAM ACTUALLY HAS RIGHT NOW.
+ *
+ * `sectionsFor` answers "could this exam have the section". This answers "is
+ * there anything on it today", and it is the one the route and every link use.
+ *
+ * It exists because the data-backed sections were rendered for every exam
+ * whether or not there was any data. Twenty exams times four sections came to
+ * about eighty pages, of which seventy-seven said only "not announced yet" or
+ * "no papers are published" under a heading. They were already noindex, but a
+ * page that exists to say it has nothing is still a page a visitor can land on
+ * and a reviewer can count — and "low value content" is what they counted.
+ *
+ * So an empty section is a 404 and is not linked. It comes back by itself the
+ * moment its data does: approve an admit-card date and that exam's admit-card
+ * page exists again, with no edit here.
+ */
+export function liveSections(
+  exam: {
+    slug: string;
+    years: ReadonlyArray<{
+      isCurrent: boolean;
+      events: ReadonlyArray<{
+        type: string;
+        startDate: string | null;
+        officialUrl?: string | null;
+      }>;
+    }>;
+  },
+  holdings: ExamHoldings,
+): ExamSection[] {
+  const events = (exam.years.find((year) => year.isCurrent) ?? exam.years[0])?.events ?? [];
+  const hasEvent = (type: string | undefined): boolean =>
+    type !== undefined &&
+    events.some(
+      (event) => event.type.toUpperCase() === type && Boolean(event.startDate ?? event.officialUrl),
+    );
+
+  return sectionsFor(exam.slug).filter((section) => {
+    if (isEditorialSection(section)) return true;
+    if (section === 'previous-year-papers') return holdings.papers > 0;
+    if (section === 'result') return holdings.results > 0 || hasEvent(SECTION_EVENT.result);
+    return hasEvent(SECTION_EVENT[section]);
+  });
+}
