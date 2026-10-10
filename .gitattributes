@@ -1,0 +1,7 @@
+# Store text with LF line endings whatever the editor uses, so diffs stay
+# about content. Windows checkouts get LF too; every tool here handles it.
+* text=auto eol=lf
+
+*.png binary
+*.ico binary
+*.pdf binary

@@ -20,8 +20,9 @@ import { Marked, type Tokens } from 'marked';
  * placeholder before Markdown runs and swapped back, typeset, afterwards.
  */
 
-const PLACEHOLDER = (i: number) => `\u0000M${i}\u0000`;
-const PLACEHOLDER_RE = /\u0000M(\d+)\u0000/g;
+// Private-use code points: never in real text, and not control characters.
+const PLACEHOLDER = (i: number) => `\uE000M${i}\uE001`;
+const PLACEHOLDER_RE = /\uE000M(\d+)\uE001/g;
 
 /** $$…$$ first (display), then $…$ (inline, single line, not "\$"). */
 const MATH_RE = /\$\$([\s\S]+?)\$\$|(?<!\\)\$((?:\\\$|[^$\n])+?)\$/g;

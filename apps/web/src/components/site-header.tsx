@@ -22,19 +22,17 @@ const NAV = [
  *
  * The search control is a plain <form> with a GET action, and the mobile menu
  * is a <details>, so both work before hydration and without JavaScript at all.
- * The hide-on-scroll behaviour and the reading-progress bar are driven from
- * outside by <Motion> through the `data-header` / `data-progress` hooks; if
- * that never runs, this is simply a sticky header.
+ * It is sticky and stays put: the way to every section is always on screen.
  */
 export function SiteHeader() {
   return (
-    <header data-header className="site-header sticky top-0 z-40">
+    <header className="site-header sticky top-0 z-40">
       <Wrap className="flex items-center gap-x-6 py-3">
         <Link href={ROUTES.home()} className="shrink-0 text-logo no-underline">
           <Logo className="h-[34px] w-auto" />
         </Link>
 
-        <nav aria-label="Primary" className="hidden gap-6 text-[14px] font-medium md:flex">
+        <nav aria-label="Primary" className="hidden gap-6 text-[15px] font-medium md:flex">
           {NAV.map((item) => (
             <Link key={item.href} href={item.href} className="nav-link">
               {item.label}
@@ -58,7 +56,7 @@ export function SiteHeader() {
               name="q"
               type="search"
               placeholder="Search exams, papers, results…"
-              className="min-w-0 flex-1 bg-transparent px-2.5 py-2 text-[13.5px] text-ink outline-none placeholder:text-ink-mute"
+              className="min-w-0 flex-1 bg-transparent px-2.5 py-2 text-[14.5px] text-ink outline-none placeholder:text-ink-mute"
             />
           </form>
         ) : null}
@@ -108,12 +106,6 @@ export function SiteHeader() {
           </div>
         </details>
       </Wrap>
-
-      <div
-        data-progress
-        aria-hidden="true"
-        className="scroll-progress absolute inset-x-0 bottom-0 h-[2px]"
-      />
     </header>
   );
 }

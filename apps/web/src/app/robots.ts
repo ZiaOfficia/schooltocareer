@@ -1,15 +1,15 @@
 import type { MetadataRoute } from 'next';
 
-import { NOINDEX_PATHS, SITE, absoluteUrl } from '@stc/constants';
 import { isIndexableDeployment } from '@stc/config';
+import { NOINDEX_PATHS, SITE, absoluteUrl } from '@stc/constants';
+
+import { deploymentEnv } from '@/lib/env';
 
 export const dynamic = 'force-static';
 
 export default function robots(): MetadataRoute.Robots {
-  const indexable = isIndexableDeployment({
-    NODE_ENV: process.env.NODE_ENV ?? 'development',
-    NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
-  });
+  const env = deploymentEnv();
+  const indexable = isIndexableDeployment(env);
 
   // A preview deployment must disallow everything. An indexed preview is
   // duplicate content pointing at a host that will disappear, and it competes
@@ -19,10 +19,10 @@ export default function robots(): MetadataRoute.Robots {
     // missing NEXT_PUBLIC_SITE_URL serves `Disallow: /` and looks completely
     // healthy — 200s everywhere, pages render, nothing errors — while being
     // invisible to every crawler. This line is the only warning you get.
-    if (process.env.NODE_ENV === 'production') {
+    if (env.NODE_ENV === 'production') {
       console.warn(
         `[robots] EMITTING "Disallow: /" — the entire site is blocked from crawlers.\n` +
-          `         NEXT_PUBLIC_SITE_URL is "${process.env.NEXT_PUBLIC_SITE_URL ?? '(unset)'}"\n` +
+          `         NEXT_PUBLIC_SITE_URL is "${env.NEXT_PUBLIC_SITE_URL ?? '(unset)'}"\n` +
           `         and must be exactly "${SITE.ORIGIN}" for this deployment to be indexable.\n` +
           `         If this IS a preview deployment, that is correct — ignore.`,
       );

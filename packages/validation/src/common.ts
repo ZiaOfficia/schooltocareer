@@ -1,4 +1,5 @@
 import { z } from 'zod';
+
 import { PAGINATION, SEO_LIMITS, RESERVED_SLUGS } from '@stc/constants';
 import { LOCALE, PUBLISH_STATUS } from '@stc/types';
 

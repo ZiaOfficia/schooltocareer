@@ -3,8 +3,6 @@ import type { ReactNode } from 'react';
 
 import { Wrap } from '@stc/ui';
 
-import { Scene } from '@/components/scene';
-
 export type Crumb = { name: string; path: string };
 
 /**
@@ -40,10 +38,8 @@ export function PageHero({
 }) {
   return (
     <div className="night hero-bg">
-      <Scene variant="waves" className="opacity-70" />
-
       <Wrap className="pb-12 pt-6 sm:pb-16">
-        <nav aria-label="Breadcrumb" className="text-[12.5px] text-ink-mute">
+        <nav aria-label="Breadcrumb" className="text-[14px] text-ink-mute">
           <ol className="flex flex-wrap items-center gap-x-1.5 gap-y-1">
             {trail.map((crumb, index) => (
               <li key={crumb.path} className="flex items-center gap-1.5">
@@ -66,33 +62,18 @@ export function PageHero({
         </nav>
 
         <header className="pt-8 sm:pt-10">
-          {badges ? (
-            <div data-reveal className="flex flex-wrap items-center gap-2">
-              {badges}
-            </div>
-          ) : null}
+          {badges ? <div className="flex flex-wrap items-center gap-2">{badges}</div> : null}
 
-          <h1 data-words className="mt-4 max-w-[24ch] text-[clamp(30px,5.4vw,52px)] leading-[1.06]">
-            <Words text={title} />
+          <h1 className="mt-4 max-w-[24ch] text-[clamp(30px,5.4vw,52px)] leading-[1.06]">
+            {title}
           </h1>
 
-          {subtitle ? (
-            <p data-reveal className="mt-2 text-[15px] text-ink-mute">
-              {subtitle}
-            </p>
-          ) : null}
+          {subtitle ? <p className="mt-2 text-[15px] text-ink-mute">{subtitle}</p> : null}
 
-          {lede ? (
-            <p data-reveal className="mt-4 max-w-[64ch] text-[16.5px] text-ink-soft">
-              {lede}
-            </p>
-          ) : null}
+          {lede ? <p className="mt-4 max-w-[64ch] text-[16.5px] text-ink-soft">{lede}</p> : null}
 
           {meta ? (
-            <div
-              data-reveal
-              className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-1 text-[13px] text-ink-soft"
-            >
+            <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-1 text-[14px] text-ink-soft">
               {meta}
             </div>
           ) : null}
@@ -101,29 +82,5 @@ export function PageHero({
         </header>
       </Wrap>
     </div>
-  );
-}
-
-/**
- * A headline split into words that can rise in one at a time.
- *
- * Split on the server, so the markup is identical with or without JavaScript
- * and a crawler reads an ordinary sentence. The spaces stay as real text
- * between the spans — that is what keeps it one sentence to a screen reader
- * and to copy-paste.
- */
-export function Words({ text, className = '' }: { text: string; className?: string }) {
-  const words = text.split(' ').filter(Boolean);
-  return (
-    <>
-      {words.map((word, index) => (
-        <span key={`${word}-${index}`}>
-          <span className="word">
-            <span className={`word-in ${className}`}>{word}</span>
-          </span>
-          {index < words.length - 1 ? ' ' : null}
-        </span>
-      ))}
-    </>
   );
 }

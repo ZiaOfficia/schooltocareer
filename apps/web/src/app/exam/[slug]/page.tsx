@@ -22,8 +22,8 @@ import { ArrowRightIcon, ArrowUpRightIcon, PlusIcon } from '@/components/icons';
 import { PageHero } from '@/components/page-hero';
 import { examHoldings, getExam } from '@/lib/api';
 import { expectedFor } from '@/lib/exam-expected';
-import { isOnNtaCalendar } from '@/lib/nta-calendar';
 import { EXAM_SECTIONS, liveSections, type ExamSection } from '@/lib/exam-sections';
+import { isOnNtaCalendar } from '@/lib/nta-calendar';
 import { JsonLd, breadcrumbSchema, examPageSchema, faqSchema } from '@/lib/seo/json-ld';
 import { buildMetadata } from '@/lib/seo/metadata';
 
@@ -402,7 +402,7 @@ export default async function ExamPage({ params }: { params: Promise<Params> }) 
           {showsEstimate && expected ? (
             <div className="mt-3 max-w-[78ch]">
               <Provenance confidence="estimated" />
-              <p className="mt-1.5 text-[13.5px] text-ink-soft">
+              <p className="mt-1.5 text-[14.5px] text-ink-soft">
                 {expected.basis} Based on{' '}
                 {expected.sources.map((source, index) => (
                   <span key={source.url}>
@@ -426,7 +426,7 @@ export default async function ExamPage({ params }: { params: Promise<Params> }) 
                 notice, so a visitor can see the proposed date in NTA's own
                 words even before it has been reviewed into the tiles above. */}
           {isOnNtaCalendar(exam.slug) ? (
-            <p className="mt-3 text-[13.5px] text-ink-soft">
+            <p className="mt-3 text-[14.5px] text-ink-soft">
               NTA has listed this exam in its calendar up to March 2027.{' '}
               <Link href={ROUTES.ntaCalendar()} className="underline">
                 See the calendar and download the notice
@@ -452,10 +452,7 @@ export default async function ExamPage({ params }: { params: Promise<Params> }) 
 
         {exam.overview ? (
           <Section title={`About ${exam.shortName}`} major>
-            <div
-              data-reveal
-              className="card max-w-[78ch] p-6 text-[16px] leading-relaxed text-ink-soft"
-            >
+            <div className="card max-w-[78ch] p-6 text-[16px] leading-relaxed text-ink-soft">
               {exam.overview}
             </div>
           </Section>
@@ -474,14 +471,14 @@ export default async function ExamPage({ params }: { params: Promise<Params> }) 
           >
             <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {clusterLinks.map((link) => (
-                <li key={link.href} data-reveal>
-                  <Link href={link.href} data-tilt className="card flex h-full flex-col gap-3 p-5">
+                <li key={link.href}>
+                  <Link href={link.href} className="card flex h-full flex-col gap-3 p-5">
                     <EntityMark kind={link.kind} />
                     <span className="mt-1 flex items-center justify-between gap-2 font-display text-[16.5px] font-semibold text-ink">
                       {link.label}
                       <ArrowRightIcon width={16} height={16} className="card-arrow text-ink-mute" />
                     </span>
-                    <span className="text-[13.5px] text-ink-soft">{link.note}</span>
+                    <span className="text-[14.5px] text-ink-soft">{link.note}</span>
                   </Link>
                 </li>
               ))}
@@ -494,7 +491,7 @@ export default async function ExamPage({ params }: { params: Promise<Params> }) 
           lede={`All announced ${exam.shortName} ${year} dates. Tentative entries are labelled — the agency has announced them but not finalised them.`}
         >
           {events.length === 0 ? (
-            <p data-reveal className="card border-dashed p-5 text-[14.5px] text-ink-soft">
+            <p className="card border-dashed p-5 text-[14.5px] text-ink-soft">
               {exam.conductingBody ?? 'The conducting body'} has not published the {year} schedule
               yet. This page updates when the official notification is released.
             </p>
@@ -507,7 +504,6 @@ export default async function ExamPage({ params }: { params: Promise<Params> }) 
                 return (
                   <li
                     key={event.id}
-                    data-reveal
                     className="card relative mb-3 flex flex-wrap items-center justify-between gap-x-4 gap-y-2 px-5 py-4"
                   >
                     <span
@@ -530,13 +526,13 @@ export default async function ExamPage({ params }: { params: Promise<Params> }) 
                           href={event.officialUrl}
                           rel="nofollow noopener"
                           target="_blank"
-                          className="ml-2 text-[12.5px] underline"
+                          className="ml-2 text-[14px] underline"
                         >
                           Official notice
                         </a>
                       ) : null}
                     </div>
-                    <div className="num shrink-0 text-[13.5px] text-ink-soft">
+                    <div className="num shrink-0 text-[14.5px] text-ink-soft">
                       {formatDate(event.startDate)}
                       {event.endDate && event.endDate !== event.startDate
                         ? ` – ${formatDate(event.endDate)}`
@@ -581,14 +577,13 @@ export default async function ExamPage({ params }: { params: Promise<Params> }) 
               there would be one for every exam-year pair. */}
             <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
               {exam.years.slice(0, 6).map((y) => (
-                <li key={y.id} data-reveal>
+                <li key={y.id}>
                   <Link
                     href={`${ROUTES.examPapers(exam.slug)}#year-${y.year}`}
-                    data-tilt
                     className="card flex flex-col gap-0.5 p-4"
                   >
                     <span className="num text-[20px] font-bold text-ink">{y.year}</span>
-                    <span className="text-[12.5px] text-ink-mute">
+                    <span className="text-[14px] text-ink-mute">
                       {y.sessionName ?? 'All sessions'}
                     </span>
                   </Link>
@@ -607,12 +602,7 @@ export default async function ExamPage({ params }: { params: Promise<Params> }) 
               it is the exam date, the question most visitors arrived with. */}
           <div className="grid gap-3">
             {faqs.map((faq, index) => (
-              <details
-                key={faq.question}
-                data-reveal
-                open={index === 0}
-                className="faq card px-5 py-4"
-              >
+              <details key={faq.question} open={index === 0} className="faq card px-5 py-4">
                 <summary className="flex items-center justify-between gap-4 text-[15.5px] font-semibold text-ink">
                   {faq.question}
                   <PlusIcon className="faq-mark shrink-0 text-brand" />
@@ -624,7 +614,7 @@ export default async function ExamPage({ params }: { params: Promise<Params> }) 
         </Section>
 
         <Section title="Official source">
-          <div data-reveal className="card p-6">
+          <div className="card p-6">
             <Eyebrow>Always confirm before a deadline</Eyebrow>
             <p className="mt-2 max-w-[70ch] text-[14.5px] text-ink-soft">
               {exam.conductingBody

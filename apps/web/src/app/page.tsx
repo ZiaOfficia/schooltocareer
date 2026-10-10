@@ -11,11 +11,9 @@ import {
   ShieldCheckIcon,
   UnlockIcon,
 } from '@/components/icons';
-import { Words } from '@/components/page-hero';
-import { Scene } from '@/components/scene';
 import { ApiError, listExams } from '@/lib/api';
-import { LIVE } from '@/lib/site-sections';
 import { buildMetadata } from '@/lib/seo/metadata';
+import { LIVE } from '@/lib/site-sections';
 
 export const revalidate = 3600;
 
@@ -121,30 +119,25 @@ export default async function HomePage() {
   return (
     <>
       <section className="night hero-bg">
-        <div data-parallax className="absolute inset-0 -z-[1]">
-          <Scene variant="orb" className="opacity-45 lg:opacity-100" />
-        </div>
-
         <Wrap className="pb-20 pt-16 sm:pb-28 sm:pt-24">
           <div className="max-w-[640px]">
-            <p data-reveal className="chip glass font-data text-[11px] uppercase tracking-[0.14em]">
+            <p className="chip glass font-data text-[12px] uppercase tracking-[0.14em]">
               <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-accent" />
               {SITE.COUNTRY === 'IN' ? 'India' : SITE.COUNTRY} · Exams · Boards · Papers
             </p>
 
-            <h1 data-words className="mt-6 text-[clamp(36px,7vw,68px)] leading-[1.02]">
-              <Words text="Every exam date, paper and result." />{' '}
-              <Words text="In one place." className="gradient-text" />
+            <h1 className="mt-6 text-[clamp(36px,7vw,68px)] leading-[1.02]">
+              Every exam date, paper and result.{' '}
+              <span className="gradient-text">In one place.</span>
             </h1>
 
-            <p data-reveal className="mt-6 max-w-[54ch] text-[17.5px] text-ink-soft">
+            <p className="mt-6 max-w-[54ch] text-[17.5px] text-ink-soft">
               Compiled from official notifications, dated so you can see how current it is, and free
               without an account.
             </p>
 
             {LIVE.search ? (
               <form
-                data-reveal
                 action={ROUTES.search()}
                 method="get"
                 role="search"
@@ -167,7 +160,7 @@ export default async function HomePage() {
               </form>
             ) : null}
 
-            <ul data-reveal className="mt-6 flex flex-wrap gap-2">
+            <ul className="mt-6 flex flex-wrap gap-2">
               {BROWSE.map((item) => (
                 <li key={item.href}>
                   <Link href={item.href} className="chip glass">
@@ -185,7 +178,7 @@ export default async function HomePage() {
             composition rather than a banner with a page under it. */}
         <ul className="relative z-10 -mt-10 grid gap-4 sm:-mt-14 md:grid-cols-3">
           {PROMISES.map(({ Icon, title, body }) => (
-            <li key={title} data-reveal className="card p-5">
+            <li key={title} className="card p-5">
               <span
                 className="grid h-10 w-10 place-items-center rounded-[12px] text-white"
                 style={{
@@ -203,14 +196,14 @@ export default async function HomePage() {
         <Section title="Browse by section" lede="Each one opens a full list." major>
           <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {BROWSE.map((item) => (
-              <li key={item.href} data-reveal>
-                <Link href={item.href} data-tilt className="card flex h-full flex-col gap-3 p-5">
+              <li key={item.href}>
+                <Link href={item.href} className="card flex h-full flex-col gap-3 p-5">
                   <EntityMark kind={item.kind} size={44} />
                   <span className="mt-1 flex items-center justify-between gap-2 font-display text-[18px] font-semibold text-ink">
                     {item.title}
                     <ArrowRightIcon width={16} height={16} className="card-arrow text-ink-mute" />
                   </span>
-                  <span className="text-[13.5px] text-ink-soft">{item.note}</span>
+                  <span className="text-[14.5px] text-ink-soft">{item.note}</span>
                 </Link>
               </li>
             ))}
@@ -236,13 +229,13 @@ export default async function HomePage() {
           ) : (
             <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {exams.map((exam) => (
-                <li key={exam.id} data-reveal>
-                  <Link href={exam.path} data-tilt className="card flex h-full flex-col gap-3 p-5">
+                <li key={exam.id}>
+                  <Link href={exam.path} className="card flex h-full flex-col gap-3 p-5">
                     <EntityBadge kind="exam" className="self-start" />
                     <span className="font-display text-[17px] font-semibold leading-snug text-ink">
                       {exam.name}
                     </span>
-                    <span className="mt-auto flex items-center justify-between gap-2 pt-2 text-[13px] text-ink-mute">
+                    <span className="mt-auto flex items-center justify-between gap-2 pt-2 text-[14px] text-ink-mute">
                       {exam.category ? exam.category.name : <span />}
                       <ArrowRightIcon width={16} height={16} className="card-arrow" />
                     </span>

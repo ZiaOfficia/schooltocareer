@@ -19,7 +19,7 @@ export function ContentBlocks({ blocks }: { blocks: readonly ContentBlock[] }) {
       {blocks.map((block, index) => {
         if (block.kind === 'text') {
           return (
-            <p key={index} data-reveal className="max-w-[72ch] text-[15.5px] text-ink-soft">
+            <p key={index} className="max-w-[72ch] text-[15.5px] text-ink-soft">
               {block.text}
             </p>
           );
@@ -29,7 +29,6 @@ export function ContentBlocks({ blocks }: { blocks: readonly ContentBlock[] }) {
           return (
             <ul
               key={index}
-              data-reveal
               className="grid max-w-[72ch] list-disc gap-2 pl-5 text-[15.5px] text-ink-soft"
             >
               {block.items.map((item) => (
@@ -40,7 +39,7 @@ export function ContentBlocks({ blocks }: { blocks: readonly ContentBlock[] }) {
         }
 
         return (
-          <figure key={index} data-reveal className="m-0">
+          <figure key={index} className="m-0">
             <ScrollX>
               <table className="w-full border-collapse text-left text-[14.5px]">
                 <caption className="sr-only">{block.caption}</caption>
@@ -50,7 +49,7 @@ export function ContentBlocks({ blocks }: { blocks: readonly ContentBlock[] }) {
                       <th
                         key={cell}
                         scope="col"
-                        className="whitespace-nowrap px-4 py-3 font-data text-[11px] font-semibold uppercase tracking-[0.12em] text-ink-mute"
+                        className="whitespace-nowrap px-4 py-3 font-data text-[12px] font-semibold uppercase tracking-[0.12em] text-ink-mute"
                       >
                         {cell}
                       </th>
@@ -94,7 +93,7 @@ export function ContentBlocks({ blocks }: { blocks: readonly ContentBlock[] }) {
               </table>
             </ScrollX>
             {block.note ? (
-              <figcaption className="mt-2 max-w-[72ch] text-[13.5px] text-ink-mute">
+              <figcaption className="mt-2 max-w-[72ch] text-[14.5px] text-ink-mute">
                 {block.note}
               </figcaption>
             ) : null}

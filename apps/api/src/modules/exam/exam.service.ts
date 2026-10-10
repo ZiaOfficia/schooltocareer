@@ -4,19 +4,18 @@ import { tombstoneSlug, untombstoneSlug } from '@stc/utils';
 import type { ExamCreateInput, ExamListQuery, ExamUpdateInput } from '@stc/validation';
 
 import { getActorId } from '../../core/context.js';
-import type { EventDispatcher } from '../../core/events/event-dispatcher.js';
 import {
   BusinessRuleError,
   GoneError,
   NotFoundError,
   VersionConflictError,
 } from '../../core/errors/app-error.js';
+import type { EventDispatcher } from '../../core/events/event-dispatcher.js';
 import { buildCursorPage, buildOffsetMeta } from '../../core/pagination/paginator.js';
 import { cacheKey, type ICacheProvider } from '../../providers/cache/cache.provider.js';
 import type { ISearchProvider } from '../../providers/search/search.provider.js';
 import type { SlugService } from '../slug/slug.service.js';
 
-import { examEvents } from './exam.events.js';
 import {
   toExamDetailDto,
   toExamDto,
@@ -26,6 +25,7 @@ import {
   type ExamDto,
   type ExamListItemDto,
 } from './exam.dto.js';
+import { examEvents } from './exam.events.js';
 import type { ExamRepository } from './exam.repository.js';
 import type { ExamCursorParams, ExamListParams, ExamRecord, ExamWriteData } from './exam.types.js';
 

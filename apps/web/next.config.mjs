@@ -19,6 +19,11 @@ const nextConfig = {
 
   poweredByHeader: false,
 
+  // Lint is CI's job (`pnpm lint`, the "verify" workflow), not the build's.
+  // Since the root eslint.config.js landed, `next build` picked it up and
+  // failed every deploy on lint findings, which are style, not breakage.
+  eslint: { ignoreDuringBuilds: true },
+
   /**
    * The workspace packages are TypeScript source compiled under NodeNext, so
    * their relative imports carry `.js` extensions that point at files which
