@@ -27,6 +27,7 @@ const GROUPS = [
     title: 'Exams',
     links: [
       { label: 'All exams', href: ROUTES.exams() },
+      ...(LIVE.practice ? [{ label: 'Mock tests', href: ROUTES.mockTests() }] : []),
       { label: 'Previous year papers', href: ROUTES.papers() },
       { label: 'NTA exam calendar', href: ROUTES.ntaCalendar() },
       ...(LIVE.results ? [{ label: 'Results', href: ROUTES.results() }] : []),

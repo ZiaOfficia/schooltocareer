@@ -1,5 +1,10 @@
 import { ROUTES } from '@stc/constants';
 import type {
+  ExamPracticeDto,
+  MockQuestionDto,
+  MockTestDto,
+  MockTestRefDto,
+  PracticeExamDto,
   ChapterPageDto,
   ChapterQuestionRowDto,
   ChapterRefDto,
@@ -8,7 +13,15 @@ import type {
   QuestionPaperRefDto,
 } from '@stc/types';
 
-import type { ChapterPageRecord, QuestionDetailRecord, QuestionRowRecord } from './question.repository.js';
+import type {
+  ChapterPageRecord,
+  MockQuestionRecord,
+  MockTestPaperRecord,
+  PracticeChapterRecord,
+  PracticePaperRecord,
+  QuestionDetailRecord,
+  QuestionRowRecord,
+} from './question.repository.js';
 
 /** Longest preview shown in a list row, in characters. */
 const PREVIEW_MAX = 160;
@@ -146,5 +159,90 @@ export function toChapterPage(
     totalQuestions: rows.length,
     questions: rows.map((row) => toChapterQuestionRow(exam.slug, row)),
     updatedAt: record.updatedAt.toISOString(),
+  };
+}
+
+// ── Practice and mock tests ────────────────────────────────────────────────
+
+/** Groups digitised papers by exam, keeping the repository's newest-first order. */
+export function toPracticeExams(papers: PracticePaperRecord[]): PracticeExamDto[] {
+  const byExam = new Map<string, PracticeExamDto>();
+  for (const paper of papers) {
+    if (!paper.exam) continue;
+    const { slug, shortName, name } = paper.exam;
+    const entry =
+      byExam.get(slug) ??
+      ({
+        exam: { slug, shortName, name, path: ROUTES.exam(slug) },
+        practicePath: ROUTES.examPractice(slug),
+        totalQuestions: 0,
+        mockTests: [],
+      } satisfies PracticeExamDto);
+    const mock: MockTestRefDto = {
+      paper: paperRef(paper),
+      questionCount: paper._count.questions,
+      path: ROUTES.mockTest(slug, paper.slug),
+    };
+    entry.mockTests.push(mock);
+    entry.totalQuestions += mock.questionCount;
+    byExam.set(slug, entry);
+  }
+  return [...byExam.values()];
+}
+
+export function toExamPractice(practice: PracticeExamDto, chapters: PracticeChapterRecord[]): ExamPracticeDto {
+  const exam = practice.exam.slug;
+  const subjects = new Map<string, ExamPracticeDto['subjects'][number]>();
+  for (const chapter of chapters) {
+    const subject = chapter.examSubject.subject;
+    const group = subjects.get(subject.slug) ?? { subject: { ...subject }, questionCount: 0, chapters: [] };
+    group.chapters.push({
+      slug: chapter.slug,
+      name: chapter.name,
+      path: ROUTES.examChapter(exam, subject.slug, chapter.slug),
+      questionCount: chapter._count.questions,
+      unit: chapter.unit,
+    });
+    group.questionCount += chapter._count.questions;
+    subjects.set(subject.slug, group);
+  }
+  return { ...practice, subjects: [...subjects.values()] };
+}
+
+function toMockQuestion(exam: string, row: MockQuestionRecord): MockQuestionDto {
+  // publicQuestion() guarantees the answer row.
+  const answer = row.answer!;
+  return {
+    publicId: row.publicId,
+    path: ROUTES.examQuestion(exam, row.slug, row.publicId),
+    number: row.number,
+    type: row.type,
+    marksRight: row.marksRight,
+    marksWrong: row.marksWrong,
+    stem: row.stem,
+    options: row.options.map(({ label, body }) => ({ label, body })),
+    correct: row.options.filter((option) => option.isCorrect).map((option) => option.label),
+    numericValue: answer.numericValue?.toString() ?? null,
+    numericTolerance: answer.numericTolerance?.toString() ?? null,
+    dropped: answer.provenance === 'DROPPED',
+  };
+}
+
+export function toMockTest(record: MockTestPaperRecord): MockTestDto {
+  // The service refuses a paper without an exam before mapping.
+  const exam = record.exam!;
+  const sections = new Map<string, MockTestDto['sections'][number]>();
+  for (const row of record.questions) {
+    const subject = row.subject ?? { slug: 'other', name: 'Other' };
+    const section = sections.get(subject.slug) ?? { subject: { ...subject }, questions: [] };
+    section.questions.push(toMockQuestion(exam.slug, row));
+    sections.set(subject.slug, section);
+  }
+  return {
+    exam: { slug: exam.slug, shortName: exam.shortName, path: ROUTES.exam(exam.slug) },
+    paper: paperRef(record),
+    durationMin: record.durationMin,
+    totalMarks: record.questions.reduce((sum, row) => sum + row.marksRight, 0),
+    sections: [...sections.values()],
   };
 }

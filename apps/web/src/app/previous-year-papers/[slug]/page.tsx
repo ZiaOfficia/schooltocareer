@@ -168,6 +168,14 @@ export default async function PaperPage({ params }: { params: Promise<Params> })
           <Section
             title="Solve this paper online"
             lede="Every question from this paper, one page each, with a step-by-step solution and the answer checked against the official key."
+            actions={
+              paper.exam ? (
+                <Link href={ROUTES.mockTest(paper.exam.slug, paper.slug)} className="btn btn-primary">
+                  Take it as a timed test
+                  <ArrowRightIcon width={16} height={16} />
+                </Link>
+              ) : undefined
+            }
           >
             <div className="grid gap-8 md:grid-cols-3">
               {solvable.map((group) => (

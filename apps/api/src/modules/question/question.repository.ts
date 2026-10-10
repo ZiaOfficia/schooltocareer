@@ -206,4 +206,109 @@ export class QuestionRepository extends BaseRepository {
       { resource: 'QuestionPaper', identifier: paperSlug },
     );
   }
+
+  /**
+   * Every published paper that has public questions, with its exam and how
+   * many questions it holds. Newest first. Drives the menu, the homepage
+   * panel and /mock-tests, so it only ever names things that exist.
+   */
+  async listPracticePapers(): Promise<PracticePaperRecord[]> {
+    return this.run(
+      () =>
+        this.prisma.questionPaper.findMany({
+          where: {
+            status: 'PUBLISHED',
+            deletedAt: null,
+            exam: { status: 'PUBLISHED', deletedAt: null },
+            questions: { some: publicQuestion() },
+          },
+          select: PRACTICE_PAPER,
+          orderBy: [{ year: 'desc' }, { slug: 'desc' }],
+          take: PRACTICE_PAPER_LIMIT,
+        }),
+      { resource: 'QuestionPaper', identifier: 'practice' },
+    );
+  }
+
+  /** An exam's published chapters that hold public questions, in syllabus order. */
+  async listPracticeChapters(exam: string): Promise<PracticeChapterRecord[]> {
+    return this.run(
+      () =>
+        this.prisma.examChapter.findMany({
+          where: {
+            status: 'PUBLISHED',
+            deletedAt: null,
+            examSubject: { exam: { slug: exam, status: 'PUBLISHED', deletedAt: null } },
+            questions: { some: publicQuestion() },
+          },
+          select: PRACTICE_CHAPTER,
+          orderBy: [{ examSubject: { order: 'asc' } }, { order: 'asc' }],
+        }),
+      { resource: 'ExamChapter', identifier: exam },
+    );
+  }
+
+  /** A paper with every public question in full, answers included, for a test. */
+  async findMockTestPaper(paperSlug: string): Promise<MockTestPaperRecord | null> {
+    return this.run(
+      () =>
+        this.prisma.questionPaper.findFirst({
+          where: { slug: paperSlug, status: 'PUBLISHED', deletedAt: null, exam: { status: 'PUBLISHED' } },
+          select: {
+            ...PAPER_REF,
+            durationMin: true,
+            exam: { select: { slug: true, shortName: true } },
+            questions: {
+              where: publicQuestion(),
+              select: MOCK_QUESTION,
+              orderBy: { number: 'asc' },
+            },
+          },
+        }),
+      { resource: 'QuestionPaper', identifier: paperSlug },
+    );
+  }
 }
+
+/** More digitised papers than this and /mock-tests should paginate. */
+export const PRACTICE_PAPER_LIMIT = 200;
+
+const PRACTICE_PAPER = {
+  ...PAPER_REF,
+  exam: { select: { slug: true, shortName: true, name: true } },
+  _count: { select: { questions: { where: publicQuestion() } } },
+} satisfies Prisma.QuestionPaperSelect;
+
+const PRACTICE_CHAPTER = {
+  slug: true,
+  name: true,
+  unit: { select: { slug: true, name: true } },
+  examSubject: { select: { subject: { select: { slug: true, name: true } } } },
+  _count: { select: { questions: { where: publicQuestion() } } },
+} satisfies Prisma.ExamChapterSelect;
+
+const MOCK_QUESTION = {
+  publicId: true,
+  slug: true,
+  number: true,
+  type: true,
+  marksRight: true,
+  marksWrong: true,
+  stem: true,
+  subject: { select: { slug: true, name: true } },
+  options: { select: { label: true, body: true, isCorrect: true }, orderBy: { order: 'asc' } },
+  answer: { select: { provenance: true, numericValue: true, numericTolerance: true } },
+} satisfies Prisma.QuestionSelect;
+
+export type PracticePaperRecord = Prisma.QuestionPaperGetPayload<{ select: typeof PRACTICE_PAPER }>;
+export type PracticeChapterRecord = Prisma.ExamChapterGetPayload<{ select: typeof PRACTICE_CHAPTER }>;
+export type MockQuestionRecord = Prisma.QuestionGetPayload<{ select: typeof MOCK_QUESTION }>;
+export type MockTestPaperRecord = {
+  slug: string;
+  title: string;
+  year: number;
+  shift: string | null;
+  durationMin: number | null;
+  exam: { slug: string; shortName: string } | null;
+  questions: MockQuestionRecord[];
+};

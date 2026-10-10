@@ -99,6 +99,21 @@ export const META_TEMPLATES = {
     description:
       '{exam} {subject} previous year questions on {chapter}, with step-by-step solutions and year-wise weightage. Answers checked against the official key.',
   },
+  examPractice: {
+    title: '{exam} Previous Year Questions Chapter-wise, with Solutions',
+    description:
+      '{count} {exam} previous year questions sorted by chapter, each with a step-by-step solution checked against the official answer key. Free, no sign-up.',
+  },
+  mockTest: {
+    title: '{exam} Mock Test: {paper}',
+    description:
+      'Take the {exam} {paper} paper as a timed online mock test: {count} questions, exam marking, instant score and a solution for every question. Free.',
+  },
+  mockTests: {
+    title: 'Free Online Mock Tests and Previous Year Questions',
+    description:
+      'Timed mock tests built from official previous year papers, with instant scores and worked solutions, plus chapter-wise practice. Free, no sign-up.',
+  },
   result: {
     title: '{title}: Direct Link, Date & How to Check',
     description:

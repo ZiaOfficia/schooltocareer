@@ -29,4 +29,6 @@ export const examChapterParams = z.object({
   chapter: slugSchema,
 });
 
+export const examPracticeParams = z.object({ exam: slugSchema });
+
 export type ExamChapterParams = z.infer<typeof examChapterParams>;

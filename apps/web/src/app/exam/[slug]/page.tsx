@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 import { ROUTES, SITE } from '@stc/constants';
-import type { ExamDetailDto, ExamEventDto } from '@stc/types';
+import type { ExamDetailDto, ExamEventDto, ExamPracticeDto } from '@stc/types';
 import {
   EntityBadge,
   EntityMark,
@@ -20,7 +20,7 @@ import {
 
 import { ArrowRightIcon, ArrowUpRightIcon, PlusIcon } from '@/components/icons';
 import { PageHero } from '@/components/page-hero';
-import { examHoldings, getExam } from '@/lib/api';
+import { examHoldings, getExam, getExamPractice } from '@/lib/api';
 import { expectedFor } from '@/lib/exam-expected';
 import { EXAM_SECTIONS, liveSections, type ExamSection } from '@/lib/exam-sections';
 import { isOnNtaCalendar } from '@/lib/nta-calendar';
@@ -290,6 +290,9 @@ export default async function ExamPage({ params }: { params: Promise<Params> }) 
    * reason. The page had not, which is how the two came to disagree again.
    */
   const holdings = await examHoldings(exam.id);
+  // Null until a paper of this exam is digitised; the hero then shows no test.
+  const practice = await getExamPractice<ExamPracticeDto>(exam.slug);
+  const latestTest = practice?.mockTests[0] ?? null;
   const clusterLinks = liveSections(exam, holdings).map((key) => ({
     label: EXAM_SECTIONS[key].label,
     href: EXAM_SECTIONS[key].path(exam.slug),
@@ -433,6 +436,29 @@ export default async function ExamPage({ params }: { params: Promise<Params> }) 
               </Link>
               .
             </p>
+          ) : null}
+
+          {practice && latestTest ? (
+            <div className="glass mt-6 flex flex-wrap items-center gap-x-6 gap-y-3 rounded-[16px] p-4 sm:p-5">
+              <div className="min-w-0 flex-1 basis-[260px]">
+                <p className="font-display text-[18px] font-semibold text-ink">
+                  Test yourself for {exam.shortName}
+                </p>
+                <p className="mt-0.5 text-[14px] text-ink-soft">
+                  {latestTest.paper.title}: {latestTest.questionCount} questions, timed, with
+                  solutions. {practice.totalQuestions} questions to practise by chapter.
+                </p>
+              </div>
+              <div className="flex flex-wrap gap-2.5">
+                <Link href={latestTest.path} className="btn btn-primary">
+                  Take a mock test
+                  <ArrowRightIcon width={16} height={16} />
+                </Link>
+                <Link href={practice.practicePath} className="btn btn-ghost">
+                  Practise by chapter
+                </Link>
+              </div>
+            </div>
           ) : null}
         </div>
       </PageHero>

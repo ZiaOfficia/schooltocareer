@@ -229,6 +229,39 @@ export async function getPaperQuestions<T>(paperSlug: string): Promise<T | null>
   }
 }
 
+/**
+ * Every exam with digitised papers. Empty on any failure: the menu, the
+ * homepage panel and the exam pages show their practice links only when this
+ * answers, and must never fail because the question bank did not.
+ */
+export async function listPractice<T>(): Promise<T[]> {
+  try {
+    const result = await requestOptional<Envelope<T[]>>(API_ROUTES.practice, {
+      tags: [CACHE_TAGS.entityList('QUESTION')],
+    });
+    return result?.data ?? [];
+  } catch (error) {
+    if (error instanceof ApiError) return [];
+    throw error;
+  }
+}
+
+/** One exam's chapter-wise practice hub; null until it has a digitised paper. */
+export async function getExamPractice<T>(exam: string): Promise<T | null> {
+  const result = await requestOptional<Envelope<T>>(API_ROUTES.examPractice(exam), {
+    tags: [CACHE_TAGS.entityList('QUESTION')],
+  });
+  return result?.data ?? null;
+}
+
+/** A digitised paper as a test; null when the paper has no public questions. */
+export async function getMockTest<T>(paperSlug: string): Promise<T | null> {
+  const result = await requestOptional<Envelope<T>>(API_ROUTES.mockTest(paperSlug), {
+    tags: [CACHE_TAGS.entity('QUESTION_PAPER', paperSlug), CACHE_TAGS.entityList('QUESTION')],
+  });
+  return result?.data ?? null;
+}
+
 export async function listBoards<T>(query = ''): Promise<T[]> {
   const result = await requestOptional<Envelope<T[]>>(
     `${API_ROUTES.boards}${query ? `?${query}` : ''}`,

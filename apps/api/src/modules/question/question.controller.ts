@@ -6,7 +6,7 @@ import { sendOk, setPublicCache } from '../../core/http/response.js';
 import { validParams } from '../../middleware/validate.js';
 
 import type { QuestionService } from './question.service.js';
-import { examChapterParams, paperQuestionsParams, questionParams } from './question.validation.js';
+import { examChapterParams, examPracticeParams, paperQuestionsParams, questionParams } from './question.validation.js';
 
 export class QuestionController {
   constructor(private readonly service: QuestionService) {}
@@ -27,5 +27,22 @@ export class QuestionController {
     const { paperSlug } = validParams(req, paperQuestionsParams);
     setPublicCache(res, { sMaxAge: REVALIDATE.LONG_TAIL });
     sendOk(res, await this.service.getPaperQuestions(paperSlug));
+  };
+
+  listPractice = async (_req: Request, res: Response): Promise<void> => {
+    setPublicCache(res, { sMaxAge: REVALIDATE.LONG_TAIL });
+    sendOk(res, await this.service.listPractice());
+  };
+
+  getExamPractice = async (req: Request, res: Response): Promise<void> => {
+    const { exam } = validParams(req, examPracticeParams);
+    setPublicCache(res, { sMaxAge: REVALIDATE.LONG_TAIL });
+    sendOk(res, await this.service.getExamPractice(exam));
+  };
+
+  getMockTest = async (req: Request, res: Response): Promise<void> => {
+    const { paperSlug } = validParams(req, paperQuestionsParams);
+    setPublicCache(res, { sMaxAge: REVALIDATE.LONG_TAIL });
+    sendOk(res, await this.service.getMockTest(paperSlug));
   };
 }
