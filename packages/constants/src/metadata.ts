@@ -89,6 +89,16 @@ export const META_TEMPLATES = {
     description:
       'Download {title} in PDF. Includes the question paper{withSolution} — free and printable.',
   },
+  question: {
+    title: '{preview} | {exam} {year} PYQ',
+    description:
+      '{exam} {year} question with a step-by-step solution{keyNote}. {paper}. Free, no sign-up.',
+  },
+  examChapter: {
+    title: '{chapter} {exam} PYQs with Solutions',
+    description:
+      '{exam} {subject} previous year questions on {chapter}, with step-by-step solutions and year-wise weightage. Answers checked against the official key.',
+  },
   result: {
     title: '{title}: Direct Link, Date & How to Check',
     description:
