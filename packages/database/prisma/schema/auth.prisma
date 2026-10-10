@@ -28,6 +28,7 @@ model User {
   /// Fact-review decisions. A canonical date change carries the name of the
   /// person who accepted it — see facts.prisma.
   factReviews     FactChange[]      @relation("FactReviewer")
+  answerReviews   QuestionAnswer[]  @relation("QuestionAnswerReviewer")
 
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt

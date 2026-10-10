@@ -77,6 +77,10 @@ enum OwnerType {
   /// This value must therefore ship in its own migration, before any migration
   /// or backfill that writes it.
   MEDIA_ASSET
+  /// Added for the question bank. Same rule as MEDIA_ASSET: shipped in its
+  /// own migration, ahead of anything that writes it.
+  QUESTION
+  EXAM_CHAPTER
 }
 
 enum Locale {

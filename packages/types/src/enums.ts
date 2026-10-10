@@ -42,6 +42,8 @@ export const OWNER_TYPE = [
   'SCHOLARSHIP',
   'JOB',
   'MEDIA_ASSET',
+  'QUESTION',
+  'EXAM_CHAPTER',
 ] as const;
 export type OwnerType = (typeof OWNER_TYPE)[number];
 
@@ -178,3 +180,36 @@ export const FACT_REVIEW_STATUS = [
   'SUPERSEDED',
 ] as const;
 export type FactReviewStatus = (typeof FACT_REVIEW_STATUS)[number];
+
+// ── Question bank ───────────────────────────────────────────────────────────
+// Mirrors of the enums in packages/database/prisma/schema/questions.prisma.
+
+export const QUESTION_TYPE = ['MCQ_SINGLE', 'MCQ_MULTI', 'NUMERICAL'] as const;
+export type QuestionType = (typeof QUESTION_TYPE)[number];
+
+/** Where a shown answer comes from. Never OFFICIAL_* without an official key. */
+export const ANSWER_PROVENANCE = [
+  'OFFICIAL_FINAL',
+  'OFFICIAL_PROVISIONAL',
+  'EDITORIAL',
+  'DROPPED',
+] as const;
+export type AnswerProvenance = (typeof ANSWER_PROVENANCE)[number];
+
+export const SYLLABUS_STATUS = ['IN_SYLLABUS', 'REDUCED', 'REMOVED'] as const;
+export type SyllabusStatus = (typeof SYLLABUS_STATUS)[number];
+
+export const QUESTION_DIFFICULTY = ['EASY', 'MEDIUM', 'HARD'] as const;
+export type QuestionDifficulty = (typeof QUESTION_DIFFICULTY)[number];
+
+export const QUESTION_REPORT_KIND = [
+  'WRONG_ANSWER',
+  'SOLUTION_ERROR',
+  'TYPO',
+  'MISSING_FIGURE',
+  'OTHER',
+] as const;
+export type QuestionReportKind = (typeof QUESTION_REPORT_KIND)[number];
+
+export const QUESTION_REPORT_STATUS = ['OPEN', 'FIXED', 'REJECTED'] as const;
+export type QuestionReportStatus = (typeof QUESTION_REPORT_STATUS)[number];

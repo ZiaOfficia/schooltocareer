@@ -61,6 +61,8 @@ model Exam {
   papers  QuestionPaper[]
   results Result[]
   entries ContentEntry[]
+  /// Question bank (questions.prisma).
+  subjects ExamSubject[]
 
   status      PublishStatus @default(DRAFT)
   publishedAt DateTime?
@@ -159,7 +161,10 @@ model QuestionPaper {
   boardClass BoardClass? @relation(fields: [boardClassId], references: [id], onDelete: SetNull)
   subject    Subject?    @relation(fields: [subjectId], references: [id], onDelete: SetNull)
 
-  files QuestionPaperFile[]
+  files     QuestionPaperFile[]
+  /// Question bank (questions.prisma). Restrict on delete: a paper with
+  /// questions is soft-deleted, never removed.
+  questions Question[]
 
   status      PublishStatus @default(DRAFT)
   publishedAt DateTime?

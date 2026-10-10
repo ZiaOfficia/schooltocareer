@@ -10,3 +10,4 @@ export * from './classes.js';
 export * from './subjects.js';
 export * from './exam-categories.js';
 export * from './sources.js';
+export * from './exam-syllabi.js';
