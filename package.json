@@ -27,6 +27,7 @@
     "clean": "turbo run clean && rimraf node_modules",
     "sources:seed": "tsx tooling/scripts/seed-sources.ts",
     "syllabus:seed": "tsx tooling/scripts/seed-exam-syllabus.ts",
+    "questions:import": "tsx tooling/scripts/import-questions.ts",
     "gate:integrity": "tsx tooling/scripts/integrity-gate.ts",
     "data:purge-placeholder": "tsx tooling/scripts/purge-placeholder-content.ts",
     "sources:fetch": "tsx tooling/scripts/fetch-sources-now.ts",

@@ -8,7 +8,8 @@
   "//exports": "Subpaths exist for ESM consumers. tooling/scripts is ESM and this package is CommonJS, so the barrel's `export *` chain loses named exports across the boundary — the same reason @stc/constants exposes ./sources.",
   "exports": {
     ".": "./src/index.ts",
-    "./indexability": "./src/indexability.ts"
+    "./indexability": "./src/indexability.ts",
+    "./slug": "./src/slug.ts"
   },
   "scripts": { "lint": "eslint src", "typecheck": "tsc --noEmit" },
   "dependencies": { "@stc/types": "workspace:*", "@stc/constants": "workspace:*" },
