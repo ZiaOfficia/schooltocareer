@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 import { ROUTES, SITE } from '@stc/constants';
-import type { ExamListItemDto } from '@stc/types';
+import type { ExamListItemDto, PracticeExamDto } from '@stc/types';
 import { EntityBadge, EntityMark, Section, Wrap, type EntityKind } from '@stc/ui';
 
 import {
@@ -11,7 +11,7 @@ import {
   ShieldCheckIcon,
   UnlockIcon,
 } from '@/components/icons';
-import { ApiError, listExams } from '@/lib/api';
+import { ApiError, listExams, listPractice } from '@/lib/api';
 import { buildMetadata } from '@/lib/seo/metadata';
 import { LIVE } from '@/lib/site-sections';
 
@@ -39,6 +39,13 @@ const ALL_SECTIONS: ReadonlyArray<{
   href: string;
   live: boolean;
 }> = [
+  {
+    kind: 'paper',
+    title: 'Mock tests',
+    note: 'Real papers, timed and marked, with solutions',
+    href: ROUTES.mockTests(),
+    live: LIVE.practice,
+  },
   {
     kind: 'exam',
     title: 'Exams',
@@ -116,6 +123,13 @@ export default async function HomePage() {
     console.warn(`[home] exam list unavailable: ${error.message}`);
   }
 
+  // The newest digitised paper of each exam, for the "test yourself" block.
+  // Empty when nothing is digitised or the API is down; the block then hides.
+  const practice = LIVE.practice ? await listPractice<PracticeExamDto>() : [];
+  const tests = practice
+    .map((entry) => ({ entry, latest: entry.mockTests[0] }))
+    .filter((t): t is { entry: PracticeExamDto; latest: NonNullable<typeof t.latest> } => !!t.latest);
+
   return (
     <>
       <section className="night hero-bg">
@@ -135,6 +149,43 @@ export default async function HomePage() {
               Compiled from official notifications, dated so you can see how current it is, and free
               without an account.
             </p>
+
+            {tests.length > 0 ? (
+              <div className="glass mt-8 max-w-[580px] rounded-[20px] p-5 sm:p-6">
+                <p className="font-data text-[12px] uppercase tracking-[0.14em] text-ink-mute">
+                  Test yourself
+                </p>
+                {tests.slice(0, 2).map(({ entry, latest }) => (
+                  <div key={entry.exam.slug} className="mt-3">
+                    <h2 className="font-display text-[22px] font-semibold leading-tight text-ink">
+                      Take a {entry.exam.shortName} mock test
+                    </h2>
+                    <p className="mt-1.5 text-[14.5px] text-ink-soft">
+                      The real {entry.exam.shortName} {latest.paper.year} paper
+                      {latest.paper.shift ? ` (${latest.paper.shift})` : ''}: {latest.questionCount}{' '}
+                      questions, timed and marked the way the exam is, with a worked solution for every
+                      question.
+                    </p>
+                    <div className="mt-4 flex flex-wrap gap-2.5">
+                      <Link href={latest.path} className="btn btn-primary">
+                        Start the test
+                        <ArrowRightIcon width={16} height={16} />
+                      </Link>
+                      <Link href={entry.practicePath} className="btn btn-ghost">
+                        Practise by chapter
+                      </Link>
+                    </div>
+                  </div>
+                ))}
+                <Link
+                  href={ROUTES.mockTests()}
+                  className="mt-4 inline-flex items-center gap-1.5 text-[14px] text-ink-soft underline-offset-4 hover:underline"
+                >
+                  All mock tests
+                  <ArrowRightIcon width={14} height={14} />
+                </Link>
+              </div>
+            ) : null}
 
             {LIVE.search ? (
               <form

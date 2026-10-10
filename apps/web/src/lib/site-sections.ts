@@ -14,6 +14,8 @@
  *   blog     when at least one article is published
  *   search   when /search exists AND the search index is being filled
  *            (it is not: no outbox worker runs, so the index is empty)
+ *   practice when at least one paper's questions are published
+ *            (on: JEE Main 8 Apr 2026 Shift 2, 75 questions)
  *
  * The pages themselves stay reachable by URL and say plainly that they are
  * empty; they are simply not advertised, and are marked noindex.
@@ -22,4 +24,5 @@ export const LIVE = {
   results: false,
   blog: false,
   search: false,
+  practice: true,
 } as const;

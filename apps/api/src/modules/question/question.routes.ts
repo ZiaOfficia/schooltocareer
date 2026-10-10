@@ -4,7 +4,7 @@ import { validate } from '../../middleware/validate.js';
 
 import { QuestionController } from './question.controller.js';
 import type { QuestionService } from './question.service.js';
-import { examChapterParams, paperQuestionsParams, questionParams } from './question.validation.js';
+import { examChapterParams, examPracticeParams, paperQuestionsParams, questionParams } from './question.validation.js';
 
 /**
  * Public, read-only. There is no admin surface: questions are loaded by the
@@ -15,6 +15,9 @@ export function questionRoutes(service: QuestionService): Router {
   const controller = new QuestionController(service);
   const router = Router();
 
+  router.get('/practice', controller.listPractice);
+  router.get('/exams/:exam', validate({ params: examPracticeParams }), controller.getExamPractice);
+  router.get('/mock-test/:paperSlug', validate({ params: paperQuestionsParams }), controller.getMockTest);
   router.get('/chapters/:exam/:subject/:chapter', validate({ params: examChapterParams }), controller.getChapter);
   router.get('/by-paper/:paperSlug', validate({ params: paperQuestionsParams }), controller.getPaperQuestions);
   router.get('/:publicId', validate({ params: questionParams }), controller.getQuestion);

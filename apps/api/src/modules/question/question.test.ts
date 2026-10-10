@@ -66,6 +66,9 @@ function service(port: Partial<QuestionRepositoryPort>) {
     listPublicInChapter: async () => [],
     findPublicChapter: async () => null,
     listPublicInPaper: async () => null,
+    listPracticePapers: async () => [],
+    listPracticeChapters: async () => [],
+    findMockTestPaper: async () => null,
     ...port,
   };
   return new QuestionService({ repository, cache: new MemoryCacheProvider() });
@@ -193,5 +196,96 @@ describe('plainPreview', () => {
     const out = plainPreview(stem);
     expect(out.endsWith('…')).toBe(true);
     expect(out).not.toMatch(/…\s*…$|……$/);
+  });
+});
+
+const practicePaper = (slug: string, year: number, count: number, exam = { slug: 'jee-main', shortName: 'JEE Main', name: 'JEE Main' }) => ({
+  ...paper(slug, year),
+  exam,
+  _count: { questions: count },
+});
+
+describe('QuestionService practice', () => {
+  it('groups digitised papers by exam, newest first, and totals the questions', async () => {
+    const svc = service({
+      listPracticePapers: async () => [
+        practicePaper('jee-main-8-apr-2026-shift-2-btech', 2026, 75),
+        practicePaper('jee-main-2025-s1', 2025, 75),
+      ],
+    });
+    const [jee] = await svc.listPractice();
+    expect(jee!.exam.slug).toBe('jee-main');
+    expect(jee!.totalQuestions).toBe(150);
+    expect(jee!.practicePath).toBe('/exam/jee-main/questions');
+    expect(jee!.mockTests.map((m) => m.path)).toEqual([
+      '/exam/jee-main/mock-test/jee-main-8-apr-2026-shift-2-btech',
+      '/exam/jee-main/mock-test/jee-main-2025-s1',
+    ]);
+  });
+
+  it('builds the hub by subject in syllabus order, and 404s for an exam with nothing digitised', async () => {
+    const chapter = (slug: string, subject: string, count: number) => ({
+      slug,
+      name: slug,
+      unit: null,
+      examSubject: { subject: { slug: subject, name: subject } },
+      _count: { questions: count },
+    });
+    const svc = service({
+      listPracticePapers: async () => [practicePaper('p1', 2026, 7)],
+      listPracticeChapters: async () => [
+        chapter('sets', 'mathematics', 1),
+        chapter('vectors', 'mathematics', 2),
+        chapter('optics', 'physics', 4),
+      ],
+    });
+    const hub = await svc.getExamPractice('jee-main');
+    expect(hub.subjects.map((s) => [s.subject.slug, s.questionCount, s.chapters.length])).toEqual([
+      ['mathematics', 3, 2],
+      ['physics', 4, 1],
+    ]);
+    expect(hub.subjects[1]!.chapters[0]!.path).toBe('/exam/jee-main/chapters/physics/optics');
+    await expect(svc.getExamPractice('neet')).rejects.toBeInstanceOf(NotFoundError);
+  });
+
+  it('turns a paper into sections with answers, and 404s when it has no questions', async () => {
+    const q = (n: number, subject: string, extra: Record<string, unknown> = {}) => ({
+      publicId: `q${String(n).padStart(9, '0')}`,
+      slug: `q-${n}`,
+      number: n,
+      type: 'MCQ_SINGLE' as const,
+      marksRight: 4,
+      marksWrong: -1,
+      stem: `Question ${n}`,
+      subject: { slug: subject, name: subject },
+      options: [
+        { label: 'A', body: 'a', isCorrect: false },
+        { label: 'B', body: 'b', isCorrect: true },
+      ],
+      answer: { provenance: 'OFFICIAL_FINAL' as const, numericValue: null, numericTolerance: null },
+      ...extra,
+    });
+    const svc = service({
+      findMockTestPaper: async (slug) =>
+        slug === 'empty'
+          ? { ...paper('empty', 2026), durationMin: 180, exam: { slug: 'jee-main', shortName: 'JEE Main' }, questions: [] }
+          : {
+              ...paper(slug, 2026),
+              durationMin: 180,
+              exam: { slug: 'jee-main', shortName: 'JEE Main' },
+              questions: [
+                q(1, 'mathematics'),
+                q(2, 'physics', { answer: { provenance: 'DROPPED', numericValue: null, numericTolerance: null } }),
+              ] as never,
+            },
+    });
+    const test = await svc.getMockTest('p1');
+    expect(test.totalMarks).toBe(8);
+    expect(test.durationMin).toBe(180);
+    expect(test.sections.map((s) => s.subject.slug)).toEqual(['mathematics', 'physics']);
+    expect(test.sections[0]!.questions[0]!.correct).toEqual(['B']);
+    expect(test.sections[0]!.questions[0]!.options[0]).toEqual({ label: 'A', body: 'a' });
+    expect(test.sections[1]!.questions[0]!.dropped).toBe(true);
+    await expect(svc.getMockTest('empty')).rejects.toBeInstanceOf(NotFoundError);
   });
 });

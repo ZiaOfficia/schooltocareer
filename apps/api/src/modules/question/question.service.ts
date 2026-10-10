@@ -1,15 +1,35 @@
 import { CACHE_TAGS, REVALIDATE, ROUTES } from '@stc/constants';
-import type { ChapterPageDto, PaperQuestionsDto, QuestionDetailDto } from '@stc/types';
+import type {
+  ChapterPageDto,
+  ExamPracticeDto,
+  MockTestDto,
+  PaperQuestionsDto,
+  PracticeExamDto,
+  QuestionDetailDto,
+} from '@stc/types';
 
 import { NotFoundError } from '../../core/errors/app-error.js';
 import { cacheKey, type ICacheProvider } from '../../providers/cache/cache.provider.js';
 
-import { toChapterPage, toQuestionDetail, toQuestionLink } from './question.dto.js';
+import {
+  toChapterPage,
+  toExamPractice,
+  toMockTest,
+  toPracticeExams,
+  toQuestionDetail,
+  toQuestionLink,
+} from './question.dto.js';
 import type { QuestionRepository } from './question.repository.js';
 
 export type QuestionRepositoryPort = Pick<
   QuestionRepository,
-  'findPublicByPublicId' | 'listPublicInChapter' | 'findPublicChapter' | 'listPublicInPaper'
+  | 'findPublicByPublicId'
+  | 'listPublicInChapter'
+  | 'findPublicChapter'
+  | 'listPublicInPaper'
+  | 'listPracticePapers'
+  | 'listPracticeChapters'
+  | 'findMockTestPaper'
 >;
 
 export type QuestionServiceDeps = {
@@ -101,6 +121,52 @@ export class QuestionService {
       },
       subjects: [...groups.values()],
     };
+    await this.deps.cache.set(key, dto, {
+      ttl: REVALIDATE.LONG_TAIL,
+      tags: [CACHE_TAGS.entity('QUESTION_PAPER', paperSlug), CACHE_TAGS.entityList('QUESTION')],
+    });
+    return dto;
+  }
+
+  /** Every exam with digitised papers. Empty when nothing is digitised yet. */
+  async listPractice(): Promise<PracticeExamDto[]> {
+    const key = cacheKey('question:practice');
+    const cached = await this.deps.cache.get<PracticeExamDto[]>(key);
+    if (cached) return cached;
+
+    const dto = toPracticeExams(await this.deps.repository.listPracticePapers());
+    await this.deps.cache.set(key, dto, {
+      ttl: REVALIDATE.LONG_TAIL,
+      tags: [CACHE_TAGS.entityList('QUESTION')],
+    });
+    return dto;
+  }
+
+  /** One exam's chapter-wise hub. 404 until the exam has a digitised paper. */
+  async getExamPractice(exam: string): Promise<ExamPracticeDto> {
+    const key = cacheKey('question:exam-practice', exam);
+    const cached = await this.deps.cache.get<ExamPracticeDto>(key);
+    if (cached) return cached;
+
+    const practice = (await this.listPractice()).find((entry) => entry.exam.slug === exam);
+    if (!practice) throw new NotFoundError('Practice', exam);
+    const dto = toExamPractice(practice, await this.deps.repository.listPracticeChapters(exam));
+    await this.deps.cache.set(key, dto, {
+      ttl: REVALIDATE.LONG_TAIL,
+      tags: [CACHE_TAGS.entityList('QUESTION')],
+    });
+    return dto;
+  }
+
+  /** A paper as a test. 404 when the paper has no public questions. */
+  async getMockTest(paperSlug: string): Promise<MockTestDto> {
+    const key = cacheKey('question:mock-test', paperSlug);
+    const cached = await this.deps.cache.get<MockTestDto>(key);
+    if (cached) return cached;
+
+    const record = await this.deps.repository.findMockTestPaper(paperSlug);
+    if (!record?.exam || record.questions.length === 0) throw new NotFoundError('Mock test', paperSlug);
+    const dto = toMockTest(record);
     await this.deps.cache.set(key, dto, {
       ttl: REVALIDATE.LONG_TAIL,
       tags: [CACHE_TAGS.entity('QUESTION_PAPER', paperSlug), CACHE_TAGS.entityList('QUESTION')],

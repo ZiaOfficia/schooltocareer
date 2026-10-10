@@ -9,6 +9,8 @@ import { LIVE } from '@/lib/site-sections';
 
 /** Only sections with something in them — see lib/site-sections.ts. */
 const NAV = [
+  // First, because it is the one thing here a student can DO rather than read.
+  ...(LIVE.practice ? [{ label: 'Mock tests', href: ROUTES.mockTests() }] : []),
   { label: 'Exams', href: ROUTES.exams() },
   { label: 'Boards', href: ROUTES.boards() },
   ...(LIVE.results ? [{ label: 'Results', href: ROUTES.results() }] : []),

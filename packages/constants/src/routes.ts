@@ -46,6 +46,11 @@ export const ROUTES = {
     `/exam/${exam}/chapters/${subject}/${chapter}`,
   examQuestion: (exam: string, slug: string, publicId: string) =>
     `/exam/${exam}/questions/${slug}-${publicId}`,
+  /** Every chapter of an exam that has questions: the practice hub. */
+  examPractice: (exam: string) => `/exam/${exam}/questions`,
+  /** A digitised paper taken as a timed test. Static `mock-test` segment, as above. */
+  mockTest: (exam: string, paper: string) => `/exam/${exam}/mock-test/${paper}`,
+  mockTests: () => '/mock-tests',
 
   papers: () => '/previous-year-papers',
   paper: (paper: string) => `/previous-year-papers/${paper}`,
@@ -158,6 +163,9 @@ export const API_ROUTES = {
   paperQuestions: (paperSlug: string) => `${API_PREFIX}/questions/by-paper/${paperSlug}`,
   examChapter: (exam: string, subject: string, chapter: string) =>
     `${API_PREFIX}/questions/chapters/${exam}/${subject}/${chapter}`,
+  practice: `${API_PREFIX}/questions/practice`,
+  examPractice: (exam: string) => `${API_PREFIX}/questions/exams/${exam}`,
+  mockTest: (paperSlug: string) => `${API_PREFIX}/questions/mock-test/${paperSlug}`,
   results: `${API_PREFIX}/results`,
   /** The blog module is mounted at /posts. `content` was wrong and 404'd, which
    *  the web client swallowed into an empty list — /blog rendered its empty
