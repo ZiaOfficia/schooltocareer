@@ -1,4 +1,4 @@
-import type { ContentType, Locale, PostListItemDto, PublishStatus } from '@stc/types';
+import type { PostListItemDto } from '@stc/types';
 import { toIsoDate } from '@stc/utils';
 
 import type { PostListRecord, PostRecord } from './blog.types.js';

@@ -1,5 +1,7 @@
 import { API_ROUTES, CACHE_TAGS } from '@stc/constants';
 
+import { serverEnv } from '@/lib/env';
+
 /**
  * The server-side API client.
  *
@@ -14,7 +16,7 @@ import { API_ROUTES, CACHE_TAGS } from '@stc/constants';
  * webhook that never arrived.
  */
 
-const BASE_URL = process.env.API_BASE_URL ?? 'http://localhost:4000';
+const BASE_URL = serverEnv().API_BASE_URL ?? 'http://localhost:4000';
 
 /** One hour. Correctness comes from tag invalidation, not from this number. */
 const DEFAULT_REVALIDATE = 3600;

@@ -5,8 +5,8 @@ import { SearchSourceRegistry } from '../core/search/search-source.js';
 import type { ClaimedMessage, IQueueProvider } from '../providers/queue/queue.provider.js';
 import type { ISearchProvider } from '../providers/search/search.provider.js';
 
-import { SearchDeleteHandler, SearchUpsertHandler } from './handlers/search.handlers.js';
 import type { IOutboxHandler } from './handlers/outbox-handler.js';
+import { SearchDeleteHandler, SearchUpsertHandler } from './handlers/search.handlers.js';
 import { OutboxWorker, DEFAULT_WORKER_OPTIONS } from './outbox.worker.js';
 
 /**

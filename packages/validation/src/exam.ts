@@ -1,4 +1,5 @@
 import { z } from 'zod';
+
 import { SORTABLE_FIELDS, DEFAULT_SORT } from '@stc/constants';
 import {
   EDUCATION_LEVEL,
@@ -7,6 +8,7 @@ import {
   EXAM_LEVEL,
   EXAM_MODE,
 } from '@stc/types';
+
 import {
   cuidSchema,
   offsetPaginationSchema,

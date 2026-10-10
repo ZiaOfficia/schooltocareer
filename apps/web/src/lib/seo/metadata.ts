@@ -12,6 +12,8 @@ import {
   type MetaTemplateKey,
 } from '@stc/constants';
 
+import { deploymentEnv } from '@/lib/env';
+
 /**
  * EVERY page title, description and canonical in the product is produced here.
  *
@@ -84,10 +86,7 @@ export function buildMetadata(input: BuildInput): Metadata {
   // Indexable only when this is the real production deployment AND the path is
   // one we want in the index AND the page has not opted out.
   const indexable =
-    isIndexableDeployment({
-      NODE_ENV: process.env.NODE_ENV ?? 'development',
-      NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
-    }) &&
+    isIndexableDeployment(deploymentEnv()) &&
     !isNoindexPath(input.path) &&
     !input.noindex;
 

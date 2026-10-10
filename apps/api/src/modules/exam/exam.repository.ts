@@ -1,9 +1,8 @@
-import { Prisma, type PrismaClient } from '@stc/database';
-
+import { type Prisma, type PrismaClient } from '@stc/database';
 import type { SortDirection } from '@stc/types';
 
 import { BaseRepository } from '../../core/base/base.repository.js';
-import { buildOffsetMeta, toCursorArgs, toOffsetArgs } from '../../core/pagination/paginator.js';
+import { toCursorArgs, toOffsetArgs } from '../../core/pagination/paginator.js';
 import { iContains, when, whereAnd } from '../../core/query/filter-builder.js';
 
 import type {

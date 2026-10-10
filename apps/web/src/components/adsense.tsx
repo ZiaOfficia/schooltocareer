@@ -3,6 +3,8 @@ import Script from 'next/script';
 import { isIndexableDeployment } from '@stc/config';
 import { ADSENSE } from '@stc/constants';
 
+import { adsenseClientEnv, deploymentEnv } from '@/lib/env';
+
 /**
  * The AdSense loader, emitted once from the root layout.
  *
@@ -19,12 +21,9 @@ import { ADSENSE } from '@stc/constants';
  * to lose the LCP budget this site is built around.
  */
 export function AdSense() {
-  const client = process.env.NEXT_PUBLIC_ADSENSE_CLIENT ?? ADSENSE.CLIENT;
+  const client = adsenseClientEnv() ?? ADSENSE.CLIENT;
 
-  const indexable = isIndexableDeployment({
-    NODE_ENV: process.env.NODE_ENV ?? 'development',
-    NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
-  });
+  const indexable = isIndexableDeployment(deploymentEnv());
 
   if (!indexable || !client) return null;
 

@@ -10,17 +10,17 @@ import { errorHandler, notFoundHandler } from './middleware/error-handler.js';
 import { rateLimitPresets } from './middleware/rate-limit.js';
 import { requestContext } from './middleware/request-context.js';
 import { requestLogger } from './middleware/request-logger.js';
+import { authRoutes } from './modules/auth/auth.routes.js';
+import { blogRoutes } from './modules/blog/blog.routes.js';
 import { boardRoutes } from './modules/board/board.routes.js';
 import { categoryRoutes } from './modules/category/category.routes.js';
 import { examRoutes } from './modules/exam/exam.routes.js';
 import { factRoutes } from './modules/fact/fact.routes.js';
-import { authRoutes } from './modules/auth/auth.routes.js';
+import { healthRoutes } from './modules/health/health.routes.js';
+import { mediaRoutes } from './modules/media/media.routes.js';
 import { questionPaperRoutes } from './modules/question-paper/question-paper.routes.js';
 import { resultRoutes } from './modules/result/result.routes.js';
-import { blogRoutes } from './modules/blog/blog.routes.js';
-import { mediaRoutes } from './modules/media/media.routes.js';
 import { searchRoutes } from './modules/search/search.routes.js';
-import { healthRoutes } from './modules/health/health.routes.js';
 
 /**
  * Express assembly. Ordering here is load-bearing — see the comments.

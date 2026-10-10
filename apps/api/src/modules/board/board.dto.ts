@@ -1,7 +1,6 @@
 import { ROUTES } from '@stc/constants';
 import type {
   BoardListItemDto,
-  BoardType,
   PublishStatus,
   SchoolStage,
   StreamType,

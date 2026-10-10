@@ -5,8 +5,8 @@ import type { ApiErrorBody } from '@stc/types';
 
 import { getContext } from '../core/context.js';
 import { AppError, NotFoundError } from '../core/errors/app-error.js';
-import type { AppLogger } from '../core/logger.js';
 import { sendFailure } from '../core/http/response.js';
+import type { AppLogger } from '../core/logger.js';
 
 /**
  * The single exit point for every failure.
