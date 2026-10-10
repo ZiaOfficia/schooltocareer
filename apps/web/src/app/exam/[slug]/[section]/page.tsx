@@ -14,10 +14,10 @@ import {
   contentsOf,
 } from '@stc/ui';
 
+import { ContentBlocks } from '@/components/content-blocks';
 import { ArrowUpRightIcon } from '@/components/icons';
 import { PageHero } from '@/components/page-hero';
 import { ApiError, examHoldings, getExam, listAllPapers, listResults } from '@/lib/api';
-import { ContentBlocks } from '@/components/content-blocks';
 import { examContent } from '@/lib/exam-content';
 import {
   EXAM_SECTIONS,

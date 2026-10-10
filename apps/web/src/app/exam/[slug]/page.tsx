@@ -22,8 +22,8 @@ import { ArrowRightIcon, ArrowUpRightIcon, PlusIcon } from '@/components/icons';
 import { PageHero } from '@/components/page-hero';
 import { examHoldings, getExam } from '@/lib/api';
 import { expectedFor } from '@/lib/exam-expected';
-import { isOnNtaCalendar } from '@/lib/nta-calendar';
 import { EXAM_SECTIONS, liveSections, type ExamSection } from '@/lib/exam-sections';
+import { isOnNtaCalendar } from '@/lib/nta-calendar';
 import { JsonLd, breadcrumbSchema, examPageSchema, faqSchema } from '@/lib/seo/json-ld';
 import { buildMetadata } from '@/lib/seo/metadata';
 

@@ -12,8 +12,8 @@ import {
   UnlockIcon,
 } from '@/components/icons';
 import { ApiError, listExams } from '@/lib/api';
-import { LIVE } from '@/lib/site-sections';
 import { buildMetadata } from '@/lib/seo/metadata';
+import { LIVE } from '@/lib/site-sections';
 
 export const revalidate = 3600;
 

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 
+import { isIndexableDeployment } from '@stc/config';
 import {
   META_TEMPLATES,
   NOINDEX_PATHS,
@@ -10,7 +11,6 @@ import {
   fillTemplate,
   type MetaTemplateKey,
 } from '@stc/constants';
-import { isIndexableDeployment } from '@stc/config';
 
 /**
  * EVERY page title, description and canonical in the product is produced here.

@@ -1,7 +1,7 @@
 import type { MetadataRoute } from 'next';
 
-import { NOINDEX_PATHS, SITE, absoluteUrl } from '@stc/constants';
 import { isIndexableDeployment } from '@stc/config';
+import { NOINDEX_PATHS, SITE, absoluteUrl } from '@stc/constants';
 
 export const dynamic = 'force-static';
 

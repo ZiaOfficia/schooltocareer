@@ -1,7 +1,7 @@
 import Script from 'next/script';
 
-import { ADSENSE } from '@stc/constants';
 import { isIndexableDeployment } from '@stc/config';
+import { ADSENSE } from '@stc/constants';
 
 /**
  * The AdSense loader, emitted once from the root layout.
