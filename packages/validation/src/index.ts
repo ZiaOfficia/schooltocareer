@@ -4,6 +4,7 @@ export * from './exam.js';
 export * from './board.js';
 export * from './category.js';
 export * from './question-paper.js';
+export * from './question.js';
 export * from './result.js';
 export * from './blog.js';
 export * from './media.js';

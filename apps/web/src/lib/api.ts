@@ -187,6 +187,46 @@ export async function getPaper<T>(slug: string): Promise<T | null> {
   return result?.data ?? null;
 }
 
+// ── Question bank ──────────────────────────────────────────────────────────
+
+export async function getQuestion<T>(publicId: string): Promise<T | null> {
+  const result = await requestOptional<Envelope<T>>(API_ROUTES.question(publicId), {
+    tags: [CACHE_TAGS.entity('QUESTION', publicId), CACHE_TAGS.entityList('QUESTION')],
+  });
+  return result?.data ?? null;
+}
+
+export async function getExamChapter<T>(
+  exam: string,
+  subject: string,
+  chapter: string,
+): Promise<T | null> {
+  const result = await requestOptional<Envelope<T>>(API_ROUTES.examChapter(exam, subject, chapter), {
+    tags: [
+      CACHE_TAGS.entity('EXAM_CHAPTER', `${exam}/${subject}/${chapter}`),
+      CACHE_TAGS.entityList('QUESTION'),
+    ],
+  });
+  return result?.data ?? null;
+}
+
+/**
+ * A paper's digitised questions, or null when it has none. Any failure is
+ * also null: the paper page must still offer its PDF if the question bank
+ * is down, so this block degrades to absent rather than taking the page with it.
+ */
+export async function getPaperQuestions<T>(paperSlug: string): Promise<T | null> {
+  try {
+    const result = await requestOptional<Envelope<T>>(API_ROUTES.paperQuestions(paperSlug), {
+      tags: [CACHE_TAGS.entity('QUESTION_PAPER', paperSlug), CACHE_TAGS.entityList('QUESTION')],
+    });
+    return result?.data ?? null;
+  } catch (error) {
+    if (error instanceof ApiError) return null;
+    throw error;
+  }
+}
+
 export async function listBoards<T>(query = ''): Promise<T[]> {
   const result = await requestOptional<Envelope<T[]>>(
     `${API_ROUTES.boards}${query ? `?${query}` : ''}`,

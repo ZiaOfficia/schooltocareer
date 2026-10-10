@@ -34,6 +34,19 @@ export const ROUTES = {
   examPapersByYear: (exam: string, year: number) =>
     `/exam/${exam}/previous-year-papers/${year}`,
 
+  /**
+   * Question bank. Two STATIC segments, `chapters` and `questions`, so they
+   * never collide with the dynamic `/exam/[slug]/[section]` route beside them
+   * (Next matches a static segment before a dynamic one).
+   *
+   * A question's URL carries its own short publicId, not its chapter: a
+   * question re-tagged to another chapter keeps its address.
+   */
+  examChapter: (exam: string, subject: string, chapter: string) =>
+    `/exam/${exam}/chapters/${subject}/${chapter}`,
+  examQuestion: (exam: string, slug: string, publicId: string) =>
+    `/exam/${exam}/questions/${slug}-${publicId}`,
+
   papers: () => '/previous-year-papers',
   paper: (paper: string) => `/previous-year-papers/${paper}`,
 
@@ -141,6 +154,10 @@ export const API_ROUTES = {
   board: (slug: string) => `${API_PREFIX}/boards/${slug}`,
   papers: `${API_PREFIX}/question-papers`,
   paper: (slug: string) => `${API_PREFIX}/question-papers/${slug}`,
+  question: (publicId: string) => `${API_PREFIX}/questions/${publicId}`,
+  paperQuestions: (paperSlug: string) => `${API_PREFIX}/questions/by-paper/${paperSlug}`,
+  examChapter: (exam: string, subject: string, chapter: string) =>
+    `${API_PREFIX}/questions/chapters/${exam}/${subject}/${chapter}`,
   results: `${API_PREFIX}/results`,
   /** The blog module is mounted at /posts. `content` was wrong and 404'd, which
    *  the web client swallowed into an empty list — /blog rendered its empty

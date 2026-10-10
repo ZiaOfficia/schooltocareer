@@ -16,6 +16,7 @@ import { examRoutes } from './modules/exam/exam.routes.js';
 import { factRoutes } from './modules/fact/fact.routes.js';
 import { authRoutes } from './modules/auth/auth.routes.js';
 import { questionPaperRoutes } from './modules/question-paper/question-paper.routes.js';
+import { questionRoutes } from './modules/question/question.routes.js';
 import { resultRoutes } from './modules/result/result.routes.js';
 import { blogRoutes } from './modules/blog/blog.routes.js';
 import { mediaRoutes } from './modules/media/media.routes.js';
@@ -98,6 +99,7 @@ export function createApp(container: AppContainer): Express {
     `${API_PREFIX}/question-papers`,
     questionPaperRoutes(container.services.questionPaper, jwtSecret),
   );
+  app.use(`${API_PREFIX}/questions`, questionRoutes(container.services.question));
   app.use(`${API_PREFIX}/results`, resultRoutes(container.services.result, jwtSecret));
   app.use(`${API_PREFIX}/posts`, blogRoutes(container.services.blog, jwtSecret));
   app.use(
