@@ -1,0 +1,298 @@
+// ---------------------------------------------------------------------------
+// QUESTION BANK — previous-year questions, one row per question, filed by exam
+// subject and chapter, with chapter statistics computed from them.
+//
+//   /exam/[examSlug]/[subjectSlug]                 subject: units + chapters
+//   /exam/[examSlug]/[subjectSlug]/[chapterSlug]   chapter: questions + stats
+//   /exam/[examSlug]/questions/[slug]-[publicId]   one question
+//
+// WHY THIS EXISTS (PRINCIPLES.md #3): every competitor has the paper PDF. What
+// they do not have is what the papers say across years, and that needs the
+// questions as data, not as a PDF.
+//
+// SOURCE RULE: question text comes from the official paper this site already
+// hosts (QuestionPaper). Solutions are written here. Nothing is taken from
+// another site's question bank — see docs/QUESTION-BANK.md.
+//
+// Exam chapters are NOT the board `Chapter` model. A board chapter belongs to
+// a BoardClassSubject ("CBSE Class 12 Physics"); an exam chapter belongs to an
+// exam's syllabus ("JEE Main Physics"), and the two are cut differently. A
+// later, optional link between them is additive.
+//
+// Purely ADDITIVE: new tables and enums, plus back-relation fields on Exam,
+// Subject, QuestionPaper and User, which generate no DDL.
+// ---------------------------------------------------------------------------
+
+enum QuestionType {
+  /// One correct option.
+  MCQ_SINGLE
+  /// One or more correct options (JEE Advanced, GATE MSQ).
+  MCQ_MULTI
+  /// A typed numeric answer, optionally with a tolerance (JEE Main section B).
+  NUMERICAL
+}
+
+/// Where the answer we show comes from. Trust is the product (PRINCIPLES.md #2):
+/// an answer is never shown as official unless an official key says so.
+enum AnswerProvenance {
+  /// The conducting body's FINAL answer key.
+  OFFICIAL_FINAL
+  /// The provisional key, before challenges. Replaced when the final key is out.
+  OFFICIAL_PROVISIONAL
+  /// No official key covers this question; the answer is ours and is labelled so.
+  EDITORIAL
+  /// The conducting body dropped the question or awarded marks to everyone.
+  DROPPED
+}
+
+/// Whether a chapter is in the CURRENT syllabus. Old questions on a removed
+/// chapter stay published (they are real history) but are labelled.
+enum SyllabusStatus {
+  IN_SYLLABUS
+  REDUCED
+  REMOVED
+}
+
+enum QuestionDifficulty {
+  EASY
+  MEDIUM
+  HARD
+}
+
+enum QuestionReportKind {
+  WRONG_ANSWER
+  SOLUTION_ERROR
+  TYPO
+  MISSING_FIGURE
+  OTHER
+}
+
+enum QuestionReportStatus {
+  OPEN
+  FIXED
+  REJECTED
+}
+
+/// Which subjects an exam tests, in display order. Shape follows the planned
+/// design in docs/architecture/schema-full-v1/exam.prisma, with `order` added
+/// and the static `weightage` left out: weightage is computed from questions
+/// (ExamChapterYearStat), not typed in.
+model ExamSubject {
+  examId    String
+  subjectId String
+  order     Int    @default(0)
+
+  exam     Exam          @relation(fields: [examId], references: [id], onDelete: Cascade)
+  subject  Subject       @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  units    ExamUnit[]
+  chapters ExamChapter[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@id([examId, subjectId])
+  @@index([subjectId])
+}
+
+/// A grouping of chapters within an exam subject ("Mechanics", "Organic
+/// Chemistry"). Display only; nothing is counted per unit.
+model ExamUnit {
+  id        String @id @default(cuid())
+  examId    String
+  subjectId String
+  name      String
+  slug      String
+  order     Int    @default(0)
+
+  examSubject ExamSubject   @relation(fields: [examId, subjectId], references: [examId, subjectId], onDelete: Cascade)
+  chapters    ExamChapter[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([examId, subjectId, slug])
+  @@index([examId, subjectId, order])
+}
+
+/// A chapter of an exam's syllabus. The unit of every PYQ statistic.
+model ExamChapter {
+  id          String  @id @default(cuid())
+  examId      String
+  subjectId   String
+  unitId      String?
+  name        String
+  slug        String // unique within (exam, subject): /exam/jee-main/physics/[slug]
+  order       Int     @default(0)
+  description String? @db.Text
+
+  syllabusStatus    SyllabusStatus @default(IN_SYLLABUS)
+  /// The official notice that set syllabusStatus. Required to publish a status
+  /// other than IN_SYLLABUS — the label is a claim, and claims are sourced.
+  syllabusSourceUrl String?
+
+  examSubject ExamSubject           @relation(fields: [examId, subjectId], references: [examId, subjectId], onDelete: Cascade)
+  unit        ExamUnit?             @relation(fields: [unitId], references: [id], onDelete: SetNull)
+  questions   Question[]
+  yearStats   ExamChapterYearStat[]
+
+  status      PublishStatus @default(DRAFT)
+  publishedAt DateTime?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  createdById String?
+  updatedById String?
+  deletedAt   DateTime?
+
+  @@unique([examId, subjectId, slug])
+  @@index([examId, subjectId, order])
+  @@index([unitId, order])
+  @@index([status, deletedAt])
+}
+
+/// One question from one official paper.
+///
+/// `number` is the question's position in the WHOLE paper (1–75 for a JEE Main
+/// shift), which is how official answer keys address it. `subjectId` is set at
+/// import, before a chapter is tagged, so a paper can be shown subject-wise
+/// while tagging is still in progress.
+///
+/// Text fields are Markdown with $…$ / $$…$$ LaTeX, rendered on the server.
+model Question {
+  id       String @id @default(cuid())
+  /// Short, stable public id: the URL suffix. Never reused, never changed.
+  publicId String @unique
+  /// Readable part of the URL, from the stem. May change; publicId resolves it.
+  slug     String
+
+  questionPaperId String
+  number          Int
+  subjectId       String?
+  examChapterId   String?
+
+  type       QuestionType
+  marksRight Float
+  /// Stored as a negative number (−1 for JEE Main MCQs), 0 when there is none.
+  marksWrong Float               @default(0)
+  stem       String              @db.Text
+  stemHi     String?             @db.Text
+  difficulty QuestionDifficulty?
+
+  questionPaper QuestionPaper         @relation(fields: [questionPaperId], references: [id], onDelete: Restrict)
+  subject       Subject?              @relation(fields: [subjectId], references: [id], onDelete: SetNull)
+  chapter       ExamChapter?          @relation(fields: [examChapterId], references: [id], onDelete: SetNull)
+  options       QuestionOption[]
+  answer        QuestionAnswer?
+  reports       QuestionErrorReport[]
+
+  status      PublishStatus @default(DRAFT)
+  publishedAt DateTime?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  createdById String?
+  updatedById String?
+  deletedAt   DateTime?
+
+  @@unique([questionPaperId, number])
+  /// The chapter page's list: newest first.
+  @@index([examChapterId, status, publishedAt(sort: Desc)])
+  @@index([questionPaperId, subjectId, number])
+  @@index([status, deletedAt])
+}
+
+/// An answer choice. Empty set for NUMERICAL questions.
+model QuestionOption {
+  id         String  @id @default(cuid())
+  questionId String
+  /// "A", "B", "C", "D" — or "1"–"4" where the paper numbers its options.
+  label      String
+  order      Int
+  body       String  @db.Text
+  bodyHi     String? @db.Text
+  isCorrect  Boolean @default(false)
+
+  question Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  @@unique([questionId, label])
+  @@index([questionId, order])
+}
+
+/// The answer and its provenance, plus our written solution.
+///
+/// For MCQs the correct choice lives on QuestionOption.isCorrect; this row says
+/// WHERE that came from. For NUMERICAL it also holds the value. A DROPPED
+/// question has no correct option and no value.
+///
+/// Publish rule (enforced in the service, like assertPublishable for exams):
+/// a question cannot be published without a solution and a provenance, and an
+/// OFFICIAL_* provenance needs answerKeySourceUrl.
+model QuestionAnswer {
+  questionId String @id
+
+  provenance         AnswerProvenance
+  /// The official answer-key document this answer was checked against.
+  answerKeySourceUrl String?
+  numericValue       Decimal?         @db.Decimal(18, 6)
+  /// Accepted range either side of numericValue, when the key gives one.
+  numericTolerance   Decimal?         @db.Decimal(18, 6)
+
+  solution     String?   @db.Text
+  solutionHi   String?   @db.Text
+  authorId     String?
+  reviewedById String?
+  reviewedAt   DateTime?
+
+  question   Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  reviewedBy User?    @relation("QuestionAnswerReviewer", fields: [reviewedById], references: [id], onDelete: SetNull)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([provenance])
+  @@index([reviewedById])
+}
+
+/// Chapter statistics for one exam year, recomputed whenever a question in
+/// the chapter is published or unpublished. Raw counts are stored alongside
+/// the percentages so every figure on the site can be re-derived and checked.
+///
+///   weightagePct = 100 × questions / subjectQuestions
+///   changePct    = change in weightagePct vs the previous year with data
+///
+/// `papersInYear` is how many of that year's papers are digitised, so the page
+/// can say "based on 8 of 20 shifts" instead of overstating coverage.
+model ExamChapterYearStat {
+  examChapterId    String
+  year             Int
+  questions        Int
+  subjectQuestions Int
+  papersInYear     Int
+  weightagePct     Float
+  changePct        Float?
+  computedAt       DateTime @default(now())
+
+  chapter ExamChapter @relation(fields: [examChapterId], references: [id], onDelete: Cascade)
+
+  @@id([examChapterId, year])
+  @@index([year])
+}
+
+/// A reader's "report an error". No personal data is collected.
+model QuestionErrorReport {
+  id           String               @id @default(cuid())
+  questionId   String
+  kind         QuestionReportKind
+  message      String               @db.Text
+  status       QuestionReportStatus @default(OPEN)
+  /// Shown publicly in the fix log once the report is resolved.
+  resolution   String?              @db.Text
+  resolvedAt   DateTime?
+  resolvedById String?
+
+  question Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  /// The review queue: open first, oldest first.
+  @@index([status, createdAt])
+  @@index([questionId])
+}

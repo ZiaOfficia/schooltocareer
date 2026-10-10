@@ -9,7 +9,8 @@
   "exports": {
     ".": "./src/index.ts",
     "./sources": "./src/sources.ts",
-    "./cache-tags": "./src/cache-tags.ts"
+    "./cache-tags": "./src/cache-tags.ts",
+    "./exam-syllabi": "./src/exam-syllabi.ts"
   },
   "scripts": { "lint": "eslint src", "typecheck": "tsc --noEmit" },
   "dependencies": { "@stc/types": "workspace:*" },
