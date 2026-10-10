@@ -38,7 +38,7 @@ export default async function ResultsIndex() {
   let results: ResultListItemDto[] = [];
   let failed = false;
   try {
-    results = await listResults<ResultListItemDto>('limit=60&sort=year&dir=desc');
+    results = await listResults<ResultListItemDto>('perPage=60&sortBy=year&sortDir=desc');
   } catch (error) {
     if (!(error instanceof ApiError)) throw error;
     failed = true;

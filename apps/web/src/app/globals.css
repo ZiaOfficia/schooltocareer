@@ -28,7 +28,8 @@
 @theme {
   --color-ink: #0e1330;
   --color-ink-soft: #454d6d;
-  --color-ink-mute: #747c9a;
+  /* Dark enough for small text on white: 5.6:1, where the old value was 4:1. */
+  --color-ink-mute: #5d6585;
   --color-link: #4338ca;
 
   --color-paper: #f5f6fc;
@@ -68,11 +69,10 @@
     sans-serif;
   --font-data: ui-monospace, 'SF Mono', 'Cascadia Mono', 'Roboto Mono', Consolas, monospace;
 
-  --radius-card: 18px;
-  --radius-tile: 12px;
+  --radius-card: 12px;
+  --radius-tile: 10px;
 
-  --shadow-card: 0 1px 2px rgb(14 19 48 / 0.04), 0 10px 28px -16px rgb(14 19 48 / 0.16);
-  --shadow-lift: 0 2px 6px rgb(14 19 48 / 0.06), 0 26px 48px -22px rgb(79 70 229 / 0.45);
+  --shadow-card: 0 1px 2px rgb(14 19 48 / 0.05);
 }
 
 /* Dark values. `.night` scopes them to one band (the hero is always dark, in
@@ -108,8 +108,7 @@
   --color-t-article: #fbbf24;
   --color-t-board: #a3adcb;
   --color-t-syllabus: #a5b4fc;
-  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.3), 0 10px 28px -16px rgb(0 0 0 / 0.6);
-  --shadow-lift: 0 2px 6px rgb(0 0 0 / 0.3), 0 26px 48px -22px rgb(129 140 248 / 0.5);
+  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.3);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -141,8 +140,7 @@
     --color-t-article: #fbbf24;
     --color-t-board: #a3adcb;
     --color-t-syllabus: #a5b4fc;
-    --shadow-card: 0 1px 2px rgb(0 0 0 / 0.3), 0 10px 28px -16px rgb(0 0 0 / 0.6);
-    --shadow-lift: 0 2px 6px rgb(0 0 0 / 0.3), 0 26px 48px -22px rgb(129 140 248 / 0.5);
+    --shadow-card: 0 1px 2px rgb(0 0 0 / 0.3);
   }
 }
 
@@ -197,9 +195,7 @@
 
 @layer components {
   /* ── The hero band ──────────────────────────────────────────────────────
-     Always dark. The gradient alone has to look finished, because the WebGL
-     scene on top of it is skipped on Save-Data, on reduced motion and wherever
-     a context cannot be created. */
+     Always dark. The gradient is the whole backdrop. */
   .hero-bg {
     position: relative;
     isolation: isolate;
@@ -231,63 +227,39 @@
     color: transparent;
   }
 
+  /* A panel on the dark hero. A plain tint: no blur behind the text. */
   .glass {
-    background: rgb(255 255 255 / 0.07);
-    border: 1px solid rgb(255 255 255 / 0.14);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
+    background: rgb(255 255 255 / 0.09);
+    border: 1px solid rgb(255 255 255 / 0.2);
   }
 
-  /* ── Cards ────────────────────────────────────────────────────────────── */
+  /* ── Cards ──────────────────────────────────────────────────────────────
+     Flat on purpose: a border, a surface and a hairline shadow. A linked card
+     answers the pointer by changing colour and nothing else — it does not
+     move, lean or glow, so the text on it can be read while it is hovered. */
   .card {
-    position: relative;
     background: var(--color-surface);
     border: 1px solid var(--color-rule);
     border-radius: var(--radius-card);
     box-shadow: var(--shadow-card);
-    transition:
-      border-color 0.25s ease,
-      box-shadow 0.25s ease;
   }
 
   a.card {
     color: inherit;
     text-decoration: none;
-    will-change: transform;
+    transition:
+      border-color 0.15s ease,
+      background-color 0.15s ease;
   }
 
   a.card:hover,
   a.card:focus-visible {
-    border-color: color-mix(in srgb, var(--color-brand) 50%, var(--color-rule));
-    box-shadow: var(--shadow-lift);
-  }
-
-  /* The pointer-following sheen. --mx/--my are written by the tilt handler. */
-  .card[data-tilt]::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    background: radial-gradient(
-      260px circle at var(--mx, 50%) var(--my, 50%),
-      color-mix(in srgb, var(--color-brand) 16%, transparent),
-      transparent 70%
-    );
-    opacity: 0;
-    transition: opacity 0.25s ease;
-    pointer-events: none;
-  }
-
-  .card[data-tilt]:hover::after {
-    opacity: 1;
-  }
-
-  .card-arrow {
-    transition: transform 0.25s ease;
+    border-color: var(--color-brand);
+    background: var(--color-row-hover);
   }
 
   a.card:hover .card-arrow {
-    transform: translateX(4px);
+    color: var(--color-brand);
   }
 
   /* ── Buttons ──────────────────────────────────────────────────────────── */
@@ -298,32 +270,25 @@
     gap: 0.5rem;
     border-radius: 999px;
     padding: 0.65rem 1.25rem;
-    font-size: 14.5px;
+    font-size: 15px;
     font-weight: 600;
     line-height: 1.2;
     text-decoration: none;
     white-space: nowrap;
     cursor: pointer;
     transition:
-      transform 0.2s ease,
-      box-shadow 0.2s ease,
-      background-color 0.2s ease,
-      border-color 0.2s ease;
-  }
-
-  .btn:active {
-    transform: scale(0.97);
+      background-color 0.15s ease,
+      border-color 0.15s ease,
+      color 0.15s ease;
   }
 
   .btn-primary {
     color: #fff;
-    background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
-    box-shadow: 0 10px 24px -10px rgb(99 71 232 / 0.75);
+    background: #4f46e5;
   }
 
   .btn-primary:hover {
-    box-shadow: 0 14px 30px -10px rgb(99 71 232 / 0.95);
-    transform: translateY(-1px);
+    background: #4338ca;
   }
 
   .btn-ghost {
@@ -343,8 +308,8 @@
     gap: 0.4rem;
     border-radius: 999px;
     border: 1px solid var(--color-rule);
-    padding: 0.2rem 0.7rem;
-    font-size: 12.5px;
+    padding: 0.3rem 0.8rem;
+    font-size: 13.5px;
     color: var(--color-ink-soft);
     text-decoration: none;
     transition:
@@ -359,20 +324,12 @@
     background: color-mix(in srgb, var(--color-brand) 12%, transparent);
   }
 
-  /* ── Header ───────────────────────────────────────────────────────────── */
+  /* ── Header ─────────────────────────────────────────────────────────────
+     Solid and always on screen: the navigation is the way to everything, so
+     it neither hides on scroll nor lets the page show through it. */
   .site-header {
-    background: color-mix(in srgb, var(--color-surface) 78%, transparent);
-    backdrop-filter: saturate(160%) blur(16px);
-    -webkit-backdrop-filter: saturate(160%) blur(16px);
-    border-bottom: 1px solid transparent;
-    transition:
-      border-color 0.25s ease,
-      box-shadow 0.25s ease;
-  }
-
-  .site-header[data-scrolled] {
-    border-bottom-color: var(--color-rule);
-    box-shadow: 0 10px 30px -22px rgb(14 19 48 / 0.5);
+    background: var(--color-surface);
+    border-bottom: 1px solid var(--color-rule);
   }
 
   .nav-link {
@@ -404,12 +361,6 @@
     transform: scaleX(1);
   }
 
-  .scroll-progress {
-    transform: scaleX(0);
-    transform-origin: left;
-    background: linear-gradient(90deg, #4f46e5, #06b6d4 55%, #f59e0b);
-  }
-
   /* The FAQ disclosure marker: a plus that turns into a cross. */
   .faq summary {
     list-style: none;
@@ -427,40 +378,6 @@
   .faq[open] .faq-mark {
     transform: rotate(45deg);
   }
-}
-
-/* ═══════════════════════════════════════════════════════════════════════════
-   MOTION — pre-animation states
-
-   An inline script in <head> adds `.js` before first paint, so these hidden
-   states apply from the first frame and nothing flashes. The same script
-   removes `.js` again if the motion code has not started within a few
-   seconds, and none of it applies under reduced motion — so content can be
-   delayed by an animation but never withheld by one.
-   ═══════════════════════════════════════════════════════════════════════════ */
-@media (prefers-reduced-motion: no-preference) {
-  .js [data-reveal]:not([data-revealed]) {
-    opacity: 0;
-    transform: translateY(28px);
-  }
-
-  .js [data-words]:not([data-revealed]) .word-in {
-    transform: translateY(110%);
-  }
-}
-
-.word {
-  display: inline-block;
-  overflow: hidden;
-  vertical-align: top;
-  /* Room for descenders, which `overflow: hidden` would otherwise clip. */
-  padding-bottom: 0.12em;
-  margin-bottom: -0.12em;
-}
-
-.word-in {
-  display: inline-block;
-  will-change: transform;
 }
 
 @media (prefers-reduced-motion: reduce) {

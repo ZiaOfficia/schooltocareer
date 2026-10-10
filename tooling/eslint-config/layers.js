@@ -16,6 +16,9 @@ const REPOSITORY_GLOBS = [
   '**/core/base/**/*.ts',
   '**/prisma/seed/**/*.ts',
   '**/src/extensions/**/*.ts',
+  // The composition root constructs the one Prisma client and hands it to the
+  // repositories. It wires; it does not query.
+  '**/src/container.ts',
   '**/*.test.ts',
   '**/*.spec.ts',
 ];
@@ -32,7 +35,7 @@ module.exports = {
     // ---------------------------------------------------------------------
     {
       files: ['apps/api/src/**/*.ts'],
-      excludedFiles: REPOSITORY_GLOBS,
+      ignores: REPOSITORY_GLOBS,
       rules: {
         'no-restricted-imports': [
           'error',
@@ -105,7 +108,7 @@ module.exports = {
     // ---------------------------------------------------------------------
     {
       files: ['apps/**/*.{ts,tsx}', 'packages/**/*.ts'],
-      excludedFiles: ['**/env.ts', '**/env.*.ts', '**/*.config.{ts,js,mjs}', '**/scripts/**'],
+      ignores: ['**/env.ts', '**/env.*.ts', '**/*.config.{ts,js,mjs}', '**/scripts/**'],
       rules: {
         'no-restricted-properties': [
           'error',
@@ -131,7 +134,10 @@ module.exports = {
           {
             patterns: [
               {
-                group: ['*', '!@stc/types', '!./*', '!../*'],
+                // A regex, not a gitignore-style group: `*` followed by negations
+                // cannot re-admit `@stc/types` or `./file.js`, so the group form
+                // rejected every import in the package.
+                regex: '^(?!@stc/types$|[.]{1,2}/)',
                 message:
                   '@stc/constants must depend on nothing but @stc/types. It is imported from ' +
                   'edge middleware, workers and the browser bundle.',

@@ -27,7 +27,7 @@ export function JsonLd({ data }: { data: Json | Json[] }) {
   return (
     <script
       type="application/ld+json"
-      // eslint-disable-next-line react/no-danger -- escaped above; the only way to emit ld+json
+      // Escaped above; dangerouslySetInnerHTML is the only way to emit ld+json.
       dangerouslySetInnerHTML={{ __html: serialise(data) }}
     />
   );

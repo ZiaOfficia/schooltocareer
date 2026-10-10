@@ -34,7 +34,14 @@ import { LIVE } from '@/lib/site-sections';
  * so it cannot be inflated.
  */
 
-export const revalidate = 3600;
+/**
+ * Rendered on request, not at build time. Building it needs the API, so a
+ * build with the API unreachable (CI, a preview without API_BASE_URL, or the
+ * API simply asleep during a deploy) failed outright. The API reads beneath
+ * it are still cached for an hour by lib/api.ts, so this costs one cheap
+ * render per crawler visit, and the sitemap is never stale after a deploy.
+ */
+export const dynamic = 'force-dynamic';
 
 /** 50,000 is the protocol limit. Warn well before it, not at it. */
 const SHARD_THRESHOLD = 45_000;

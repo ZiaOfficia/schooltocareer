@@ -2,7 +2,7 @@ import { ROUTES, SITE } from '@stc/constants';
 import type { PaperListItemDto } from '@stc/types';
 
 import { IndexPage, type IndexItem } from '@/components/index-page';
-import { ApiError, listPapers } from '@/lib/api';
+import { ApiError, listAllPapers } from '@/lib/api';
 import { buildMetadata } from '@/lib/seo/metadata';
 
 export const revalidate = 3600;
@@ -24,7 +24,7 @@ export default async function PapersIndex() {
   try {
     // Newest first — a paper's value decays with age, so the default order
     // should match what most people are looking for.
-    papers = await listPapers<PaperListItemDto>('perPage=60&sortBy=year&sortDir=desc');
+    papers = await listAllPapers<PaperListItemDto>('sortBy=year&sortDir=desc');
   } catch (error) {
     if (!(error instanceof ApiError)) throw error;
     failed = true;

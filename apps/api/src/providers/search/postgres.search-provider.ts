@@ -3,7 +3,6 @@ import { normalizeQuery } from '@stc/utils';
 
 import { SearchUnavailableError } from '../../core/errors/app-error.js';
 
-import type { SearchRepository } from './search.repository.js';
 import type {
   ISearchProvider,
   SearchDocumentInput,
@@ -12,6 +11,7 @@ import type {
   SearchSuggestion,
   SuggestParams,
 } from './search.provider.js';
+import type { SearchRepository } from './search.repository.js';
 
 /**
  * PostgreSQL full-text search. The launch implementation.

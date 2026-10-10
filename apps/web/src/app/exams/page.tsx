@@ -22,7 +22,7 @@ export default async function ExamsIndex() {
   let exams: ExamListItemDto[] = [];
   let failed = false;
   try {
-    exams = await listExams<ExamListItemDto>('limit=200&sort=popularityScore&dir=desc');
+    exams = await listExams<ExamListItemDto>('perPage=100&sortBy=popularityScore&sortDir=desc');
   } catch (error) {
     if (!(error instanceof ApiError)) throw error;
     failed = true;

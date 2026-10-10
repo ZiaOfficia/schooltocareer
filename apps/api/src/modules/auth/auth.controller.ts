@@ -2,9 +2,9 @@ import type { Request, Response } from 'express';
 
 import { loginSchema } from '@stc/validation';
 
-import { sendOk, setPrivateNoStore } from '../../core/http/response.js';
 import { getCurrentUser } from '../../core/context.js';
 import { UnauthenticatedError } from '../../core/errors/app-error.js';
+import { sendOk, setPrivateNoStore } from '../../core/http/response.js';
 import { validBody } from '../../middleware/validate.js';
 
 import type { AuthService } from './auth.service.js';

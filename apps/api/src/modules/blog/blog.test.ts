@@ -1,8 +1,9 @@
 import { describe, expect, it, vi } from 'vitest';
 
-import { BusinessRuleError, ForbiddenError, NotFoundError, VersionConflictError } from '../../core/errors/app-error.js';
-import { runWithContext } from '../../core/context.js';
 import type { AuthUser } from '@stc/types';
+
+import { runWithContext } from '../../core/context.js';
+import { BusinessRuleError, ForbiddenError, NotFoundError, VersionConflictError } from '../../core/errors/app-error.js';
 import type { DomainEvent } from '../../core/events/domain-event.js';
 import { EventDispatcher } from '../../core/events/event-dispatcher.js';
 import { MemoryCacheProvider } from '../../providers/cache/memory.cache-provider.js';
