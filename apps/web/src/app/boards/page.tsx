@@ -22,7 +22,7 @@ export default async function BoardsIndex() {
   let boards: BoardListItemDto[] = [];
   let failed = false;
   try {
-    boards = await listBoards<BoardListItemDto>('limit=200&sort=popularityScore&dir=desc');
+    boards = await listBoards<BoardListItemDto>('perPage=100&sortBy=popularityScore&sortDir=desc');
   } catch (error) {
     if (!(error instanceof ApiError)) throw error;
     failed = true;

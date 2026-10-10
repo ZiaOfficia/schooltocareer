@@ -131,7 +131,7 @@ export default async function PaperPage({ params }: { params: Promise<Params> })
         <Section title="Download" major>
           <ul className="grid gap-3 sm:grid-cols-2">
             {files.map((file) => (
-              <li key={`${file.role}-${file.locale}`} data-reveal>
+              <li key={`${file.role}-${file.locale}`}>
                 <a
                   href={file.url}
                   target="_blank"
@@ -142,7 +142,7 @@ export default async function PaperPage({ params }: { params: Promise<Params> })
                     <span className="block font-display text-[16.5px] font-semibold text-ink">
                       {FILE_LABEL[file.role]}
                     </span>
-                    <span className="num mt-1 block text-[12.5px] text-ink-mute">
+                    <span className="num mt-1 block text-[14px] text-ink-mute">
                       {fileDetail(file)}
                     </span>
                   </span>
@@ -151,7 +151,7 @@ export default async function PaperPage({ params }: { params: Promise<Params> })
               </li>
             ))}
           </ul>
-          <p data-reveal className="mt-4 max-w-[68ch] text-[14px] text-ink-soft">
+          <p className="mt-4 max-w-[68ch] text-[14px] text-ink-soft">
             The file opens in a new tab. It is the paper as the exam body issued it, not a retyped
             or memory-based copy.
             {files.some((file) => file.role === 'ANSWER_KEY')
@@ -163,10 +163,9 @@ export default async function PaperPage({ params }: { params: Promise<Params> })
         {paper.exam && examPapersPath ? (
           <Section title={`More ${paper.exam.shortName} papers`}>
             <ul className="grid gap-4 sm:grid-cols-2">
-              <li data-reveal>
+              <li>
                 <Link
                   href={`${examPapersPath}#year-${paper.year}`}
-                  data-tilt
                   className="card flex h-full items-center justify-between gap-3 p-5"
                 >
                   <span className="font-display text-[16px] font-semibold text-ink">
@@ -175,10 +174,9 @@ export default async function PaperPage({ params }: { params: Promise<Params> })
                   <ArrowRightIcon width={16} height={16} className="card-arrow text-ink-mute" />
                 </Link>
               </li>
-              <li data-reveal>
+              <li>
                 <Link
                   href={examPapersPath}
-                  data-tilt
                   className="card flex h-full items-center justify-between gap-3 p-5"
                 >
                   <span className="font-display text-[16px] font-semibold text-ink">All years</span>

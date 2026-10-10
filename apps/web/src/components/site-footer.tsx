@@ -46,7 +46,7 @@ export function SiteFooter() {
     <footer className="night hero-bg mt-16">
       <Wrap className="py-14">
         <div className="grid gap-10 md:grid-cols-[1.4fr_1fr_1fr]">
-          <div data-reveal>
+          <div>
             <Link href={ROUTES.home()} className="inline-block text-logo no-underline">
               <Logo className="h-10 w-auto" />
             </Link>
@@ -54,8 +54,8 @@ export function SiteFooter() {
           </div>
 
           {GROUPS.map((group) => (
-            <div key={group.title} data-reveal>
-              <h2 className="font-data text-[11px] font-semibold uppercase tracking-[0.16em] text-ink-mute">
+            <div key={group.title}>
+              <h2 className="font-data text-[12px] font-semibold uppercase tracking-[0.16em] text-ink-mute">
                 {group.title}
               </h2>
               <ul className="mt-4 space-y-2.5 text-[14px]">
@@ -80,16 +80,13 @@ export function SiteFooter() {
           stale has a legitimate grievance. Saying plainly that the agency is
           authoritative is both honest and the correct legal posture.
         */}
-        <p
-          data-reveal
-          className="glass mt-10 max-w-[86ch] rounded-[var(--radius-tile)] p-4 text-[13px] leading-relaxed text-ink-soft"
-        >
+        <p className="glass mt-10 max-w-[86ch] rounded-[var(--radius-tile)] p-4 text-[14px] leading-relaxed text-ink-soft">
           {SITE.NAME} is an independent education portal. Exam dates, eligibility and results are
           compiled from official notifications and can change without notice. Always confirm against
           the conducting body&rsquo;s official website before acting on a deadline.
         </p>
 
-        <p className="mt-8 border-t border-rule pt-6 font-data text-[11.5px] text-ink-mute">
+        <p className="mt-8 border-t border-rule pt-6 font-data text-[12.5px] text-ink-mute">
           © {new Date().getFullYear()} {SITE.NAME} · {SITE.ORIGIN.replace('https://', '')}
         </p>
       </Wrap>

@@ -75,7 +75,7 @@ export function EntityBadge({
 }) {
   return (
     <span
-      className={`inline-flex items-center gap-[6px] rounded-md border border-rule bg-surface py-[4px] pl-[5px] pr-2 font-data text-[10px] font-semibold uppercase leading-none tracking-[0.09em] whitespace-nowrap ${className}`}
+      className={`inline-flex items-center gap-[6px] rounded-md border border-rule bg-surface py-[4px] pl-[5px] pr-2 font-data text-[11px] font-semibold uppercase leading-none tracking-[0.08em] whitespace-nowrap ${className}`}
       style={{ color: TONE[kind] }}
     >
       {/* The accent spine. A bar inside the badge rather than a thick left

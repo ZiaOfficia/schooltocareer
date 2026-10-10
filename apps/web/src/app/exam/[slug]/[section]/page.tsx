@@ -308,14 +308,14 @@ export default async function ExamSectionPage({ params }: { params: Promise<Para
               is "Official" because the link beside it is the conducting
               body's own document, and the type will not let it render
               without one. */}
-            <div data-reveal className="card mt-10 p-5">
+            <div className="card mt-10 p-5">
               <Provenance
                 confidence="official"
                 sourceUrl={written.source.url}
                 sourceName={written.source.name}
               />
               {written.cycleNote ? (
-                <p className="mt-2 max-w-[72ch] text-[13.5px] text-ink-mute">{written.cycleNote}</p>
+                <p className="mt-2 max-w-[72ch] text-[14.5px] text-ink-mute">{written.cycleNote}</p>
               ) : null}
             </div>
 
@@ -328,7 +328,7 @@ export default async function ExamSectionPage({ params }: { params: Promise<Para
             <Section title="Questions students ask">
               <dl className="grid max-w-[72ch] gap-5">
                 {written.faqs.map((faq) => (
-                  <div key={faq.question} data-reveal>
+                  <div key={faq.question}>
                     <dt className="text-[16px] font-semibold text-ink">{faq.question}</dt>
                     <dd className="mt-1.5 text-[15px] text-ink-soft">{faq.answer}</dd>
                   </div>
@@ -341,7 +341,7 @@ export default async function ExamSectionPage({ params }: { params: Promise<Para
         {/* The date this page exists to answer, stated once and sourced. */}
         {SECTION_EVENT[section as ExamSection] ? (
           <Section title={`${config.label} date`} major>
-            <div data-reveal className="card p-6">
+            <div className="card p-6">
               <div className="flex flex-wrap items-center gap-3">
                 <span className="num text-[clamp(24px,4vw,32px)] font-bold">
                   {formatDate(date)}
@@ -401,7 +401,7 @@ export default async function ExamSectionPage({ params }: { params: Promise<Para
             lede={`${papers.length > 0 ? `${papers.length} papers` : 'Papers'} for ${exam.shortName}, newest first.`}
           >
             {papers.length === 0 ? (
-              <p data-reveal className="card border-dashed p-5 text-[14.5px] text-ink-soft">
+              <p className="card border-dashed p-5 text-[14.5px] text-ink-soft">
                 No papers are published for {exam.shortName} yet.
               </p>
             ) : (
@@ -413,20 +413,16 @@ export default async function ExamSectionPage({ params }: { params: Promise<Para
                 // scroll-mt clears the sticky header, or the year heading an
                 // anchor jumps to would land underneath it.
                 <div key={year} id={`year-${year}`} className="mb-8 scroll-mt-24">
-                  <h3 data-reveal className="mb-3 num text-[20px] font-bold text-ink">
+                  <h3 className="mb-3 num text-[20px] font-bold text-ink">
                     {year}
-                    <span className="ml-2 font-normal text-[13px] text-ink-mute">
+                    <span className="ml-2 font-normal text-[14px] text-ink-mute">
                       {forYear.length} {forYear.length === 1 ? 'paper' : 'papers'}
                     </span>
                   </h3>
                   <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                     {forYear.map((paper) => (
-                      <li key={paper.id} data-reveal>
-                        <Link
-                          href={paper.path}
-                          data-tilt
-                          className="card flex h-full flex-col gap-1.5 p-4"
-                        >
+                      <li key={paper.id}>
+                        <Link href={paper.path} className="card flex h-full flex-col gap-1.5 p-4">
                           {/* Under a year heading on the exam's own page, the
                             exam name and year in a title are noise repeated on
                             every card. The sitting is what tells two cards
@@ -434,7 +430,7 @@ export default async function ExamSectionPage({ params }: { params: Promise<Para
                           <span className="text-[15px] font-semibold text-ink">
                             {paper.shift ?? paper.title}
                           </span>
-                          <span className="num text-[12.5px] text-ink-mute">
+                          <span className="num text-[14px] text-ink-mute">
                             {[
                               paper.setCode ?? (paper.shift ? 'Question paper' : 'All shifts'),
                               paper.hasSolution ? 'solved' : null,
@@ -456,7 +452,7 @@ export default async function ExamSectionPage({ params }: { params: Promise<Para
           <>
             {guide.sections.map((part) => (
               <Section key={part.title} title={part.title}>
-                <div data-reveal className="grid max-w-[72ch] gap-4 text-[15.5px] text-ink-soft">
+                <div className="grid max-w-[72ch] gap-4 text-[15.5px] text-ink-soft">
                   {part.paragraphs.map((text) => (
                     <p key={text}>{text}</p>
                   ))}
@@ -474,7 +470,7 @@ export default async function ExamSectionPage({ params }: { params: Promise<Para
             <Section title="Questions students ask">
               <dl className="grid max-w-[72ch] gap-5">
                 {guide.faqs.map((faq) => (
-                  <div key={faq.question} data-reveal>
+                  <div key={faq.question}>
                     <dt className="text-[16px] font-semibold text-ink">{faq.question}</dt>
                     <dd className="mt-1.5 text-[15px] text-ink-soft">{faq.answer}</dd>
                   </div>
@@ -490,7 +486,7 @@ export default async function ExamSectionPage({ params }: { params: Promise<Para
             lede={`${exam.shortName} results we hold, newest first.`}
           >
             {results.length === 0 ? (
-              <p data-reveal className="card border-dashed p-5 text-[14.5px] text-ink-soft">
+              <p className="card border-dashed p-5 text-[14.5px] text-ink-soft">
                 No results are published for {exam.shortName} yet.
               </p>
             ) : (
@@ -498,7 +494,6 @@ export default async function ExamSectionPage({ params }: { params: Promise<Para
                 {results.map((result) => (
                   <li
                     key={result.id}
-                    data-reveal
                     className="card flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 px-5 py-4"
                   >
                     <Link
@@ -507,7 +502,7 @@ export default async function ExamSectionPage({ params }: { params: Promise<Para
                     >
                       {result.title}
                     </Link>
-                    <span className="num text-[13px] text-ink-soft">
+                    <span className="num text-[14px] text-ink-soft">
                       {result.isDeclared ? formatDate(result.declaredAt) : 'Awaited'}
                     </span>
                   </li>
@@ -519,10 +514,10 @@ export default async function ExamSectionPage({ params }: { params: Promise<Para
 
         <Section title={`More about ${exam.shortName}`}>
           <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            <li data-reveal>
-              <Link href={exam.path} data-tilt className="card block h-full p-5">
+            <li>
+              <Link href={exam.path} className="card block h-full p-5">
                 <span className="font-display text-[16px] font-semibold text-ink">Overview</span>
-                <span className="mt-1 block text-[13.5px] text-ink-soft">Dates and summary</span>
+                <span className="mt-1 block text-[14.5px] text-ink-soft">Dates and summary</span>
               </Link>
             </li>
             {/* Only the sections with something on them today: an empty
@@ -530,16 +525,12 @@ export default async function ExamSectionPage({ params }: { params: Promise<Para
             {live
               .filter((key) => key !== section)
               .map((key) => (
-                <li key={key} data-reveal>
-                  <Link
-                    href={EXAM_SECTIONS[key].path(exam.slug)}
-                    data-tilt
-                    className="card block h-full p-5"
-                  >
+                <li key={key}>
+                  <Link href={EXAM_SECTIONS[key].path(exam.slug)} className="card block h-full p-5">
                     <span className="font-display text-[16px] font-semibold text-ink">
                       {EXAM_SECTIONS[key].label}
                     </span>
-                    <span className="mt-1 block text-[13.5px] text-ink-soft">
+                    <span className="mt-1 block text-[14.5px] text-ink-soft">
                       {MORE_HINT[key] ?? `${year} dates`}
                     </span>
                   </Link>
@@ -550,7 +541,7 @@ export default async function ExamSectionPage({ params }: { params: Promise<Para
 
         {exam.officialWebsite ? (
           <Section title="Official source">
-            <div data-reveal className="card p-6">
+            <div className="card p-6">
               <p className="max-w-[70ch] text-[14.5px] text-ink-soft">
                 {exam.conductingBody
                   ? `${exam.conductingBody} is the authority for ${exam.name}.`

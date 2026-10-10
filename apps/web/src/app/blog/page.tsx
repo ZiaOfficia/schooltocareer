@@ -25,7 +25,7 @@ export default async function BlogIndex() {
   let posts: PostListItemDto[] = [];
   let failed = false;
   try {
-    posts = await listPosts<PostListItemDto>('limit=60&sort=publishedAt&dir=desc');
+    posts = await listPosts<PostListItemDto>('perPage=60&sortBy=publishedAt&sortDir=desc');
   } catch (error) {
     if (!(error instanceof ApiError)) throw error;
     failed = true;

@@ -72,9 +72,9 @@ export function Provenance({ confidence, sourceUrl, sourceName, className = '' }
   const { label, tone, bg, explain } = COPY[confidence];
 
   return (
-    <p className={`flex flex-wrap items-center gap-x-2 gap-y-1 text-[13px] ${className}`}>
+    <p className={`flex flex-wrap items-center gap-x-2 gap-y-1 text-[14px] ${className}`}>
       <span
-        className="rounded-full border px-[9px] py-[3px] font-data text-[10px] font-bold uppercase leading-none tracking-[0.09em]"
+        className="rounded-full border px-[9px] py-[3px] font-data text-[11px] font-bold uppercase leading-none tracking-[0.09em]"
         style={{
           color: tone,
           background: bg,
