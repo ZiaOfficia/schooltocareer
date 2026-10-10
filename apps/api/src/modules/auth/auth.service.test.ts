@@ -11,8 +11,8 @@ import { authenticate } from '../../middleware/authenticate.js';
 import { requirePermission } from '../../middleware/authorize.js';
 
 import { hashPassword, verifyPassword } from './auth.password.js';
-import { AuthService, ttlSeconds, type AuthRepositoryPort } from './auth.service.js';
 import type { AuthUserRecord } from './auth.repository.js';
+import { AuthService, ttlSeconds, type AuthRepositoryPort } from './auth.service.js';
 
 /**
  * Authentication exists here for exactly one reason: to make the fact-review

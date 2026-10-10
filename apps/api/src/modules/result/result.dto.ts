@@ -1,8 +1,8 @@
 import { ROUTES } from '@stc/constants';
-import type { PublishStatus, ResultListItemDto, ResultType } from '@stc/types';
+import type { ResultListItemDto } from '@stc/types';
 import { daysUntil, toIsoDate } from '@stc/utils';
 
-import { phaseOf, type ResultPhase } from './result.service.js';
+import { phaseOf } from './result.service.js';
 import type { ResultLink, ResultListRecord, ResultRecord, ResultStatistics } from './result.types.js';
 
 /**

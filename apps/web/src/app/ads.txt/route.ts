@@ -1,5 +1,7 @@
 import { ADSENSE } from '@stc/constants';
 
+import { adsenseClientEnv } from '@/lib/env';
+
 /**
  * /ads.txt — the file that tells ad buyers who is allowed to sell this site's
  * ad space. Without it AdSense reports "Not found" against the site.
@@ -11,7 +13,7 @@ import { ADSENSE } from '@stc/constants';
 export const dynamic = 'force-static';
 
 export function GET(): Response {
-  const publisher = (process.env.NEXT_PUBLIC_ADSENSE_CLIENT ?? ADSENSE.CLIENT).replace(/^ca-/, '');
+  const publisher = (adsenseClientEnv() ?? ADSENSE.CLIENT).replace(/^ca-/, '');
   return new Response(`google.com, ${publisher}, DIRECT, f08c47fec0942fa0\n`, {
     headers: { 'content-type': 'text/plain; charset=utf-8' },
   });

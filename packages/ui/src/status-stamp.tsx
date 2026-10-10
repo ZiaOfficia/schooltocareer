@@ -35,7 +35,7 @@ export function StatusStamp({
   const { fg, bg } = TONE[tone];
   return (
     <span
-      className={`inline-flex items-center gap-[6px] rounded-full border px-[9px] py-[3px] font-data text-[10px] font-bold uppercase leading-none tracking-[0.09em] whitespace-nowrap ${className}`}
+      className={`inline-flex items-center gap-[6px] rounded-full border px-[9px] py-[3px] font-data text-[11px] font-bold uppercase leading-none tracking-[0.09em] whitespace-nowrap ${className}`}
       style={{
         color: fg,
         background: bg,

@@ -1,5 +1,4 @@
-import { Prisma, type PrismaClient } from '@stc/database';
-
+import { type Prisma, type PrismaClient } from '@stc/database';
 import type { OwnerType } from '@stc/types';
 
 import { BaseRepository } from '../../core/base/base.repository.js';

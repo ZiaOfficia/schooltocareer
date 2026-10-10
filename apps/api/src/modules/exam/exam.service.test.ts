@@ -5,8 +5,8 @@ import type { DomainEvent } from '../../core/events/domain-event.js';
 import { EventDispatcher } from '../../core/events/event-dispatcher.js';
 import { MemoryCacheProvider } from '../../providers/cache/memory.cache-provider.js';
 import type { ISearchProvider } from '../../providers/search/search.provider.js';
-import { SlugService } from '../slug/slug.service.js';
 import type { SlugRepository } from '../slug/slug.repository.js';
+import { SlugService } from '../slug/slug.service.js';
 
 import { ExamService, type ExamRepositoryPort } from './exam.service.js';
 import type { ExamRecord } from './exam.types.js';

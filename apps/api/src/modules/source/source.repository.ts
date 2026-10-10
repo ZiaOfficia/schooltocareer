@@ -1,4 +1,4 @@
-import { PrismaClient, type FetchOutcome, type Prisma } from '@prisma/client';
+import { type PrismaClient, type FetchOutcome, type Prisma } from '@prisma/client';
 
 /**
  * The only place ingestion touches Prisma.

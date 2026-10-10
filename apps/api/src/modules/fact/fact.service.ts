@@ -7,11 +7,17 @@ import {
   NotFoundError,
   VersionConflictError,
 } from '../../core/errors/app-error.js';
-import { buildOffsetMeta } from '../../core/pagination/paginator.js';
 import type { AppLogger } from '../../core/logger.js';
+import { buildOffsetMeta } from '../../core/pagination/paginator.js';
 import type { ICacheProvider } from '../../providers/cache/cache.provider.js';
 import type { IQueueProvider } from '../../providers/queue/queue.provider.js';
 
+import {
+  toFactChangeDetailDto,
+  toFactChangeDto,
+  type FactChangeDetailDto,
+  type FactChangeDto,
+} from './fact.dto.js';
 import {
   EXTRACTOR_VERSION,
   extractFacts,
@@ -19,12 +25,6 @@ import {
   toDateRange,
   type Observation,
 } from './fact.extractor.js';
-import {
-  toFactChangeDetailDto,
-  toFactChangeDto,
-  type FactChangeDetailDto,
-  type FactChangeDto,
-} from './fact.dto.js';
 import type { FactRepository } from './fact.repository.js';
 import {
   CANONICAL_OWNER,

@@ -1,10 +1,9 @@
-import Link from 'next/link';
 import type { ReactNode } from 'react';
 
 import { ROUTES } from '@stc/constants';
 import { EntityBadge, Eyebrow, Wrap, type EntityKind } from '@stc/ui';
 
-import { ArrowRightIcon } from '@/components/icons';
+import { IndexList, type IndexItem } from '@/components/index-list';
 import { PageHero } from '@/components/page-hero';
 
 /**
@@ -16,21 +15,11 @@ import { PageHero } from '@/components/page-hero';
  * a year later they look like different products.
  *
  * Each route supplies only what differs: the entity kind, the copy, and a
- * mapping from its own DTO to the three fields a card renders.
+ * mapping from its own DTO to the three fields a card renders. The grid itself,
+ * and the box that filters it, are <IndexList>.
  */
 
-export type IndexItem = {
-  /**
-   * Link target, and the React key. `null` when the destination page is not
-   * built yet: the card renders unlinked rather than pointing at a 404.
-   */
-  href: string | null;
-  title: string;
-  /** One line under the title — a category, a state, a year. */
-  meta?: string | null;
-  /** Right-aligned detail, usually a count or a date. Monospaced. */
-  aside?: string | null;
-};
+export type { IndexItem };
 
 export function IndexPage({
   kind,
@@ -77,11 +66,8 @@ export function IndexPage({
         lede={lede}
         meta={
           items.length > 0 ? (
-            <p className="font-data text-[13px] text-ink-mute">
-              Showing{' '}
-              <span className="num text-ink" data-count={items.length}>
-                {items.length.toLocaleString('en-IN')}
-              </span>
+            <p className="font-data text-[14px] text-ink-mute">
+              Showing <span className="num text-ink">{items.length.toLocaleString('en-IN')}</span>
               {typeof total === 'number' && total > items.length ? (
                 <>
                   {' '}
@@ -99,7 +85,6 @@ export function IndexPage({
 
         {items.length === 0 ? (
           <div
-            data-reveal
             className="card border-dashed p-6"
             style={
               failed
@@ -118,53 +103,7 @@ export function IndexPage({
             </p>
           </div>
         ) : (
-          <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {items.map((item) => {
-              const body = (
-                <>
-                  <span className="flex items-start justify-between gap-3">
-                    <span className="font-display text-[16.5px] font-semibold leading-snug text-ink">
-                      {item.title}
-                    </span>
-                    {item.href ? (
-                      <ArrowRightIcon
-                        width={16}
-                        height={16}
-                        className="card-arrow mt-1 shrink-0 text-ink-mute"
-                      />
-                    ) : null}
-                  </span>
-                  <span className="mt-auto flex flex-wrap items-baseline justify-between gap-x-3 pt-1">
-                    {item.meta ? (
-                      <span className="text-[13px] text-ink-mute">{item.meta}</span>
-                    ) : (
-                      <span />
-                    )}
-                    {item.aside ? (
-                      <span className="num rounded-full bg-row-hover px-2 py-0.5 text-[11.5px] text-ink-soft">
-                        {item.aside}
-                      </span>
-                    ) : null}
-                  </span>
-                </>
-              );
-              return (
-                <li key={item.href ?? item.title} data-reveal>
-                  {item.href ? (
-                    <Link
-                      href={item.href}
-                      data-tilt
-                      className="card flex h-full flex-col gap-2 p-5"
-                    >
-                      {body}
-                    </Link>
-                  ) : (
-                    <div className="card flex h-full flex-col gap-2 p-5">{body}</div>
-                  )}
-                </li>
-              );
-            })}
-          </ul>
+          <IndexList items={items} unit={unit} />
         )}
       </Wrap>
     </>

@@ -87,7 +87,7 @@ export default function NtaCalendarPage() {
       />
 
       <Wrap>
-        <div data-reveal className="card mt-10 p-5">
+        <div className="card mt-10 p-5">
           <Provenance
             confidence="tentative"
             sourceUrl={NTA_CALENDAR.source.url}
@@ -123,7 +123,7 @@ export default function NtaCalendarPage() {
 
         {NTA_CALENDAR.months.map((month, index) => (
           <Section key={month.month} title={month.month} major={index === 0}>
-            <div data-reveal>
+            <div>
               <ScrollX>
                 <table className="w-full border-collapse text-left text-[14.5px]">
                   <caption className="sr-only">NTA exams in {month.month}</caption>
@@ -133,7 +133,7 @@ export default function NtaCalendarPage() {
                         <th
                           key={cell}
                           scope="col"
-                          className="whitespace-nowrap px-4 py-3 font-data text-[11px] font-semibold uppercase tracking-[0.12em] text-ink-mute"
+                          className="whitespace-nowrap px-4 py-3 font-data text-[12px] font-semibold uppercase tracking-[0.12em] text-ink-mute"
                         >
                           {cell}
                         </th>
@@ -162,7 +162,7 @@ export default function NtaCalendarPage() {
         <Section title="Questions students ask">
           <dl className="grid max-w-[72ch] gap-5">
             {FAQS.map((faq) => (
-              <div key={faq.question} data-reveal>
+              <div key={faq.question}>
                 <dt className="text-[16px] font-semibold text-ink">{faq.question}</dt>
                 <dd className="mt-1.5 text-[15px] text-ink-soft">{faq.answer}</dd>
               </div>

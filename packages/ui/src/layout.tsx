@@ -41,9 +41,9 @@ export function TableOfContents({
   if (items.length < 3) return null;
 
   return (
-    <nav aria-label="On this page" data-reveal className={`card p-5 ${className}`}>
+    <nav aria-label="On this page" className={`card p-5 ${className}`}>
       <Eyebrow>On this page</Eyebrow>
-      <ol className="mt-3 grid gap-x-8 gap-y-2 text-[14.5px] sm:grid-cols-2">
+      <ol className="mt-3 grid gap-x-8 gap-y-2 text-[15px] sm:grid-cols-2">
         {items.map((item, index) => (
           <li key={item.id} className="flex gap-2">
             <span aria-hidden="true" className="num w-5 shrink-0 text-ink-mute">
@@ -73,9 +73,7 @@ export function contentsOf(
  *
  * `major` adds the gradient marker reserved for genuine top-level divisions.
  * Using it everywhere flattens the hierarchy back to nothing.
- *
- * The heading block and the body carry `data-reveal`, so every section on the
- * site enters the same way without each page having to remember to ask.
+
  */
 export function Section({
   id,
@@ -94,7 +92,7 @@ export function Section({
 }) {
   return (
     <section id={id ?? sectionId(title)} className="scroll-mt-24 py-10 sm:py-12">
-      <div data-reveal className="mb-6 flex flex-wrap items-end justify-between gap-x-6 gap-y-3">
+      <div className="mb-6 flex flex-wrap items-end justify-between gap-x-6 gap-y-3">
         <div>
           {major ? (
             <span
@@ -125,7 +123,7 @@ export function Section({
 export function Eyebrow({ children, className = '' }: { children: ReactNode; className?: string }) {
   return (
     <div
-      className={`font-data text-[11px] font-semibold uppercase tracking-[0.16em] text-ink-mute ${className}`}
+      className={`font-data text-[12px] font-semibold uppercase tracking-[0.12em] text-ink-mute ${className}`}
     >
       {children}
     </div>
@@ -162,8 +160,7 @@ export function FactGrid({
       {items.map((item) => (
         <div
           key={item.label}
-          data-reveal
-          className="min-w-0 rounded-[var(--radius-tile)] border border-rule bg-surface/70 p-4 backdrop-blur-md"
+          className="min-w-0 rounded-[var(--radius-tile)] border border-rule bg-surface p-4"
           style={
             item.tone === 'urgent'
               ? {
@@ -173,11 +170,11 @@ export function FactGrid({
               : undefined
           }
         >
-          <dt className="font-data text-[10px] font-semibold uppercase tracking-[0.14em] text-ink-mute">
+          <dt className="font-data text-[11.5px] font-semibold uppercase tracking-[0.1em] text-ink-mute">
             {item.label}
           </dt>
           <dd
-            className="num mt-1.5 text-[15px] font-semibold leading-snug text-ink"
+            className="num mt-1.5 text-[16px] font-semibold leading-snug text-ink"
             style={{
               color:
                 item.tone === 'urgent'

@@ -2,9 +2,7 @@ import { ROUTES } from '@stc/constants';
 import type {
   ExamDetailDto,
   ExamDto,
-  ExamEventDto,
   ExamListItemDto,
-  ExamYearDto,
 } from '@stc/types';
 import { evaluateIndexability, toIsoDate } from '@stc/utils';
 

@@ -1,6 +1,8 @@
 import { revalidatePath, revalidateTag } from 'next/cache';
 import { NextResponse } from 'next/server';
 
+import { serverEnv } from '@/lib/env';
+
 /**
  * The receiving end of CACHE_REVALIDATE.
  *
@@ -28,7 +30,7 @@ export const dynamic = 'force-dynamic';
 
 /** Rejects rather than accepts when the secret is not configured. */
 function authorised(request: Request): boolean {
-  const expected = process.env.REVALIDATE_SECRET;
+  const expected = serverEnv().REVALIDATE_SECRET;
   if (!expected) return false;
 
   const provided = request.headers.get('x-revalidate-secret');
@@ -48,7 +50,7 @@ function asStringArray(value: unknown): string[] {
 }
 
 export async function POST(request: Request): Promise<NextResponse> {
-  if (!process.env.REVALIDATE_SECRET) {
+  if (!serverEnv().REVALIDATE_SECRET) {
     // Loud, because the symptom otherwise is "content is stale sometimes",
     // which nobody traces back to a missing environment variable.
     console.error(
