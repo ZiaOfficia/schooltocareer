@@ -28,6 +28,8 @@ import { HealthRepository } from './modules/health/health.repository.js';
 import { HealthService } from './modules/health/health.service.js';
 import { MediaRepository } from './modules/media/media.repository.js';
 import { MediaService } from './modules/media/media.service.js';
+import { QuestionRepository } from './modules/question/question.repository.js';
+import { QuestionService } from './modules/question/question.service.js';
 import { QuestionPaperRepository } from './modules/question-paper/question-paper.repository.js';
 import { QuestionPaperSearchSource } from './modules/question-paper/question-paper.search-source.js';
 import { QuestionPaperService } from './modules/question-paper/question-paper.service.js';
@@ -89,6 +91,7 @@ export type AppContainer = {
     board: BoardService;
     category: CategoryService;
     questionPaper: QuestionPaperService;
+    question: QuestionService;
     result: ResultService;
     blog: BlogService;
     media: MediaService;
@@ -221,6 +224,10 @@ export function createContainer(overrides: Partial<AppContainer> = {}): AppConta
     siteId: env.SITE_ID,
   });
 
+  // Read-only, so no slugs, events or search: questions are written by the
+  // reviewed import, which enqueues its own cache revalidation.
+  const question = new QuestionService({ repository: new QuestionRepository(db), cache });
+
   const resultRepository = new ResultRepository(db);
   const result = new ResultService({
     repository: resultRepository,
@@ -302,7 +309,7 @@ export function createContainer(overrides: Partial<AppContainer> = {}): AppConta
     logger,
     prisma: db,
     providers: { cache, queue, storage, search },
-    services: { health, exam, board, category, questionPaper, result, blog, media, search: searchService, fact, auth },
+    services: { health, exam, board, category, questionPaper, question, result, blog, media, search: searchService, fact, auth },
     searchSources,
 
     /**

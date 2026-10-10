@@ -2,12 +2,12 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 import { ROUTES, SITE } from '@stc/constants';
-import type { PaperDetailDto, PaperFileDto } from '@stc/types';
+import type { PaperDetailDto, PaperFileDto, PaperQuestionsDto } from '@stc/types';
 import { EntityBadge, FactGrid, LastUpdated, Section, Wrap } from '@stc/ui';
 
 import { ArrowRightIcon, ArrowUpRightIcon } from '@/components/icons';
 import { PageHero } from '@/components/page-hero';
-import { ApiError, getPaper } from '@/lib/api';
+import { ApiError, getPaper, getPaperQuestions } from '@/lib/api';
 import { JsonLd, breadcrumbSchema } from '@/lib/seo/json-ld';
 import { buildMetadata } from '@/lib/seo/metadata';
 
@@ -89,6 +89,10 @@ export default async function PaperPage({ params }: { params: Promise<Params> })
   if (!paper) notFound();
 
   const files = sortedFiles(paper);
+  // Null when the paper is not digitised yet (or the question bank is down):
+  // the page is then exactly what it was, a download.
+  const digitised = await getPaperQuestions<PaperQuestionsDto>(paper.slug);
+  const solvable = digitised?.subjects.filter((group) => group.questions.length > 0) ?? [];
   const examPapersPath = paper.exam ? ROUTES.examPapers(paper.exam.slug) : null;
 
   const trail = [
@@ -159,6 +163,34 @@ export default async function PaperPage({ params }: { params: Promise<Params> })
               : ''}
           </p>
         </Section>
+
+        {solvable.length ? (
+          <Section
+            title="Solve this paper online"
+            lede="Every question from this paper, one page each, with a step-by-step solution and the answer checked against the official key."
+          >
+            <div className="grid gap-8 md:grid-cols-3">
+              {solvable.map((group) => (
+                <div key={group.subject.slug}>
+                  <h3 className="mb-3 text-[16px] font-semibold text-ink">{group.subject.name}</h3>
+                  <ol className="flex flex-wrap gap-2">
+                    {group.questions.map((q) => (
+                      <li key={q.publicId}>
+                        <Link
+                          href={q.path}
+                          title={q.preview}
+                          className="num grid h-10 w-10 place-items-center rounded-lg border border-rule text-[13.5px] text-ink hover:bg-row-hover"
+                        >
+                          {q.number}
+                        </Link>
+                      </li>
+                    ))}
+                  </ol>
+                </div>
+              ))}
+            </div>
+          </Section>
+        ) : null}
 
         {paper.exam && examPapersPath ? (
           <Section title={`More ${paper.exam.shortName} papers`}>
