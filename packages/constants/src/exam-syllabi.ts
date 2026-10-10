@@ -62,19 +62,30 @@ export type ExamSyllabus = {
 const ch = (slug: string, name: string): ExamSyllabusChapter => ({ slug, name });
 
 /**
- * JEE Main, Paper 1 (B.E./B.Tech). Subject order is the bulletin's.
+ * JEE Main, Paper 1 (B.E./B.Tech). Units, order and the chemistry grouping are
+ * the syllabus document's own.
  *
- * NOT YET VERIFIED: titles were entered from NTA's revised (2024 onward)
- * syllabus and must be checked against the 2026 bulletin before any chapter
- * is published.
+ * SOURCE. Not the information bulletin: the 2026 bulletin (section 2.6, page
+ * 16) holds no syllabus and points to jeemain.nta.nic.in, whose "Syllabus" link
+ * is the PDF below.
+ *
+ * VERIFIED 2026-10-10 against that PDF's text: 14 mathematics, 20 physics and
+ * 20 chemistry units, same titles, same order. Two deliberate differences:
+ *  - Case. The PDF prints mathematics and chemistry in capitals and physics in
+ *    title case; all three are title case here.
+ *  - Spelling. The PDF has "INTEGRAL CALCULAS" and "DIFFRENTIAL EQUATIONS";
+ *    these are spelled correctly here. A student-facing page should not
+ *    reproduce a typo, and the slug was never derived from it.
+ * Re-verify when NTA posts a new syllabus link, and keep slugs unchanged.
  */
 export const JEE_MAIN_PAPER_1: ExamSyllabus = {
   examSlug: PRIORITY_EXAMS.JEE_MAIN,
   paper: 'Paper 1 (B.E./B.Tech.)',
   sourceUrl:
-    'https://cdnbbsr.s3waas.gov.in/s3f8e59f4b2fe7c5705bf878bbd494ccdf/uploads/2025/11/202511021649722475.pdf',
-  sourceTitle: 'JEE (Main) 2026 Information Bulletin, National Testing Agency',
-  verifiedAgainstSource: false,
+    'https://cdnbbsr.s3waas.gov.in/s3f8e59f4b2fe7c5705bf878bbd494ccdf/uploads/2025/10/202510311323551056.pdf',
+  sourceTitle:
+    'Syllabus for JEE Main Paper 1 (B.E./B.Tech.) - Mathematics, Physics and Chemistry, National Testing Agency',
+  verifiedAgainstSource: true,
   subjects: [
     {
       subjectSlug: SUBJECTS.MATHEMATICS,
@@ -144,7 +155,7 @@ export const JEE_MAIN_PAPER_1: ExamSyllabus = {
             ch('classification-of-elements-and-periodicity', 'Classification of Elements and Periodicity in Properties'),
             ch('p-block-elements', 'p-Block Elements'),
             ch('d-and-f-block-elements', 'd- and f-Block Elements'),
-            ch('coordination-compounds', 'Co-ordination Compounds'),
+            ch('coordination-compounds', 'Coordination Compounds'),
           ],
         },
         {
