@@ -110,6 +110,9 @@ export default function NtaCalendarPage() {
               Open on nta.ac.in
               <ArrowUpRightIcon width={16} height={16} />
             </a>
+            <Link href={ROUTES.sscCalendar()} className="btn btn-ghost">
+              SSC exam calendar
+            </Link>
           </div>
         </div>
 

@@ -15,7 +15,8 @@ const NAV = [
   { label: 'Boards', href: ROUTES.boards() },
   ...(LIVE.results ? [{ label: 'Results', href: ROUTES.results() }] : []),
   { label: 'Papers', href: ROUTES.papers() },
-  { label: 'Exam calendar', href: ROUTES.ntaCalendar() },
+  { label: 'NTA calendar', href: ROUTES.ntaCalendar() },
+  { label: 'SSC calendar', href: ROUTES.sscCalendar() },
   ...(LIVE.blog ? [{ label: 'Articles', href: ROUTES.blog() }] : []),
 ];
 

@@ -26,6 +26,7 @@ import { EXAM_SECTIONS, liveSections, type ExamSection } from '@/lib/exam-sectio
 import { isOnNtaCalendar } from '@/lib/nta-calendar';
 import { JsonLd, breadcrumbSchema, examPageSchema, faqSchema } from '@/lib/seo/json-ld';
 import { buildMetadata } from '@/lib/seo/metadata';
+import { SSC_CALENDAR, sscCalendarRow } from '@/lib/ssc-calendar';
 
 /**
  * THE REFERENCE PAGE — the standard every other page is measured against.
@@ -201,6 +202,7 @@ export default async function ExamPage({ params }: { params: Promise<Params> }) 
   const year = currentYear(exam);
   const cycle = exam.years.find((y) => y.isCurrent) ?? exam.years[0];
   const events = cycle?.events ?? [];
+  const sscRow = sscCalendarRow(exam.slug);
 
   const applicationOpens = findEvent(events, 'APPLICATION_START');
   const applicationCloses = findEvent(events, 'APPLICATION_END');
@@ -433,6 +435,19 @@ export default async function ExamPage({ params }: { params: Promise<Params> }) 
               NTA has listed this exam in its calendar up to March 2027.{' '}
               <Link href={ROUTES.ntaCalendar()} className="underline">
                 See the calendar and download the notice
+              </Link>
+              .
+            </p>
+          ) : null}
+
+          {/* The same for SSC: its calendar gives months, not days, so the row is
+                quoted as SSC states it and the full table is one click away. */}
+          {sscRow ? (
+            <p className="mt-3 text-[14.5px] text-ink-soft">
+              SSC’s {SSC_CALENDAR.session} calendar plans the {sscRow.stage.split(',')[0]} exam for{' '}
+              {sscRow.examWindow}, with the notice in {sscRow.advertised}.{' '}
+              <Link href={ROUTES.sscCalendar()} className="underline">
+                See the full SSC exam calendar
               </Link>
               .
             </p>

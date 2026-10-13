@@ -76,9 +76,16 @@ const ALL_SECTIONS: ReadonlyArray<{
   },
   {
     kind: 'exam',
-    title: 'Exam calendar',
+    title: 'NTA exam calendar',
     note: 'NTA dates up to March 2027, as a table',
     href: ROUTES.ntaCalendar(),
+    live: true,
+  },
+  {
+    kind: 'exam',
+    title: 'SSC exam calendar',
+    note: 'CGL, CHSL, MTS and GD for 2026-27',
+    href: ROUTES.sscCalendar(),
     live: true,
   },
   {

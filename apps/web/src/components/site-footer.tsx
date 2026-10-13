@@ -30,6 +30,7 @@ const GROUPS = [
       ...(LIVE.practice ? [{ label: 'Mock tests', href: ROUTES.mockTests() }] : []),
       { label: 'Previous year papers', href: ROUTES.papers() },
       { label: 'NTA exam calendar', href: ROUTES.ntaCalendar() },
+      { label: 'SSC exam calendar', href: ROUTES.sscCalendar() },
       ...(LIVE.results ? [{ label: 'Results', href: ROUTES.results() }] : []),
     ],
   },
