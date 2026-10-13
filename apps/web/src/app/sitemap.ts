@@ -60,6 +60,7 @@ const STATIC_ROUTES = [
   ...(LIVE.results ? [ROUTES.results()] : []),
   ...(LIVE.blog ? [ROUTES.blog()] : []),
   ROUTES.ntaCalendar(),
+  ROUTES.sscCalendar(),
 ];
 
 /**
@@ -90,7 +91,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // static routes when the API is down — submits a six-URL sitemap for a site
   // with thousands, which reads to Google as mass removal. Throwing returns a
   // 5xx, which the crawler treats as temporary and retries.
-  const exams = await listExams<ExamListItemDto>('limit=1000');
+  const exams = await listExams<ExamListItemDto>('perPage=100');
 
   // Only pages that will actually serve `index, follow`.
   //

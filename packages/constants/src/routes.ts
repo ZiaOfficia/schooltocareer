@@ -60,6 +60,7 @@ export const ROUTES = {
 
   blog: () => '/blog',
   ntaCalendar: () => '/nta-exam-calendar',
+  sscCalendar: () => '/ssc-exam-calendar',
   blogCategory: (category: string) => `/blog/${category}`,
   blogPost: (category: string, post: string) => `/blog/${category}/${post}`,
 
