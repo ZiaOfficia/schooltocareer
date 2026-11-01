@@ -22,9 +22,9 @@ export function generateMetadata() {
     template: 'search',
     values: { siteName: SITE.NAME },
     path: ROUTES.home(),
-    title: `${SITE.NAME} — ${SITE.TAGLINE}`,
+    title: `${SITE.NAME}: Exam Dates, Syllabus & Papers`,
     description:
-      'Exam dates, eligibility, syllabus, previous year question papers and results for India’s major exams and school boards. Free, and updated from official notifications.',
+      'Exam dates, eligibility, syllabus, previous year papers and mock tests for India’s major exams. Free, and updated from official notifications.',
   });
 }
 

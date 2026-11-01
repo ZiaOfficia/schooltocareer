@@ -12,9 +12,9 @@ export function generateMetadata() {
     template: 'search',
     values: { siteName: SITE.NAME },
     path: ROUTES.exams(),
-    title: 'All Entrance Exams in India: Dates, Syllabus & Papers',
+    title: 'Entrance Exams in India: Dates & Syllabus',
     description:
-      'Every entrance exam we cover — engineering, medical, management, law, banking and government. Dates, eligibility, syllabus, previous year papers and results for each.',
+      'Engineering, medical, management, law, banking and government exams: dates, eligibility, syllabus and previous year papers for each.',
   });
 }
 

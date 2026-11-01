@@ -49,8 +49,8 @@ const SHARD_THRESHOLD = 45_000;
 /**
  * Only routes that actually RESOLVE. A sitemap listing a 404 is worse than
  * omitting it: it spends crawl budget and reports as an error in Search
- * Console. Legal pages are absent because they are not built yet — add them
- * here on the same commit that adds the page, never before.
+ * Console. A new page is added here on the same commit that adds the page,
+ * never before.
  */
 const STATIC_ROUTES = [
   ROUTES.home(),
@@ -61,6 +61,11 @@ const STATIC_ROUTES = [
   ...(LIVE.blog ? [ROUTES.blog()] : []),
   ROUTES.ntaCalendar(),
   ROUTES.sscCalendar(),
+  ROUTES.about(),
+  ROUTES.contact(),
+  ROUTES.privacy(),
+  ROUTES.terms(),
+  ROUTES.disclaimer(),
 ];
 
 /**
