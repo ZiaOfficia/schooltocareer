@@ -48,6 +48,8 @@ type HubEntry = {
   conductingBody: string;
   officialWebsite: string;
   overview: string;
+  /** Only when the stored value is wrong, e.g. NEET recorded as ONLINE. */
+  mode?: 'ONLINE' | 'OFFLINE' | 'HYBRID';
 };
 
 type ExamFromApi = {
@@ -123,6 +125,7 @@ async function main(): Promise<void> {
     if (!same(exam.overview, entry.overview)) patch.overview = entry.overview.trim();
     if (!same(exam.conductingBody, entry.conductingBody))
       patch.conductingBody = entry.conductingBody.trim();
+    if (entry.mode && exam.mode !== entry.mode) patch.mode = entry.mode;
     if (!same(exam.officialWebsite, entry.officialWebsite))
       patch.officialWebsite = entry.officialWebsite.trim();
 
@@ -134,7 +137,7 @@ async function main(): Promise<void> {
         conductingBody: entry.conductingBody,
         overview: entry.overview,
         level: exam.level,
-        mode: exam.mode,
+        mode: entry.mode ?? exam.mode,
       },
       structuredDataTypes: HUB_STRUCTURED_DATA,
     });
@@ -143,6 +146,7 @@ async function main(): Promise<void> {
     console.log(`  overview        ${words(exam.overview)} → ${words(entry.overview)} words`);
     console.log(`  conductingBody  ${exam.conductingBody ?? '(none)'} → ${entry.conductingBody}`);
     console.log(`  officialWebsite ${exam.officialWebsite ?? '(none)'} → ${entry.officialWebsite}`);
+    if (patch.mode) console.log(`  mode            ${exam.mode} → ${patch.mode}`);
     console.log(
       `  indexable       ${exam.isIndexable ? 'yes' : 'no'} → ${after.indexable ? 'yes' : 'NO'} (score ${after.score})`,
     );
