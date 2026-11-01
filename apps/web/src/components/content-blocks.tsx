@@ -39,7 +39,10 @@ export function ContentBlocks({ blocks }: { blocks: readonly ContentBlock[] }) {
         }
 
         return (
-          <figure key={index} className="m-0">
+          // min-w-0: a grid item defaults to min-width:auto, so a wide table
+          // stretched the whole page sideways on phones instead of scrolling
+          // inside its own box.
+          <figure key={index} className="m-0 min-w-0">
             <ScrollX>
               <table className="w-full border-collapse text-left text-[14.5px]">
                 <caption className="sr-only">{block.caption}</caption>

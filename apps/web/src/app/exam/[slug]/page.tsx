@@ -493,8 +493,16 @@ export default async function ExamPage({ params }: { params: Promise<Params> }) 
 
         {exam.overview ? (
           <Section title={`About ${exam.shortName}`} major>
-            <div className="card max-w-[78ch] p-6 text-[16px] leading-relaxed text-ink-soft">
-              {exam.overview}
+            {/* Plain text from the editor; a blank line starts a new paragraph.
+                Rendered as text, never as HTML. */}
+            <div className="card grid max-w-[78ch] gap-4 p-6 text-[16px] leading-relaxed text-ink-soft">
+              {exam.overview
+                .split(/\n\s*\n/)
+                .map((paragraph) => paragraph.trim())
+                .filter(Boolean)
+                .map((paragraph) => (
+                  <p key={paragraph.slice(0, 48)}>{paragraph}</p>
+                ))}
             </div>
           </Section>
         ) : null}
