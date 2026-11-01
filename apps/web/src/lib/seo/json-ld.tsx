@@ -1,4 +1,4 @@
-import { SITE, absoluteUrl } from '@stc/constants';
+import { ROUTES, SITE, absoluteUrl } from '@stc/constants';
 
 /**
  * Structured data.
@@ -47,6 +47,14 @@ export function organizationSchema(): Json {
     logo: absoluteUrl('/images/logo.png'),
     description: SITE.TAGLINE,
     areaServed: { '@type': 'Country', name: 'India' },
+    email: SITE.CONTACT_EMAIL,
+    contactPoint: {
+      '@type': 'ContactPoint',
+      contactType: 'customer support',
+      email: SITE.CONTACT_EMAIL,
+      url: absoluteUrl(ROUTES.contact()),
+      availableLanguage: ['en', 'hi'],
+    },
   };
 }
 

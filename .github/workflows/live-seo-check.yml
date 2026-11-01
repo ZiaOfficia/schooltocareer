@@ -1,0 +1,41 @@
+name: Live SEO check
+
+# The failure this guards against is silent: a production build that misses
+# NEXT_PUBLIC_SITE_URL serves `Disallow: /` and `noindex` on every page while
+# returning 200s everywhere (see apps/web/src/app/robots.ts). Nothing errors;
+# the site just disappears from Google. This checks the LIVE site, daily and
+# on demand, so the first warning is a red check instead of a traffic graph.
+
+on:
+  schedule:
+    - cron: '17 2 * * *' # 07:47 IST daily
+  workflow_dispatch:
+
+jobs:
+  live:
+    runs-on: ubuntu-latest
+    env:
+      ORIGIN: https://schooltocareer.in
+    steps:
+      - name: robots.txt allows crawling
+        run: |
+          body=$(curl -fsS "$ORIGIN/robots.txt")
+          echo "$body"
+          if echo "$body" | grep -Eq '^Disallow:[[:space:]]*/[[:space:]]*$'; then
+            echo "::error::robots.txt blocks the whole site (Disallow: /). Check NEXT_PUBLIC_SITE_URL in Vercel Production."
+            exit 1
+          fi
+          echo "$body" | grep -q "Sitemap: $ORIGIN/sitemap.xml" || { echo "::error::robots.txt has no sitemap line"; exit 1; }
+
+      - name: home page is indexable
+        run: |
+          html=$(curl -fsSL "$ORIGIN/")
+          if echo "$html" | grep -Eiq '<meta name="robots" content="[^"]*noindex'; then
+            echo "::error::The home page serves noindex."
+            exit 1
+          fi
+
+      - name: sitemap and ads.txt respond
+        run: |
+          curl -fsS -o /dev/null "$ORIGIN/sitemap.xml"
+          curl -fsS "$ORIGIN/ads.txt" | grep -q 'google.com, pub-' || { echo "::error::ads.txt missing or wrong"; exit 1; }

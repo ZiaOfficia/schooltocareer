@@ -15,6 +15,12 @@ export const SITE = {
   TWITTER_HANDLE: '@schooltocareer',
 
   /**
+   * The one public inbox. Shown on /contact, /privacy-policy and in the
+   * Organization schema — all read it from here, so changing it is one edit.
+   */
+  CONTACT_EMAIL: 'contact@schooltocareer.in',
+
+  /**
    * THE canonical origin. Apex, no `www`, no trailing slash.
    *
    * Every absolute URL the site emits derives from this one constant —

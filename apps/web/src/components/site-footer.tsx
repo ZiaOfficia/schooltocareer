@@ -19,8 +19,8 @@ import { LIVE } from '@/lib/site-sections';
  * "it's in ROUTES" is not evidence the page is there. Add a link here on the
  * same commit that adds the page.
  *
- * STILL OWED, and needed before AdSense review: privacy policy, terms,
- * disclaimer, contact. Tracked in docs/PROJECT-STATUS.md.
+ * The five standing pages (about, contact, privacy policy, terms, disclaimer)
+ * were added together with their links, and are in the sitemap.
  */
 const GROUPS = [
   {
@@ -41,13 +41,23 @@ const GROUPS = [
       ...(LIVE.blog ? [{ label: 'Articles', href: ROUTES.blog() }] : []),
     ],
   },
+  {
+    title: 'About',
+    links: [
+      { label: 'About us', href: ROUTES.about() },
+      { label: 'Contact', href: ROUTES.contact() },
+      { label: 'Privacy policy', href: ROUTES.privacy() },
+      { label: 'Terms and conditions', href: ROUTES.terms() },
+      { label: 'Disclaimer', href: ROUTES.disclaimer() },
+    ],
+  },
 ];
 
 export function SiteFooter() {
   return (
     <footer className="night hero-bg mt-16">
       <Wrap className="py-14">
-        <div className="grid gap-10 md:grid-cols-[1.4fr_1fr_1fr]">
+        <div className="grid gap-10 sm:grid-cols-2 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
           <div>
             <Link href={ROUTES.home()} className="inline-block text-logo no-underline">
               <Logo className="h-10 w-auto" />

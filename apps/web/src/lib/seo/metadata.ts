@@ -77,7 +77,11 @@ export function buildMetadata(input: BuildInput): Metadata {
   // the string clamped here is NOT what appears in the SERP — the suffix is
   // added afterwards. Clamping to TITLE_MAX produced 78-character titles.
   // Reserve the suffix so the rendered total lands inside the limit.
-  const suffixLength = TITLE_TEMPLATE.DEFAULT.replace('%s', '').length;
+  // The home page is the one exception: Next applies a layout's title template
+  // to child segments only, never to the page in the layout's own segment, so
+  // the home title renders bare and gets the whole budget.
+  const isHome = input.path === '/';
+  const suffixLength = isHome ? 0 : TITLE_TEMPLATE.DEFAULT.replace('%s', '').length;
   const title = clamp(rawTitle, Math.max(20, SEO_LIMITS.TITLE_MAX - suffixLength));
   const description = clamp(rawDescription, SEO_LIMITS.DESCRIPTION_MAX);
 
