@@ -10,6 +10,7 @@ import { FactGrid, LastUpdated, Section, Wrap } from '@stc/ui';
 import { ArrowRightIcon } from '@/components/icons';
 import { PageHero } from '@/components/page-hero';
 import { getExamChapter } from '@/lib/api';
+import { CHAPTER_INDEX_THRESHOLD } from '@/lib/practice-index';
 import { JsonLd, breadcrumbSchema } from '@/lib/seo/json-ld';
 import { buildMetadata } from '@/lib/seo/metadata';
 
@@ -18,15 +19,12 @@ import { buildMetadata } from '@/lib/seo/metadata';
  * paper first, and what the papers say about it year by year.
  *
  * INDEXING (PRINCIPLES.md #6). A chapter with a handful of questions is a
- * thin list, so it is noindex until it holds INDEX_THRESHOLD of them. It still
+ * thin list, so it is noindex until it holds CHAPTER_INDEX_THRESHOLD of them. It still
  * renders and links: a student who reaches it is helped, and the question
  * pages it links to are indexable on their own merit.
  */
 
 export const revalidate = 86400;
-
-/** Questions a chapter needs before it is worth a search result of its own. */
-const INDEX_THRESHOLD = 15;
 
 type Params = { slug: string; subject: string; chapter: string };
 
@@ -49,7 +47,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }) 
     },
     path: chapter.path,
     modifiedTime: chapter.updatedAt,
-    noindex: chapter.totalQuestions < INDEX_THRESHOLD,
+    noindex: chapter.totalQuestions < CHAPTER_INDEX_THRESHOLD,
   });
 }
 
@@ -71,11 +69,13 @@ function YearStats({ stats }: { stats: ChapterYearStatDto[] }) {
             }}
           />
           <span className="col-start-2 text-[13.5px] text-ink-soft">
-            <span className="num font-semibold text-ink">{pct(stat.weightagePct)}</span> of the subject:{' '}
+            <span className="num font-semibold text-ink">{pct(stat.weightagePct)}</span> of the
+            subject:{' '}
             <span className="num">
               {stat.questions} of {stat.subjectQuestions}
             </span>{' '}
-            questions, from {stat.papersInYear} {stat.papersInYear === 1 ? 'paper' : 'papers'} we have digitised
+            questions, from {stat.papersInYear} {stat.papersInYear === 1 ? 'paper' : 'papers'} we
+            have digitised
           </span>
         </li>
       ))}
@@ -100,7 +100,12 @@ export default async function ChapterPage({ params }: { params: Promise<Params> 
   const facts = [
     { label: 'Questions here', value: chapter.totalQuestions },
     ...(years.length
-      ? [{ label: 'Years', value: years.length > 1 ? `${Math.min(...years)}–${Math.max(...years)}` : years[0]! }]
+      ? [
+          {
+            label: 'Years',
+            value: years.length > 1 ? `${Math.min(...years)}–${Math.max(...years)}` : years[0]!,
+          },
+        ]
       : []),
     ...(latest ? [{ label: `Weightage in ${latest.year}`, value: pct(latest.weightagePct) }] : []),
     { label: 'Answers on the official key', value: `${official} of ${chapter.totalQuestions}` },
@@ -128,7 +133,12 @@ export default async function ChapterPage({ params }: { params: Promise<Params> 
             {chapter.syllabusSourceUrl ? (
               <>
                 {' '}
-                <a href={chapter.syllabusSourceUrl} target="_blank" rel="noopener" className="underline">
+                <a
+                  href={chapter.syllabusSourceUrl}
+                  target="_blank"
+                  rel="noopener"
+                  className="underline"
+                >
                   See the official notice
                 </a>
                 .
@@ -138,7 +148,9 @@ export default async function ChapterPage({ params }: { params: Promise<Params> 
         ) : null}
 
         {chapter.description ? (
-          <p className="mt-8 max-w-[68ch] text-[16px] leading-relaxed text-ink-soft">{chapter.description}</p>
+          <p className="mt-8 max-w-[68ch] text-[16px] leading-relaxed text-ink-soft">
+            {chapter.description}
+          </p>
         ) : null}
 
         {chapter.stats.length ? (

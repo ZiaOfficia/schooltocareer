@@ -8,7 +8,11 @@ const nextConfig = {
   // Cloudinary is the only remote image host. Listing it explicitly means an
   // attacker cannot use our optimiser as an open proxy for arbitrary URLs.
   images: {
-    remotePatterns: [{ protocol: 'https', hostname: 'res.cloudinary.com', pathname: '/**' }],
+    remotePatterns: [
+      { protocol: 'https', hostname: 'res.cloudinary.com', pathname: '/**' },
+      // Article photos: free-licence Unsplash images (lib/articles/types.ts).
+      { protocol: 'https', hostname: 'images.unsplash.com', pathname: '/photo-*' },
+    ],
     formats: ['image/avif', 'image/webp'],
   },
 
