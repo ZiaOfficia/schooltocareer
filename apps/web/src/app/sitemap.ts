@@ -1,12 +1,27 @@
 import type { MetadataRoute } from 'next';
 
 import { ROUTES, absoluteUrl } from '@stc/constants';
-import type { ExamDetailDto, ExamListItemDto } from '@stc/types';
+import type {
+  ExamDetailDto,
+  ExamListItemDto,
+  ExamPracticeDto,
+  MockTestDto,
+  PracticeExamDto,
+} from '@stc/types';
 
-import { examHoldings, getExam, listExams } from '@/lib/api';
+import {
+  examHoldings,
+  getExam,
+  getExamPractice,
+  getMockTest,
+  listExams,
+  listPractice,
+} from '@/lib/api';
+import { ARTICLES, articlePath } from '@/lib/articles';
 import { BOARD_GUIDE_SLUGS } from '@/lib/board-prep';
 import { EXAM_SECTIONS, isEditorialSection, liveSections, sectionsFor } from '@/lib/exam-sections';
 import { PAPER_GUIDES } from '@/lib/paper-guides';
+import { CHAPTER_INDEX_THRESHOLD } from '@/lib/practice-index';
 import { LIVE } from '@/lib/site-sections';
 
 /**
@@ -58,6 +73,7 @@ const STATIC_ROUTES = [
   ROUTES.exams(),
   ...(LIVE.boards ? [ROUTES.boards()] : []),
   ROUTES.papers(),
+  ...(LIVE.practice ? [ROUTES.mockTests()] : []),
   ...(LIVE.results ? [ROUTES.results()] : []),
   ...(LIVE.blog ? [ROUTES.blog()] : []),
   ROUTES.ntaCalendar(),
@@ -142,6 +158,44 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         url: absoluteUrl(EXAM_SECTIONS[section].path(exam.slug)),
         lastModified,
       });
+    }
+  }
+
+  // Articles: built from lib/articles, so they need no API call.
+  if (LIVE.blog) {
+    for (const article of ARTICLES) {
+      entries.push({
+        url: absoluteUrl(articlePath(article)),
+        lastModified: new Date(article.updatedAt),
+      });
+    }
+  }
+
+  // The question bank. Only the pages that serve `index, follow`: each exam's
+  // practice hub, chapters with at least CHAPTER_INDEX_THRESHOLD questions, and
+  // every question page. The timed mock-test pages are noindex and stay out.
+  if (LIVE.practice) {
+    const seen = new Set(entries.map((entry) => entry.url));
+    const add = (path: string) => {
+      const url = absoluteUrl(path);
+      if (seen.has(url)) return;
+      seen.add(url);
+      entries.push({ url, lastModified: now });
+    };
+    for (const practice of await listPractice<PracticeExamDto>()) {
+      add(practice.practicePath);
+      const hub = await getExamPractice<ExamPracticeDto>(practice.exam.slug);
+      for (const subject of hub?.subjects ?? []) {
+        for (const chapter of subject.chapters) {
+          if (chapter.questionCount >= CHAPTER_INDEX_THRESHOLD) add(chapter.path);
+        }
+      }
+      for (const ref of practice.mockTests) {
+        const test = await getMockTest<MockTestDto>(ref.paper.slug);
+        for (const section of test?.sections ?? []) {
+          for (const question of section.questions) add(question.path);
+        }
+      }
     }
   }
 

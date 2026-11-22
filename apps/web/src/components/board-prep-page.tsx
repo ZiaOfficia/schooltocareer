@@ -14,6 +14,7 @@ import {
 
 import { ArrowRightIcon, ArrowUpRightIcon } from '@/components/icons';
 import { PageHero } from '@/components/page-hero';
+import { articlePath, articlesForGuide } from '@/lib/articles';
 import {
   BOARD_PREP,
   paperOutOf,
@@ -128,6 +129,7 @@ export function BoardPrepPage({ slug }: { slug: BoardGuideSlug }) {
   const cls = BOARD_PREP.guides[slug];
   const others = BOARD_PREP.order.filter((s) => s !== slug).map((s) => BOARD_PREP.guides[s]);
   const path = ROUTES.boardPrep(slug);
+  const articles = articlesForGuide(path);
   const trail = [
     { name: 'Home', path: ROUTES.home() },
     { name: 'Board exams 2027', path: ROUTES.boardPrepHub() },
@@ -395,9 +397,9 @@ export function BoardPrepPage({ slug }: { slug: BoardGuideSlug }) {
         <Section title={DOWNLOAD_TITLE}>
           <p className="mb-4 max-w-[72ch] text-[15px] text-ink-soft">
             Every board&rsquo;s guide in one spreadsheet &mdash; a tab each for CBSE, UP Board, ICSE
-            and ISC, plus the official papers and the exam tips. It opens in Excel, and in Google
-            Sheets with File &rarr; Import &rarr; Upload. The CSV opens anywhere, including Google
-            Sheets.
+            and ISC, plus the official papers and the exam tips. It opens in Excel, or open the
+            read-only Google Sheet and use File &rarr; Make a copy. The CSV opens anywhere,
+            including Google Sheets.
           </p>
           <DownloadButtons slug={slug} />
           <h3 className="mt-8 text-[17px] font-semibold text-ink">Guides for other boards</h3>
@@ -415,6 +417,24 @@ export function BoardPrepPage({ slug }: { slug: BoardGuideSlug }) {
             ))}
           </ul>
         </Section>
+
+        {articles.length > 0 ? (
+          <Section title="Read the article">
+            <ul className="grid max-w-[72ch] gap-3">
+              {articles.map((article) => (
+                <li key={article.slug}>
+                  <Link
+                    href={articlePath(article)}
+                    className="card flex items-center justify-between gap-4 p-4 hover:underline"
+                  >
+                    <span className="text-[15.5px] font-semibold text-ink">{article.h1}</span>
+                    <ArrowRightIcon width={14} height={14} />
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </Section>
+        ) : null}
 
         <Section title={FAQ_TITLE}>
           <dl className="grid max-w-[72ch] gap-5">

@@ -12,6 +12,7 @@
  *
  *   results  when at least one Result row is published
  *   blog     when at least one article is published
+ *            (on: the articles in lib/articles)
  *   search   when /search exists AND the search index is being filled
  *            (it is not: no outbox worker runs, so the index is empty)
  *   practice when at least one paper's questions are published
@@ -26,7 +27,7 @@
  */
 export const LIVE = {
   results: false,
-  blog: false,
+  blog: true,
   search: false,
   practice: true,
   boards: false,

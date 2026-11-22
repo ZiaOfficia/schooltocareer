@@ -18,6 +18,7 @@ import { ContentBlocks } from '@/components/content-blocks';
 import { ArrowUpRightIcon } from '@/components/icons';
 import { PageHero } from '@/components/page-hero';
 import { ApiError, examHoldings, getExam, listAllPapers, listResults } from '@/lib/api';
+import { articlePath, articlesForGuide } from '@/lib/articles';
 import { examContent } from '@/lib/exam-content';
 import {
   EXAM_SECTIONS,
@@ -230,6 +231,8 @@ export default async function ExamSectionPage({ params }: { params: Promise<Para
 
   const written = isEditorialSection(section) ? examContent(exam.slug, section) : undefined;
   const faqs = written?.faqs ?? guide?.faqs;
+  // An article built on this exam's written pages, linked from both of them.
+  const articles = written ? articlesForGuide(ROUTES.examPattern(exam.slug)) : [];
 
   // The page's outline, in the order the sections render below. Built from the
   // same conditions as the sections themselves, so it cannot list one that is
@@ -335,6 +338,23 @@ export default async function ExamSectionPage({ params }: { params: Promise<Para
                 ))}
               </dl>
             </Section>
+
+            {articles.length > 0 ? (
+              <Section title="Read the article">
+                <ul className="grid max-w-[72ch] gap-3">
+                  {articles.map((article) => (
+                    <li key={article.slug}>
+                      <Link
+                        href={articlePath(article)}
+                        className="card block p-4 text-[15.5px] font-semibold text-ink hover:underline"
+                      >
+                        {article.h1}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </Section>
+            ) : null}
           </>
         ) : null}
 
