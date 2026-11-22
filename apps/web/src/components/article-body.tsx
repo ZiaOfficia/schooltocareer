@@ -71,7 +71,7 @@ function Block({ block }: { block: Exclude<ArticleBlock, { kind: 'h2' }> }) {
       );
     case 'tip':
       return (
-        <p className="rounded-[14px] border-l-4 border-mint bg-[color-mix(in_srgb,var(--color-mint)_9%,var(--color-surface))] px-5 py-4 text-[16px] text-ink">
+        <p className="rounded-[14px] bg-hl-soft px-5 py-4 text-[16px] text-ink">
           {inline(block.text)}
         </p>
       );
@@ -86,7 +86,7 @@ function Block({ block }: { block: Exclude<ArticleBlock, { kind: 'h2' }> }) {
                   <th
                     key={cell}
                     scope="col"
-                    className="whitespace-nowrap px-4 py-3 font-data text-[12px] font-semibold uppercase tracking-[0.12em] text-ink-mute"
+                    className="whitespace-nowrap px-4 py-3 font-data text-[13px] font-semibold text-ink-mute"
                   >
                     {cell}
                   </th>
@@ -127,7 +127,8 @@ export function groupBlocks(blocks: readonly ArticleBlock[]): Group[] {
   return groups.filter((group) => group.title !== null || group.blocks.length > 0);
 }
 
-const PROSE = 'grid max-w-[70ch] gap-5 text-[17px] leading-[1.75] text-ink-soft';
+const PROSE =
+  'grid max-w-[70ch] grid-cols-[minmax(0,1fr)] gap-5 text-[17px] leading-[1.75] text-ink-soft';
 
 export function ArticleBody({
   blocks,

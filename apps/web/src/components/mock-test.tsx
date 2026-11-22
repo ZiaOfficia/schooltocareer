@@ -201,13 +201,18 @@ export function MockTest(props: Props) {
     (index: number) => {
       const target = flat[index];
       if (!target) return;
-      setState((s) => ({ ...s, current: index, visited: { ...s.visited, [target.question.publicId]: true } }));
+      setState((s) => ({
+        ...s,
+        current: index,
+        visited: { ...s.visited, [target.question.publicId]: true },
+      }));
       // Bring the new question's top just under the sticky test bar. Plain
       // scrollIntoView puts it under the bar, hiding the start of the stem.
       const el = questionTop.current;
       if (el) {
         const top = el.getBoundingClientRect().top;
-        if (top < BAR_CLEARANCE || top > window.innerHeight / 2) window.scrollBy({ top: top - BAR_CLEARANCE });
+        if (top < BAR_CLEARANCE || top > window.innerHeight / 2)
+          window.scrollBy({ top: top - BAR_CLEARANCE });
       }
     },
     [flat],
@@ -251,7 +256,9 @@ export function MockTest(props: Props) {
     });
   }
 
-  const answeredCount = flat.filter(({ question }) => (state.responses[question.publicId] ?? '').trim() !== '').length;
+  const answeredCount = flat.filter(
+    ({ question }) => (state.responses[question.publicId] ?? '').trim() !== '',
+  ).length;
 
   // ── Before the start ────────────────────────────────────────────────────
   if (!hydrated || state.phase === 'intro') {
@@ -267,8 +274,8 @@ export function MockTest(props: Props) {
           <li>
             {durationMin ? (
               <>
-                <strong className="text-ink">{durationMin} minutes</strong>. The test submits itself when the
-                time runs out.
+                <strong className="text-ink">{durationMin} minutes</strong>. The test submits itself
+                when the time runs out.
               </>
             ) : (
               'Untimed: the paper does not state its duration, so the clock counts up instead.'
@@ -276,8 +283,8 @@ export function MockTest(props: Props) {
           </li>
           {marking ? (
             <li>
-              Marking as in the exam: <strong className="text-ink">+{marking.marksRight}</strong> for a right
-              answer,{' '}
+              Marking as in the exam: <strong className="text-ink">+{marking.marksRight}</strong>{' '}
+              for a right answer,{' '}
               <strong className="text-ink">
                 {marking.marksWrong < 0 ? marking.marksWrong : 'no negative'}
               </strong>{' '}
@@ -285,11 +292,21 @@ export function MockTest(props: Props) {
               <strong className="text-ink">{totalMarks}</strong>.
             </li>
           ) : null}
-          <li>Your answers stay in this browser. Nothing is sent anywhere, and no account is needed.</li>
-          <li>After you submit you see your score, subject by subject, with a worked solution for every question.</li>
+          <li>
+            Your answers stay in this browser. Nothing is sent anywhere, and no account is needed.
+          </li>
+          <li>
+            After you submit you see your score, subject by subject, with a worked solution for
+            every question.
+          </li>
         </ul>
         <div className="mt-6 flex flex-wrap items-center gap-3">
-          <button type="button" className="qp-button qp-button-primary" onClick={start} disabled={!hydrated}>
+          <button
+            type="button"
+            className="qp-button qp-button-primary"
+            onClick={start}
+            disabled={!hydrated}
+          >
             Start the test
           </button>
           <a href={paperPath} className="qp-button inline-flex items-center">
@@ -315,15 +332,20 @@ export function MockTest(props: Props) {
     return (
       <div className="grid gap-6">
         <section className="q-card" aria-labelledby="mt-score">
-          <p className="text-[13px] font-semibold uppercase tracking-[0.12em] text-ink-mute">Your score</p>
-          <p id="mt-score" className="mt-1 font-display text-[44px] font-semibold leading-none text-ink">
+          <p className="text-[13px] font-semibold text-ink-mute">Your score</p>
+          <p
+            id="mt-score"
+            className="mt-1 font-display text-[44px] font-semibold leading-none text-ink"
+          >
             <span className="num">{total}</span>
             <span className="text-[22px] text-ink-mute"> / {totalMarks}</span>
           </p>
           <p className="mt-3 text-[15px] text-ink-soft">
             {right} right · {wrong} wrong · {flat.length - attempted} left blank
             {attempted > 0 ? ` · accuracy ${Math.round((right / attempted) * 100)}%` : ''}
-            {state.startedAt && state.finishedAt ? ` · time ${duration(state.finishedAt - state.startedAt)}` : ''}
+            {state.startedAt && state.finishedAt
+              ? ` · time ${duration(state.finishedAt - state.startedAt)}`
+              : ''}
           </p>
 
           <div className="mt-5 overflow-x-auto">
@@ -347,7 +369,12 @@ export function MockTest(props: Props) {
                       <td className="num">
                         {rows.reduce((sum, r) => sum + r.marks, 0)} / {max}
                       </td>
-                      <td className="num">{rows.filter((r) => r.outcome === 'right' || r.outcome === 'dropped').length}</td>
+                      <td className="num">
+                        {
+                          rows.filter((r) => r.outcome === 'right' || r.outcome === 'dropped')
+                            .length
+                        }
+                      </td>
                       <td className="num">{rows.filter((r) => r.outcome === 'wrong').length}</td>
                       <td className="num">{rows.filter((r) => r.outcome === 'skipped').length}</td>
                     </tr>
@@ -375,10 +402,17 @@ export function MockTest(props: Props) {
                 {scored
                   .filter((r) => r.sectionIndex === index)
                   .map((r) => (
-                    <li key={r.question.publicId} className="mt-review-row" data-outcome={r.outcome}>
+                    <li
+                      key={r.question.publicId}
+                      className="mt-review-row"
+                      data-outcome={r.outcome}
+                    >
                       <span className="num font-semibold text-ink">Q{r.question.number}</span>
                       <span className="text-[14px] text-ink-soft">
-                        Yours: <strong className="text-ink">{r.response?.trim() ? r.response : '—'}</strong>
+                        Yours:{' '}
+                        <strong className="text-ink">
+                          {r.response?.trim() ? r.response : '—'}
+                        </strong>
                         {' · '}Answer:{' '}
                         <strong className="text-ink">
                           {r.question.dropped
@@ -397,7 +431,12 @@ export function MockTest(props: Props) {
                               ? `Dropped, +${r.marks}`
                               : 'Blank, 0'}
                       </span>
-                      <a href={r.question.path} target="_blank" rel="noopener" className="mt-solution-link">
+                      <a
+                        href={r.question.path}
+                        target="_blank"
+                        rel="noopener"
+                        className="mt-solution-link"
+                      >
                         Solution
                       </a>
                     </li>
@@ -429,7 +468,11 @@ export function MockTest(props: Props) {
           <span className="sr-only">{remainingMs !== null ? 'Time left' : 'Time taken'}: </span>
           {remainingMs !== null ? clock(remainingMs / 1000) : clock(elapsedMs / 1000)}
         </p>
-        <button type="button" className="qp-button qp-button-primary" onClick={() => setConfirming(true)}>
+        <button
+          type="button"
+          className="qp-button qp-button-primary"
+          onClick={() => setConfirming(true)}
+        >
           Submit
         </button>
       </div>
@@ -441,8 +484,8 @@ export function MockTest(props: Props) {
           </p>
           <p className="mt-1 text-[14.5px] text-ink-soft">
             You have answered {answeredCount} of {flat.length}.
-            {remainingMs !== null ? ` ${clock(remainingMs / 1000)} is left on the clock.` : ''} You cannot change
-            answers after submitting.
+            {remainingMs !== null ? ` ${clock(remainingMs / 1000)} is left on the clock.` : ''} You
+            cannot change answers after submitting.
           </p>
           <div className="mt-4 flex flex-wrap gap-3">
             <button type="button" className="qp-button qp-button-primary" onClick={submit}>
@@ -458,7 +501,9 @@ export function MockTest(props: Props) {
       <nav className="mt-tabs" aria-label="Subjects">
         {sections.map((section, index) => {
           const active = current.sectionIndex === index;
-          const done = section.questions.filter((q) => (state.responses[q.publicId] ?? '').trim() !== '').length;
+          const done = section.questions.filter(
+            (q) => (state.responses[q.publicId] ?? '').trim() !== '',
+          ).length;
           return (
             <button
               key={section.subject.slug}
@@ -483,7 +528,9 @@ export function MockTest(props: Props) {
             <span id="mt-qno" className="chip num">
               Question {state.current + 1} of {flat.length}
             </span>
-            <span className="chip">{question.type === 'NUMERICAL' ? 'Numerical answer' : 'Single correct'}</span>
+            <span className="chip">
+              {question.type === 'NUMERICAL' ? 'Numerical answer' : 'Single correct'}
+            </span>
             <span className="chip num">
               +{question.marksRight} / {question.marksWrong < 0 ? question.marksWrong : '0'}
             </span>
@@ -492,7 +539,9 @@ export function MockTest(props: Props) {
           <div className="rich" dangerouslySetInnerHTML={{ __html: question.stemHtml }} />
 
           <fieldset className="mt-6">
-            <legend className="sr-only">{question.type === 'NUMERICAL' ? 'Your answer' : 'Choose one'}</legend>
+            <legend className="sr-only">
+              {question.type === 'NUMERICAL' ? 'Your answer' : 'Choose one'}
+            </legend>
             {question.type === 'NUMERICAL' ? (
               <label className="qp-numeric">
                 <span className="text-[14px] text-ink-soft">Your answer</span>
@@ -509,7 +558,10 @@ export function MockTest(props: Props) {
               <ul className="grid gap-3">
                 {question.options.map((option) => (
                   <li key={option.label}>
-                    <label className="qp-option" data-picked={response === option.label || undefined}>
+                    <label
+                      className="qp-option"
+                      data-picked={response === option.label || undefined}
+                    >
                       <input
                         type="radio"
                         name={`mt-${question.publicId}`}
@@ -529,7 +581,12 @@ export function MockTest(props: Props) {
           </fieldset>
 
           <div className="mt-6 flex flex-wrap gap-3">
-            <button type="button" className="qp-button" onClick={() => go(state.current - 1)} disabled={state.current === 0}>
+            <button
+              type="button"
+              className="qp-button"
+              onClick={() => go(state.current - 1)}
+              disabled={state.current === 0}
+            >
               Previous
             </button>
             <button
@@ -596,10 +653,18 @@ export function MockTest(props: Props) {
             </div>
           ))}
           <ul className="mt-legend">
-            <li><span className="mt-cell" data-status="answered" aria-hidden="true" /> Answered</li>
-            <li><span className="mt-cell" data-status="unanswered" aria-hidden="true" /> Not answered</li>
-            <li><span className="mt-cell" data-status="marked" aria-hidden="true" /> For review</li>
-            <li><span className="mt-cell" data-status="unseen" aria-hidden="true" /> Not seen</li>
+            <li>
+              <span className="mt-cell" data-status="answered" aria-hidden="true" /> Answered
+            </li>
+            <li>
+              <span className="mt-cell" data-status="unanswered" aria-hidden="true" /> Not answered
+            </li>
+            <li>
+              <span className="mt-cell" data-status="marked" aria-hidden="true" /> For review
+            </li>
+            <li>
+              <span className="mt-cell" data-status="unseen" aria-hidden="true" /> Not seen
+            </li>
           </ul>
         </aside>
       </div>

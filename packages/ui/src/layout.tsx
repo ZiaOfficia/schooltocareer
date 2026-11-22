@@ -119,12 +119,10 @@ export function Section({
   );
 }
 
-/** Small uppercase mono label. Used for facet groups and column headers. */
+/** Small label in sentence case. Used for facet groups and column headers. */
 export function Eyebrow({ children, className = '' }: { children: ReactNode; className?: string }) {
   return (
-    <div
-      className={`font-data text-[12px] font-semibold uppercase tracking-[0.12em] text-ink-mute ${className}`}
-    >
+    <div className={`font-data text-[13px] font-semibold text-ink-mute ${className}`}>
       {children}
     </div>
   );
@@ -170,9 +168,7 @@ export function FactGrid({
               : undefined
           }
         >
-          <dt className="font-data text-[11.5px] font-semibold uppercase tracking-[0.1em] text-ink-mute">
-            {item.label}
-          </dt>
+          <dt className="font-data text-[13px] font-semibold text-ink-mute">{item.label}</dt>
           <dd
             className="num mt-1.5 text-[16px] font-semibold leading-snug text-ink"
             style={{

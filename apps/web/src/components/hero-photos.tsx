@@ -62,7 +62,7 @@ export function HeroPhotos() {
         {PHOTOS.map((photo) => (
           <div
             key={photo.id}
-            className={`relative aspect-[3/4] overflow-hidden rounded-2xl shadow-[0_24px_60px_-20px_rgb(0_0_0/0.7)] ring-1 ring-white/15 lg:absolute lg:aspect-auto lg:rounded-[24px] ${photo.frame}`}
+            className={`relative aspect-[3/4] overflow-hidden rounded-2xl shadow-[0_24px_50px_-24px_rgb(22_19_58/0.45)] ring-4 ring-white lg:absolute lg:aspect-auto lg:rounded-[24px] ${photo.frame}`}
           >
             <Image
               src={src(photo.id)}
@@ -75,7 +75,7 @@ export function HeroPhotos() {
         ))}
         <span
           aria-hidden="true"
-          className="pointer-events-none absolute -left-6 bottom-[14%] hidden h-24 w-24 rounded-full bg-[radial-gradient(circle,rgb(6_182_212/0.45),transparent_70%)] blur-xl lg:block"
+          className="pointer-events-none absolute -left-4 bottom-[10%] hidden h-20 w-20 rounded-full bg-hl lg:block"
         />
       </div>
       <figcaption className="mt-3 text-right text-[11px] text-ink-mute">

@@ -12,7 +12,7 @@ import { ArrowRightIcon } from '@/components/icons';
  */
 export default function NotFound() {
   return (
-    <div className="night hero-bg">
+    <div className="hero-bg">
       <Wrap className="py-24 sm:py-32">
         <p className="num gradient-text text-[clamp(56px,12vw,112px)] font-bold leading-none">
           404
