@@ -4,6 +4,7 @@ import type { BoardListItemDto } from '@stc/types';
 import { IndexPage, type IndexItem } from '@/components/index-page';
 import { ApiError, listBoards } from '@/lib/api';
 import { buildMetadata } from '@/lib/seo/metadata';
+import { LIVE } from '@/lib/site-sections';
 
 export const revalidate = 3600;
 
@@ -15,6 +16,8 @@ export function generateMetadata() {
     title: 'School Boards in India: Syllabus, Date Sheets & Papers',
     description:
       'CBSE, ICSE and every state board — syllabus, date sheets, previous year question papers and results, organised by class and subject.',
+    // A list of names with no pages behind them is not ready for the index.
+    noindex: !LIVE.boards,
   });
 }
 

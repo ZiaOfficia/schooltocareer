@@ -1,0 +1,2242 @@
+{
+  "checkedOn": "2026-11-22",
+  "session": "2026-27",
+  "exam": "2027",
+  "order": [
+    "cbse-class-10",
+    "cbse-class-12",
+    "up-board-class-10",
+    "up-board-class-12",
+    "icse-class-10",
+    "isc-class-12"
+  ],
+  "download": {
+    "xlsx": "/downloads/board-exam-2027-prep-sheet.xlsx",
+    "googleSheet": "https://docs.google.com/spreadsheets/d/1Npu7d9NAy7-wVv_WqOW4xd3a2UZcdJxCqkt5gp9CgXg/edit?usp=sharing",
+    "csv": {
+      "cbse-class-10": "/downloads/cbse-class-10-important-chapters-2027.csv",
+      "cbse-class-12": "/downloads/cbse-class-12-important-chapters-2027.csv",
+      "up-board-class-10": "/downloads/up-board-class-10-important-chapters-2027.csv",
+      "up-board-class-12": "/downloads/up-board-class-12-important-chapters-2027.csv",
+      "icse-class-10": "/downloads/icse-class-10-important-chapters-2027.csv",
+      "isc-class-12": "/downloads/isc-class-12-important-chapters-2027.csv"
+    }
+  },
+  "guides": {
+    "cbse-class-10": {
+      "slug": "cbse-class-10",
+      "theoryOutOf": 80,
+      "title": "CBSE Class 10 Important Chapters 2027: Marks, Answer Tips & Past Papers",
+      "h1": "CBSE Class 10 Board Exam 2027: Important Chapters and How to Prepare",
+      "description": "Unit-wise marks for CBSE Class 10 Science, Maths and Social Science 2027, which chapters to study first, how to write answers, a 30-day plan and official past papers.",
+      "intro": [
+        "The fastest way to prepare for the CBSE Class 10 board exam is to know where the marks are. CBSE publishes the marks for every unit in its 2026-27 curriculum, and a few units carry a large share of each paper. In Science, two units — chemical substances and the world of living — are worth 50 of the 80 theory marks. In Mathematics, Algebra alone is 20 marks, a quarter of the paper.",
+        "This page puts those numbers in one place for Science, Mathematics and Social Science, marks every unit as high, medium or low priority, and says for each one how to write the answer and how to revise it quickly. It also links to CBSE's own question papers from the 2026 and 2025 board exams, and you can download the whole plan as a spreadsheet."
+      ],
+      "subjects": [
+        {
+          "name": "Science",
+          "code": "086",
+          "units": [
+            {
+              "unit": "Chemical Substances – Nature & Behaviour",
+              "chapters": "Chemical Reactions & Equations; Acids, Bases & Salts; Metals & Non-metals; Carbon & its Compounds",
+              "marks": 25,
+              "answer": "Write balanced equations with state symbols and name the type of reaction. For carbon compounds, draw the structure and give the IUPAC name.",
+              "prep": "Make one page of every reaction in the four chapters and read it daily. Practise pH, uses of salts and the reactivity series from past papers."
+            },
+            {
+              "unit": "World of Living",
+              "chapters": "Life Processes; Control & Coordination; How do Organisms Reproduce?; Heredity",
+              "marks": 25,
+              "answer": "Draw and label the diagrams — heart, nephron, neuron, flower, alimentary canal. Use NCERT keywords and answer in points.",
+              "prep": "Practise the eight to ten standard diagrams until each takes two minutes. For Heredity, practise Mendel's monohybrid and dihybrid crosses."
+            },
+            {
+              "unit": "Effects of Current",
+              "chapters": "Electricity; Magnetic Effects of Electric Current",
+              "marks": 13,
+              "answer": "For numericals write the formula, then the values with units, then the answer with its unit. Draw circuits with the correct symbols.",
+              "prep": "Learn Ohm's law, resistances in series and parallel, and the power and heating formulas, then solve 15–20 numericals from past papers."
+            },
+            {
+              "unit": "Natural Phenomena",
+              "chapters": "Light – Reflection & Refraction; The Human Eye & the Colourful World",
+              "marks": 12,
+              "answer": "Draw ray diagrams with a ruler and arrows. Use the sign convention in mirror and lens numericals and show every step.",
+              "prep": "Practise the six mirror and six lens ray-diagram cases and the mirror and lens formulas. Revise defects of vision and how they are corrected."
+            },
+            {
+              "unit": "Natural Resources",
+              "chapters": "Our Environment",
+              "marks": 5,
+              "answer": "Short answers with an example: a food chain, the 10% law, the ozone layer.",
+              "prep": "A short chapter: read the NCERT text once and revise the in-text questions for quick marks."
+            }
+          ]
+        },
+        {
+          "name": "Mathematics",
+          "code": "041 / 241",
+          "units": [
+            {
+              "unit": "Algebra",
+              "chapters": "Polynomials; Pair of Linear Equations in Two Variables; Quadratic Equations; Arithmetic Progressions",
+              "marks": 20,
+              "answer": "Write the formula first, then every step, and box the final answer. CBSE gives marks for steps even when the final answer is wrong.",
+              "prep": "The biggest unit. Do the NCERT examples and exercises, then word problems on quadratic equations and APs from the last two years' papers."
+            },
+            {
+              "unit": "Geometry",
+              "chapters": "Triangles; Circles",
+              "marks": 15,
+              "answer": "Write Given, To Prove, Construction and Proof, with a reason for every step, and draw a neat figure.",
+              "prep": "Learn the proofs of the Basic Proportionality Theorem and the tangent theorems — they are asked often. Then practise similarity problems."
+            },
+            {
+              "unit": "Trigonometry",
+              "chapters": "Introduction to Trigonometry; Some Applications of Trigonometry",
+              "marks": 12,
+              "answer": "For heights and distances always draw the figure and mark the angles. For identities, work on one side only.",
+              "prep": "Memorise the ratio table and the three identities, then practise ten identity proofs and ten heights-and-distances problems."
+            },
+            {
+              "unit": "Statistics & Probability",
+              "chapters": "Statistics; Probability",
+              "marks": 11,
+              "answer": "Build the full table (class mark, frequency, cumulative frequency) before using the formula. For probability, write the total outcomes first.",
+              "prep": "Very scoring: practise mean, median and mode of grouped data, and dice, card and coin probability."
+            },
+            {
+              "unit": "Mensuration",
+              "chapters": "Areas Related to Circles; Surface Areas & Volumes",
+              "marks": 10,
+              "answer": "Write the formula, substitute, and keep the units (cm², cm³). Draw the combined solid.",
+              "prep": "Make a formula sheet and practise questions on combinations of solids."
+            },
+            {
+              "unit": "Number Systems",
+              "chapters": "Real Numbers",
+              "marks": 6,
+              "answer": "Show the prime factorisation clearly. Write irrationality proofs by contradiction.",
+              "prep": "Quick marks: HCF and LCM, and the proofs that √2 and √3 are irrational."
+            },
+            {
+              "unit": "Coordinate Geometry",
+              "chapters": "Coordinate Geometry",
+              "marks": 6,
+              "answer": "Write the distance or section formula, then substitute.",
+              "prep": "Only two formulas to learn — distance and section — so these are easy marks."
+            }
+          ]
+        },
+        {
+          "name": "Social Science",
+          "code": "087",
+          "units": [
+            {
+              "unit": "History (includes 2 map marks)",
+              "chapters": "India and the Contemporary World – II (5 chapters) and map work",
+              "marks": 20,
+              "answer": "Answer in points with dates and names. For 5-mark answers write an opening line, four or five points and a closing line. Practise the history map items.",
+              "prep": "Start with Nationalism in India and The Rise of Nationalism in Europe, the longest chapters, and make a timeline of events."
+            },
+            {
+              "unit": "Geography (includes 3 map marks)",
+              "chapters": "Contemporary India – II (7 chapters) and map work",
+              "marks": 20,
+              "answer": "Give examples — crops, states, industries. On the map, mark accurately and label clearly.",
+              "prep": "Practise the official map list for five minutes every day, and learn crops, minerals and industries as tables."
+            },
+            {
+              "unit": "Political Science",
+              "chapters": "Democratic Politics – II (5 chapters)",
+              "marks": 20,
+              "answer": "Define the term, then explain it with examples, such as Belgium and Sri Lanka for power sharing.",
+              "prep": "A short book for 20 marks. Read each chapter twice and make one page of notes per chapter."
+            },
+            {
+              "unit": "Economics",
+              "chapters": "Understanding Economic Development (5 chapters)",
+              "marks": 20,
+              "answer": "Define terms exactly — GDP, sectors, credit — and use the tables and data from the NCERT book.",
+              "prep": "Practise the case-based questions in the sample paper; they are built on data tables."
+            }
+          ]
+        },
+        {
+          "name": "English (Language & Literature)",
+          "code": "184",
+          "units": [
+            {
+              "unit": "Reading, Writing & Grammar, Literature",
+              "chapters": "First Flight; Footprints without Feet; grammar; letter and analytical paragraph",
+              "marks": null,
+              "answer": "Keep to the word limit and follow the format exactly (a letter needs address, date, subject and salutation). In literature answers, refer to characters and events by name.",
+              "prep": "Read a summary of every chapter, practise two formal letters and two analytical paragraphs, and solve the unseen passages in past papers."
+            }
+          ]
+        },
+        {
+          "name": "Hindi (Course A / B)",
+          "code": "002 / 085",
+          "units": [
+            {
+              "unit": "Reading, Writing, Grammar, Literature",
+              "chapters": "Kshitij and Kritika (A); Sparsh and Sanchayan (B); grammar; letter and notice",
+              "marks": null,
+              "answer": "Answer in clear points, follow the letter and notice formats, and give one example for each grammar rule.",
+              "prep": "Learn each poet's and author's name with the main idea of the piece. Grammar is the quickest source of marks, so practise it from past papers."
+            }
+          ]
+        }
+      ],
+      "papers": [
+        {
+          "subject": "Science",
+          "links": [
+            {
+              "label": "2026 paper",
+              "url": "https://www.cbse.gov.in/cbsenew/question-paper/2026/X/Science.zip"
+            },
+            {
+              "label": "2025 paper",
+              "url": "https://www.cbse.gov.in/cbsenew/question-paper/2025/X/086_Science.zip"
+            },
+            {
+              "label": "Sample paper 2026-27",
+              "url": "https://cbseacademic.nic.in/SQP_CLASSX_2026-27.html"
+            }
+          ]
+        },
+        {
+          "subject": "Mathematics Standard",
+          "links": [
+            {
+              "label": "2026 paper",
+              "url": "https://www.cbse.gov.in/cbsenew/question-paper/2026/X/Mathematics_Standard.zip"
+            },
+            {
+              "label": "2025 paper",
+              "url": "https://www.cbse.gov.in/cbsenew/question-paper/2025/X/041_Mathematics_Standard.zip"
+            },
+            {
+              "label": "Sample paper 2026-27",
+              "url": "https://cbseacademic.nic.in/SQP_CLASSX_2026-27.html"
+            }
+          ]
+        },
+        {
+          "subject": "Mathematics Basic",
+          "links": [
+            {
+              "label": "2026 paper",
+              "url": "https://www.cbse.gov.in/cbsenew/question-paper/2026/X/Mathematics_Standard.zip"
+            },
+            {
+              "label": "2025 paper",
+              "url": "https://www.cbse.gov.in/cbsenew/question-paper/2025/X/241_Mathematics_Basic.zip"
+            },
+            {
+              "label": "Sample paper 2026-27",
+              "url": "https://cbseacademic.nic.in/SQP_CLASSX_2026-27.html"
+            }
+          ]
+        },
+        {
+          "subject": "Social Science",
+          "links": [
+            {
+              "label": "2026 paper",
+              "url": "https://www.cbse.gov.in/cbsenew/question-paper/2026/X/Social_Science.zip"
+            },
+            {
+              "label": "2025 paper",
+              "url": "https://www.cbse.gov.in/cbsenew/question-paper/2025/X/087_Social_Science.zip"
+            },
+            {
+              "label": "Sample paper 2026-27",
+              "url": "https://cbseacademic.nic.in/web_material/SQP/ClassX_2026_27/SocialScience-SQP.pdf"
+            },
+            {
+              "label": "Marking scheme",
+              "url": "https://cbseacademic.nic.in/web_material/SQP/ClassX_2026_27/SocialScience-MS.pdf"
+            }
+          ]
+        },
+        {
+          "subject": "English Language & Literature",
+          "links": [
+            {
+              "label": "2026 paper",
+              "url": "https://www.cbse.gov.in/cbsenew/question-paper/2026/X/English_Language_Literature.zip"
+            },
+            {
+              "label": "2025 paper",
+              "url": "https://www.cbse.gov.in/cbsenew/question-paper/2025/X/184_English_Language_and_Literature.zip"
+            },
+            {
+              "label": "Sample paper 2026-27",
+              "url": "https://cbseacademic.nic.in/SQP_CLASSX_2026-27.html"
+            }
+          ]
+        },
+        {
+          "subject": "English Communicative",
+          "links": [
+            {
+              "label": "2026 paper",
+              "url": "https://www.cbse.gov.in/cbsenew/question-paper/2026/X/English_communicative.zip"
+            },
+            {
+              "label": "2025 paper",
+              "url": "https://www.cbse.gov.in/cbsenew/question-paper/2025/X/1_eng_communicative.pdf"
+            },
+            {
+              "label": "Sample paper 2026-27",
+              "url": "https://cbseacademic.nic.in/SQP_CLASSX_2026-27.html"
+            }
+          ]
+        },
+        {
+          "subject": "Hindi Course A",
+          "links": [
+            {
+              "label": "2026 paper",
+              "url": "https://www.cbse.gov.in/cbsenew/question-paper/2026/X/Hindi_Course_A_UPD.zip"
+            },
+            {
+              "label": "2025 paper",
+              "url": "https://www.cbse.gov.in/cbsenew/question-paper/2025/X/002_Hindi_Course_A.zip"
+            },
+            {
+              "label": "Sample paper 2026-27",
+              "url": "https://cbseacademic.nic.in/SQP_CLASSX_2026-27.html"
+            }
+          ]
+        },
+        {
+          "subject": "Hindi Course B",
+          "links": [
+            {
+              "label": "2026 paper",
+              "url": "https://www.cbse.gov.in/cbsenew/question-paper/2026/X/Hindi_Course_B_UPD.zip"
+            },
+            {
+              "label": "2025 paper",
+              "url": "https://www.cbse.gov.in/cbsenew/question-paper/2025/X/085_Hindi_Course_B.zip"
+            },
+            {
+              "label": "Sample paper 2026-27",
+              "url": "https://cbseacademic.nic.in/SQP_CLASSX_2026-27.html"
+            }
+          ]
+        },
+        {
+          "subject": "Sanskrit",
+          "links": [
+            {
+              "label": "2026 paper",
+              "url": "https://www.cbse.gov.in/cbsenew/question-paper/2026/X/sanskrit.zip"
+            },
+            {
+              "label": "2025 paper",
+              "url": "https://www.cbse.gov.in/cbsenew/question-paper/2025/X/52_Sanskrit.pdf"
+            },
+            {
+              "label": "Sample paper 2026-27",
+              "url": "https://cbseacademic.nic.in/SQP_CLASSX_2026-27.html"
+            }
+          ]
+        },
+        {
+          "subject": "Information Technology",
+          "links": [
+            {
+              "label": "2026 paper",
+              "url": "https://www.cbse.gov.in/cbsenew/question-paper/2026/X/Information_Technology.zip"
+            },
+            {
+              "label": "2025 paper",
+              "url": "https://www.cbse.gov.in/cbsenew/question-paper/2025/X/89_Information_Technology.pdf"
+            },
+            {
+              "label": "Sample paper 2026-27",
+              "url": "https://cbseacademic.nic.in/SQP_CLASSX_2026-27.html"
+            }
+          ]
+        },
+        {
+          "subject": "Artificial Intelligence",
+          "links": [
+            {
+              "label": "2026 paper",
+              "url": "https://www.cbse.gov.in/cbsenew/question-paper/2026/X/Artificial_Intelleigence.zip"
+            },
+            {
+              "label": "2025 paper",
+              "url": "https://www.cbse.gov.in/cbsenew/question-paper/2025/X/104_Artificial_Intelleigence_NEW.pdf"
+            },
+            {
+              "label": "Sample paper 2026-27",
+              "url": "https://cbseacademic.nic.in/SQP_CLASSX_2026-27.html"
+            }
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Which chapters are most important for CBSE Class 10 Science 2027?",
+          "answer": "By marks, the chemistry chapters (Chemical Reactions, Acids Bases and Salts, Metals and Non-metals, Carbon and its Compounds) and the biology chapters (Life Processes, Control and Coordination, Reproduction, Heredity). Each group is a 25-mark unit, so together they are 50 of the 80 theory marks."
+        },
+        {
+          "question": "Which unit carries the most marks in Class 10 Maths?",
+          "answer": "Algebra, with 20 of the 80 theory marks. It covers Polynomials, Pair of Linear Equations, Quadratic Equations and Arithmetic Progressions. Geometry is next with 15."
+        },
+        {
+          "question": "How are marks split in Class 10 Social Science?",
+          "answer": "Equally: History, Geography, Political Science and Economics carry 20 marks each. Map work is 5 marks in all, 2 within History and 3 within Geography."
+        },
+        {
+          "question": "Is it safe to skip low-priority chapters?",
+          "answer": "No. Low priority means fewer marks, not zero. Study high-priority units first, but revise every chapter at least once — short chapters such as Our Environment or Coordinate Geometry are often the easiest marks in the paper."
+        },
+        {
+          "question": "Where can I download official CBSE Class 10 previous year papers?",
+          "answer": "On cbse.gov.in under Previous Years' Question Papers. The table on this page links directly to CBSE's files for 2026 and 2025."
+        }
+      ],
+      "board": "CBSE",
+      "boardName": "Central Board of Secondary Education",
+      "classLabel": "Class 10",
+      "papersNote": "CBSE's own question papers from the 2026 and 2025 board exams. ZIP files hold the PDFs of every set. More subjects and earlier years are on CBSE's question paper page; sample papers and marking schemes are on cbseacademic.nic.in.",
+      "source": {
+        "name": "CBSE Curriculum 2026-27 (copies published by the Directorate of Education, Delhi)",
+        "url": "https://edustud.nic.in/",
+        "papersUrl": "https://www.cbse.gov.in/cbsenew/question-paper.html"
+      },
+      "notes": [
+        "Each main subject has an 80-mark theory paper and 20 marks of internal assessment.",
+        "CBSE gives marks for correct steps even when the final answer is wrong, so show your working in every numerical and derivation."
+      ],
+      "label": "CBSE Class 10"
+    },
+    "cbse-class-12": {
+      "slug": "cbse-class-12",
+      "theoryOutOf": null,
+      "title": "CBSE Class 12 Important Chapters 2027: Marks, Answer Tips & Past Papers",
+      "h1": "CBSE Class 12 Board Exam 2027: Important Chapters and How to Prepare",
+      "description": "Unit-wise marks for CBSE Class 12 Physics, Chemistry, Maths, Biology, Accountancy and Economics 2027, what to study first, answer-writing tips and official past papers.",
+      "intro": [
+        "In the CBSE Class 12 board exam a handful of units decide most of the result. CBSE's 2026-27 curriculum gives Calculus 35 of the 80 theory marks in Mathematics, Partnership Firms 36 of 80 in Accountancy, and Genetics and Evolution 20 of 70 in Biology. Knowing these numbers tells you where an hour of study is worth the most.",
+        "This page lists the official unit marks for Physics, Chemistry, Mathematics, Biology, Accountancy and Economics, marks each unit as high, medium or low priority, and gives a short guide to answering and revising each one. Below that are CBSE's own 2026 and 2025 question papers for 18 subjects, a 30-day revision plan and exam-day rules. The whole plan is also available as a spreadsheet to download."
+      ],
+      "subjects": [
+        {
+          "name": "Physics",
+          "code": "042",
+          "outOf": 70,
+          "units": [
+            {
+              "unit": "Electromagnetic Waves + Optics",
+              "chapters": "EM Waves; Ray Optics & Optical Instruments; Wave Optics",
+              "marks": 18,
+              "answer": "Draw ray diagrams with arrows and labels. For derivations: diagram, steps, then the final formula boxed.",
+              "prep": "The lens-maker's formula, refraction through a prism, Young's double slit and the microscope and telescope come up again and again."
+            },
+            {
+              "unit": "Magnetic Effects & Magnetism + EMI & AC",
+              "chapters": "Moving Charges & Magnetism; Magnetism & Matter; Electromagnetic Induction; Alternating Current",
+              "marks": 17,
+              "answer": "State the law, draw the figure, then derive. In numericals use SI units and give the answer with its unit.",
+              "prep": "Learn the derivations: uses of Biot–Savart and Ampère's laws, force between parallel wires, self and mutual inductance, the LCR circuit and the transformer."
+            },
+            {
+              "unit": "Electrostatics + Current Electricity",
+              "chapters": "Electric Charges & Fields; Electrostatic Potential & Capacitance; Current Electricity",
+              "marks": 16,
+              "answer": "For Gauss's law, draw the Gaussian surface. For Kirchhoff's laws, mark the current directions first.",
+              "prep": "Practise capacitor combinations, the Wheatstone and metre bridges, and the potential due to a dipole."
+            },
+            {
+              "unit": "Dual Nature + Atoms & Nuclei",
+              "chapters": "Dual Nature of Radiation & Matter; Atoms; Nuclei",
+              "marks": 12,
+              "answer": "Short, formula-based answers. Draw the photoelectric graphs with labelled axes.",
+              "prep": "Very scoring: Einstein's photoelectric equation, de Broglie wavelength, the Bohr model and the binding-energy curve."
+            },
+            {
+              "unit": "Electronic Devices",
+              "chapters": "Semiconductor Electronics",
+              "marks": 7,
+              "answer": "Draw the circuit diagrams and the I–V graphs for the p-n junction and rectifiers.",
+              "prep": "One chapter: learn half-wave and full-wave rectifiers and the diode characteristics."
+            }
+          ]
+        },
+        {
+          "name": "Chemistry",
+          "code": "043",
+          "outOf": 70,
+          "units": [
+            {
+              "unit": "Electrochemistry",
+              "chapters": "Electrochemistry",
+              "marks": 9,
+              "answer": "Write the cell notation and the Nernst equation with values, and give units for conductivity.",
+              "prep": "Practise Nernst equation, molar conductivity and Kohlrausch's law numericals from past papers."
+            },
+            {
+              "unit": "Aldehydes, Ketones & Carboxylic Acids",
+              "chapters": "Aldehydes, Ketones and Carboxylic Acids",
+              "marks": 8,
+              "answer": "Write reactions with the conditions over the arrow. For a named reaction, give the equation, not just the name.",
+              "prep": "Make a sheet of named reactions — aldol, Cannizzaro, Clemmensen, HVZ — and read it daily."
+            },
+            {
+              "unit": "Solutions",
+              "chapters": "Solutions",
+              "marks": 7,
+              "answer": "In colligative-property numericals, write the formula and the units at each step.",
+              "prep": "Raoult's law, the van't Hoff factor and colligative numericals."
+            },
+            {
+              "unit": "Chemical Kinetics",
+              "chapters": "Chemical Kinetics",
+              "marks": 7,
+              "answer": "Show the integrated rate law and each step of the log calculation.",
+              "prep": "First-order and half-life numericals and the Arrhenius equation."
+            },
+            {
+              "unit": "d- and f-Block Elements",
+              "chapters": "The d- and f-Block Elements",
+              "marks": 7,
+              "answer": "Give each 'reason' in one line, such as why transition metals are coloured.",
+              "prep": "Learn the trend-based 'give reasons' questions and the lanthanoid contraction."
+            },
+            {
+              "unit": "Coordination Compounds",
+              "chapters": "Coordination Compounds",
+              "marks": 7,
+              "answer": "Put the IUPAC name, hybridisation and magnetic nature in a small table.",
+              "prep": "Practise naming and crystal-field splitting for ten complexes."
+            },
+            {
+              "unit": "Biomolecules",
+              "chapters": "Biomolecules",
+              "marks": 7,
+              "answer": "Short definitions and structures, such as glucose and the peptide bond.",
+              "prep": "A theory-only chapter, so quick revision gives sure marks."
+            },
+            {
+              "unit": "Haloalkanes & Haloarenes",
+              "chapters": "Haloalkanes and Haloarenes",
+              "marks": 6,
+              "answer": "Explain SN1 and SN2 with the mechanism and conditions.",
+              "prep": "Learn the conversions and the mechanisms."
+            },
+            {
+              "unit": "Alcohols, Phenols & Ethers",
+              "chapters": "Alcohols, Phenols and Ethers",
+              "marks": 6,
+              "answer": "Write reactions with the reagents, and the tests that tell compounds apart.",
+              "prep": "Practise conversions and distinguishing tests."
+            },
+            {
+              "unit": "Amines",
+              "chapters": "Amines",
+              "marks": 6,
+              "answer": "Give the order of basicity with the reason; the Hofmann and Gabriel reactions.",
+              "prep": "Learn the distinguishing tests and the reactions of diazonium salts."
+            }
+          ]
+        },
+        {
+          "name": "Mathematics",
+          "code": "041",
+          "outOf": 80,
+          "units": [
+            {
+              "unit": "Calculus",
+              "chapters": "Continuity & Differentiability; Application of Derivatives; Integrals; Application of Integrals; Differential Equations",
+              "marks": 35,
+              "answer": "Show every step, because step marks matter. Draw the region in area questions and write + C.",
+              "prep": "Nearly half the paper: do every NCERT integration exercise, then maxima and minima word problems."
+            },
+            {
+              "unit": "Vectors & 3D Geometry",
+              "chapters": "Vectors; Three-Dimensional Geometry",
+              "marks": 14,
+              "answer": "Write vectors with arrows or hats. In 3D, state the formula, such as for shortest distance, before using it.",
+              "prep": "Shortest distance between lines and the angle between lines are frequent five-mark questions."
+            },
+            {
+              "unit": "Algebra",
+              "chapters": "Matrices; Determinants",
+              "marks": 10,
+              "answer": "Check an inverse by multiplying back to the identity, and show the cofactors in a grid.",
+              "prep": "Solving equations by the matrix method is almost always asked."
+            },
+            {
+              "unit": "Relations & Functions",
+              "chapters": "Relations and Functions; Inverse Trigonometric Functions",
+              "marks": 8,
+              "answer": "For an equivalence relation, prove reflexive, symmetric and transitive one by one.",
+              "prep": "Learn the table of principal-value branches."
+            },
+            {
+              "unit": "Probability",
+              "chapters": "Probability",
+              "marks": 8,
+              "answer": "Describe the events in words first. For Bayes' theorem, draw a tree.",
+              "prep": "Bayes' theorem and probability distributions come up often."
+            },
+            {
+              "unit": "Linear Programming",
+              "chapters": "Linear Programming",
+              "marks": 5,
+              "answer": "Draw the graph neatly, shade the feasible region and make a table of corner points.",
+              "prep": "Full marks with one well-practised method."
+            }
+          ]
+        },
+        {
+          "name": "Biology",
+          "code": "044",
+          "outOf": 70,
+          "units": [
+            {
+              "unit": "Genetics & Evolution",
+              "chapters": "Principles of Inheritance & Variation; Molecular Basis of Inheritance; Evolution",
+              "marks": 20,
+              "answer": "Draw crosses with Punnett squares. Explain the lac operon and DNA replication with diagrams.",
+              "prep": "The largest unit: start with Molecular Basis of Inheritance."
+            },
+            {
+              "unit": "Reproduction",
+              "chapters": "Sexual Reproduction in Flowering Plants; Human Reproduction; Reproductive Health",
+              "marks": 16,
+              "answer": "Labelled diagrams — embryo sac, sections of testis and ovary, the menstrual cycle.",
+              "prep": "Practise the diagrams daily and learn each process as a flowchart."
+            },
+            {
+              "unit": "Biology & Human Welfare",
+              "chapters": "Human Health & Disease; Microbes in Human Welfare",
+              "marks": 12,
+              "answer": "Give disease, pathogen, symptoms and prevention as a table.",
+              "prep": "Revising in tables is fastest."
+            },
+            {
+              "unit": "Biotechnology & its Applications",
+              "chapters": "Biotechnology: Principles & Processes; Biotechnology & its Applications",
+              "marks": 12,
+              "answer": "Explain steps in order, such as recombinant DNA and PCR, as a flowchart.",
+              "prep": "Learn the steps of recombinant DNA technology and PCR, and Bt crops."
+            },
+            {
+              "unit": "Ecology & Environment",
+              "chapters": "Organisms & Populations; Ecosystem; Biodiversity & Conservation",
+              "marks": 10,
+              "answer": "Use graphs, such as population growth curves, and examples.",
+              "prep": "Short chapters and quick marks."
+            }
+          ]
+        },
+        {
+          "name": "Accountancy",
+          "code": "055",
+          "outOf": 80,
+          "units": [
+            {
+              "unit": "Accounting for Partnership Firms",
+              "chapters": "Fundamentals; change in profit-sharing ratio; admission; retirement and death; dissolution",
+              "marks": 36,
+              "answer": "Show working notes. Every journal entry needs a narration. Prepare ledgers and the balance sheet neatly.",
+              "prep": "Almost half the paper: practise admission and retirement questions from past papers."
+            },
+            {
+              "unit": "Accounting for Companies",
+              "chapters": "Issue of Shares; Issue of Debentures",
+              "marks": 24,
+              "answer": "Use the correct account names and show calculations in working notes.",
+              "prep": "Practise forfeiture and re-issue of shares, and issue of debentures."
+            },
+            {
+              "unit": "Analysis of Financial Statements",
+              "chapters": "Financial statements; comparative and common-size statements; accounting ratios",
+              "marks": 12,
+              "answer": "Write the ratio formula, then the values, then the answer.",
+              "prep": "Keep all ratio formulas on one sheet."
+            },
+            {
+              "unit": "Cash Flow Statement",
+              "chapters": "Cash Flow Statement",
+              "marks": 8,
+              "answer": "Follow the format: operating, investing and financing activities.",
+              "prep": "Practise three complete cash-flow statements."
+            }
+          ]
+        },
+        {
+          "name": "Economics",
+          "code": "030",
+          "outOf": 80,
+          "units": [
+            {
+              "unit": "Indian Economic Development (Part B)",
+              "chapters": "All Part B chapters",
+              "marks": 40,
+              "answer": "Use data and current examples, and answer in points with headings.",
+              "prep": "Half the paper: make one page of notes per chapter."
+            },
+            {
+              "unit": "Determination of Income & Employment",
+              "chapters": "Aggregate demand, the multiplier, deficient and excess demand",
+              "marks": 12,
+              "answer": "Draw diagrams with labelled axes and show the multiplier steps.",
+              "prep": "Numericals on the multiplier and aggregate demand."
+            },
+            {
+              "unit": "National Income & Related Aggregates",
+              "chapters": "National income, methods of calculation, GDP and welfare",
+              "marks": 10,
+              "answer": "Write the formula, then the values, showing each step.",
+              "prep": "Practise national-income numericals by all three methods."
+            },
+            {
+              "unit": "Money & Banking",
+              "chapters": "Money, credit creation, functions of the RBI",
+              "marks": 6,
+              "answer": "Define the terms and explain the RBI's tools.",
+              "prep": "Quick theory revision."
+            },
+            {
+              "unit": "Government Budget & the Economy",
+              "chapters": "Components of the budget; deficits",
+              "marks": 6,
+              "answer": "Give the formulas for fiscal, revenue and primary deficit.",
+              "prep": "Short and scoring."
+            },
+            {
+              "unit": "Balance of Payments",
+              "chapters": "Balance of payments; foreign exchange rate",
+              "marks": 6,
+              "answer": "Use the balance-of-payments table format.",
+              "prep": "Short and scoring."
+            }
+          ]
+        },
+        {
+          "name": "English Core",
+          "code": "301",
+          "outOf": null,
+          "units": [
+            {
+              "unit": "Reading, Creative Writing, Literature",
+              "chapters": "Flamingo; Vistas; notice, invitation, letter, article",
+              "marks": null,
+              "answer": "Follow formats and word limits exactly, and refer to events and characters by name in literature answers.",
+              "prep": "Read a summary of each chapter, practise one of each writing format, and solve three unseen passages from past papers."
+            }
+          ]
+        }
+      ],
+      "papers": [
+        {
+          "subject": "Physics",
+          "links": [
+            {
+              "label": "2026 paper",
+              "url": "https://www.cbse.gov.in/cbsenew/question-paper/2026/XII/Physics.zip"
+            },
+            {
+              "label": "2025 paper",
+              "url": "https://www.cbse.gov.in/cbsenew/question-paper/2025/XII/PHYSICS.zip"
+            },
+            {
+              "label": "Sample paper 2026-27",
+              "url": "https://cbseacademic.nic.in/SQP_CLASSXII_2026-27.html"
+            }
+          ]
+        },
+        {
+          "subject": "Chemistry",
+          "links": [
+            {
+              "label": "2026 paper",
+              "url": "https://www.cbse.gov.in/cbsenew/question-paper/2026/XII/Chemistry.zip"
+            },
+            {
+              "label": "2025 paper",
+              "url": "https://www.cbse.gov.in/cbsenew/question-paper/2025/XII/CHEMISTRY.zip"
+            },
+            {
+              "label": "Sample paper 2026-27",
+              "url": "https://cbseacademic.nic.in/SQP_CLASSXII_2026-27.html"
+            }
+          ]
+        },
+        {
+          "subject": "Mathematics",
+          "links": [
+            {
+              "label": "2026 paper",
+              "url": "https://www.cbse.gov.in/cbsenew/question-paper/2026/XII/Mathematics.zip"
+            },
+            {
+              "label": "2025 paper",
+              "url": "https://www.cbse.gov.in/cbsenew/question-paper/2025/XII/MATHEMATICS.zip"
+            },
+            {
+              "label": "Sample paper 2026-27",
+              "url": "https://cbseacademic.nic.in/SQP_CLASSXII_2026-27.html"
+            }
+          ]
+        },
+        {
+          "subject": "Applied Mathematics",
+          "links": [
+            {
+              "label": "2026 paper",
+              "url": "https://www.cbse.gov.in/cbsenew/question-paper/2026/XII/Applied_Math.zip"
+            },
+            {
+              "label": "2025 paper",
+              "url": "https://www.cbse.gov.in/cbsenew/question-paper/2025/XII/465_Applied_Mathematics.pdf"
+            },
+            {
+              "label": "Sample paper 2026-27",
+              "url": "https://cbseacademic.nic.in/SQP_CLASSXII_2026-27.html"
+            }
+          ]
+        },
+        {
+          "subject": "Biology",
+          "links": [
+            {
+              "label": "2026 paper",
+              "url": "https://www.cbse.gov.in/cbsenew/question-paper/2026/XII/Biology.zip"
+            },
+            {
+              "label": "2025 paper",
+              "url": "https://www.cbse.gov.in/cbsenew/question-paper/2025/XII/BIOLOGY.zip"
+            },
+            {
+              "label": "Sample paper 2026-27",
+              "url": "https://cbseacademic.nic.in/SQP_CLASSXII_2026-27.html"
+            }
+          ]
+        },
+        {
+          "subject": "Accountancy",
+          "links": [
+            {
+              "label": "2026 paper",
+              "url": "https://www.cbse.gov.in/cbsenew/question-paper/2026/XII/Accountancy.zip"
+            },
+            {
+              "label": "2025 paper",
+              "url": "https://www.cbse.gov.in/cbsenew/question-paper/2025/XII/ACCOUNTANCY.zip"
+            },
+            {
+              "label": "Sample paper 2026-27",
+              "url": "https://cbseacademic.nic.in/SQP_CLASSXII_2026-27.html"
+            }
+          ]
+        },
+        {
+          "subject": "Business Studies",
+          "links": [
+            {
+              "label": "2026 paper",
+              "url": "https://www.cbse.gov.in/cbsenew/question-paper/2026/XII/Business_Studies.zip"
+            },
+            {
+              "label": "2025 paper",
+              "url": "https://www.cbse.gov.in/cbsenew/question-paper/2025/XII/BUSINESS_STUDIES.zip"
+            },
+            {
+              "label": "Sample paper 2026-27",
+              "url": "https://cbseacademic.nic.in/SQP_CLASSXII_2026-27.html"
+            }
+          ]
+        },
+        {
+          "subject": "Economics",
+          "links": [
+            {
+              "label": "2026 paper",
+              "url": "https://www.cbse.gov.in/cbsenew/question-paper/2026/XII/Economics.zip"
+            },
+            {
+              "label": "2025 paper",
+              "url": "https://www.cbse.gov.in/cbsenew/question-paper/2025/XII/ECONOMICS.zip"
+            },
+            {
+              "label": "Sample paper 2026-27",
+              "url": "https://cbseacademic.nic.in/SQP_CLASSXII_2026-27.html"
+            },
+            {
+              "label": "Marking scheme",
+              "url": "https://cbseacademic.nic.in/web_material/SQP/ClassXII_2026_27/Economics-MS.pdf"
+            }
+          ]
+        },
+        {
+          "subject": "English Core",
+          "links": [
+            {
+              "label": "2026 paper",
+              "url": "https://www.cbse.gov.in/cbsenew/question-paper/2026/XII/ENGLISH_CORE.zip"
+            },
+            {
+              "label": "2025 paper",
+              "url": "https://www.cbse.gov.in/cbsenew/question-paper/2025/XII/ENGLISH_CORE.zip"
+            },
+            {
+              "label": "Sample paper 2026-27",
+              "url": "https://cbseacademic.nic.in/SQP_CLASSXII_2026-27.html"
+            }
+          ]
+        },
+        {
+          "subject": "Hindi Core",
+          "links": [
+            {
+              "label": "2026 paper",
+              "url": "https://www.cbse.gov.in/cbsenew/question-paper/2026/XII/Hindi_Core.zip"
+            },
+            {
+              "label": "2025 paper",
+              "url": "https://www.cbse.gov.in/cbsenew/question-paper/2025/XII/HINDI_CORE.zip"
+            },
+            {
+              "label": "Sample paper 2026-27",
+              "url": "https://cbseacademic.nic.in/SQP_CLASSXII_2026-27.html"
+            }
+          ]
+        },
+        {
+          "subject": "History",
+          "links": [
+            {
+              "label": "2026 paper",
+              "url": "https://www.cbse.gov.in/cbsenew/question-paper/2026/XII/History.zip"
+            },
+            {
+              "label": "2025 paper",
+              "url": "https://www.cbse.gov.in/cbsenew/question-paper/2025/XII/HISTORY.zip"
+            },
+            {
+              "label": "Sample paper 2026-27",
+              "url": "https://cbseacademic.nic.in/SQP_CLASSXII_2026-27.html"
+            }
+          ]
+        },
+        {
+          "subject": "Political Science",
+          "links": [
+            {
+              "label": "2026 paper",
+              "url": "https://www.cbse.gov.in/cbsenew/question-paper/2026/XII/Political_Science.zip"
+            },
+            {
+              "label": "2025 paper",
+              "url": "https://www.cbse.gov.in/cbsenew/question-paper/2025/XII/POLITICAL_SCIENCE.zip"
+            },
+            {
+              "label": "Sample paper 2026-27",
+              "url": "https://cbseacademic.nic.in/SQP_CLASSXII_2026-27.html"
+            }
+          ]
+        },
+        {
+          "subject": "Geography",
+          "links": [
+            {
+              "label": "2026 paper",
+              "url": "https://www.cbse.gov.in/cbsenew/question-paper/2026/XII/Geography.zip"
+            },
+            {
+              "label": "2025 paper",
+              "url": "https://www.cbse.gov.in/cbsenew/question-paper/2025/XII/GEOGRAPHY.zip"
+            },
+            {
+              "label": "Sample paper 2026-27",
+              "url": "https://cbseacademic.nic.in/SQP_CLASSXII_2026-27.html"
+            }
+          ]
+        },
+        {
+          "subject": "Psychology",
+          "links": [
+            {
+              "label": "2026 paper",
+              "url": "https://www.cbse.gov.in/cbsenew/question-paper/2026/XII/Psychology.zip"
+            },
+            {
+              "label": "2025 paper",
+              "url": "https://www.cbse.gov.in/cbsenew/question-paper/2025/XII/63_psychology.pdf"
+            },
+            {
+              "label": "Sample paper 2026-27",
+              "url": "https://cbseacademic.nic.in/SQP_CLASSXII_2026-27.html"
+            }
+          ]
+        },
+        {
+          "subject": "Sociology",
+          "links": [
+            {
+              "label": "2026 paper",
+              "url": "https://www.cbse.gov.in/cbsenew/question-paper/2026/XII/Sociology.zip"
+            },
+            {
+              "label": "2025 paper",
+              "url": "https://www.cbse.gov.in/cbsenew/question-paper/2025/XII/62_Sociology.pdf"
+            },
+            {
+              "label": "Sample paper 2026-27",
+              "url": "https://cbseacademic.nic.in/SQP_CLASSXII_2026-27.html"
+            }
+          ]
+        },
+        {
+          "subject": "Computer Science",
+          "links": [
+            {
+              "label": "2026 paper",
+              "url": "https://www.cbse.gov.in/cbsenew/question-paper/2026/XII/Computer_Science.zip"
+            },
+            {
+              "label": "2025 paper",
+              "url": "https://www.cbse.gov.in/cbsenew/question-paper/2025/XII/91_COMPUTER_SCIENCE.pdf"
+            },
+            {
+              "label": "Sample paper 2026-27",
+              "url": "https://cbseacademic.nic.in/SQP_CLASSXII_2026-27.html"
+            }
+          ]
+        },
+        {
+          "subject": "Informatics Practices",
+          "links": [
+            {
+              "label": "2026 paper",
+              "url": "https://www.cbse.gov.in/cbsenew/question-paper/2026/XII/Informatics_Practices.zip"
+            },
+            {
+              "label": "2025 paper",
+              "url": "https://www.cbse.gov.in/cbsenew/question-paper/2025/XII/90_INFORMATICS_PRACTICES.pdf"
+            },
+            {
+              "label": "Sample paper 2026-27",
+              "url": "https://cbseacademic.nic.in/SQP_CLASSXII_2026-27.html"
+            }
+          ]
+        },
+        {
+          "subject": "Physical Education",
+          "links": [
+            {
+              "label": "2026 paper",
+              "url": "https://www.cbse.gov.in/cbsenew/question-paper/2026/XII/Physical_Education.zip"
+            },
+            {
+              "label": "2025 paper",
+              "url": "https://www.cbse.gov.in/cbsenew/question-paper/2025/XII/75_Physical%20Education.pdf"
+            },
+            {
+              "label": "Sample paper 2026-27",
+              "url": "https://cbseacademic.nic.in/SQP_CLASSXII_2026-27.html"
+            }
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Which chapters are most important in CBSE Class 12 Maths 2027?",
+          "answer": "Calculus — Continuity and Differentiability, Application of Derivatives, Integrals, Application of Integrals and Differential Equations — carries 35 of the 80 theory marks. Vectors and 3D Geometry is next with 14."
+        },
+        {
+          "question": "How are marks distributed in Class 12 Physics?",
+          "answer": "The 70 theory marks are split across nine units, grouped as: Electrostatics and Current Electricity 16, Magnetism and EMI/AC 17, EM Waves and Optics 18, Dual Nature, Atoms and Nuclei 12, and Electronic Devices 7. Practicals carry the other 30."
+        },
+        {
+          "question": "Which Chemistry chapter has the highest weightage in Class 12?",
+          "answer": "Electrochemistry, with 9 of 70 marks, followed by Aldehydes, Ketones and Carboxylic Acids with 8. The other chapters carry 6 or 7 each, so Chemistry rewards covering the whole book."
+        },
+        {
+          "question": "What is the most important part of Class 12 Accountancy?",
+          "answer": "Accounting for Partnership Firms, worth 36 of the 80 theory marks, followed by Accounting for Companies with 24."
+        },
+        {
+          "question": "Where can I get official CBSE Class 12 previous year papers?",
+          "answer": "On cbse.gov.in under Previous Years' Question Papers. The table on this page links directly to CBSE's files for 2026 and 2025 in 18 subjects."
+        }
+      ],
+      "board": "CBSE",
+      "boardName": "Central Board of Secondary Education",
+      "classLabel": "Class 12",
+      "papersNote": "CBSE's own question papers from the 2026 and 2025 board exams. ZIP files hold the PDFs of every set. More subjects and earlier years are on CBSE's question paper page; sample papers and marking schemes are on cbseacademic.nic.in.",
+      "source": {
+        "name": "CBSE Curriculum 2026-27 (copies published by the Directorate of Education, Delhi)",
+        "url": "https://edustud.nic.in/",
+        "papersUrl": "https://www.cbse.gov.in/cbsenew/question-paper.html"
+      },
+      "notes": [
+        "The theory paper is 80 marks in most subjects (70 in Science-stream subjects with practicals); internal assessment or practicals make up the rest of 100.",
+        "CBSE gives marks for correct steps even when the final answer is wrong, so show your working in every numerical and derivation."
+      ],
+      "label": "CBSE Class 12"
+    },
+    "up-board-class-10": {
+      "slug": "up-board-class-10",
+      "board": "UP Board",
+      "boardName": "Uttar Pradesh Madhyamik Shiksha Parishad (UPMSP)",
+      "classLabel": "Class 10",
+      "label": "UP Board Class 10",
+      "theoryOutOf": 70,
+      "title": "UP Board Class 10 Important Chapters 2027: Marks & Exam Tips",
+      "h1": "UP Board Class 10 (High School) 2027: Important Chapters and How to Prepare",
+      "description": "Unit-wise marks for UP Board Class 10 Science, Maths and Social Science 2027, what to study first, how to write answers and where to get UPMSP model papers.",
+      "intro": [
+        "UP Board High School papers are 70 marks of written exam and 30 marks of internal assessment or practicals. UPMSP's 2026-27 syllabus fixes how the 70 written marks are shared out, and the split is not even: in Science, chemistry and biology are 20 marks each, and in Mathematics, Algebra alone is 18 of 70.",
+        "The books are the same NCERT books CBSE uses, so the chapters will look familiar, but the marks differ from CBSE's. This page lists UPMSP's own unit marks for Science, Mathematics and Social Science, ranks every unit, and explains how to answer and revise each one quickly. The full plan is also available as a spreadsheet to download."
+      ],
+      "subjects": [
+        {
+          "name": "Science",
+          "code": "931",
+          "units": [
+            {
+              "unit": "Chemical Substances – Nature & Behaviour",
+              "chapters": "Chemical Reactions & Equations; Acids, Bases & Salts; Metals & Non-metals; Carbon & its Compounds",
+              "marks": 20,
+              "answer": "Write balanced equations with state symbols and name the type of reaction. For carbon compounds, draw the structure and give the IUPAC name.",
+              "prep": "Make one page of every reaction in the four chapters and read it daily. Practise pH, uses of salts and the reactivity series from past papers."
+            },
+            {
+              "unit": "World of Living",
+              "chapters": "Life Processes; Control & Coordination; How do Organisms Reproduce?; Heredity",
+              "marks": 20,
+              "answer": "Draw and label the diagrams — heart, nephron, neuron, flower, alimentary canal. Use NCERT keywords and answer in points.",
+              "prep": "Practise the eight to ten standard diagrams until each takes two minutes. For Heredity, practise Mendel's monohybrid and dihybrid crosses."
+            },
+            {
+              "unit": "Effects of Current",
+              "chapters": "Electricity; Magnetic Effects of Electric Current",
+              "marks": 13,
+              "answer": "For numericals write the formula, then the values with units, then the answer with its unit. Draw circuits with the correct symbols.",
+              "prep": "Learn Ohm's law, resistances in series and parallel, and the power and heating formulas, then solve 15–20 numericals from past papers."
+            },
+            {
+              "unit": "Natural Phenomena",
+              "chapters": "Light – Reflection & Refraction; The Human Eye & the Colourful World",
+              "marks": 12,
+              "answer": "Draw ray diagrams with a ruler and arrows. Use the sign convention in mirror and lens numericals and show every step.",
+              "prep": "Practise the six mirror and six lens ray-diagram cases and the mirror and lens formulas. Revise defects of vision and how they are corrected."
+            },
+            {
+              "unit": "Natural Resources",
+              "chapters": "Our Environment",
+              "marks": 5,
+              "answer": "Short answers with an example: a food chain, the 10% law, the ozone layer.",
+              "prep": "A short chapter: read the NCERT text once and revise the in-text questions for quick marks."
+            }
+          ]
+        },
+        {
+          "name": "Mathematics",
+          "code": "928",
+          "units": [
+            {
+              "unit": "Algebra",
+              "chapters": "Polynomials; Pair of Linear Equations in Two Variables; Quadratic Equations; Arithmetic Progressions",
+              "marks": 18,
+              "answer": "Write the formula first, then every step, and box the final answer. CBSE gives marks for steps even when the final answer is wrong.",
+              "prep": "The biggest unit. Do the NCERT examples and exercises, then word problems on quadratic equations and APs from the last two years' papers."
+            },
+            {
+              "unit": "Geometry",
+              "chapters": "Triangles; Circles",
+              "marks": 12,
+              "answer": "Write Given, To Prove, Construction and Proof, with a reason for every step, and draw a neat figure.",
+              "prep": "Learn the proofs of the Basic Proportionality Theorem and the tangent theorems — they are asked often. Then practise similarity problems."
+            },
+            {
+              "unit": "Trigonometry",
+              "chapters": "Introduction to Trigonometry; Some Applications of Trigonometry",
+              "marks": 10,
+              "answer": "For heights and distances always draw the figure and mark the angles. For identities, work on one side only.",
+              "prep": "Memorise the ratio table and the three identities, then practise ten identity proofs and ten heights-and-distances problems."
+            },
+            {
+              "unit": "Mensuration",
+              "chapters": "Areas Related to Circles; Surface Areas & Volumes",
+              "marks": 10,
+              "answer": "Write the formula, substitute, and keep the units (cm², cm³). Draw the combined solid.",
+              "prep": "Make a formula sheet and practise questions on combinations of solids."
+            },
+            {
+              "unit": "Statistics & Probability",
+              "chapters": "Statistics; Probability",
+              "marks": 10,
+              "answer": "Build the full table (class mark, frequency, cumulative frequency) before using the formula. For probability, write the total outcomes first.",
+              "prep": "Very scoring: practise mean, median and mode of grouped data, and dice, card and coin probability."
+            },
+            {
+              "unit": "Number Systems",
+              "chapters": "Real Numbers",
+              "marks": 5,
+              "answer": "Show the prime factorisation clearly. Write irrationality proofs by contradiction.",
+              "prep": "Quick marks: HCF and LCM, and the proofs that √2 and √3 are irrational."
+            },
+            {
+              "unit": "Coordinate Geometry",
+              "chapters": "Coordinate Geometry",
+              "marks": 5,
+              "answer": "Write the distance or section formula, then substitute.",
+              "prep": "Only two formulas to learn — distance and section — so these are easy marks."
+            }
+          ]
+        },
+        {
+          "name": "Social Science",
+          "code": "932",
+          "units": [
+            {
+              "unit": "History (includes map work)",
+              "chapters": "India and the Contemporary World – 2",
+              "marks": 20,
+              "answer": "Answer in points with dates and names, and practise the history map items — UPMSP sets part of these marks on the map.",
+              "prep": "Start with the nationalism chapters, the longest in the book, and make a timeline of events."
+            },
+            {
+              "unit": "Geography (includes map work)",
+              "chapters": "Contemporary India – 2",
+              "marks": 20,
+              "answer": "Give examples — crops, states, industries. On the outline map of India, mark accurately and label clearly.",
+              "prep": "Practise map work for five minutes daily, and learn crops, minerals and industries as tables."
+            },
+            {
+              "unit": "Civics",
+              "chapters": "Democratic Politics – 2",
+              "marks": 15,
+              "answer": "Define the term, then explain it with examples, such as Belgium and Sri Lanka for power sharing.",
+              "prep": "Short book: read each chapter twice and make one page of notes per chapter."
+            },
+            {
+              "unit": "Economics",
+              "chapters": "Understanding Economic Development",
+              "marks": 15,
+              "answer": "Define terms exactly — GDP, sectors, credit — and use the tables from the book.",
+              "prep": "Learn the definitions and the data tables; they are asked directly."
+            }
+          ]
+        },
+        {
+          "name": "English",
+          "code": "917",
+          "units": [
+            {
+              "unit": "Reading, Writing, Grammar, Literature",
+              "chapters": "First Flight; Footprints without Feet; grammar; letter and application writing",
+              "marks": null,
+              "answer": "Keep to the word limit and follow the letter or application format exactly. In literature answers, refer to characters and events by name.",
+              "prep": "Read a summary of every lesson and poem, practise two letters and two applications, and do grammar from the model paper."
+            }
+          ]
+        },
+        {
+          "name": "Hindi",
+          "code": "901",
+          "units": [
+            {
+              "unit": "Gadya, Padya, Vyakaran, Lekhan",
+              "chapters": "Prose, poetry, grammar, letter and essay writing",
+              "marks": null,
+              "answer": "Write answers in clear points, give the author or poet's name and the main idea, and follow the letter and essay formats.",
+              "prep": "Learn each poet's and author's life and works in short, and practise sandarbh-prasang (reference to context) answers."
+            }
+          ]
+        }
+      ],
+      "papers": [
+        {
+          "subject": "All subjects",
+          "links": [
+            {
+              "label": "UPMSP model papers 2027 (upmsp.edu.in → Model Paper)",
+              "url": "https://upmsp.edu.in/"
+            }
+          ]
+        }
+      ],
+      "papersNote": "UPMSP publishes model papers for every subject on upmsp.edu.in; they show the current pattern, including the multiple-choice part. We could not find previous years' question papers on UPMSP's own website, so practise with the model papers first.",
+      "source": {
+        "name": "UPMSP syllabus 2026-27 (upmsp.edu.in), as reported subject-wise",
+        "url": "https://upmsp.edu.in/",
+        "papersUrl": "https://upmsp.edu.in/"
+      },
+      "notes": [
+        "Science, Mathematics and Social Science each have a 70-mark written paper and 30 marks of internal assessment or practicals.",
+        "You need 33% in each subject to pass, so do not leave any subject weak.",
+        "Recent UP Board papers begin with multiple-choice questions answered on an OMR sheet: fill the bubble carefully, because a wrongly filled bubble cannot be corrected."
+      ],
+      "faqs": [
+        {
+          "question": "Which chapters are most important in UP Board Class 10 Science?",
+          "answer": "The chemistry chapters (Chemical Reactions, Acids Bases and Salts, Metals and Non-metals, Carbon and its Compounds) and the biology chapters (Life Processes, Control and Coordination, Reproduction, Heredity). Each group is a 20-mark unit, so together they are 40 of the 70 written marks."
+        },
+        {
+          "question": "Which unit carries the most marks in UP Board Class 10 Maths?",
+          "answer": "Algebra, with 18 of the 70 written marks, followed by Geometry with 12."
+        },
+        {
+          "question": "How are marks split in UP Board Class 10 Social Science?",
+          "answer": "History and Geography carry 20 marks each, including map work, and Civics and Economics 15 marks each, for 70 in all."
+        },
+        {
+          "question": "Is the UP Board syllabus the same as CBSE?",
+          "answer": "The textbooks are the same NCERT books, but the unit marks are UPMSP's own and the paper is 70 written marks, not 80. Use UPMSP's marks to plan."
+        },
+        {
+          "question": "Where can I get UP Board model papers?",
+          "answer": "On upmsp.edu.in, under Model Paper. UPMSP publishes them subject-wise for Class 10 and Class 12."
+        }
+      ]
+    },
+    "up-board-class-12": {
+      "slug": "up-board-class-12",
+      "board": "UP Board",
+      "boardName": "Uttar Pradesh Madhyamik Shiksha Parishad (UPMSP)",
+      "classLabel": "Class 12",
+      "label": "UP Board Class 12",
+      "theoryOutOf": 70,
+      "title": "UP Board Class 12 Important Chapters 2027: Marks & Exam Tips",
+      "h1": "UP Board Class 12 (Intermediate) 2027: Important Chapters and How to Prepare",
+      "description": "Unit-wise marks for UP Board Class 12 Physics, Chemistry, Maths and Biology 2027, what to study first, answer-writing tips and where to get UPMSP model papers.",
+      "intro": [
+        "In the UP Board Intermediate exam the science papers are 70 written marks with 30 for practicals, while Mathematics is a 100-mark written paper. UPMSP's 2026-27 syllabus gives Calculus 44 of those 100 Maths marks, Optics 13 of 70 in Physics, and Genetics and Evolution 18 of 70 in Biology.",
+        "This page lists UPMSP's own unit marks for Physics, Chemistry, Mathematics and Biology, ranks every unit by its share of the paper, and gives a short guide to answering and revising each one. The books are NCERT's, so the chapter names match CBSE's, but the marks do not. The full plan is also available as a spreadsheet."
+      ],
+      "subjects": [
+        {
+          "name": "Physics",
+          "code": "151",
+          "outOf": 70,
+          "units": [
+            {
+              "unit": "Optics",
+              "chapters": "Ray Optics & Optical Instruments; Wave Optics",
+              "marks": 13,
+              "answer": "Draw ray diagrams with arrows and labels. For derivations: diagram, steps, then the final formula boxed.",
+              "prep": "The biggest single unit: lens-maker's formula, prism, microscope and telescope, Young's double slit."
+            },
+            {
+              "unit": "Electrostatics",
+              "chapters": "Electric Charges & Fields; Electrostatic Potential & Capacitance",
+              "marks": 8,
+              "answer": "For Gauss's law, draw the Gaussian surface; show each step of capacitor combinations.",
+              "prep": "Gauss's law applications, potential due to a dipole, capacitors."
+            },
+            {
+              "unit": "Magnetic Effects of Current & Magnetism",
+              "chapters": "Moving Charges & Magnetism; Magnetism & Matter",
+              "marks": 8,
+              "answer": "State the law, draw the figure, then derive.",
+              "prep": "Biot–Savart and Ampère's law, force on a conductor, moving-coil galvanometer."
+            },
+            {
+              "unit": "Electromagnetic Induction & Alternating Current",
+              "chapters": "Electromagnetic Induction; Alternating Current",
+              "marks": 8,
+              "answer": "Derive with a labelled figure; in numericals give the answer with its unit.",
+              "prep": "Self and mutual inductance, the LCR circuit, resonance and the transformer."
+            },
+            {
+              "unit": "Atoms & Nuclei",
+              "chapters": "Atoms; Nuclei",
+              "marks": 8,
+              "answer": "Short, formula-based answers with the Bohr model figure where asked.",
+              "prep": "Bohr model, hydrogen spectrum, binding energy, radioactive decay."
+            },
+            {
+              "unit": "Electronic Devices",
+              "chapters": "Semiconductor Electronics",
+              "marks": 8,
+              "answer": "Draw the circuit diagram and the I–V graph for diodes and rectifiers.",
+              "prep": "Full marks are realistic: p-n junction, rectifiers, logic of the diode."
+            },
+            {
+              "unit": "Current Electricity",
+              "chapters": "Current Electricity",
+              "marks": 7,
+              "answer": "For Kirchhoff's laws mark current directions first; label the bridge diagrams.",
+              "prep": "Wheatstone and metre bridges, potentiometer, cells in series and parallel."
+            },
+            {
+              "unit": "Dual Nature of Matter & Radiation",
+              "chapters": "Dual Nature of Radiation and Matter",
+              "marks": 6,
+              "answer": "Draw the photoelectric graphs with labelled axes.",
+              "prep": "Einstein's photoelectric equation and de Broglie wavelength numericals."
+            },
+            {
+              "unit": "Electromagnetic Waves",
+              "chapters": "Electromagnetic Waves",
+              "marks": 4,
+              "answer": "Give the order of the spectrum with one use of each band.",
+              "prep": "Learn the spectrum table; quick marks."
+            }
+          ]
+        },
+        {
+          "name": "Chemistry",
+          "code": "152",
+          "outOf": 70,
+          "units": [
+            {
+              "unit": "Solutions",
+              "chapters": "Solutions",
+              "marks": 8,
+              "answer": "In colligative-property numericals, write the formula and the units at each step.",
+              "prep": "Raoult's law, the van't Hoff factor and colligative numericals."
+            },
+            {
+              "unit": "Aldehydes, Ketones & Carboxylic Acids",
+              "chapters": "Aldehydes, Ketones and Carboxylic Acids",
+              "marks": 8,
+              "answer": "Write reactions with the conditions over the arrow. For a named reaction, give the equation, not just the name.",
+              "prep": "Make a sheet of named reactions — aldol, Cannizzaro, Clemmensen, HVZ — and read it daily."
+            },
+            {
+              "unit": "Electrochemistry",
+              "chapters": "Electrochemistry",
+              "marks": 7,
+              "answer": "Write the cell notation and the Nernst equation with values, and give units for conductivity.",
+              "prep": "Practise Nernst equation, molar conductivity and Kohlrausch's law numericals from past papers."
+            },
+            {
+              "unit": "Chemical Kinetics",
+              "chapters": "Chemical Kinetics",
+              "marks": 7,
+              "answer": "Show the integrated rate law and each step of the log calculation.",
+              "prep": "First-order and half-life numericals and the Arrhenius equation."
+            },
+            {
+              "unit": "Coordination Compounds",
+              "chapters": "Coordination Compounds",
+              "marks": 7,
+              "answer": "Put the IUPAC name, hybridisation and magnetic nature in a small table.",
+              "prep": "Practise naming and crystal-field splitting for ten complexes."
+            },
+            {
+              "unit": "Haloalkanes & Haloarenes",
+              "chapters": "Haloalkanes and Haloarenes",
+              "marks": 7,
+              "answer": "Explain SN1 and SN2 with the mechanism and conditions.",
+              "prep": "Learn the conversions and the mechanisms."
+            },
+            {
+              "unit": "Alcohols, Phenols & Ethers",
+              "chapters": "Alcohols, Phenols and Ethers",
+              "marks": 7,
+              "answer": "Write reactions with the reagents, and the tests that tell compounds apart.",
+              "prep": "Practise conversions and distinguishing tests."
+            },
+            {
+              "unit": "Biomolecules",
+              "chapters": "Biomolecules",
+              "marks": 7,
+              "answer": "Short definitions and structures, such as glucose and the peptide bond.",
+              "prep": "A theory-only chapter, so quick revision gives sure marks."
+            },
+            {
+              "unit": "d- and f-Block Elements",
+              "chapters": "The d- and f-Block Elements",
+              "marks": 6,
+              "answer": "Give each 'reason' in one line, such as why transition metals are coloured.",
+              "prep": "Learn the trend-based 'give reasons' questions and the lanthanoid contraction."
+            },
+            {
+              "unit": "Amines",
+              "chapters": "Amines",
+              "marks": 6,
+              "answer": "Give the order of basicity with the reason; the Hofmann and Gabriel reactions.",
+              "prep": "Learn the distinguishing tests and the reactions of diazonium salts."
+            }
+          ]
+        },
+        {
+          "name": "Mathematics",
+          "code": "131",
+          "outOf": 100,
+          "units": [
+            {
+              "unit": "Calculus",
+              "chapters": "Continuity & Differentiability; Application of Derivatives; Integrals; Application of Integrals; Differential Equations",
+              "marks": 44,
+              "answer": "Show every step, because step marks matter. Draw the region in area questions and write + C.",
+              "prep": "Nearly half the paper: do every NCERT integration exercise, then maxima and minima word problems."
+            },
+            {
+              "unit": "Vectors & 3D Geometry",
+              "chapters": "Vectors; Three-Dimensional Geometry",
+              "marks": 18,
+              "answer": "Write vectors with arrows or hats. In 3D, state the formula, such as for shortest distance, before using it.",
+              "prep": "Shortest distance between lines and the angle between lines are frequent five-mark questions."
+            },
+            {
+              "unit": "Algebra",
+              "chapters": "Matrices; Determinants",
+              "marks": 15,
+              "answer": "Check an inverse by multiplying back to the identity, and show the cofactors in a grid.",
+              "prep": "Solving equations by the matrix method is almost always asked."
+            },
+            {
+              "unit": "Relations & Functions",
+              "chapters": "Relations and Functions; Inverse Trigonometric Functions",
+              "marks": 10,
+              "answer": "For an equivalence relation, prove reflexive, symmetric and transitive one by one.",
+              "prep": "Learn the table of principal-value branches."
+            },
+            {
+              "unit": "Probability",
+              "chapters": "Probability",
+              "marks": 8,
+              "answer": "Describe the events in words first. For Bayes' theorem, draw a tree.",
+              "prep": "Bayes' theorem and probability distributions come up often."
+            },
+            {
+              "unit": "Linear Programming",
+              "chapters": "Linear Programming",
+              "marks": 5,
+              "answer": "Draw the graph neatly, shade the feasible region and make a table of corner points.",
+              "prep": "Full marks with one well-practised method."
+            }
+          ]
+        },
+        {
+          "name": "Biology",
+          "code": "153",
+          "outOf": 70,
+          "units": [
+            {
+              "unit": "Genetics & Evolution",
+              "chapters": "Principles of Inheritance & Variation; Molecular Basis of Inheritance; Evolution",
+              "marks": 18,
+              "answer": "Draw crosses with Punnett squares. Explain the lac operon and DNA replication with diagrams.",
+              "prep": "The largest unit: start with Molecular Basis of Inheritance."
+            },
+            {
+              "unit": "Reproduction",
+              "chapters": "Sexual Reproduction in Flowering Plants; Human Reproduction; Reproductive Health",
+              "marks": 14,
+              "answer": "Labelled diagrams — embryo sac, sections of testis and ovary, the menstrual cycle.",
+              "prep": "Practise the diagrams daily and learn each process as a flowchart."
+            },
+            {
+              "unit": "Biology & Human Welfare",
+              "chapters": "Human Health & Disease; Microbes in Human Welfare",
+              "marks": 14,
+              "answer": "Give disease, pathogen, symptoms and prevention as a table.",
+              "prep": "Revising in tables is fastest."
+            },
+            {
+              "unit": "Ecology & Environment",
+              "chapters": "Organisms & Populations; Ecosystem; Biodiversity & Conservation",
+              "marks": 14,
+              "answer": "Use graphs, such as population growth curves, and examples.",
+              "prep": "Short chapters and quick marks."
+            },
+            {
+              "unit": "Biotechnology & its Applications",
+              "chapters": "Biotechnology: Principles & Processes; Biotechnology & its Applications",
+              "marks": 10,
+              "answer": "Explain steps in order, such as recombinant DNA and PCR, as a flowchart.",
+              "prep": "Learn the steps of recombinant DNA technology and PCR, and Bt crops."
+            }
+          ]
+        },
+        {
+          "name": "English",
+          "code": "117",
+          "outOf": null,
+          "units": [
+            {
+              "unit": "Reading, Writing, Grammar, Literature",
+              "chapters": "Flamingo; Vistas; grammar; letter, application and essay",
+              "marks": null,
+              "answer": "Follow formats and word limits exactly, and refer to events and characters by name.",
+              "prep": "Read lesson summaries, practise one letter, one application and one essay, and do the grammar section of the model paper."
+            }
+          ]
+        }
+      ],
+      "papers": [
+        {
+          "subject": "All subjects",
+          "links": [
+            {
+              "label": "UPMSP model papers 2027 (upmsp.edu.in → Model Paper)",
+              "url": "https://upmsp.edu.in/"
+            }
+          ]
+        }
+      ],
+      "papersNote": "UPMSP publishes model papers for every subject on upmsp.edu.in; they show the current pattern, including the multiple-choice part. We could not find previous years' question papers on UPMSP's own website, so practise with the model papers first.",
+      "source": {
+        "name": "UPMSP syllabus 2026-27 (upmsp.edu.in), as reported subject-wise",
+        "url": "https://upmsp.edu.in/",
+        "papersUrl": "https://upmsp.edu.in/"
+      },
+      "notes": [
+        "Physics, Chemistry and Biology have a 70-mark written paper and 30 marks of practicals; Mathematics is a 100-mark written paper.",
+        "You need 33% in each subject to pass, in the written paper and the practical.",
+        "Recent UP Board papers begin with multiple-choice questions answered on an OMR sheet: fill each bubble carefully."
+      ],
+      "faqs": [
+        {
+          "question": "Which unit carries the most marks in UP Board Class 12 Maths?",
+          "answer": "Calculus, with 44 of the 100 marks — nearly half the paper. Vectors and 3D Geometry is next with 18."
+        },
+        {
+          "question": "Which Physics unit is most important for UP Board Class 12?",
+          "answer": "Optics, with 13 of the 70 written marks. Electrostatics, Magnetism, EMI and AC, Atoms and Nuclei and Electronic Devices carry 8 each."
+        },
+        {
+          "question": "How are UP Board Class 12 Biology marks split?",
+          "answer": "Genetics and Evolution 18, Reproduction 14, Biology and Human Welfare 14, Ecology 14 and Biotechnology 10, for 70 written marks."
+        },
+        {
+          "question": "Is UP Board Chemistry the same as CBSE?",
+          "answer": "The ten chapters are the same NCERT chapters, but UPMSP spreads the marks more evenly: every chapter carries 6 to 8 marks, so leave none out."
+        },
+        {
+          "question": "Where can I get UP Board Class 12 model papers?",
+          "answer": "On upmsp.edu.in, under Model Paper, subject-wise."
+        }
+      ]
+    },
+    "icse-class-10": {
+      "slug": "icse-class-10",
+      "board": "ICSE",
+      "boardName": "Council for the Indian School Certificate Examinations (CISCE)",
+      "classLabel": "Class 10",
+      "label": "ICSE Class 10",
+      "theoryOutOf": 80,
+      "title": "ICSE Class 10 Important Chapters 2027: Paper Pattern & Prep Tips",
+      "h1": "ICSE Class 10 Board Exam 2027: Important Chapters and How to Prepare",
+      "description": "ICSE Class 10 2027 Maths, Physics, Chemistry and Biology chapters, how the paper is set, how to write answers, a 30-day plan and where to get CISCE specimen papers.",
+      "intro": [
+        "ICSE is different from CBSE and the state boards in one important way: CISCE does not publish marks for each chapter. Instead, every main paper has a compulsory first section that covers the whole syllabus and a second section where you choose questions. So in ICSE no chapter is safe to skip — and the way to score is to know every chapter well enough to answer short compulsory questions, and a few chapters very well for the long ones.",
+        "For 2027 CISCE has also said that about half of the marks will come from higher-order, competency-based questions. This page lists the chapters of Mathematics, Physics, Chemistry and Biology, with how to answer and revise each, explains the paper pattern, and links to CISCE's official specimen papers. You can download the whole plan as a spreadsheet."
+      ],
+      "subjects": [
+        {
+          "name": "Mathematics",
+          "code": "",
+          "units": [
+            {
+              "unit": "Commercial Mathematics",
+              "chapters": "GST; Banking (recurring deposit); Shares and Dividends",
+              "marks": null,
+              "answer": "Write the formula, then substitute with ₹ and % units, and state the final answer in a sentence.",
+              "prep": "Short and scoring: practise ten questions of each type from the specimen and past papers."
+            },
+            {
+              "unit": "Algebra",
+              "chapters": "Linear inequations; Quadratic equations; Ratio and proportion; Factorisation; Matrices; Progressions",
+              "marks": null,
+              "answer": "Show every step; for word problems, define the variable first and check the answer fits the question.",
+              "prep": "The largest part of the syllabus: do quadratic word problems and matrices daily."
+            },
+            {
+              "unit": "Geometry",
+              "chapters": "Similarity; Loci; Circles; Constructions; Coordinate geometry (reflection, section formula, equation of a line)",
+              "marks": null,
+              "answer": "Give a reason for every statement in proofs; draw constructions with a sharp pencil and keep the arcs.",
+              "prep": "Circle theorems and constructions come up in Section B almost every year."
+            },
+            {
+              "unit": "Mensuration",
+              "chapters": "Cylinder, cone and sphere; combinations of solids",
+              "marks": null,
+              "answer": "Write the formula, keep the units, and say clearly what is being found.",
+              "prep": "Make one formula sheet and practise conversion (melting and recasting) problems."
+            },
+            {
+              "unit": "Trigonometry",
+              "chapters": "Identities; Heights and distances",
+              "marks": null,
+              "answer": "Draw the figure and mark angles; for identities, work on one side only.",
+              "prep": "Practise ten identities and ten heights-and-distances problems with the tables."
+            },
+            {
+              "unit": "Statistics",
+              "chapters": "Mean, median, quartiles and mode; histograms and ogives",
+              "marks": null,
+              "answer": "Draw graphs to scale on graph paper and label both axes.",
+              "prep": "Graph questions are quick marks if the scale is right."
+            },
+            {
+              "unit": "Probability",
+              "chapters": "Probability",
+              "marks": null,
+              "answer": "List the sample space first.",
+              "prep": "Easy marks: dice, coins and cards."
+            }
+          ]
+        },
+        {
+          "name": "Physics (Science Paper 1)",
+          "code": "",
+          "units": [
+            {
+              "unit": "Force, Work, Power and Energy",
+              "chapters": "Force; Work, Energy and Power; Machines",
+              "marks": null,
+              "answer": "Numericals: formula, values with SI units, answer with unit. Draw lever and pulley diagrams.",
+              "prep": "Machines (MA, VR, efficiency) and moment of force numericals are asked every year."
+            },
+            {
+              "unit": "Light",
+              "chapters": "Refraction at plane surfaces; Refraction through a lens; Spectrum",
+              "marks": null,
+              "answer": "Ray diagrams with a ruler and arrows; give the sign convention you use.",
+              "prep": "Practise lens ray diagrams, critical angle and total internal reflection."
+            },
+            {
+              "unit": "Sound",
+              "chapters": "Sound",
+              "marks": null,
+              "answer": "Define terms exactly (natural, forced vibrations, resonance) and give one example each.",
+              "prep": "Echo numericals and the characteristics of sound."
+            },
+            {
+              "unit": "Electricity and Magnetism",
+              "chapters": "Current electricity; Household circuits; Electromagnetism",
+              "marks": null,
+              "answer": "Draw circuit diagrams with standard symbols; show the series/parallel calculation.",
+              "prep": "Resistor combinations, power and energy bills, and the AC generator and motor."
+            },
+            {
+              "unit": "Heat",
+              "chapters": "Calorimetry",
+              "marks": null,
+              "answer": "State the principle of calorimetry and write heat lost = heat gained before substituting.",
+              "prep": "Specific and latent heat numericals."
+            },
+            {
+              "unit": "Modern Physics",
+              "chapters": "Radioactivity",
+              "marks": null,
+              "answer": "Write nuclear equations with mass and atomic numbers balanced.",
+              "prep": "Alpha, beta and gamma changes and their properties."
+            }
+          ]
+        },
+        {
+          "name": "Chemistry (Science Paper 2)",
+          "code": "",
+          "units": [
+            {
+              "unit": "Periodic Properties and Chemical Bonding",
+              "chapters": "Periodic properties and their variations; Chemical bonding",
+              "marks": null,
+              "answer": "Explain trends with a reason (atomic size, ionisation potential). Draw electron-dot structures.",
+              "prep": "Learn the trends down a group and across a period as a table."
+            },
+            {
+              "unit": "Acids, Bases and Salts; Analytical Chemistry",
+              "chapters": "Acids, bases and salts; Analytical chemistry (reactions with ammonium and sodium hydroxide)",
+              "marks": null,
+              "answer": "Write balanced equations and give the observation (colour of precipitate).",
+              "prep": "Make a table of precipitate colours; it answers many short questions."
+            },
+            {
+              "unit": "Mole Concept and Stoichiometry",
+              "chapters": "Mole concept; Gay-Lussac's law; empirical and molecular formula",
+              "marks": null,
+              "answer": "Show the calculation steps and units; state the law used.",
+              "prep": "Practise ten numericals; they are high-scoring with method."
+            },
+            {
+              "unit": "Electrolysis and Metallurgy",
+              "chapters": "Electrolysis; Metallurgy (aluminium); alloys",
+              "marks": null,
+              "answer": "Write electrode reactions for each electrode and name the products.",
+              "prep": "Electrolysis of copper sulphate and the extraction of aluminium are asked often."
+            },
+            {
+              "unit": "Study of Compounds",
+              "chapters": "Hydrogen chloride; Ammonia; Nitric acid; Sulphuric acid",
+              "marks": null,
+              "answer": "Laboratory preparation: reactants, equation, conditions and a labelled diagram.",
+              "prep": "Learn the four lab preparations and their key reactions."
+            },
+            {
+              "unit": "Organic Chemistry",
+              "chapters": "Organic chemistry",
+              "marks": null,
+              "answer": "IUPAC names, structures and reactions with conditions.",
+              "prep": "Homologous series, isomers and the reactions of alkanes, alkenes, alkynes, alcohols and acids."
+            }
+          ]
+        },
+        {
+          "name": "Biology (Science Paper 3)",
+          "code": "",
+          "units": [
+            {
+              "unit": "Basic Biology",
+              "chapters": "Cell cycle and cell division; Genetics",
+              "marks": null,
+              "answer": "Draw and label the stages of mitosis; use Punnett squares for crosses.",
+              "prep": "Genetics crosses and mitosis versus meiosis tables."
+            },
+            {
+              "unit": "Plant Physiology",
+              "chapters": "Absorption by roots; Transpiration; Photosynthesis; Chemical coordination in plants",
+              "marks": null,
+              "answer": "Give experiments with aim, set-up, observation and conclusion.",
+              "prep": "Learn the standard experiments and their diagrams."
+            },
+            {
+              "unit": "Human Anatomy and Physiology",
+              "chapters": "Circulatory, excretory, nervous, endocrine and reproductive systems",
+              "marks": null,
+              "answer": "Labelled diagrams (heart, nephron, eye, ear, brain); use correct terms.",
+              "prep": "Diagram practice daily: these chapters carry most long answers."
+            },
+            {
+              "unit": "Population and Pollution",
+              "chapters": "Population; Pollution",
+              "marks": null,
+              "answer": "Answer with causes, effects and measures in points.",
+              "prep": "Short chapters; revise with a one-page summary."
+            }
+          ]
+        },
+        {
+          "name": "English, History & Civics, Geography",
+          "code": "",
+          "units": [
+            {
+              "unit": "English (Language and Literature)",
+              "chapters": "Composition, letter, notice and comprehension; prescribed texts",
+              "marks": null,
+              "answer": "Plan compositions before writing; follow the letter format exactly; quote from the text in literature answers.",
+              "prep": "Write one composition and one letter every week and get them checked."
+            },
+            {
+              "unit": "History and Civics",
+              "chapters": "Union Parliament, Executive and Judiciary; Indian National Movement; contemporary world",
+              "marks": null,
+              "answer": "Answer in points with dates and names; state constitutional provisions precisely.",
+              "prep": "Make timelines for the national movement and tables for Parliament's powers."
+            },
+            {
+              "unit": "Geography",
+              "chapters": "Topographical map interpretation; map of India; physical and economic geography of India",
+              "marks": null,
+              "answer": "Read the toposheet carefully and use grid references; on the India map, mark and label clearly.",
+              "prep": "Practise one toposheet and one India map a week."
+            }
+          ]
+        }
+      ],
+      "papers": [
+        {
+          "subject": "All subjects",
+          "links": [
+            {
+              "label": "CISCE specimen question papers 2027 (cisce.org)",
+              "url": "https://cisce.org/"
+            }
+          ]
+        }
+      ],
+      "papersNote": "CISCE publishes specimen question papers, with answer keys for selected subjects, on cisce.org (Examinations → ICSE → Specimen Question Papers). They are the best guide to the 2027 pattern.",
+      "source": {
+        "name": "CISCE ICSE regulations and syllabuses 2027 and specimen papers (cisce.org)",
+        "url": "https://cisce.org/",
+        "papersUrl": "https://cisce.org/"
+      },
+      "notes": [
+        "CISCE does not publish marks for individual chapters in ICSE. The priority column therefore reads 'Whole paper': every chapter can appear in the compulsory section.",
+        "Mathematics is one 80-mark paper with 20 marks of internal assessment. Section A (40 marks) is compulsory and covers the whole syllabus; in Section B (40 marks) you answer any four questions out of seven.",
+        "Science is three separate papers — Physics, Chemistry and Biology — each with a compulsory Section A and a Section B where you choose questions.",
+        "For 2027 CISCE says about half of the marks will test higher-order thinking and application, so practise the specimen paper's case-based and reasoning questions, not just definitions."
+      ],
+      "faqs": [
+        {
+          "question": "Which chapters are most important for ICSE Class 10 2027?",
+          "answer": "CISCE does not give marks per chapter, and Section A of each paper is compulsory and covers the whole syllabus, so every chapter matters. For the long Section B questions, Algebra and Geometry in Maths, Machines, Light and Electricity in Physics, and Study of Compounds and Mole Concept in Chemistry are asked very often."
+        },
+        {
+          "question": "What is the ICSE Class 10 Maths paper pattern?",
+          "answer": "One 80-mark paper plus 20 marks of internal assessment. Section A (40 marks) is compulsory; in Section B (40 marks) you answer any four of seven questions."
+        },
+        {
+          "question": "Is it safe to skip chapters in ICSE?",
+          "answer": "No. Section A is compulsory and is set from the whole syllabus, so a skipped chapter costs marks you cannot choose your way out of."
+        },
+        {
+          "question": "What changed in ICSE 2027 papers?",
+          "answer": "CISCE has said about 50% of the marks in 2027 will go to higher-order, competency-based questions. The 2027 specimen papers show what these look like."
+        },
+        {
+          "question": "Where can I get ICSE specimen papers?",
+          "answer": "On cisce.org, under the ICSE examination section, as Specimen Question Papers for 2027."
+        }
+      ]
+    },
+    "isc-class-12": {
+      "slug": "isc-class-12",
+      "board": "ISC",
+      "boardName": "Council for the Indian School Certificate Examinations (CISCE)",
+      "classLabel": "Class 12",
+      "label": "ISC Class 12",
+      "theoryOutOf": 70,
+      "title": "ISC Class 12 Important Chapters 2027: Marks & Exam Tips",
+      "h1": "ISC Class 12 Board Exam 2027: Important Chapters and How to Prepare",
+      "description": "Unit-wise marks for ISC Class 12 Physics, Chemistry, Maths and Biology 2027, what to study first, answer-writing tips and where to get CISCE specimen papers.",
+      "intro": [
+        "Unlike ICSE, the ISC syllabus does give marks for each unit, and they show clear priorities. In Physics, Optics alone is 18 of the 70 theory marks; in Chemistry, organic chemistry is 31 of 70; and in Mathematics, Calculus is 35 of 80.",
+        "This page lists CISCE's unit marks for ISC Physics, Chemistry, Mathematics and Biology, ranks every unit by its share of the paper, and gives a short guide to answering and revising each one. CISCE says about half of the 2027 marks will test higher-order thinking, so the specimen papers linked below are essential practice. The whole plan is available as a spreadsheet."
+      ],
+      "subjects": [
+        {
+          "name": "Physics",
+          "code": "861",
+          "outOf": 70,
+          "units": [
+            {
+              "unit": "Optics",
+              "chapters": "Ray optics and optical instruments; Wave optics",
+              "marks": 18,
+              "answer": "Ray diagrams with arrows; derivations with a labelled figure and the result boxed.",
+              "prep": "The biggest unit: lens and mirror formulae, prism, microscope and telescope, interference and diffraction."
+            },
+            {
+              "unit": "Magnetism + Electromagnetic Induction & AC",
+              "chapters": "Moving charges and magnetism; Magnetism and matter; Electromagnetic induction; Alternating currents",
+              "marks": 16,
+              "answer": "State the law, draw the figure, then derive; give units in every numerical.",
+              "prep": "Biot–Savart and Ampère's law, force between wires, LCR circuits and the transformer."
+            },
+            {
+              "unit": "Electrostatics + Current Electricity",
+              "chapters": "Electric charges and fields; Potential and capacitance; Current electricity",
+              "marks": 14,
+              "answer": "For Gauss's law draw the Gaussian surface; for Kirchhoff's laws mark currents first.",
+              "prep": "Capacitor combinations, the Wheatstone and metre bridges, and the potentiometer."
+            },
+            {
+              "unit": "Dual Nature of Radiation and Matter",
+              "chapters": "Photoelectric effect; matter waves",
+              "marks": 7,
+              "answer": "Draw the photoelectric graphs with labelled axes.",
+              "prep": "Einstein's equation and de Broglie wavelength numericals."
+            },
+            {
+              "unit": "Electronic Devices",
+              "chapters": "Semiconductor electronics",
+              "marks": 7,
+              "answer": "Circuit diagrams and I–V graphs for diodes and rectifiers.",
+              "prep": "Rectifiers, the Zener diode and logic of the p-n junction."
+            },
+            {
+              "unit": "Atoms and Nuclei",
+              "chapters": "Atoms; Nuclei",
+              "marks": 6,
+              "answer": "Formula-based short answers; balance nuclear equations.",
+              "prep": "Bohr model, binding energy and radioactive decay."
+            },
+            {
+              "unit": "Electromagnetic Waves",
+              "chapters": "Electromagnetic waves",
+              "marks": 2,
+              "answer": "Give the order of the spectrum with one use of each band.",
+              "prep": "Learn the spectrum table."
+            }
+          ]
+        },
+        {
+          "name": "Chemistry",
+          "code": "862",
+          "outOf": 70,
+          "units": [
+            {
+              "unit": "Organic Chemistry",
+              "chapters": "Haloalkanes and haloarenes; Alcohols, phenols and ethers; Aldehydes, ketones and carboxylic acids; Organic compounds containing nitrogen; Biomolecules",
+              "marks": 31,
+              "answer": "Write reactions with reagents and conditions; give mechanisms where asked; name reactions with the equation.",
+              "prep": "Nearly half the paper: make a reactions sheet and practise conversion questions daily."
+            },
+            {
+              "unit": "Physical Chemistry",
+              "chapters": "Solutions; Electrochemistry; Chemical kinetics",
+              "marks": 25,
+              "answer": "Show every step of numericals with units; write the formula first.",
+              "prep": "Colligative properties, the Nernst equation and rate-law numericals."
+            },
+            {
+              "unit": "Inorganic Chemistry",
+              "chapters": "d- and f-block elements; Coordination compounds",
+              "marks": 14,
+              "answer": "Give reasons in one line; IUPAC names, hybridisation and magnetic nature in a table.",
+              "prep": "Coordination compounds naming and crystal-field theory, and trends in transition elements."
+            }
+          ]
+        },
+        {
+          "name": "Mathematics",
+          "code": "860",
+          "outOf": 80,
+          "units": [
+            {
+              "unit": "Calculus",
+              "chapters": "Continuity & Differentiability; Application of Derivatives; Integrals; Application of Integrals; Differential Equations",
+              "marks": 35,
+              "answer": "Show every step, because step marks matter. Draw the region in area questions and write + C.",
+              "prep": "Nearly half the paper: do every NCERT integration exercise, then maxima and minima word problems."
+            },
+            {
+              "unit": "Relations & Functions",
+              "chapters": "Relations and Functions; Inverse Trigonometric Functions",
+              "marks": 10,
+              "answer": "For an equivalence relation, prove reflexive, symmetric and transitive one by one.",
+              "prep": "Learn the table of principal-value branches."
+            },
+            {
+              "unit": "Algebra",
+              "chapters": "Matrices; Determinants",
+              "marks": 10,
+              "answer": "Check an inverse by multiplying back to the identity, and show the cofactors in a grid.",
+              "prep": "Solving equations by the matrix method is almost always asked."
+            },
+            {
+              "unit": "Probability",
+              "chapters": "Probability",
+              "marks": 9,
+              "answer": "Describe the events in words first. For Bayes' theorem, draw a tree.",
+              "prep": "Bayes' theorem and probability distributions come up often."
+            },
+            {
+              "unit": "Three-Dimensional Geometry",
+              "chapters": "Three-dimensional geometry",
+              "marks": 6,
+              "answer": "State the formula first; for shortest distance write the vector form.",
+              "prep": "Equations of lines and planes, angle between lines, shortest distance."
+            },
+            {
+              "unit": "Vector Algebra",
+              "chapters": "Vectors",
+              "marks": 5,
+              "answer": "Write vectors with arrows or hats; show dot and cross products step by step.",
+              "prep": "Dot and cross product applications; quick marks."
+            },
+            {
+              "unit": "Linear Programming",
+              "chapters": "Linear Programming",
+              "marks": 5,
+              "answer": "Draw the graph neatly, shade the feasible region and make a table of corner points.",
+              "prep": "Full marks with one well-practised method."
+            }
+          ]
+        },
+        {
+          "name": "Biology",
+          "code": "863",
+          "outOf": 70,
+          "units": [
+            {
+              "unit": "Reproduction",
+              "chapters": "Sexual Reproduction in Flowering Plants; Human Reproduction; Reproductive Health",
+              "marks": 16,
+              "answer": "Labelled diagrams — embryo sac, sections of testis and ovary, the menstrual cycle.",
+              "prep": "Practise the diagrams daily and learn each process as a flowchart."
+            },
+            {
+              "unit": "Genetics & Evolution",
+              "chapters": "Principles of Inheritance & Variation; Molecular Basis of Inheritance; Evolution",
+              "marks": 15,
+              "answer": "Draw crosses with Punnett squares. Explain the lac operon and DNA replication with diagrams.",
+              "prep": "Second only to Reproduction: start with Molecular Basis of Inheritance and practise crosses."
+            },
+            {
+              "unit": "Ecology & Environment",
+              "chapters": "Organisms & Populations; Ecosystem; Biodiversity & Conservation",
+              "marks": 15,
+              "answer": "Use graphs, such as population growth curves, and examples.",
+              "prep": "Short chapters and quick marks."
+            },
+            {
+              "unit": "Biology & Human Welfare",
+              "chapters": "Human Health & Disease; Microbes in Human Welfare",
+              "marks": 14,
+              "answer": "Give disease, pathogen, symptoms and prevention as a table.",
+              "prep": "Revising in tables is fastest."
+            },
+            {
+              "unit": "Biotechnology & its Applications",
+              "chapters": "Biotechnology: Principles & Processes; Biotechnology & its Applications",
+              "marks": 10,
+              "answer": "Explain steps in order, such as recombinant DNA and PCR, as a flowchart.",
+              "prep": "Learn the steps of recombinant DNA technology and PCR, and Bt crops."
+            }
+          ]
+        },
+        {
+          "name": "English",
+          "code": "801 / 802",
+          "outOf": null,
+          "units": [
+            {
+              "unit": "Language and Literature",
+              "chapters": "Composition, directed writing, proposal, grammar; prescribed literature texts",
+              "marks": null,
+              "answer": "Plan compositions before writing and keep to the word limit; quote and explain from the text in literature answers.",
+              "prep": "Write one composition a week and get it checked; revise the literature texts by theme and character."
+            }
+          ]
+        }
+      ],
+      "papers": [
+        {
+          "subject": "All subjects",
+          "links": [
+            {
+              "label": "CISCE specimen question papers 2027 (cisce.org)",
+              "url": "https://cisce.org/"
+            }
+          ]
+        }
+      ],
+      "papersNote": "CISCE publishes specimen question papers, with answer keys for selected subjects, on cisce.org (Examinations → ISC → Specimen Question Papers).",
+      "source": {
+        "name": "CISCE ISC regulations and syllabuses 2027 (cisce.org)",
+        "url": "https://cisce.org/",
+        "papersUrl": "https://cisce.org/"
+      },
+      "notes": [
+        "Physics, Chemistry and Biology have a 70-mark theory paper and 30 marks for practical, project work and practical file. Mathematics has an 80-mark theory paper and 20 marks of project work.",
+        "ISC Chemistry marks are given for three groups — physical, inorganic and organic — not for each chapter.",
+        "For 2027 CISCE says about half of the marks will test higher-order thinking and application. The 2027 Mathematics specimen paper has four sections, all compulsory."
+      ],
+      "faqs": [
+        {
+          "question": "Which Physics unit has the most marks in ISC Class 12?",
+          "answer": "Optics, with 18 of the 70 theory marks, followed by Magnetism with Electromagnetic Induction and AC at 16, and Electrostatics with Current Electricity at 14."
+        },
+        {
+          "question": "How are ISC Class 12 Chemistry marks split?",
+          "answer": "Organic chemistry 31, physical chemistry 25 and inorganic chemistry 14, for 70 theory marks."
+        },
+        {
+          "question": "Which unit matters most in ISC Class 12 Maths?",
+          "answer": "Calculus, with 35 of the 80 theory marks. Relations and Functions and Algebra carry 10 each and Probability 9."
+        },
+        {
+          "question": "How are ISC Class 12 Biology marks split?",
+          "answer": "Reproduction 16, Genetics and Evolution 15, Ecology and Environment 15, Biology and Human Welfare 14 and Biotechnology 10."
+        },
+        {
+          "question": "Where can I get ISC specimen papers for 2027?",
+          "answer": "On cisce.org, under the ISC examination section, as Specimen Question Papers."
+        }
+      ]
+    }
+  },
+  "tips": [
+    [
+      "Start now",
+      "Sort the units by marks. Study high-priority units first, then medium, then low.",
+      "The top two or three units of most subjects are about half the paper."
+    ],
+    [
+      "Start now",
+      "Read the textbook chapter first, then do its exercise questions.",
+      "CBSE and UP Board papers follow NCERT books; ICSE and ISC papers follow the CISCE syllabus."
+    ],
+    [
+      "Every week",
+      "Sit one full past paper every Sunday in exactly three hours.",
+      "It builds speed and shows which units are costing you marks."
+    ],
+    [
+      "Every week",
+      "Check your answers against the official marking scheme or answer key, not just the final answer.",
+      "It shows the steps and keywords that earn marks."
+    ],
+    [
+      "Last 30 days – weeks 1 and 2",
+      "Revise only high and medium units. Make one-page notes of formulas, reactions, diagrams and dates.",
+      "These notes are what you will read in the last week."
+    ],
+    [
+      "Last 30 days – week 3",
+      "Solve past papers and your board's 2027 sample, model or specimen paper, one a day, timed.",
+      "Official papers show the current pattern and level."
+    ],
+    [
+      "Last 30 days – week 4",
+      "Re-do every question you got wrong, and revise the low-priority units quickly.",
+      "Fixing mistakes gains more marks than reading new topics."
+    ],
+    [
+      "Last 7 days",
+      "No new topics. Read your one-page notes and formula sheets, and sleep seven to eight hours.",
+      "Memory is fixed during sleep, and tiredness costs marks."
+    ],
+    [
+      "Day before",
+      "Light revision only. Pack your admit card, ID, pens, pencil, ruler, eraser and a transparent water bottle.",
+      "No exam-day panic."
+    ],
+    [
+      "Reading time",
+      "Use it to choose between internal-choice questions and plan the order you will answer in.",
+      "You save time and pick the questions you know best."
+    ],
+    [
+      "While writing",
+      "Number answers exactly as in the paper, leave a line between answers and underline key words.",
+      "Examiners mark many copies quickly; make your marks easy to find."
+    ],
+    [
+      "How much to write",
+      "Roughly: 1 mark, one point; 2 marks, two points; 3 marks, three points; 5 marks, five or six points with a diagram or example.",
+      "Over-long short answers take time you need for long ones."
+    ],
+    [
+      "Numericals",
+      "Formula, values with units, calculation, then the answer boxed with its unit.",
+      "Boards give step marks even if the final answer is wrong."
+    ],
+    [
+      "Diagrams",
+      "Draw in pencil, label neatly on one side and add a title.",
+      "A labelled diagram often carries marks of its own."
+    ],
+    [
+      "Case-based questions",
+      "Read the passage or data first; the answer is usually in it.",
+      "These questions test reading as much as memory."
+    ],
+    [
+      "MCQs",
+      "Attempt every MCQ, ruling out wrong options first.",
+      "A blank MCQ always scores zero."
+    ],
+    [
+      "Last 15 minutes",
+      "Stop starting new answers. Check question numbers, units and anything you skipped.",
+      "It catches small errors that cost easy marks."
+    ]
+  ]
+}

@@ -12,9 +12,10 @@ const NAV = [
   // First, because it is the one thing here a student can DO rather than read.
   ...(LIVE.practice ? [{ label: 'Mock tests', href: ROUTES.mockTests() }] : []),
   { label: 'Exams', href: ROUTES.exams() },
-  { label: 'Boards', href: ROUTES.boards() },
+  ...(LIVE.boards ? [{ label: 'Boards', href: ROUTES.boards() }] : []),
   ...(LIVE.results ? [{ label: 'Results', href: ROUTES.results() }] : []),
   { label: 'Papers', href: ROUTES.papers() },
+  { label: 'Board exams', href: ROUTES.boardPrepHub() },
   { label: 'NTA calendar', href: ROUTES.ntaCalendar() },
   { label: 'SSC calendar', href: ROUTES.sscCalendar() },
   ...(LIVE.blog ? [{ label: 'Articles', href: ROUTES.blog() }] : []),

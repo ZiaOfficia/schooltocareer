@@ -4,6 +4,7 @@ import { ROUTES, absoluteUrl } from '@stc/constants';
 import type { ExamDetailDto, ExamListItemDto } from '@stc/types';
 
 import { examHoldings, getExam, listExams } from '@/lib/api';
+import { BOARD_GUIDE_SLUGS } from '@/lib/board-prep';
 import { EXAM_SECTIONS, isEditorialSection, liveSections, sectionsFor } from '@/lib/exam-sections';
 import { PAPER_GUIDES } from '@/lib/paper-guides';
 import { LIVE } from '@/lib/site-sections';
@@ -55,12 +56,14 @@ const SHARD_THRESHOLD = 45_000;
 const STATIC_ROUTES = [
   ROUTES.home(),
   ROUTES.exams(),
-  ROUTES.boards(),
+  ...(LIVE.boards ? [ROUTES.boards()] : []),
   ROUTES.papers(),
   ...(LIVE.results ? [ROUTES.results()] : []),
   ...(LIVE.blog ? [ROUTES.blog()] : []),
   ROUTES.ntaCalendar(),
   ROUTES.sscCalendar(),
+  ROUTES.boardPrepHub(),
+  ...BOARD_GUIDE_SLUGS.map((slug) => ROUTES.boardPrep(slug)),
   ROUTES.about(),
   ROUTES.contact(),
   ROUTES.privacy(),
@@ -117,10 +120,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     if (!exam.isIndexable) {
       for (const section of editorial) {
-        entries.push({ url: absoluteUrl(EXAM_SECTIONS[section].path(exam.slug)), lastModified });
+        entries.push({
+          url: absoluteUrl(EXAM_SECTIONS[section].path(exam.slug)),
+          lastModified,
+        });
       }
       if (hasGuide && (await examHoldings(exam.id)).papers > 0) {
-        entries.push({ url: absoluteUrl(ROUTES.examPapers(exam.slug)), lastModified });
+        entries.push({
+          url: absoluteUrl(ROUTES.examPapers(exam.slug)),
+          lastModified,
+        });
       }
       continue;
     }
@@ -129,7 +138,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const detail = await getExam<ExamDetailDto>(exam.slug);
     if (!detail) continue;
     for (const section of liveSections(detail, await examHoldings(exam.id))) {
-      entries.push({ url: absoluteUrl(EXAM_SECTIONS[section].path(exam.slug)), lastModified });
+      entries.push({
+        url: absoluteUrl(EXAM_SECTIONS[section].path(exam.slug)),
+        lastModified,
+      });
     }
   }
 
