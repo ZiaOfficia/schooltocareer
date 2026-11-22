@@ -12,6 +12,8 @@ import {
   UnlockIcon,
 } from '@/components/icons';
 import { ApiError, listExams, listPractice } from '@/lib/api';
+import { examsWithContent } from '@/lib/exam-content';
+import { EXAM_SECTIONS, isEditorialSection, sectionsFor } from '@/lib/exam-sections';
 import { buildMetadata } from '@/lib/seo/metadata';
 import { LIVE } from '@/lib/site-sections';
 
@@ -58,7 +60,7 @@ const ALL_SECTIONS: ReadonlyArray<{
     title: 'Boards',
     note: 'National and state school boards',
     href: ROUTES.boards(),
-    live: true,
+    live: LIVE.boards,
   },
   {
     kind: 'result',
@@ -72,6 +74,13 @@ const ALL_SECTIONS: ReadonlyArray<{
     title: 'Papers',
     note: 'Previous year question papers',
     href: ROUTES.papers(),
+    live: true,
+  },
+  {
+    kind: 'board',
+    title: 'Board exam 2027 guides',
+    note: 'CBSE, UP Board, ICSE and ISC: important chapters and papers',
+    href: ROUTES.boardPrepHub(),
     live: true,
   },
   {
@@ -122,9 +131,17 @@ export default async function HomePage() {
   // A listing may degrade to empty: the page is still useful, search still
   // works, and a backend blip should not take the homepage down. The sitemap
   // deliberately does NOT do this — see src/app/sitemap.ts.
+  //
+  // Only exams with WRITTEN guides are featured. The list used to be the eight
+  // most popular exams, most of whose hubs say "to be announced" and are
+  // noindex — the first thing a reviewer clicked was an unfinished page.
   let exams: ExamListItemDto[] = [];
   try {
-    exams = await listExams<ExamListItemDto>('perPage=8&sort=popularityScore&dir=desc');
+    const guided = examsWithContent();
+    const all = await listExams<ExamListItemDto>('perPage=100');
+    exams = guided
+      .map((slug) => all.find((exam) => exam.slug === slug))
+      .filter((exam): exam is ExamListItemDto => exam !== undefined);
   } catch (error) {
     if (!(error instanceof ApiError)) throw error;
     console.warn(`[home] exam list unavailable: ${error.message}`);
@@ -135,7 +152,14 @@ export default async function HomePage() {
   const practice = LIVE.practice ? await listPractice<PracticeExamDto>() : [];
   const tests = practice
     .map((entry) => ({ entry, latest: entry.mockTests[0] }))
-    .filter((t): t is { entry: PracticeExamDto; latest: NonNullable<typeof t.latest> } => !!t.latest);
+    .filter(
+      (
+        t,
+      ): t is {
+        entry: PracticeExamDto;
+        latest: NonNullable<typeof t.latest>;
+      } => !!t.latest,
+    );
 
   return (
     <>
@@ -144,7 +168,8 @@ export default async function HomePage() {
           <div className="max-w-[640px]">
             <p className="chip glass font-data text-[12px] uppercase tracking-[0.14em]">
               <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-accent" />
-              {SITE.COUNTRY === 'IN' ? 'India' : SITE.COUNTRY} · Exams · Boards · Papers
+              {SITE.COUNTRY === 'IN' ? 'India' : SITE.COUNTRY} · Exams
+              {LIVE.boards ? ' · Boards' : ''} · Papers
             </p>
 
             <h1 className="mt-6 text-[clamp(36px,7vw,68px)] leading-[1.02]">
@@ -170,8 +195,8 @@ export default async function HomePage() {
                     <p className="mt-1.5 text-[14.5px] text-ink-soft">
                       The real {entry.exam.shortName} {latest.paper.year} paper
                       {latest.paper.shift ? ` (${latest.paper.shift})` : ''}: {latest.questionCount}{' '}
-                      questions, timed and marked the way the exam is, with a worked solution for every
-                      question.
+                      questions, timed and marked the way the exam is, with a worked solution for
+                      every question.
                     </p>
                     <div className="mt-4 flex flex-wrap gap-2.5">
                       <Link href={latest.path} className="btn btn-primary">
@@ -269,8 +294,8 @@ export default async function HomePage() {
         </Section>
 
         <Section
-          title="Popular exams"
-          lede="The hubs people reach for most, each with its dates and what we hold for it."
+          title="Exam guides"
+          lede="The exam pattern and full syllabus, written from each exam’s official notice."
           major
           actions={
             <Link href={ROUTES.exams()} className="btn btn-ghost">
@@ -287,17 +312,29 @@ export default async function HomePage() {
           ) : (
             <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {exams.map((exam) => (
-                <li key={exam.id}>
-                  <Link href={exam.path} className="card flex h-full flex-col gap-3 p-5">
-                    <EntityBadge kind="exam" className="self-start" />
-                    <span className="font-display text-[17px] font-semibold leading-snug text-ink">
-                      {exam.name}
-                    </span>
-                    <span className="mt-auto flex items-center justify-between gap-2 pt-2 text-[14px] text-ink-mute">
-                      {exam.category ? exam.category.name : <span />}
-                      <ArrowRightIcon width={16} height={16} className="card-arrow" />
-                    </span>
-                  </Link>
+                <li key={exam.id} className="card flex h-full flex-col gap-3 p-5">
+                  <EntityBadge kind="exam" className="self-start" />
+                  <span className="font-display text-[17px] font-semibold leading-snug text-ink">
+                    {exam.name}
+                  </span>
+                  {exam.category ? (
+                    <span className="text-[14px] text-ink-mute">{exam.category.name}</span>
+                  ) : null}
+                  <ul className="mt-auto space-y-1.5 pt-2 text-[14.5px]">
+                    {sectionsFor(exam.slug)
+                      .filter(isEditorialSection)
+                      .map((section) => (
+                        <li key={section}>
+                          <Link
+                            href={EXAM_SECTIONS[section].path(exam.slug)}
+                            className="inline-flex items-center gap-1.5 text-ink underline-offset-4 hover:underline"
+                          >
+                            {EXAM_SECTIONS[section].label}
+                            <ArrowRightIcon width={14} height={14} />
+                          </Link>
+                        </li>
+                      ))}
+                  </ul>
                 </li>
               ))}
             </ul>

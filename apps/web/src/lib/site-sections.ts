@@ -16,6 +16,10 @@
  *            (it is not: no outbox worker runs, so the index is empty)
  *   practice when at least one paper's questions are published
  *            (on: JEE Main 8 Apr 2026 Shift 2, 75 questions)
+ *   boards   when the per-board pages exist. /boards today lists 20 names
+ *            that link nowhere and says "not built yet" — exactly the
+ *            unfinished-site signal an AdSense reviewer reports as
+ *            "low value content".
  *
  * The pages themselves stay reachable by URL and say plainly that they are
  * empty; they are simply not advertised, and are marked noindex.
@@ -25,4 +29,5 @@ export const LIVE = {
   blog: false,
   search: false,
   practice: true,
+  boards: false,
 } as const;

@@ -37,7 +37,15 @@ const GROUPS = [
   {
     title: 'Boards',
     links: [
-      { label: 'All boards', href: ROUTES.boards() },
+      { label: 'All board exam guides', href: ROUTES.boardPrepHub() },
+      { label: 'CBSE Class 10 & 12', href: ROUTES.boardPrep('cbse-class-10') },
+      {
+        label: 'UP Board Class 10 & 12',
+        href: ROUTES.boardPrep('up-board-class-10'),
+      },
+      { label: 'ICSE Class 10', href: ROUTES.boardPrep('icse-class-10') },
+      { label: 'ISC Class 12', href: ROUTES.boardPrep('isc-class-12') },
+      ...(LIVE.boards ? [{ label: 'All boards', href: ROUTES.boards() }] : []),
       ...(LIVE.blog ? [{ label: 'Articles', href: ROUTES.blog() }] : []),
     ],
   },
@@ -65,7 +73,7 @@ export function SiteFooter() {
             <p className="mt-3 max-w-[38ch] text-[14px] text-ink-soft">{SITE.TAGLINE}</p>
           </div>
 
-          {GROUPS.map((group) => (
+          {GROUPS.filter((group) => group.links.length > 0).map((group) => (
             <div key={group.title}>
               <h2 className="font-data text-[12px] font-semibold uppercase tracking-[0.16em] text-ink-mute">
                 {group.title}

@@ -31,8 +31,7 @@ export const ROUTES = {
   examAnswerKey: (exam: string) => `/exam/${exam}/answer-key`,
   examResult: (exam: string) => `/exam/${exam}/result`,
   examPapers: (exam: string) => `/exam/${exam}/previous-year-papers`,
-  examPapersByYear: (exam: string, year: number) =>
-    `/exam/${exam}/previous-year-papers/${year}`,
+  examPapersByYear: (exam: string, year: number) => `/exam/${exam}/previous-year-papers/${year}`,
 
   /**
    * Question bank. Two STATIC segments, `chapters` and `questions`, so they
@@ -61,6 +60,17 @@ export const ROUTES = {
   blog: () => '/blog',
   ntaCalendar: () => '/nta-exam-calendar',
   sscCalendar: () => '/ssc-exam-calendar',
+  /** Board-exam prep guides: important chapters, answer tips, official papers. */
+  boardPrepHub: () => '/board-exam-preparation',
+  boardPrep: (
+    guide:
+      | 'cbse-class-10'
+      | 'cbse-class-12'
+      | 'up-board-class-10'
+      | 'up-board-class-12'
+      | 'icse-class-10'
+      | 'isc-class-12',
+  ) => `/${guide}-important-chapters`,
   blogCategory: (category: string) => `/blog/${category}`,
   blogPost: (category: string, post: string) => `/blog/${category}/${post}`,
 
