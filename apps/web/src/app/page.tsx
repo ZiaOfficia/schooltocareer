@@ -4,6 +4,7 @@ import { ROUTES, SITE } from '@stc/constants';
 import type { ExamListItemDto, PracticeExamDto } from '@stc/types';
 import { EntityBadge, EntityMark, Section, Wrap, type EntityKind } from '@stc/ui';
 
+import { HeroPhotos } from '@/components/hero-photos';
 import {
   ArrowRightIcon,
   ClockIcon,
@@ -164,7 +165,7 @@ export default async function HomePage() {
   return (
     <>
       <section className="night hero-bg">
-        <Wrap className="pb-20 pt-16 sm:pb-28 sm:pt-24">
+        <Wrap className="grid items-center gap-x-12 pb-20 pt-16 sm:pb-28 sm:pt-24 lg:grid-cols-[minmax(0,1fr)_440px]">
           <div className="max-w-[640px]">
             <p className="chip glass font-data text-[12px] uppercase tracking-[0.14em]">
               <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-accent" />
@@ -253,6 +254,8 @@ export default async function HomePage() {
               ))}
             </ul>
           </div>
+
+          <HeroPhotos />
         </Wrap>
       </section>
 
