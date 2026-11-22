@@ -70,7 +70,9 @@ export function PageHero({
 
           {subtitle ? <p className="mt-2 text-[15px] text-ink-mute">{subtitle}</p> : null}
 
-          {lede ? <p className="mt-4 max-w-[64ch] text-[16.5px] text-ink-soft">{lede}</p> : null}
+          {lede ? (
+            <p className="mt-4 max-w-[64ch] text-[17px] leading-relaxed text-ink-soft">{lede}</p>
+          ) : null}
 
           {meta ? (
             <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-1 text-[14px] text-ink-soft">

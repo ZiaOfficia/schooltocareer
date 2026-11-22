@@ -14,6 +14,7 @@ import {
   contentsOf,
 } from '@stc/ui';
 
+import { AdSlot } from '@/components/ad-slot';
 import { ContentBlocks } from '@/components/content-blocks';
 import { ArrowUpRightIcon } from '@/components/icons';
 import { PageHero } from '@/components/page-hero';
@@ -323,9 +324,13 @@ export default async function ExamSectionPage({ params }: { params: Promise<Para
             </div>
 
             {written.parts.map((part, index) => (
-              <Section key={part.title} title={part.title} major={index === 0}>
-                <ContentBlocks blocks={part.blocks} />
-              </Section>
+              <div key={part.title}>
+                <Section title={part.title} major={index === 0}>
+                  <ContentBlocks blocks={part.blocks} />
+                </Section>
+                {/* One in-content ad, after the first full part, between sections. */}
+                {index === 0 && written.parts.length > 1 ? <AdSlot kind="in-content" /> : null}
+              </div>
             ))}
 
             <Section title="Questions students ask">

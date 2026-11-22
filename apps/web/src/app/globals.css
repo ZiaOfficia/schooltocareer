@@ -26,24 +26,34 @@
    ═══════════════════════════════════════════════════════════════════════════ */
 
 @theme {
-  --color-ink: #0e1330;
-  --color-ink-soft: #454d6d;
-  /* Dark enough for small text on white: 5.6:1, where the old value was 4:1. */
-  --color-ink-mute: #5d6585;
-  --color-link: #4338ca;
+  /* ── Brand palette (2026 redesign) ─────────────────────────────────────
+     Deep navy for the hero and footer, a refined electric violet for action,
+     mint for highlights. Every text pairing below was checked for WCAG AA:
+     violet #5a4ff3 carries white text at 5.5:1; the brief's brighter #6c63ff
+     (4.3:1) is kept for gradients and decoration only. Mint #19b99a is too
+     light for text on white (2.5:1), so text uses --color-mint-ink. */
+  --color-navy: #101c35;
+  --color-mint: #19b99a;
+  --color-mint-ink: #0b7a65;
 
-  --color-paper: #f5f6fc;
+  --color-ink: #172033;
+  --color-ink-soft: #475569;
+  /* 5.5:1 on the page background, 6:1 on white. */
+  --color-ink-mute: #5b6476;
+  --color-link: #4a3fe0;
+
+  --color-paper: #f4f6fc;
   --color-surface: #ffffff;
-  --color-rule: #e2e5f1;
-  --color-rule-hard: #c5cbe2;
-  --color-row-hover: #f0f1fb;
+  --color-rule: #e3e7f2;
+  --color-rule-hard: #c9d0e3;
+  --color-row-hover: #f1f0ff;
 
-  --color-brand: #4f46e5;
-  --color-brand-2: #7c3aed;
-  --color-accent: #f59e0b;
-  --color-cyan: #06b6d4;
+  --color-brand: #5a4ff3;
+  --color-brand-2: #6c63ff;
+  --color-accent: #19b99a;
+  --color-cyan: #19b99a;
   /* The logo's own navy. Not a chrome colour — only the logo takes it. */
-  --color-logo: #12355b;
+  --color-logo: #101c35;
 
   --color-urgent: #dc2626;
   --color-urgent-bg: #fef0f0;
@@ -58,42 +68,47 @@
   --color-t-paper: #2563eb;
   --color-t-article: #c2700a;
   --color-t-board: #5b6788;
-  --color-t-syllabus: #4f46e5;
+  --color-t-syllabus: #5a4ff3;
 
-  /* Self-hosted through next/font: no third-party request, preloaded, and
-     `display: swap` so text paints in the fallback first. The fallbacks are
-     listed so a failed font load still looks intentional. */
-  --font-display: var(--font-sora), system-ui, -apple-system, 'Segoe UI', sans-serif;
+  /* One family, self-hosted through next/font: Plus Jakarta Sans for
+     headings, body and figures alike. The old pairing loaded a second
+     display face (Sora) on every page for headings alone. */
+  --font-display:
+    var(--font-jakarta), system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
   --font-sans:
     var(--font-jakarta), system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial,
     sans-serif;
-  --font-data: ui-monospace, 'SF Mono', 'Cascadia Mono', 'Roboto Mono', Consolas, monospace;
+  /* Labels, dates and counts. Jakarta with tabular figures (see `.num`) reads
+     friendlier than the monospace it replaces, and columns still line up. */
+  --font-data: var(--font-jakarta), system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
 
-  --radius-card: 12px;
-  --radius-tile: 10px;
+  --radius-card: 16px;
+  --radius-tile: 12px;
 
-  --shadow-card: 0 1px 2px rgb(14 19 48 / 0.05);
+  --shadow-card: 0 1px 2px rgb(16 28 53 / 0.04), 0 6px 20px -12px rgb(16 28 53 / 0.14);
+  --shadow-lift: 0 2px 4px rgb(16 28 53 / 0.05), 0 18px 40px -18px rgb(16 28 53 / 0.28);
 }
 
-/* Dark values. `.night` scopes them to one band (the hero is always dark, in
-   both themes), which is why every component inside a hero adapts without a
-   second set of classes. `[data-theme]` lets a manual toggle override the OS
-   in both directions. */
+/* Dark values. `.night` scopes them to one band (the hero and footer are
+   always dark, in both themes), which is why every component inside them
+   adapts without a second set of classes. `[data-theme]` lets a manual
+   toggle override the OS in both directions. */
 .night,
 :root[data-theme='dark'] {
-  --color-ink: #eef0fd;
-  --color-ink-soft: #b6bcd9;
-  --color-ink-mute: #858cad;
-  --color-link: #a5b4fc;
-  --color-paper: #080b1c;
-  --color-surface: #11152e;
-  --color-rule: #242a4d;
-  --color-rule-hard: #3b4273;
-  --color-row-hover: #181d3d;
-  --color-brand: #818cf8;
-  --color-brand-2: #a78bfa;
-  --color-accent: #fbbf24;
-  --color-cyan: #22d3ee;
+  --color-ink: #f4f6fc;
+  --color-ink-soft: #b4bdd3;
+  --color-ink-mute: #8f9bb6;
+  --color-link: #b3aeff;
+  --color-paper: #0b1428;
+  --color-surface: #14223f;
+  --color-rule: #23345a;
+  --color-rule-hard: #34497a;
+  --color-row-hover: #1a2a4d;
+  --color-brand: #9d97ff;
+  --color-brand-2: #b3aeff;
+  --color-accent: #5ee0c2;
+  --color-cyan: #5ee0c2;
+  --color-mint-ink: #5ee0c2;
   --color-logo: #ffffff;
   --color-urgent: #f87171;
   --color-urgent-bg: #3a1620;
@@ -107,25 +122,27 @@
   --color-t-paper: #60a5fa;
   --color-t-article: #fbbf24;
   --color-t-board: #a3adcb;
-  --color-t-syllabus: #a5b4fc;
+  --color-t-syllabus: #b3aeff;
   --shadow-card: 0 1px 2px rgb(0 0 0 / 0.3);
+  --shadow-lift: 0 18px 40px -18px rgb(0 0 0 / 0.6);
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) {
-    --color-ink: #eef0fd;
-    --color-ink-soft: #b6bcd9;
-    --color-ink-mute: #858cad;
-    --color-link: #a5b4fc;
-    --color-paper: #080b1c;
-    --color-surface: #11152e;
-    --color-rule: #242a4d;
-    --color-rule-hard: #3b4273;
-    --color-row-hover: #181d3d;
-    --color-brand: #818cf8;
-    --color-brand-2: #a78bfa;
-    --color-accent: #fbbf24;
-    --color-cyan: #22d3ee;
+    --color-ink: #f4f6fc;
+    --color-ink-soft: #b4bdd3;
+    --color-ink-mute: #8f9bb6;
+    --color-link: #b3aeff;
+    --color-paper: #0b1428;
+    --color-surface: #14223f;
+    --color-rule: #23345a;
+    --color-rule-hard: #34497a;
+    --color-row-hover: #1a2a4d;
+    --color-brand: #9d97ff;
+    --color-brand-2: #b3aeff;
+    --color-accent: #5ee0c2;
+    --color-cyan: #5ee0c2;
+    --color-mint-ink: #5ee0c2;
     --color-logo: #ffffff;
     --color-urgent: #f87171;
     --color-urgent-bg: #3a1620;
@@ -139,8 +156,9 @@
     --color-t-paper: #60a5fa;
     --color-t-article: #fbbf24;
     --color-t-board: #a3adcb;
-    --color-t-syllabus: #a5b4fc;
+    --color-t-syllabus: #b3aeff;
     --shadow-card: 0 1px 2px rgb(0 0 0 / 0.3);
+    --shadow-lift: 0 18px 40px -18px rgb(0 0 0 / 0.6);
   }
 }
 
@@ -165,7 +183,7 @@
   h4 {
     font-family: var(--font-display);
     font-weight: 700;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.025em;
     text-wrap: balance;
     margin: 0;
   }
@@ -184,28 +202,30 @@
     background: color-mix(in srgb, var(--color-brand) 28%, transparent);
   }
 
-  /* Digits that sit in a column must line up. This is why the data font is
-     monospace and why every count, date and file size uses `.num`. */
+  h1 {
+    font-weight: 800;
+  }
+
+  /* Digits that sit in a column must line up: every count, date and file
+     size uses `.num` for tabular figures. */
   .num {
     font-family: var(--font-data);
     font-variant-numeric: tabular-nums;
-    letter-spacing: -0.01em;
   }
 }
 
 @layer components {
-  /* ── The hero band ──────────────────────────────────────────────────────
-     Always dark. The gradient is the whole backdrop. */
+  /* ── The dark band (hero, footer) ──────────────────────────────────────
+     Deep navy, lit by a violet glow top-right and a mint glow bottom-left. */
   .hero-bg {
     position: relative;
     isolation: isolate;
     overflow: hidden;
     color: var(--color-ink);
     background:
-      radial-gradient(1100px 620px at 88% -12%, rgb(124 58 237 / 0.55), transparent 62%),
-      radial-gradient(820px 520px at -6% 108%, rgb(6 182 212 / 0.26), transparent 60%),
-      radial-gradient(520px 320px at 52% 118%, rgb(245 158 11 / 0.16), transparent 70%),
-      linear-gradient(180deg, #090c22 0%, #10143a 100%);
+      radial-gradient(980px 560px at 92% -18%, rgb(108 99 255 / 0.5), transparent 62%),
+      radial-gradient(760px 480px at -8% 112%, rgb(25 185 154 / 0.28), transparent 60%),
+      linear-gradient(180deg, #0d1830 0%, #101c35 100%);
   }
 
   .hero-bg::before {
@@ -213,30 +233,40 @@
     position: absolute;
     inset: 0;
     z-index: -1;
-    background-image:
-      linear-gradient(rgb(255 255 255 / 0.045) 1px, transparent 1px),
-      linear-gradient(90deg, rgb(255 255 255 / 0.045) 1px, transparent 1px);
-    background-size: 56px 56px;
-    mask-image: radial-gradient(ellipse 90% 80% at 50% 0%, #000 30%, transparent 78%);
+    background-image: radial-gradient(rgb(255 255 255 / 0.09) 1px, transparent 1px);
+    background-size: 22px 22px;
+    mask-image: radial-gradient(ellipse 80% 70% at 70% 0%, #000 25%, transparent 75%);
   }
 
   .gradient-text {
-    background: linear-gradient(92deg, #a5b4fc 0%, #67e8f9 48%, #fcd34d 100%);
+    background: linear-gradient(92deg, #b3aeff 0%, #8f88ff 38%, #5ee0c2 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
   }
 
-  /* A panel on the dark hero. A plain tint: no blur behind the text. */
+  /* A panel on the dark band. A plain tint: no blur behind the text. */
   .glass {
-    background: rgb(255 255 255 / 0.09);
-    border: 1px solid rgb(255 255 255 / 0.2);
+    background: rgb(255 255 255 / 0.07);
+    border: 1px solid rgb(255 255 255 / 0.16);
+  }
+
+  /* A small uppercase label above a heading or inside a card. */
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 12.5px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-mint-ink);
   }
 
   /* ── Cards ──────────────────────────────────────────────────────────────
-     Flat on purpose: a border, a surface and a hairline shadow. A linked card
-     answers the pointer by changing colour and nothing else — it does not
-     move, lean or glow, so the text on it can be read while it is hovered. */
+     A surface, a hairline border and a soft two-layer shadow. A linked card
+     answers the pointer with a deeper shadow and a violet border; it does
+     not move, so its text stays readable while hovered. */
   .card {
     background: var(--color-surface);
     border: 1px solid var(--color-rule);
@@ -244,34 +274,48 @@
     box-shadow: var(--shadow-card);
   }
 
-  a.card {
+  a.card,
+  .card-link {
     color: inherit;
     text-decoration: none;
     transition:
-      border-color 0.15s ease,
-      background-color 0.15s ease;
+      border-color 0.18s ease,
+      box-shadow 0.18s ease,
+      background-color 0.18s ease;
   }
 
   a.card:hover,
-  a.card:focus-visible {
-    border-color: var(--color-brand);
-    background: var(--color-row-hover);
+  a.card:focus-visible,
+  .card-link:hover,
+  .card-link:focus-within {
+    border-color: color-mix(in srgb, var(--color-brand) 45%, var(--color-rule));
+    box-shadow: var(--shadow-lift);
   }
 
-  a.card:hover .card-arrow {
+  a.card:hover .card-arrow,
+  .card-link:hover .card-arrow {
     color: var(--color-brand);
+    transform: translateX(2px);
   }
 
-  /* ── Buttons ──────────────────────────────────────────────────────────── */
+  .card-arrow {
+    transition:
+      color 0.18s ease,
+      transform 0.18s ease;
+  }
+
+  /* ── Buttons ──────────────────────────────────────────────────────────
+     44px tall at minimum: a comfortable thumb target on a phone. */
   .btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    border-radius: 999px;
-    padding: 0.65rem 1.25rem;
+    min-height: 44px;
+    border-radius: 12px;
+    padding: 0.7rem 1.2rem;
     font-size: 15px;
-    font-weight: 600;
+    font-weight: 700;
     line-height: 1.2;
     text-decoration: none;
     white-space: nowrap;
@@ -279,16 +323,28 @@
     transition:
       background-color 0.15s ease,
       border-color 0.15s ease,
+      box-shadow 0.15s ease,
       color 0.15s ease;
   }
 
   .btn-primary {
     color: #fff;
-    background: #4f46e5;
+    background: #5a4ff3;
+    box-shadow: 0 8px 20px -10px rgb(90 79 243 / 0.8);
   }
 
   .btn-primary:hover {
-    background: #4338ca;
+    background: #4a3fe0;
+  }
+
+  /* On the navy band: mint with navy text, 6.8:1. */
+  .btn-mint {
+    color: #101c35;
+    background: #5ee0c2;
+  }
+
+  .btn-mint:hover {
+    background: #7ae8cf;
   }
 
   .btn-ghost {
@@ -308,8 +364,8 @@
     gap: 0.4rem;
     border-radius: 999px;
     border: 1px solid var(--color-rule);
-    padding: 0.3rem 0.8rem;
-    font-size: 13.5px;
+    padding: 0.35rem 0.85rem;
+    font-size: 14px;
     color: var(--color-ink-soft);
     text-decoration: none;
     transition:
@@ -325,40 +381,55 @@
   }
 
   /* ── Header ─────────────────────────────────────────────────────────────
-     Solid and always on screen: the navigation is the way to everything, so
-     it neither hides on scroll nor lets the page show through it. */
+     Solid and always on screen: the navigation is the way to everything. */
   .site-header {
-    background: var(--color-surface);
+    background: color-mix(in srgb, var(--color-surface) 94%, transparent);
     border-bottom: 1px solid var(--color-rule);
+    backdrop-filter: saturate(1.4) blur(10px);
   }
 
   .nav-link {
     position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    border-radius: 10px;
+    padding: 0.45rem 0.7rem;
     color: var(--color-ink-soft);
     text-decoration: none;
-    transition: color 0.2s ease;
+    transition:
+      color 0.15s ease,
+      background-color 0.15s ease;
   }
 
-  .nav-link::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: -6px;
-    height: 2px;
-    border-radius: 2px;
-    background: linear-gradient(90deg, var(--color-brand), var(--color-cyan));
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.25s ease;
-  }
-
-  .nav-link:hover {
+  .nav-link:hover,
+  details[open] > .nav-link {
     color: var(--color-ink);
+    background: var(--color-row-hover);
   }
 
-  .nav-link:hover::after {
-    transform: scaleX(1);
+  /* ── Advertising ────────────────────────────────────────────────────────
+     Every ad unit sits in its own labelled band, clearly apart from links
+     and buttons, with its height reserved so it never shifts the text. */
+  .ad-slot {
+    display: block;
+    margin-block: 2.5rem;
+    border-block: 1px solid var(--color-rule);
+    padding-block: 0.75rem 1rem;
+  }
+
+  .ad-slot--sidebar {
+    margin-block: 1.5rem 0;
+  }
+
+  .ad-slot__label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-ink-mute);
   }
 
   /* The FAQ disclosure marker: a plus that turns into a cross. */

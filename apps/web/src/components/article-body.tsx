@@ -3,6 +3,7 @@ import type { ReactNode } from 'react';
 
 import { ScrollX, Section } from '@stc/ui';
 
+import { AdSlot } from '@/components/ad-slot';
 import type { ArticleBlock } from '@/lib/articles';
 
 /**
@@ -70,7 +71,7 @@ function Block({ block }: { block: Exclude<ArticleBlock, { kind: 'h2' }> }) {
       );
     case 'tip':
       return (
-        <p className="rounded-lg border border-rule bg-row-hover px-4 py-3 text-[15px]">
+        <p className="rounded-[14px] border-l-4 border-mint bg-[color-mix(in_srgb,var(--color-mint)_9%,var(--color-surface))] px-5 py-4 text-[16px] text-ink">
           {inline(block.text)}
         </p>
       );
@@ -126,28 +127,43 @@ export function groupBlocks(blocks: readonly ArticleBlock[]): Group[] {
   return groups.filter((group) => group.title !== null || group.blocks.length > 0);
 }
 
-const PROSE = 'grid max-w-[72ch] gap-4 text-[16px] leading-relaxed text-ink-soft';
+const PROSE = 'grid max-w-[70ch] gap-5 text-[17px] leading-[1.75] text-ink-soft';
 
-export function ArticleBody({ blocks }: { blocks: readonly ArticleBlock[] }) {
+export function ArticleBody({
+  blocks,
+  adAfterSection,
+}: {
+  blocks: readonly ArticleBlock[];
+  /** Places one in-content ad after this many headed sections (see AdSlot). */
+  adAfterSection?: number;
+}) {
+  let headed = 0;
   return (
     <>
-      {groupBlocks(blocks).map((group) =>
-        group.title === null ? (
-          <div key="intro" className={`mt-8 ${PROSE}`}>
-            {group.blocks.map((block, i) => (
-              <Block key={i} block={block} />
-            ))}
-          </div>
-        ) : (
-          <Section key={group.title} title={group.title}>
-            <div className={PROSE}>
+      {groupBlocks(blocks).map((group) => {
+        if (group.title === null) {
+          return (
+            <div key="intro" className={PROSE}>
               {group.blocks.map((block, i) => (
                 <Block key={i} block={block} />
               ))}
             </div>
-          </Section>
-        ),
-      )}
+          );
+        }
+        headed += 1;
+        return (
+          <div key={group.title}>
+            <Section title={group.title}>
+              <div className={PROSE}>
+                {group.blocks.map((block, i) => (
+                  <Block key={i} block={block} />
+                ))}
+              </div>
+            </Section>
+            {headed === adAfterSection ? <AdSlot kind="in-content" /> : null}
+          </div>
+        );
+      })}
     </>
   );
 }
