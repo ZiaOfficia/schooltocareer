@@ -10,9 +10,8 @@ export type Crumb = { name: string; path: string };
  *
  * Breadcrumb, badges, H1, lede — the same four things in the same order on
  * every listing, exam hub and exam section, so they are written once. The
- * band is `.night`, which re-points the colour tokens to their dark values:
- * badges, stamps and fact tiles dropped in as `children` need no "on dark"
- * variant of their own.
+ * band is light (`.hero-bg`), so badges, stamps and fact tiles dropped in as
+ * `children` use the normal page colours.
  *
  * The last crumb is the current page, so it is text, not a link.
  */
@@ -37,7 +36,7 @@ export function PageHero({
   children?: ReactNode;
 }) {
   return (
-    <div className="night hero-bg">
+    <div className="hero-bg">
       <Wrap className="pb-12 pt-6 sm:pb-16">
         <nav aria-label="Breadcrumb" className="text-[14px] text-ink-mute">
           <ol className="flex flex-wrap items-center gap-x-1.5 gap-y-1">

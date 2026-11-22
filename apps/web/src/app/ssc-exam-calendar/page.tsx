@@ -94,7 +94,7 @@ function CalendarTable({ rows, caption }: { rows: readonly SscCalendarRow[]; cap
               <th
                 key={cell}
                 scope="col"
-                className="whitespace-nowrap px-4 py-3 font-data text-[12px] font-semibold uppercase tracking-[0.12em] text-ink-mute"
+                className="whitespace-nowrap px-4 py-3 font-data text-[13px] font-semibold text-ink-mute"
               >
                 {cell}
               </th>
@@ -285,7 +285,7 @@ export default function SscCalendarPage() {
                     <th
                       key={cell}
                       scope="col"
-                      className="whitespace-nowrap px-4 py-3 font-data text-[12px] font-semibold uppercase tracking-[0.12em] text-ink-mute"
+                      className="whitespace-nowrap px-4 py-3 font-data text-[13px] font-semibold text-ink-mute"
                     >
                       {cell}
                     </th>

@@ -67,7 +67,7 @@ const GROUPS = [
 
 export function SiteFooter() {
   return (
-    <footer className="night hero-bg mt-20">
+    <footer className="night band-dark mt-20">
       <Wrap className="py-14">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1fr_1fr]">
           <div>
@@ -79,9 +79,7 @@ export function SiteFooter() {
 
           {GROUPS.filter((group) => group.links.length > 0).map((group) => (
             <div key={group.title}>
-              <h2 className="text-[13px] font-bold uppercase tracking-[0.08em] text-ink-mute">
-                {group.title}
-              </h2>
+              <h2 className="font-display text-[16px] font-bold text-ink">{group.title}</h2>
               <ul className="mt-4 space-y-3 text-[14.5px]">
                 {group.links.map((link) => (
                   <li key={link.href}>

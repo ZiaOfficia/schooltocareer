@@ -62,9 +62,12 @@ export default async function MockTestsPage() {
             <ul className="grid gap-3 sm:grid-cols-2">
               {entry.mockTests.map((mock) => (
                 <li key={mock.paper.slug}>
-                  <Link href={mock.path} className="card flex h-full items-center justify-between gap-3 p-5">
+                  <Link
+                    href={mock.path}
+                    className="card flex h-full items-center justify-between gap-3 p-5"
+                  >
                     <span>
-                      <span className="block text-[12px] font-semibold uppercase tracking-[0.1em] text-ink-mute">
+                      <span className="block text-[13px] font-semibold text-ink-mute">
                         Mock test
                       </span>
                       <span className="mt-1 block font-display text-[16px] font-semibold text-ink">
@@ -79,11 +82,12 @@ export default async function MockTestsPage() {
                 </li>
               ))}
               <li>
-                <Link href={entry.practicePath} className="card flex h-full items-center justify-between gap-3 p-5">
+                <Link
+                  href={entry.practicePath}
+                  className="card flex h-full items-center justify-between gap-3 p-5"
+                >
                   <span>
-                    <span className="block text-[12px] font-semibold uppercase tracking-[0.1em] text-ink-mute">
-                      Practice
-                    </span>
+                    <span className="block text-[13px] font-semibold text-ink-mute">Practice</span>
                     <span className="mt-1 block font-display text-[16px] font-semibold text-ink">
                       {entry.exam.shortName} questions by chapter
                     </span>
@@ -91,7 +95,11 @@ export default async function MockTestsPage() {
                       {entry.totalQuestions} questions, each with a solution
                     </span>
                   </span>
-                  <ArrowRightIcon width={18} height={18} className="card-arrow shrink-0 text-ink-mute" />
+                  <ArrowRightIcon
+                    width={18}
+                    height={18}
+                    className="card-arrow shrink-0 text-ink-mute"
+                  />
                 </Link>
               </li>
             </ul>

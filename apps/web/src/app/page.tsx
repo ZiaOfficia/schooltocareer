@@ -191,16 +191,16 @@ export default async function HomePage() {
   return (
     <>
       {/* ── Hero ───────────────────────────────────────────────────────── */}
-      <section className="night hero-bg">
+      <section className="hero-bg">
         <Wrap className="grid grid-cols-[minmax(0,1fr)] items-center gap-x-12 pb-24 pt-12 sm:pb-32 sm:pt-20 lg:grid-cols-[minmax(0,1fr)_440px]">
           <div className="max-w-[640px]">
-            <p className="chip glass text-[13px] font-semibold text-ink">
-              <span aria-hidden="true" className="h-2 w-2 rounded-full bg-accent" />
+            <p className="chip glass text-[13.5px] font-semibold text-ink">
+              <span aria-hidden="true" className="h-2 w-2 rounded-full bg-coral" />
               Board exams {BOARD_PREP.exam} · Entrance exams · Free
             </p>
 
             <h1 className="mt-6 text-[clamp(36px,6.4vw,64px)] leading-[1.04]">
-              Know exactly what to study for your <span className="gradient-text">next exam.</span>
+              Know exactly what to study for your <span className="hl">next exam</span>.
             </h1>
 
             <p className="mt-6 max-w-[56ch] text-[17.5px] leading-relaxed text-ink-soft">
@@ -210,13 +210,19 @@ export default async function HomePage() {
             </p>
 
             <div className="mt-8 flex flex-wrap gap-3">
-              <Link href={ROUTES.boardPrepHub()} className="btn btn-mint">
+              <Link href={ROUTES.boardPrepHub()} className="btn btn-primary">
                 Board exam {BOARD_PREP.exam} guides
                 <ArrowRightIcon width={16} height={16} />
               </Link>
-              <Link href={ROUTES.exams()} className="btn glass text-ink hover:bg-white/15">
-                Explore entrance exams
-              </Link>
+              {test?.latest ? (
+                <Link href={test.latest.path} className="btn btn-coral">
+                  Take a free mock test
+                </Link>
+              ) : (
+                <Link href={ROUTES.exams()} className="btn btn-ghost">
+                  Explore entrance exams
+                </Link>
+              )}
             </div>
 
             <div className="mt-8">
@@ -224,7 +230,7 @@ export default async function HomePage() {
               <ul className="mt-3 flex flex-wrap gap-2">
                 {QUICK_PICKS.map((item) => (
                   <li key={item.href}>
-                    <Link href={item.href} className="chip glass text-ink-soft">
+                    <Link href={item.href} className="chip glass font-semibold text-ink-soft">
                       {item.label}
                     </Link>
                   </li>
@@ -271,7 +277,7 @@ export default async function HomePage() {
                     className="card group flex h-full flex-col p-6"
                   >
                     <span className="flex items-center justify-between gap-3">
-                      <span className="rounded-full bg-[color-mix(in_srgb,var(--color-mint)_14%,transparent)] px-3 py-1 text-[12.5px] font-bold text-mint-ink">
+                      <span className="rounded-full bg-hl px-3 py-1 text-[13px] font-bold text-[#16133a]">
                         {guide.board}
                       </span>
                       <span className="grid h-9 w-9 place-items-center rounded-full border border-rule">
@@ -345,7 +351,7 @@ export default async function HomePage() {
 
         {/* ── Mock test ───────────────────────────────────────────────── */}
         {test?.latest ? (
-          <section className="night hero-bg mt-20 overflow-hidden rounded-[24px] px-6 py-10 sm:px-10 sm:py-12">
+          <section className="night band-dark mt-20 overflow-hidden rounded-[28px] px-6 py-10 sm:px-10 sm:py-12">
             <div className="grid items-center gap-8 lg:grid-cols-[minmax(0,1fr)_auto]">
               <div className="max-w-[58ch]">
                 <p className="eyebrow">Test yourself</p>
@@ -360,7 +366,7 @@ export default async function HomePage() {
                 </p>
               </div>
               <div className="flex flex-wrap gap-3">
-                <Link href={test.latest.path} className="btn btn-mint">
+                <Link href={test.latest.path} className="btn btn-hl">
                   Start the test
                   <ArrowRightIcon width={16} height={16} />
                 </Link>
@@ -426,7 +432,7 @@ export default async function HomePage() {
             {resources.map(({ Icon, title, note, href }) => (
               <li key={href}>
                 <Link href={href} className="card flex h-full items-center gap-4 p-5">
-                  <span className="grid h-11 w-11 shrink-0 place-items-center rounded-[12px] bg-[color-mix(in_srgb,var(--color-mint)_14%,transparent)] text-mint-ink">
+                  <span className="grid h-11 w-11 shrink-0 place-items-center rounded-[12px] bg-hl-soft text-ink">
                     <Icon width={20} height={20} />
                   </span>
                   <div className="min-w-0">

@@ -26,34 +26,32 @@
    ═══════════════════════════════════════════════════════════════════════════ */
 
 @theme {
-  /* ── Brand palette (2026 redesign) ─────────────────────────────────────
-     Deep navy for the hero and footer, a refined electric violet for action,
-     mint for highlights. Every text pairing below was checked for WCAG AA:
-     violet #5a4ff3 carries white text at 5.5:1; the brief's brighter #6c63ff
-     (4.3:1) is kept for gradients and decoration only. Mint #19b99a is too
-     light for text on white (2.5:1), so text uses --color-mint-ink. */
-  --color-navy: #101c35;
-  --color-mint: #19b99a;
-  --color-mint-ink: #0b7a65;
+  /* ── "Highlighter" (2026 redesign) ──────────────────────────────────────
+     Bright white pages, electric blue for action, highlighter yellow for the
+     things that matter most, coral for the second call to action. All text
+     pairings meet WCAG AA: blue #3550ff carries white text at 5.6:1; coral
+     #ff5d73 is too light for white text (3:1), so coral buttons use ink
+     text (6:1); yellow is only ever a background behind ink text. */
+  --color-ink: #16133a;
+  --color-ink-soft: #4a4766;
+  --color-ink-mute: #5e5b78;
+  --color-link: #2f48f0;
 
-  --color-ink: #172033;
-  --color-ink-soft: #475569;
-  /* 5.5:1 on the page background, 6:1 on white. */
-  --color-ink-mute: #5b6476;
-  --color-link: #4a3fe0;
-
-  --color-paper: #f4f6fc;
+  --color-paper: #f7f8fc;
   --color-surface: #ffffff;
-  --color-rule: #e3e7f2;
-  --color-rule-hard: #c9d0e3;
-  --color-row-hover: #f1f0ff;
+  --color-rule: #e6e7f0;
+  --color-rule-hard: #cfd1e2;
+  --color-row-hover: #f0f2ff;
 
-  --color-brand: #5a4ff3;
-  --color-brand-2: #6c63ff;
-  --color-accent: #19b99a;
-  --color-cyan: #19b99a;
-  /* The logo's own navy. Not a chrome colour — only the logo takes it. */
-  --color-logo: #101c35;
+  --color-brand: #3550ff;
+  --color-brand-2: #6e7bff;
+  --color-hl: #ffe24a;
+  --color-hl-soft: #fff6c2;
+  --color-coral: #ff5d73;
+  /* Kept for older class names; they now follow the new palette. */
+  --color-accent: #ffe24a;
+  --color-cyan: #ff5d73;
+  --color-logo: #16133a;
 
   --color-urgent: #dc2626;
   --color-urgent-bg: #fef0f0;
@@ -68,47 +66,46 @@
   --color-t-paper: #2563eb;
   --color-t-article: #c2700a;
   --color-t-board: #5b6788;
-  --color-t-syllabus: #5a4ff3;
+  --color-t-syllabus: #3550ff;
 
-  /* One family, self-hosted through next/font: Plus Jakarta Sans for
-     headings, body and figures alike. The old pairing loaded a second
-     display face (Sora) on every page for headings alone. */
+  /* Bricolage Grotesque for headings: a characterful grotesque with a
+     slightly hand-made feel that suits a student site. Figtree for reading:
+     open, friendly and very legible at small sizes on a phone. Both are
+     self-hosted through next/font. */
   --font-display:
-    var(--font-jakarta), system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+    var(--font-bricolage), system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
   --font-sans:
-    var(--font-jakarta), system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial,
+    var(--font-figtree), system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial,
     sans-serif;
-  /* Labels, dates and counts. Jakarta with tabular figures (see `.num`) reads
-     friendlier than the monospace it replaces, and columns still line up. */
-  --font-data: var(--font-jakarta), system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+  --font-data: var(--font-figtree), system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
 
-  --radius-card: 16px;
-  --radius-tile: 12px;
+  --radius-card: 18px;
+  --radius-tile: 14px;
 
-  --shadow-card: 0 1px 2px rgb(16 28 53 / 0.04), 0 6px 20px -12px rgb(16 28 53 / 0.14);
-  --shadow-lift: 0 2px 4px rgb(16 28 53 / 0.05), 0 18px 40px -18px rgb(16 28 53 / 0.28);
+  --shadow-card: 0 1px 2px rgb(22 19 58 / 0.05), 0 8px 24px -16px rgb(22 19 58 / 0.18);
+  --shadow-lift: 0 2px 4px rgb(22 19 58 / 0.06), 0 22px 44px -20px rgb(53 80 255 / 0.35);
 }
 
-/* Dark values. `.night` scopes them to one band (the hero and footer are
-   always dark, in both themes), which is why every component inside them
-   adapts without a second set of classes. `[data-theme]` lets a manual
-   toggle override the OS in both directions. */
+/* Dark values. `.night` scopes them to one band (the footer and the mock
+   test band are always dark), so every component inside adapts without a
+   second set of classes. `[data-theme]` lets a manual toggle override the
+   OS in both directions. */
 .night,
 :root[data-theme='dark'] {
-  --color-ink: #f4f6fc;
-  --color-ink-soft: #b4bdd3;
-  --color-ink-mute: #8f9bb6;
-  --color-link: #b3aeff;
-  --color-paper: #0b1428;
-  --color-surface: #14223f;
-  --color-rule: #23345a;
-  --color-rule-hard: #34497a;
-  --color-row-hover: #1a2a4d;
-  --color-brand: #9d97ff;
-  --color-brand-2: #b3aeff;
-  --color-accent: #5ee0c2;
-  --color-cyan: #5ee0c2;
-  --color-mint-ink: #5ee0c2;
+  --color-ink: #ffffff;
+  --color-ink-soft: #c9c6e4;
+  --color-ink-mute: #a19dc7;
+  --color-link: #a9b5ff;
+  --color-paper: #16133a;
+  --color-surface: #211d4d;
+  --color-rule: #322d66;
+  --color-rule-hard: #48428a;
+  --color-row-hover: #2a2560;
+  --color-brand: #8fa0ff;
+  --color-brand-2: #a9b5ff;
+  --color-hl: #ffe24a;
+  --color-hl-soft: #3a3352;
+  --color-coral: #ff5d73;
   --color-logo: #ffffff;
   --color-urgent: #f87171;
   --color-urgent-bg: #3a1620;
@@ -122,27 +119,27 @@
   --color-t-paper: #60a5fa;
   --color-t-article: #fbbf24;
   --color-t-board: #a3adcb;
-  --color-t-syllabus: #b3aeff;
+  --color-t-syllabus: #a9b5ff;
   --shadow-card: 0 1px 2px rgb(0 0 0 / 0.3);
   --shadow-lift: 0 18px 40px -18px rgb(0 0 0 / 0.6);
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) {
-    --color-ink: #f4f6fc;
-    --color-ink-soft: #b4bdd3;
-    --color-ink-mute: #8f9bb6;
-    --color-link: #b3aeff;
-    --color-paper: #0b1428;
-    --color-surface: #14223f;
-    --color-rule: #23345a;
-    --color-rule-hard: #34497a;
-    --color-row-hover: #1a2a4d;
-    --color-brand: #9d97ff;
-    --color-brand-2: #b3aeff;
-    --color-accent: #5ee0c2;
-    --color-cyan: #5ee0c2;
-    --color-mint-ink: #5ee0c2;
+    --color-ink: #ffffff;
+    --color-ink-soft: #c9c6e4;
+    --color-ink-mute: #a19dc7;
+    --color-link: #a9b5ff;
+    --color-paper: #16133a;
+    --color-surface: #211d4d;
+    --color-rule: #322d66;
+    --color-rule-hard: #48428a;
+    --color-row-hover: #2a2560;
+    --color-brand: #8fa0ff;
+    --color-brand-2: #a9b5ff;
+    --color-hl: #ffe24a;
+    --color-hl-soft: #3a3352;
+    --color-coral: #ff5d73;
     --color-logo: #ffffff;
     --color-urgent: #f87171;
     --color-urgent-bg: #3a1620;
@@ -156,7 +153,7 @@
     --color-t-paper: #60a5fa;
     --color-t-article: #fbbf24;
     --color-t-board: #a3adcb;
-    --color-t-syllabus: #b3aeff;
+    --color-t-syllabus: #a9b5ff;
     --shadow-card: 0 1px 2px rgb(0 0 0 / 0.3);
     --shadow-lift: 0 18px 40px -18px rgb(0 0 0 / 0.6);
   }
@@ -183,7 +180,7 @@
   h4 {
     font-family: var(--font-display);
     font-weight: 700;
-    letter-spacing: -0.025em;
+    letter-spacing: -0.028em;
     text-wrap: balance;
     margin: 0;
   }
@@ -204,6 +201,7 @@
 
   h1 {
     font-weight: 800;
+    letter-spacing: -0.035em;
   }
 
   /* Digits that sit in a column must line up: every count, date and file
@@ -215,17 +213,19 @@
 }
 
 @layer components {
-  /* ── The dark band (hero, footer) ──────────────────────────────────────
-     Deep navy, lit by a violet glow top-right and a mint glow bottom-left. */
+  /* ── Hero ───────────────────────────────────────────────────────────────
+     Light: the page's own surface with a soft blue wash top-right, a yellow
+     one bottom-left and a faint dot grid, like the corner of a notebook. */
   .hero-bg {
     position: relative;
     isolation: isolate;
     overflow: hidden;
     color: var(--color-ink);
     background:
-      radial-gradient(980px 560px at 92% -18%, rgb(108 99 255 / 0.5), transparent 62%),
-      radial-gradient(760px 480px at -8% 112%, rgb(25 185 154 / 0.28), transparent 60%),
-      linear-gradient(180deg, #0d1830 0%, #101c35 100%);
+      radial-gradient(760px 420px at 96% -10%, rgb(53 80 255 / 0.14), transparent 65%),
+      radial-gradient(620px 380px at -6% 110%, rgb(255 226 74 / 0.3), transparent 62%),
+      var(--color-surface);
+    border-bottom: 1px solid var(--color-rule);
   }
 
   .hero-bg::before {
@@ -233,34 +233,62 @@
     position: absolute;
     inset: 0;
     z-index: -1;
-    background-image: radial-gradient(rgb(255 255 255 / 0.09) 1px, transparent 1px);
+    background-image: radial-gradient(rgb(22 19 58 / 0.09) 1px, transparent 1px);
     background-size: 22px 22px;
-    mask-image: radial-gradient(ellipse 80% 70% at 70% 0%, #000 25%, transparent 75%);
+    mask-image: radial-gradient(ellipse 70% 70% at 80% 10%, #000 20%, transparent 72%);
   }
 
+  /* ── Dark band (footer, mock-test band) ─────────────────────────────── */
+  .band-dark {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    color: var(--color-ink);
+    background:
+      radial-gradient(720px 420px at 100% 0%, rgb(53 80 255 / 0.45), transparent 62%),
+      radial-gradient(520px 320px at 0% 100%, rgb(255 93 115 / 0.22), transparent 60%), #16133a;
+  }
+
+  /* The signature: a highlighter stroke behind the words that matter. */
+  .hl {
+    background: linear-gradient(
+      transparent 56%,
+      var(--color-hl) 56%,
+      var(--color-hl) 90%,
+      transparent 90%
+    );
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+    padding-inline: 0.06em;
+  }
+
+  /* Kept for the 404 page: now a blue-to-coral fill. */
   .gradient-text {
-    background: linear-gradient(92deg, #b3aeff 0%, #8f88ff 38%, #5ee0c2 100%);
+    background: linear-gradient(92deg, #3550ff 0%, #ff5d73 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
   }
 
-  /* A panel on the dark band. A plain tint: no blur behind the text. */
+  /* A soft panel: white on the light hero, a plain tint on dark bands. */
   .glass {
-    background: rgb(255 255 255 / 0.07);
-    border: 1px solid rgb(255 255 255 / 0.16);
+    background: rgb(255 255 255 / 0.85);
+    border: 1px solid var(--color-rule);
   }
 
-  /* A small uppercase label above a heading or inside a card. */
+  .night .glass {
+    background: rgb(255 255 255 / 0.07);
+    border-color: rgb(255 255 255 / 0.16);
+  }
+
+  /* A short label above a heading: sentence case, in blue. */
   .eyebrow {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    font-size: 12.5px;
+    font-size: 14.5px;
     font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--color-mint-ink);
+    color: var(--color-brand);
   }
 
   /* ── Cards ──────────────────────────────────────────────────────────────
@@ -311,10 +339,10 @@
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    min-height: 44px;
-    border-radius: 12px;
-    padding: 0.7rem 1.2rem;
-    font-size: 15px;
+    min-height: 46px;
+    border-radius: 999px;
+    padding: 0.7rem 1.35rem;
+    font-size: 15.5px;
     font-weight: 700;
     line-height: 1.2;
     text-decoration: none;
@@ -329,22 +357,33 @@
 
   .btn-primary {
     color: #fff;
-    background: #5a4ff3;
-    box-shadow: 0 8px 20px -10px rgb(90 79 243 / 0.8);
+    background: #3550ff;
+    box-shadow: 0 10px 22px -12px rgb(53 80 255 / 0.9);
   }
 
   .btn-primary:hover {
-    background: #4a3fe0;
+    background: #2a42e0;
   }
 
-  /* On the navy band: mint with navy text, 6.8:1. */
-  .btn-mint {
-    color: #101c35;
-    background: #5ee0c2;
+  /* Coral with ink text: 6:1. */
+  .btn-coral {
+    color: #16133a;
+    background: #ff5d73;
+    box-shadow: 0 10px 22px -12px rgb(255 93 115 / 0.9);
   }
 
-  .btn-mint:hover {
-    background: #7ae8cf;
+  .btn-coral:hover {
+    background: #ff7a8c;
+  }
+
+  /* Yellow with ink text, for the dark bands. */
+  .btn-hl {
+    color: #16133a;
+    background: #ffe24a;
+  }
+
+  .btn-hl:hover {
+    background: #ffea7a;
   }
 
   .btn-ghost {

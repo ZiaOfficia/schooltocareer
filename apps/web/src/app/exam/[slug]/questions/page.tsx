@@ -83,19 +83,25 @@ export default async function ExamPracticePage({ params }: { params: Promise<Par
             <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {group.chapters.map((chapter) => (
                 <li key={chapter.slug}>
-                  <Link href={chapter.path} className="card flex h-full items-center justify-between gap-3 p-4">
+                  <Link
+                    href={chapter.path}
+                    className="card flex h-full items-center justify-between gap-3 p-4"
+                  >
                     <span className="min-w-0">
                       {chapter.unit ? (
-                        <span className="block text-[12px] uppercase tracking-[0.08em] text-ink-mute">
-                          {chapter.unit.name}
-                        </span>
+                        <span className="block text-[13px] text-ink-mute">{chapter.unit.name}</span>
                       ) : null}
                       <span className="block font-semibold text-ink">{chapter.name}</span>
                       <span className="num mt-0.5 block text-[13px] text-ink-mute">
-                        {chapter.questionCount} {chapter.questionCount === 1 ? 'question' : 'questions'}
+                        {chapter.questionCount}{' '}
+                        {chapter.questionCount === 1 ? 'question' : 'questions'}
                       </span>
                     </span>
-                    <ArrowRightIcon width={16} height={16} className="card-arrow shrink-0 text-ink-mute" />
+                    <ArrowRightIcon
+                      width={16}
+                      height={16}
+                      className="card-arrow shrink-0 text-ink-mute"
+                    />
                   </Link>
                 </li>
               ))}
@@ -110,7 +116,10 @@ export default async function ExamPracticePage({ params }: { params: Promise<Par
           <ul className="grid gap-3 sm:grid-cols-2">
             {hub.mockTests.map((mock) => (
               <li key={mock.paper.slug}>
-                <Link href={mock.path} className="card flex h-full items-center justify-between gap-3 p-5">
+                <Link
+                  href={mock.path}
+                  className="card flex h-full items-center justify-between gap-3 p-5"
+                >
                   <span>
                     <span className="block font-display text-[16px] font-semibold text-ink">
                       {mock.paper.shift ?? mock.paper.title}

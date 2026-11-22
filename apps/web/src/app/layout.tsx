@@ -1,4 +1,4 @@
-import { Plus_Jakarta_Sans } from 'next/font/google';
+import { Bricolage_Grotesque, Figtree } from 'next/font/google';
 import type { ReactNode } from 'react';
 
 import { AdSense } from '@/components/adsense';
@@ -11,20 +11,24 @@ import './globals.css';
 
 export const metadata = rootMetadata;
 
-// next/font downloads the font at build time and serves it from our own
+// next/font downloads both fonts at build time and serves them from our own
 // origin: no request to Google at runtime, and `swap` paints text in the
 // fallback first, so a slow connection is never left looking at a blank
-// heading. One variable family covers headings, body and figures; the old
-// second display face cost a font download on every page.
-const sans = Plus_Jakarta_Sans({
+// heading. Bricolage Grotesque sets headings; Figtree sets everything else.
+const display = Bricolage_Grotesque({
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-jakarta',
+  variable: '--font-bricolage',
+});
+const sans = Figtree({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-figtree',
 });
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en-IN" className={sans.variable} suppressHydrationWarning>
+    <html lang="en-IN" className={`${display.variable} ${sans.variable}`} suppressHydrationWarning>
       <body>
         {/* Keyboard users reach content without tabbing the whole nav. */}
         <a
