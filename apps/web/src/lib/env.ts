@@ -24,8 +24,23 @@ export function adsenseClientEnv(): string | undefined {
   return process.env.NEXT_PUBLIC_ADSENSE_CLIENT;
 }
 
+/**
+ * AdSense ad-unit ids, one per kind of placement, created in the AdSense
+ * account (Ads → By ad unit). Unset means that kind of slot renders nothing:
+ * no empty box, no reserved gap.
+ */
+export function adSlotEnv(): { IN_CONTENT: string | undefined; SIDEBAR: string | undefined } {
+  return {
+    IN_CONTENT: process.env.NEXT_PUBLIC_ADSENSE_SLOT_IN_CONTENT,
+    SIDEBAR: process.env.NEXT_PUBLIC_ADSENSE_SLOT_SIDEBAR,
+  };
+}
+
 /** Server-only values. Never import into a client component. */
-export function serverEnv(): { API_BASE_URL: string | undefined; REVALIDATE_SECRET: string | undefined } {
+export function serverEnv(): {
+  API_BASE_URL: string | undefined;
+  REVALIDATE_SECRET: string | undefined;
+} {
   return {
     API_BASE_URL: process.env.API_BASE_URL,
     REVALIDATE_SECRET: process.env.REVALIDATE_SECRET,

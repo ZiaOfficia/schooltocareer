@@ -12,6 +12,7 @@ import {
   contentsOf,
 } from '@stc/ui';
 
+import { AdSlot } from '@/components/ad-slot';
 import { ArrowRightIcon, ArrowUpRightIcon } from '@/components/icons';
 import { PageHero } from '@/components/page-hero';
 import { articlePath, articlesForGuide } from '@/lib/articles';
@@ -260,6 +261,9 @@ export function BoardPrepPage({ slug }: { slug: BoardGuideSlug }) {
           </Section>
         ) : null}
 
+        {/* Ad 1 of 2: after the opening overview, between whole sections. */}
+        <AdSlot kind="in-content" />
+
         <Section title={PATTERN_TITLE} major={ranked.length === 0}>
           <ul className="grid max-w-[72ch] list-disc gap-2 pl-5 text-[15px] text-ink-soft">
             {cls.notes.map((note) => (
@@ -336,6 +340,9 @@ export function BoardPrepPage({ slug }: { slug: BoardGuideSlug }) {
             </Section>
           );
         })}
+
+        {/* Ad 2 of 2: before the paper links, never beside them. */}
+        <AdSlot kind="in-content" />
 
         <Section title={PAPERS_TITLE} lede={cls.papersNote} major>
           <ScrollX>

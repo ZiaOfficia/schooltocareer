@@ -27,25 +27,29 @@ const GROUPS = [
     title: 'Exams',
     links: [
       { label: 'All exams', href: ROUTES.exams() },
-      ...(LIVE.practice ? [{ label: 'Mock tests', href: ROUTES.mockTests() }] : []),
-      { label: 'Previous year papers', href: ROUTES.papers() },
       { label: 'NTA exam calendar', href: ROUTES.ntaCalendar() },
       { label: 'SSC exam calendar', href: ROUTES.sscCalendar() },
       ...(LIVE.results ? [{ label: 'Results', href: ROUTES.results() }] : []),
     ],
   },
   {
-    title: 'Boards',
+    title: 'Board exams 2027',
     links: [
       { label: 'All board exam guides', href: ROUTES.boardPrepHub() },
-      { label: 'CBSE Class 10 & 12', href: ROUTES.boardPrep('cbse-class-10') },
-      {
-        label: 'UP Board Class 10 & 12',
-        href: ROUTES.boardPrep('up-board-class-10'),
-      },
+      { label: 'CBSE Class 10', href: ROUTES.boardPrep('cbse-class-10') },
+      { label: 'CBSE Class 12', href: ROUTES.boardPrep('cbse-class-12') },
+      { label: 'UP Board Class 10', href: ROUTES.boardPrep('up-board-class-10') },
+      { label: 'UP Board Class 12', href: ROUTES.boardPrep('up-board-class-12') },
       { label: 'ICSE Class 10', href: ROUTES.boardPrep('icse-class-10') },
       { label: 'ISC Class 12', href: ROUTES.boardPrep('isc-class-12') },
       ...(LIVE.boards ? [{ label: 'All boards', href: ROUTES.boards() }] : []),
+    ],
+  },
+  {
+    title: 'Practise and read',
+    links: [
+      ...(LIVE.practice ? [{ label: 'Mock tests', href: ROUTES.mockTests() }] : []),
+      { label: 'Previous year papers', href: ROUTES.papers() },
       ...(LIVE.blog ? [{ label: 'Articles', href: ROUTES.blog() }] : []),
     ],
   },
@@ -63,9 +67,9 @@ const GROUPS = [
 
 export function SiteFooter() {
   return (
-    <footer className="night hero-bg mt-16">
+    <footer className="night hero-bg mt-20">
       <Wrap className="py-14">
-        <div className="grid gap-10 sm:grid-cols-2 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1fr_1fr]">
           <div>
             <Link href={ROUTES.home()} className="inline-block text-logo no-underline">
               <Logo className="h-10 w-auto" />
@@ -75,10 +79,10 @@ export function SiteFooter() {
 
           {GROUPS.filter((group) => group.links.length > 0).map((group) => (
             <div key={group.title}>
-              <h2 className="font-data text-[12px] font-semibold uppercase tracking-[0.16em] text-ink-mute">
+              <h2 className="text-[13px] font-bold uppercase tracking-[0.08em] text-ink-mute">
                 {group.title}
               </h2>
-              <ul className="mt-4 space-y-2.5 text-[14px]">
+              <ul className="mt-4 space-y-3 text-[14.5px]">
                 {group.links.map((link) => (
                   <li key={link.href}>
                     <Link
@@ -106,7 +110,7 @@ export function SiteFooter() {
           the conducting body&rsquo;s official website before acting on a deadline.
         </p>
 
-        <p className="mt-8 border-t border-rule pt-6 font-data text-[12.5px] text-ink-mute">
+        <p className="mt-8 border-t border-rule pt-6 text-[13px] text-ink-mute">
           © {new Date().getFullYear()} {SITE.NAME} · {SITE.ORIGIN.replace('https://', '')}
         </p>
       </Wrap>

@@ -1,4 +1,4 @@
-import { Plus_Jakarta_Sans, Sora } from 'next/font/google';
+import { Plus_Jakarta_Sans } from 'next/font/google';
 import type { ReactNode } from 'react';
 
 import { AdSense } from '@/components/adsense';
@@ -11,23 +11,20 @@ import './globals.css';
 
 export const metadata = rootMetadata;
 
-// next/font downloads these at build time and serves them from our own origin:
-// no request to Google at runtime, and `swap` paints text in the fallback
-// first, so a slow connection is never left looking at a blank heading.
+// next/font downloads the font at build time and serves it from our own
+// origin: no request to Google at runtime, and `swap` paints text in the
+// fallback first, so a slow connection is never left looking at a blank
+// heading. One variable family covers headings, body and figures; the old
+// second display face cost a font download on every page.
 const sans = Plus_Jakarta_Sans({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-jakarta',
 });
-const display = Sora({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-sora',
-});
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en-IN" className={`${sans.variable} ${display.variable}`} suppressHydrationWarning>
+    <html lang="en-IN" className={sans.variable} suppressHydrationWarning>
       <body>
         {/* Keyboard users reach content without tabbing the whole nav. */}
         <a
