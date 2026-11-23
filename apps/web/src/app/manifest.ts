@@ -16,8 +16,8 @@ export default function manifest(): MetadataRoute.Manifest {
     description: SITE.TAGLINE,
     start_url: '/',
     display: 'standalone',
-    theme_color: '#12355B',
-    background_color: '#F6F4EF',
+    theme_color: '#ffffff',
+    background_color: '#f7f8fc',
     icons: [
       { src: '/android-chrome-192x192.png', sizes: '192x192', type: 'image/png' },
       // The mark sits well inside the safe zone on a full-bleed navy square,

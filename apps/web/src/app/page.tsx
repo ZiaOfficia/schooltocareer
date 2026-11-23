@@ -142,11 +142,11 @@ function SectionHead({
   action?: { label: string; href: string };
 }) {
   return (
-    <div className="mb-8 flex flex-wrap items-end justify-between gap-x-6 gap-y-4">
+    <div className="mb-6 flex flex-wrap items-end justify-between gap-x-6 gap-y-4 sm:mb-8">
       <div className="max-w-[62ch]">
         <p className="eyebrow">{eyebrow}</p>
         <h2 className="mt-2 text-[clamp(26px,3.6vw,36px)] leading-tight">{title}</h2>
-        <p className="mt-3 text-[16.5px] text-ink-soft">{lede}</p>
+        <p className="mt-2 text-[15.5px] text-ink-soft sm:mt-3 sm:text-[16.5px]">{lede}</p>
       </div>
       {action ? (
         <Link href={action.href} className="btn btn-ghost">
@@ -192,24 +192,24 @@ export default async function HomePage() {
     <>
       {/* ── Hero ───────────────────────────────────────────────────────── */}
       <section className="hero-bg">
-        <Wrap className="grid grid-cols-[minmax(0,1fr)] items-center gap-x-12 pb-24 pt-12 sm:pb-32 sm:pt-20 lg:grid-cols-[minmax(0,1fr)_440px]">
+        <Wrap className="grid grid-cols-[minmax(0,1fr)] items-center gap-x-12 pb-20 pt-8 sm:pb-32 sm:pt-20 lg:grid-cols-[minmax(0,1fr)_440px]">
           <div className="max-w-[640px]">
             <p className="chip glass text-[13.5px] font-semibold text-ink">
               <span aria-hidden="true" className="h-2 w-2 rounded-full bg-coral" />
               Board exams {BOARD_PREP.exam} · Entrance exams · Free
             </p>
 
-            <h1 className="mt-6 text-[clamp(36px,6.4vw,64px)] leading-[1.04]">
+            <h1 className="mt-5 text-[clamp(34px,6.4vw,64px)] leading-[1.05] sm:mt-6">
               Know exactly what to study for your <span className="hl">next exam</span>.
             </h1>
 
-            <p className="mt-6 max-w-[56ch] text-[17.5px] leading-relaxed text-ink-soft">
+            <p className="mt-4 max-w-[56ch] text-[16.5px] leading-relaxed text-ink-soft sm:mt-6 sm:text-[17.5px]">
               Important chapters for CBSE, UP Board, ICSE and ISC, exam patterns for JEE, NEET, CLAT
               and NDA, previous year papers and free mock tests &mdash; compiled from official
               sources.
             </p>
 
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div className="mt-7 grid gap-3 sm:mt-8 sm:flex sm:flex-wrap">
               <Link href={ROUTES.boardPrepHub()} className="btn btn-primary">
                 Board exam {BOARD_PREP.exam} guides
                 <ArrowRightIcon width={16} height={16} />
@@ -227,10 +227,13 @@ export default async function HomePage() {
 
             <div className="mt-8">
               <p className="text-[13px] font-semibold text-ink-mute">Popular right now</p>
-              <ul className="mt-3 flex flex-wrap gap-2">
+              <ul className="-mx-5 mt-3 flex snap-x gap-2 overflow-x-auto px-5 pb-1 [scrollbar-width:none] sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0 [&::-webkit-scrollbar]:hidden">
                 {QUICK_PICKS.map((item) => (
                   <li key={item.href}>
-                    <Link href={item.href} className="chip glass font-semibold text-ink-soft">
+                    <Link
+                      href={item.href}
+                      className="chip glass shrink-0 snap-start whitespace-nowrap font-semibold text-ink-soft"
+                    >
                       {item.label}
                     </Link>
                   </li>
@@ -247,7 +250,7 @@ export default async function HomePage() {
         {/* Pulled up over the hero's bottom edge, so the two bands read as one. */}
         <ul className="card relative z-10 -mt-12 grid divide-y divide-rule sm:-mt-16 lg:grid-cols-3 lg:divide-x lg:divide-y-0">
           {PROMISES.map(({ Icon, title, body }) => (
-            <li key={title} className="flex gap-4 p-5 sm:p-6">
+            <li key={title} className="flex gap-4 p-4 sm:p-6">
               <span className="grid h-11 w-11 shrink-0 place-items-center rounded-[12px] bg-[color-mix(in_srgb,var(--color-brand)_12%,transparent)] text-brand">
                 <Icon width={21} height={21} />
               </span>
@@ -260,7 +263,7 @@ export default async function HomePage() {
         </ul>
 
         {/* ── Board exams ─────────────────────────────────────────────── */}
-        <section className="pt-20">
+        <section className="pt-14 sm:pt-20">
           <SectionHead
             eyebrow={`Board exams ${BOARD_PREP.exam}`}
             title="Important chapters, board by board"
@@ -274,7 +277,7 @@ export default async function HomePage() {
                 <li key={guide.slug}>
                   <Link
                     href={ROUTES.boardPrep(guide.slug)}
-                    className="card group flex h-full flex-col p-6"
+                    className="card group flex h-full flex-col p-5 sm:p-6"
                   >
                     <span className="flex items-center justify-between gap-3">
                       <span className="rounded-full bg-hl px-3 py-1 text-[13px] font-bold text-[#16133a]">
@@ -288,7 +291,9 @@ export default async function HomePage() {
                         />
                       </span>
                     </span>
-                    <h3 className="mt-4 text-[20px] font-bold text-ink">{guide.label}</h3>
+                    <h3 className="mt-3 text-[19px] font-bold text-ink sm:mt-4 sm:text-[20px]">
+                      {guide.label}
+                    </h3>
                     <span className="mt-2 text-[14.5px] text-ink-soft">
                       {fact ? (
                         <>
@@ -298,7 +303,7 @@ export default async function HomePage() {
                         'No chapter marks are published, so the guide shows how the paper is set.'
                       )}
                     </span>
-                    <span className="mt-auto pt-5 text-[14.5px] font-semibold text-brand">
+                    <span className="mt-auto pt-4 text-[14.5px] font-semibold text-brand sm:pt-5">
                       See important chapters
                     </span>
                   </Link>
@@ -310,16 +315,16 @@ export default async function HomePage() {
 
         {/* ── Entrance exams ──────────────────────────────────────────── */}
         {exams.length > 0 ? (
-          <section className="pt-20">
+          <section className="pt-14 sm:pt-20">
             <SectionHead
               eyebrow="Entrance exams"
               title="Exam pattern and syllabus, from the official notice"
               lede="Marks, timing, negative marking and the full syllabus for the exams students ask about most."
               action={{ label: 'All exams', href: ROUTES.exams() }}
             />
-            <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <ul className="grid gap-3 min-[440px]:grid-cols-2 sm:gap-4 lg:grid-cols-4">
               {exams.map((exam) => (
-                <li key={exam.id} className="card card-link flex h-full flex-col p-5">
+                <li key={exam.id} className="card card-link flex h-full flex-col p-4 sm:p-5">
                   <span className="flex items-center gap-3">
                     <span className="grid h-10 w-10 shrink-0 place-items-center rounded-[12px] bg-[color-mix(in_srgb,var(--color-brand)_12%,transparent)] text-brand">
                       <TargetIcon width={19} height={19} />
@@ -351,7 +356,7 @@ export default async function HomePage() {
 
         {/* ── Mock test ───────────────────────────────────────────────── */}
         {test?.latest ? (
-          <section className="night band-dark mt-20 overflow-hidden rounded-[28px] px-6 py-10 sm:px-10 sm:py-12">
+          <section className="night band-dark mt-14 overflow-hidden rounded-[24px] px-5 py-8 sm:mt-20 sm:rounded-[28px] sm:px-10 sm:py-12">
             <div className="grid items-center gap-8 lg:grid-cols-[minmax(0,1fr)_auto]">
               <div className="max-w-[58ch]">
                 <p className="eyebrow">Test yourself</p>
@@ -365,7 +370,7 @@ export default async function HomePage() {
                   way the exam is, with a worked solution for every question. Free, no sign-up.
                 </p>
               </div>
-              <div className="flex flex-wrap gap-3">
+              <div className="grid gap-3 sm:flex sm:flex-wrap">
                 <Link href={test.latest.path} className="btn btn-hl">
                   Start the test
                   <ArrowRightIcon width={16} height={16} />
@@ -383,16 +388,16 @@ export default async function HomePage() {
 
         {/* ── Latest articles ─────────────────────────────────────────── */}
         {latest.length > 0 ? (
-          <section className="pt-20">
+          <section className="pt-14 sm:pt-20">
             <SectionHead
               eyebrow="Latest articles"
               title="Study plans and strategy"
               lede="Short, practical articles built on the official syllabus and paper pattern."
               action={{ label: 'All articles', href: ROUTES.blog() }}
             />
-            <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            <ul className="-mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 [scrollbar-width:none] sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-5 sm:overflow-visible sm:px-0 lg:grid-cols-3 [&::-webkit-scrollbar]:hidden">
               {latest.map((article) => (
-                <li key={article.slug}>
+                <li key={article.slug} className="w-[82%] shrink-0 snap-start sm:w-auto">
                   <Link
                     href={articlePath(article)}
                     className="card group block h-full overflow-hidden"
@@ -422,22 +427,27 @@ export default async function HomePage() {
         ) : null}
 
         {/* ── Resources ───────────────────────────────────────────────── */}
-        <section className="pt-20">
+        <section className="pt-14 sm:pt-20">
           <SectionHead
             eyebrow="Student resources"
             title="Practise, plan and look things up"
             lede="Free tools and reference pages, updated from official sources."
           />
-          <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <ul className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
             {resources.map(({ Icon, title, note, href }) => (
               <li key={href}>
-                <Link href={href} className="card flex h-full items-center gap-4 p-5">
+                <Link
+                  href={href}
+                  className="card flex h-full flex-col gap-3 p-4 sm:flex-row sm:items-center sm:gap-4 sm:p-5"
+                >
                   <span className="grid h-11 w-11 shrink-0 place-items-center rounded-[12px] bg-hl-soft text-ink">
                     <Icon width={20} height={20} />
                   </span>
                   <div className="min-w-0">
-                    <h3 className="text-[16px] font-bold text-ink">{title}</h3>
-                    <p className="text-[14px] text-ink-soft">{note}</p>
+                    <h3 className="text-[15.5px] font-bold leading-snug text-ink sm:text-[16px]">
+                      {title}
+                    </h3>
+                    <p className="mt-0.5 text-[13.5px] text-ink-soft sm:text-[14px]">{note}</p>
                   </div>
                 </Link>
               </li>

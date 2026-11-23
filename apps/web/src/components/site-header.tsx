@@ -3,8 +3,9 @@ import Link from 'next/link';
 import { ROUTES, SITE } from '@stc/constants';
 import { Wrap } from '@stc/ui';
 
-import { ArrowRightIcon, MenuIcon, SearchIcon } from '@/components/icons';
+import { SearchIcon } from '@/components/icons';
 import { Logo } from '@/components/logo';
+import { MobileMenu, type MenuGroup } from '@/components/mobile-menu';
 import { LIVE } from '@/lib/site-sections';
 
 type NavItem = { label: string; href: string };
@@ -32,6 +33,31 @@ const CALENDARS: readonly NavItem[] = [
   { label: 'SSC exam calendar', href: ROUTES.sscCalendar() },
 ];
 
+/** The phone menu, grouped so a long list of links is easy to scan. */
+const MENU_GROUPS: readonly MenuGroup[] = [
+  {
+    title: 'Prepare',
+    links: [
+      { label: 'Board exams 2027', href: ROUTES.boardPrepHub(), note: 'CBSE, UP Board, ICSE, ISC' },
+      { label: 'Entrance exams', href: ROUTES.exams(), note: 'JEE, NEET, CUET, CLAT, NDA' },
+      ...(LIVE.blog
+        ? [{ label: 'Articles', href: ROUTES.blog(), note: 'Study plans and strategy' }]
+        : []),
+    ],
+  },
+  {
+    title: 'Practise',
+    links: [
+      ...(LIVE.practice ? [{ label: 'Mock tests', href: ROUTES.mockTests() }] : []),
+      { label: 'Previous year papers', href: ROUTES.papers() },
+    ],
+  },
+  {
+    title: 'Calendars',
+    links: CALENDARS,
+  },
+];
+
 /** The one thing in the header a student can DO rather than read. */
 const CTA: NavItem | null = LIVE.practice
   ? { label: 'Free mock test', href: ROUTES.mockTests() }
@@ -55,7 +81,8 @@ function ChevronDown() {
  * Server Component — the header ships no client JS of its own.
  *
  * The desktop "Calendars" menu opens on hover and on keyboard focus (CSS
- * only), and the phone menu is a <details>, so everything works before
+ * only). The phone menu is a small client component (components/mobile-menu)
+ * that slides in; everything else in the header is server-rendered, so it works before
  * hydration and without JavaScript at all.
  */
 export function SiteHeader() {
@@ -132,54 +159,8 @@ export function SiteHeader() {
             </Link>
           ) : null}
 
-          {/* Below `lg` the nav lives in a disclosure. */}
-          <details className="group relative lg:hidden">
-            <summary
-              aria-label="Menu"
-              className="grid h-11 w-11 cursor-pointer list-none place-items-center rounded-[12px] border border-rule bg-surface text-ink [&::-webkit-details-marker]:hidden"
-            >
-              <MenuIcon />
-            </summary>
-            <div className="card absolute right-0 top-[calc(100%+10px)] w-[min(90vw,320px)] p-3 shadow-[var(--shadow-lift)]">
-              {LIVE.search ? (
-                <form
-                  action={ROUTES.search()}
-                  method="get"
-                  role="search"
-                  className="mb-2 flex items-center rounded-[12px] border border-rule bg-paper pl-3.5"
-                >
-                  <SearchIcon width={16} height={16} className="shrink-0 text-ink-mute" />
-                  <label htmlFor="menu-search" className="sr-only">
-                    Search {SITE.NAME}
-                  </label>
-                  <input
-                    id="menu-search"
-                    name="q"
-                    type="search"
-                    placeholder="Search…"
-                    className="min-w-0 flex-1 bg-transparent px-2.5 py-2.5 text-[15px] text-ink outline-none placeholder:text-ink-mute"
-                  />
-                </form>
-              ) : null}
-              <nav aria-label="Primary" className="flex flex-col">
-                {[...NAV, ...CALENDARS].map((item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className="flex items-center justify-between rounded-[10px] px-3 py-3 text-[15.5px] font-semibold text-ink no-underline hover:bg-row-hover"
-                  >
-                    {item.label}
-                    <ArrowRightIcon width={15} height={15} className="text-ink-mute" />
-                  </Link>
-                ))}
-              </nav>
-              {CTA ? (
-                <Link href={CTA.href} className="btn btn-primary mt-2 w-full">
-                  {CTA.label}
-                </Link>
-              ) : null}
-            </div>
-          </details>
+          {/* Below `lg` the nav lives in a slide-in panel. */}
+          <MobileMenu groups={MENU_GROUPS} cta={CTA} />
         </div>
       </Wrap>
     </header>

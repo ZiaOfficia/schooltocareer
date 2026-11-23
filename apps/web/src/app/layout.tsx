@@ -1,3 +1,4 @@
+import type { Viewport } from 'next';
 import { Bricolage_Grotesque, Figtree } from 'next/font/google';
 import type { ReactNode } from 'react';
 
@@ -10,6 +11,17 @@ import { rootMetadata } from '@/lib/seo/metadata';
 import './globals.css';
 
 export const metadata = rootMetadata;
+
+/**
+ * Light on every device, with a white browser bar that matches the header.
+ * Pinch-zoom stays allowed: blocking it fails accessibility guidelines.
+ */
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  themeColor: '#ffffff',
+  colorScheme: 'light',
+};
 
 // next/font downloads both fonts at build time and serves them from our own
 // origin: no request to Google at runtime, and `swap` paints text in the

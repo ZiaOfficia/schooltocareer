@@ -79,7 +79,7 @@ export default function BoardPrepHub() {
             One spreadsheet with a tab for every guide, the official papers and the exam tips. It
             opens in Excel, or open the read-only Google Sheet and use File &rarr; Make a copy.
           </p>
-          <div className="flex flex-wrap gap-2.5">
+          <div className="grid gap-2.5 sm:flex sm:flex-wrap">
             <a href={BOARD_PREP.download.xlsx} download className="btn btn-primary">
               Download spreadsheet (.xlsx)
             </a>

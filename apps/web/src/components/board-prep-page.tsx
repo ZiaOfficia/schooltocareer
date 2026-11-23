@@ -106,7 +106,7 @@ function FileLink({ href, label }: { href: string; label: string }) {
 function DownloadButtons({ slug }: { slug: BoardGuideSlug }) {
   const csv = BOARD_PREP.download.csv[slug];
   return (
-    <div className="flex flex-wrap gap-2.5">
+    <div className="grid gap-2.5 sm:flex sm:flex-wrap">
       <a href={BOARD_PREP.download.xlsx} download className="btn btn-primary">
         Download spreadsheet (.xlsx)
       </a>
