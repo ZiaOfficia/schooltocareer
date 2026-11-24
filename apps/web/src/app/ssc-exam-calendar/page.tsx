@@ -27,7 +27,6 @@ import { SSC_ABBREVIATIONS, SSC_CALENDAR, type SscCalendarRow } from '@/lib/ssc-
  *
  * Re-rendered daily, because "still ahead" depends on today's month.
  */
-export const revalidate = 86400;
 
 const FAQS = [
   {

@@ -5,8 +5,6 @@ import { IndexPage, type IndexItem } from '@/components/index-page';
 import { ApiError, listAllPapers } from '@/lib/api';
 import { buildMetadata } from '@/lib/seo/metadata';
 
-export const revalidate = 3600;
-
 export function generateMetadata() {
   return buildMetadata({
     template: 'search',

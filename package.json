@@ -39,6 +39,7 @@
     "cycle:roll": "tsx tooling/scripts/roll-exam-cycle.ts",
     "papers:import": "tsx tooling/scripts/import-exam-papers.ts",
     "exams:hubs": "tsx tooling/scripts/apply-exam-hubs.ts",
+    "content:snapshot": "tsx tooling/scripts/snapshot-content.ts",
     "admin:set-password": "tsx tooling/scripts/set-admin-password.ts"
   },
   "devDependencies": {

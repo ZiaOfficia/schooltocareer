@@ -158,7 +158,10 @@ export default async function ArticlePage({ params }: { params: Promise<Params> 
                 The full guide has the complete chapter list, answer tips and links to the
                 board&rsquo;s or conducting body&rsquo;s own papers.
               </p>
-              <Link href={article.guide.href} className="btn btn-primary max-w-full whitespace-normal">
+              <Link
+                href={article.guide.href}
+                className="btn btn-primary max-w-full whitespace-normal"
+              >
                 {article.guide.label}
                 <ArrowRightIcon width={14} height={14} />
               </Link>

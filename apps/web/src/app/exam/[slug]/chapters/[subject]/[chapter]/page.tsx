@@ -9,7 +9,7 @@ import { FactGrid, LastUpdated, Section, Wrap } from '@stc/ui';
 
 import { ArrowRightIcon } from '@/components/icons';
 import { PageHero } from '@/components/page-hero';
-import { getExamChapter } from '@/lib/api';
+import { getExamChapter , SNAPSHOT_KEYS } from '@/lib/api';
 import { CHAPTER_INDEX_THRESHOLD } from '@/lib/practice-index';
 import { JsonLd, breadcrumbSchema } from '@/lib/seo/json-ld';
 import { buildMetadata } from '@/lib/seo/metadata';
@@ -23,8 +23,6 @@ import { buildMetadata } from '@/lib/seo/metadata';
  * renders and links: a student who reaches it is helped, and the question
  * pages it links to are indexable on their own merit.
  */
-
-export const revalidate = 86400;
 
 type Params = { slug: string; subject: string; chapter: string };
 
@@ -182,4 +180,14 @@ export default async function ChapterPage({ params }: { params: Promise<Params> 
       </Wrap>
     </>
   );
+}
+
+/** Every chapter with questions, built at deploy time. */
+export const dynamicParams = false;
+
+export function generateStaticParams() {
+  return SNAPSHOT_KEYS.chapters().map((key) => {
+    const [slug = '', subject = '', chapter = ''] = key.split('/');
+    return { slug, subject, chapter };
+  });
 }

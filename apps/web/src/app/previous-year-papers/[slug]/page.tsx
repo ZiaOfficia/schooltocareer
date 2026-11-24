@@ -7,7 +7,7 @@ import { EntityBadge, FactGrid, LastUpdated, Section, Wrap } from '@stc/ui';
 
 import { ArrowRightIcon, ArrowUpRightIcon } from '@/components/icons';
 import { PageHero } from '@/components/page-hero';
-import { ApiError, getPaper, getPaperQuestions } from '@/lib/api';
+import { ApiError, getPaper, getPaperQuestions , SNAPSHOT_KEYS } from '@/lib/api';
 import { JsonLd, breadcrumbSchema } from '@/lib/seo/json-ld';
 import { buildMetadata } from '@/lib/seo/metadata';
 
@@ -22,8 +22,6 @@ import { buildMetadata } from '@/lib/seo/metadata';
  * heading and everything else is the few facts that help them decide whether
  * this is the paper they meant.
  */
-
-export const revalidate = 3600;
 
 type Params = { slug: string };
 
@@ -170,7 +168,10 @@ export default async function PaperPage({ params }: { params: Promise<Params> })
             lede="Every question from this paper, one page each, with a step-by-step solution and the answer checked against the official key."
             actions={
               paper.exam ? (
-                <Link href={ROUTES.mockTest(paper.exam.slug, paper.slug)} className="btn btn-primary">
+                <Link
+                  href={ROUTES.mockTest(paper.exam.slug, paper.slug)}
+                  className="btn btn-primary"
+                >
                   Take it as a timed test
                   <ArrowRightIcon width={16} height={16} />
                 </Link>
@@ -229,4 +230,11 @@ export default async function PaperPage({ params }: { params: Promise<Params> })
       </Wrap>
     </>
   );
+}
+
+/** Every paper in the content snapshot is built at deploy time. */
+export const dynamicParams = false;
+
+export function generateStaticParams() {
+  return SNAPSHOT_KEYS.papers().map((slug) => ({ slug }));
 }

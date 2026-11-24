@@ -9,6 +9,7 @@
   "exports": {
     ".": "./src/index.ts",
     "./indexability": "./src/indexability.ts",
+    "./math-text": "./src/math-text.ts",
     "./slug": "./src/slug.ts"
   },
   "scripts": { "lint": "eslint src", "typecheck": "tsc --noEmit" },

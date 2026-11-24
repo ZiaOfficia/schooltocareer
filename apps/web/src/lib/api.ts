@@ -1,201 +1,130 @@
-import { API_ROUTES, CACHE_TAGS } from '@stc/constants';
-
-import { serverEnv } from '@/lib/env';
+import boardsData from '@/data/snapshot/boards.json';
+import chaptersData from '@/data/snapshot/chapters.json';
+import examDetailsData from '@/data/snapshot/examDetails.json';
+import examPracticeData from '@/data/snapshot/examPractice.json';
+import examsData from '@/data/snapshot/exams.json';
+import mockTestsData from '@/data/snapshot/mockTests.json';
+import paperDetailsData from '@/data/snapshot/paperDetails.json';
+import paperQuestionsData from '@/data/snapshot/paperQuestions.json';
+import papersData from '@/data/snapshot/papers.json';
+import practiceData from '@/data/snapshot/practice.json';
+import questionsData from '@/data/snapshot/questions.json';
+import resultsData from '@/data/snapshot/results.json';
 
 /**
- * The server-side API client.
+ * The website's data, read from the content snapshot — never from a server.
  *
- * Only Server Components call this. The browser never talks to the API
- * directly, which means the API host is not a public constant, CORS stays
- * narrow, and every response is cacheable at the Next layer with a tag the
- * backend already knows how to invalidate.
+ * The snapshot (apps/web/src/data/snapshot/*.json) is a copy of every public
+ * record the API serves, taken by `pnpm content:snapshot` and committed. Every
+ * page is built from it at deploy time, so no visitor and no crawler ever
+ * waits on the API, which runs on a free instance that sleeps when idle.
  *
- * Cache strategy: long `revalidate` plus tag-based invalidation. The outbox
- * worker fires CACHE_REVALIDATE on publish, so pages update within seconds of
- * an edit rather than waiting out a TTL. The TTL is only the backstop for a
- * webhook that never arrived.
+ * The functions keep the names and return shapes of the old HTTP client, so
+ * pages did not change: a missing record is still `null` (and the page's
+ * notFound()), a list is still an array.
+ *
+ * To publish a change made through the API: run `pnpm content:snapshot`,
+ * commit the JSON, push.
  */
 
-const BASE_URL = serverEnv().API_BASE_URL ?? 'http://localhost:4000';
+type Row = Record<string, unknown> & {
+  id?: string;
+  year?: number;
+  popularityScore?: number;
+  exam?: { id: string } | null;
+};
+type Lookup = Record<string, unknown>;
 
-/** One hour. Correctness comes from tag invalidation, not from this number. */
-const DEFAULT_REVALIDATE = 3600;
+const exams = examsData as unknown as Row[];
+const examDetails = examDetailsData as unknown as Lookup;
+const papers = papersData as unknown as Row[];
+const paperDetails = paperDetailsData as unknown as Lookup;
+const paperQuestions = paperQuestionsData as unknown as Lookup;
+const results = resultsData as unknown as Row[];
+const boards = boardsData as unknown as Row[];
+const practice = practiceData as unknown as Row[];
+const examPractice = examPracticeData as unknown as Lookup;
+const mockTests = mockTestsData as unknown as Lookup;
+const chapters = chaptersData as unknown as Lookup;
+const questions = questionsData as unknown as Lookup;
 
+/**
+ * Kept so existing `catch (error) { if (error instanceof ApiError) … }`
+ * blocks still compile. Reading a file cannot fail the way a request could,
+ * so nothing here throws it any more.
+ */
 export class ApiError extends Error {
   constructor(
     readonly status: number,
     readonly path: string,
     message: string,
-    options?: { cause?: unknown },
   ) {
-    super(message, options);
+    super(message);
     this.name = 'ApiError';
   }
 
-  /** 503 means we never reached the API — distinct from anything it replied. */
   get unreachable(): boolean {
     return this.status === 503;
   }
 }
 
-type FetchOptions = {
-  tags?: readonly string[];
-  revalidate?: number;
-  /** Set for genuinely per-request data. Almost nothing here qualifies. */
-  noStore?: boolean;
-};
-
-async function request<T>(path: string, options: FetchOptions = {}): Promise<T> {
-  const url = `${BASE_URL}${path}`;
-
-  let response: Response;
-  try {
-    response = await fetchOnce(url, options);
-  } catch (cause) {
-    // A refused connection or DNS failure is not a 404. Surfacing it as 503
-    // keeps it distinguishable from "this page does not exist", which matters:
-    // a listing may safely degrade to empty, but a sitemap must never quietly
-    // become empty, because an empty sitemap deindexes the site.
-    throw new ApiError(503, path, `GET ${path} could not reach the API at ${BASE_URL}`, {
-      cause,
-    });
+/** The query-string options pages pass: filter by exam, sort, cap. */
+function applyQuery(rows: Row[], query: string): Row[] {
+  const params = new URLSearchParams(query);
+  let out = [...rows];
+  const examId = params.get('examId');
+  if (examId) out = out.filter((row) => row.exam?.id === examId);
+  const sortBy = params.get('sortBy') ?? params.get('sort');
+  const desc = (params.get('sortDir') ?? params.get('dir')) === 'desc';
+  if (sortBy === 'year' || sortBy === 'popularityScore') {
+    const key = sortBy;
+    out.sort((a, b) => ((a[key] as number) ?? 0) - ((b[key] as number) ?? 0));
+    if (desc) out.reverse();
   }
-
-  if (!response.ok) {
-    // The FULL url, not the path. When this surfaces in a Vercel log the first
-    // question is always "which API did it call" — a wrong or missing
-    // API_BASE_URL is indistinguishable from a broken endpoint otherwise.
-    throw new ApiError(response.status, path, `GET ${url} failed with ${response.status}`);
-  }
-
-  return (await response.json()) as T;
+  const cap = Number(params.get('perPage') ?? params.get('limit'));
+  return cap > 0 ? out.slice(0, cap) : out;
 }
 
-function fetchOnce(url: string, options: FetchOptions): Promise<Response> {
-  return fetch(url, {
-    headers: { accept: 'application/json' },
-    // `tags` is spread conditionally rather than set to undefined:
-    // exactOptionalPropertyTypes distinguishes "absent" from "present and
-    // undefined", and Next's RequestInit declares `tags: string[]`, not
-    // `string[] | undefined`.
-    ...(options.noStore
-      ? { cache: 'no-store' as const }
-      : {
-          next: {
-            revalidate: options.revalidate ?? DEFAULT_REVALIDATE,
-            ...(options.tags ? { tags: [...options.tags] } : {}),
-          },
-        }),
-  });
+function pick<T>(lookup: Lookup, key: string): T | null {
+  return (lookup[key] as T | undefined) ?? null;
 }
-
-/**
- * Returns null instead of throwing on 404, so a page can render notFound()
- * without a try/catch at every call site. Any other failure still throws —
- * a 500 must not be silently rendered as "this exam does not exist", because
- * that would let a backend outage delete pages from the index.
- */
-async function requestOptional<T>(path: string, options: FetchOptions = {}): Promise<T | null> {
-  try {
-    return await request<T>(path, options);
-  } catch (error) {
-    if (error instanceof ApiError && error.status === 404) return null;
-    throw error;
-  }
-}
-
-/** The API wraps payloads as `{ data, meta }`. */
-type Envelope<T> = { data: T; meta?: Record<string, unknown> };
 
 export async function getExam<T>(slug: string): Promise<T | null> {
-  const result = await requestOptional<Envelope<T>>(API_ROUTES.exam(slug), {
-    tags: [CACHE_TAGS.entity('EXAM', slug)],
-  });
-  return result?.data ?? null;
+  return pick<T>(examDetails, slug);
 }
 
 export async function listExams<T>(query = ''): Promise<T[]> {
-  const result = await requestOptional<Envelope<T[]>>(
-    `${API_ROUTES.exams}${query ? `?${query}` : ''}`,
-    { tags: [CACHE_TAGS.entityList('EXAM')] },
-  );
-  return result?.data ?? [];
+  return applyQuery(exams, query) as T[];
 }
 
 export async function listPapers<T>(query = ''): Promise<T[]> {
-  const result = await requestOptional<Envelope<T[]>>(
-    `${API_ROUTES.papers}${query ? `?${query}` : ''}`,
-    { tags: [CACHE_TAGS.entityList('QUESTION_PAPER')] },
-  );
-  return result?.data ?? [];
+  return applyQuery(papers, query) as T[];
 }
 
-/** The API caps a page at 100 rows (PAGINATION.MAX_PER_PAGE). */
-const PAPERS_PER_PAGE = 100;
-
-/**
- * Every published paper matching `query`, not just the first page.
- *
- * An exam with two sessions and two shifts a day passes 100 papers in a few
- * years, so one request cannot hold them. `maxPages` bounds the loop: a wrong
- * `totalPages` from the API must not turn a page render into a crawl.
- */
-export async function listAllPapers<T>(query = '', maxPages = 5): Promise<T[]> {
-  const all: T[] = [];
-  for (let page = 1; page <= maxPages; page += 1) {
-    const result = await requestOptional<Envelope<T[]>>(
-      `${API_ROUTES.papers}?perPage=${PAPERS_PER_PAGE}&page=${page}${query ? `&${query}` : ''}`,
-      { tags: [CACHE_TAGS.entityList('QUESTION_PAPER')] },
-    );
-    all.push(...(result?.data ?? []));
-    if (!result?.meta?.hasNext) break;
-  }
-  return all;
+/** Every paper matching `query`. `perPage` is ignored here: all rows are wanted. */
+export async function listAllPapers<T>(query = ''): Promise<T[]> {
+  const params = new URLSearchParams(query);
+  params.delete('perPage');
+  params.delete('page');
+  return applyQuery(papers, params.toString()) as T[];
 }
 
-/**
- * How many published papers and results exist for one exam — the two numbers
- * that decide whether those sections are pages or dead ends.
- *
- * One row each, read for its `meta.total`. A failed count is treated as zero:
- * hiding a section for an hour is a smaller mistake than linking to an empty one.
- */
+/** How many papers and results exist for one exam. */
 export async function examHoldings(examId: string): Promise<{ papers: number; results: number }> {
-  const total = async (route: string, tag: string): Promise<number> => {
-    try {
-      const result = await requestOptional<Envelope<unknown[]>>(
-        `${route}?perPage=1&examId=${encodeURIComponent(examId)}`,
-        { tags: [tag] },
-      );
-      const value = result?.meta?.total;
-      return typeof value === 'number' ? value : 0;
-    } catch (error) {
-      if (!(error instanceof ApiError)) throw error;
-      return 0;
-    }
+  return {
+    papers: papers.filter((row) => row.exam?.id === examId).length,
+    results: results.filter((row) => row.exam?.id === examId).length,
   };
-
-  const [papers, results] = await Promise.all([
-    total(API_ROUTES.papers, CACHE_TAGS.entityList('QUESTION_PAPER')),
-    total(API_ROUTES.results, CACHE_TAGS.entityList('RESULT')),
-  ]);
-  return { papers, results };
 }
 
 export async function getPaper<T>(slug: string): Promise<T | null> {
-  const result = await requestOptional<Envelope<T>>(API_ROUTES.paper(slug), {
-    tags: [CACHE_TAGS.entity('QUESTION_PAPER', slug)],
-  });
-  return result?.data ?? null;
+  return pick<T>(paperDetails, slug);
 }
 
 // ── Question bank ──────────────────────────────────────────────────────────
 
 export async function getQuestion<T>(publicId: string): Promise<T | null> {
-  const result = await requestOptional<Envelope<T>>(API_ROUTES.question(publicId), {
-    tags: [CACHE_TAGS.entity('QUESTION', publicId), CACHE_TAGS.entityList('QUESTION')],
-  });
-  return result?.data ?? null;
+  return pick<T>(questions, publicId);
 }
 
 export async function getExamChapter<T>(
@@ -203,95 +132,55 @@ export async function getExamChapter<T>(
   subject: string,
   chapter: string,
 ): Promise<T | null> {
-  const result = await requestOptional<Envelope<T>>(API_ROUTES.examChapter(exam, subject, chapter), {
-    tags: [
-      CACHE_TAGS.entity('EXAM_CHAPTER', `${exam}/${subject}/${chapter}`),
-      CACHE_TAGS.entityList('QUESTION'),
-    ],
-  });
-  return result?.data ?? null;
+  return pick<T>(chapters, `${exam}/${subject}/${chapter}`);
 }
 
-/**
- * A paper's digitised questions, or null when it has none. Any failure is
- * also null: the paper page must still offer its PDF if the question bank
- * is down, so this block degrades to absent rather than taking the page with it.
- */
 export async function getPaperQuestions<T>(paperSlug: string): Promise<T | null> {
-  try {
-    const result = await requestOptional<Envelope<T>>(API_ROUTES.paperQuestions(paperSlug), {
-      tags: [CACHE_TAGS.entity('QUESTION_PAPER', paperSlug), CACHE_TAGS.entityList('QUESTION')],
-    });
-    return result?.data ?? null;
-  } catch (error) {
-    if (error instanceof ApiError) return null;
-    throw error;
-  }
+  return pick<T>(paperQuestions, paperSlug);
 }
 
-/**
- * Every exam with digitised papers. Empty on any failure: the menu, the
- * homepage panel and the exam pages show their practice links only when this
- * answers, and must never fail because the question bank did not.
- */
 export async function listPractice<T>(): Promise<T[]> {
-  try {
-    const result = await requestOptional<Envelope<T[]>>(API_ROUTES.practice, {
-      tags: [CACHE_TAGS.entityList('QUESTION')],
-    });
-    return result?.data ?? [];
-  } catch (error) {
-    if (error instanceof ApiError) return [];
-    throw error;
-  }
+  return practice as T[];
 }
 
-/** One exam's chapter-wise practice hub; null until it has a digitised paper. */
 export async function getExamPractice<T>(exam: string): Promise<T | null> {
-  const result = await requestOptional<Envelope<T>>(API_ROUTES.examPractice(exam), {
-    tags: [CACHE_TAGS.entityList('QUESTION')],
-  });
-  return result?.data ?? null;
+  return pick<T>(examPractice, exam);
 }
 
-/** A digitised paper as a test; null when the paper has no public questions. */
 export async function getMockTest<T>(paperSlug: string): Promise<T | null> {
-  const result = await requestOptional<Envelope<T>>(API_ROUTES.mockTest(paperSlug), {
-    tags: [CACHE_TAGS.entity('QUESTION_PAPER', paperSlug), CACHE_TAGS.entityList('QUESTION')],
-  });
-  return result?.data ?? null;
+  return pick<T>(mockTests, paperSlug);
 }
 
 export async function listBoards<T>(query = ''): Promise<T[]> {
-  const result = await requestOptional<Envelope<T[]>>(
-    `${API_ROUTES.boards}${query ? `?${query}` : ''}`,
-    { tags: [CACHE_TAGS.entityList('BOARD')] },
-  );
-  return result?.data ?? [];
+  return applyQuery(boards, query) as T[];
 }
 
 export async function listResults<T>(query = ''): Promise<T[]> {
-  const result = await requestOptional<Envelope<T[]>>(
-    `${API_ROUTES.results}${query ? `?${query}` : ''}`,
-    { tags: [CACHE_TAGS.entityList('RESULT')] },
-  );
-  return result?.data ?? [];
+  return applyQuery(results, query) as T[];
 }
 
-export async function listPosts<T>(query = ''): Promise<T[]> {
-  const result = await requestOptional<Envelope<T[]>>(
-    `${API_ROUTES.posts}${query ? `?${query}` : ''}`,
-    { tags: [CACHE_TAGS.entityList('CONTENT_ENTRY')] },
-  );
-  return result?.data ?? [];
+/** Articles are files in lib/articles; the API's posts are not published. */
+export async function listPosts<T>(_query = ''): Promise<T[]> {
+  return [];
 }
 
-export async function search<T>(query: string): Promise<T | null> {
-  const result = await requestOptional<Envelope<T>>(
-    `${API_ROUTES.search}?q=${encodeURIComponent(query)}`,
-    // Search results are per-query and not worth a tag; a short TTL absorbs
-    // repeated identical queries during a traffic spike without going stale.
-    { revalidate: 60 },
-  );
-  return result?.data ?? null;
+/** Site search is off (LIVE.search) and needs a server; nothing to return. */
+export async function search<T>(_query: string): Promise<T | null> {
+  return null;
 }
+
+// ── For generateStaticParams: every record that gets a page ────────────────
+
+export const SNAPSHOT_KEYS = {
+  exams: () => Object.keys(examDetails).filter((slug) => examDetails[slug] !== null),
+  papers: () => Object.keys(paperDetails).filter((slug) => paperDetails[slug] !== null),
+  mockTests: () => Object.keys(mockTests).filter((slug) => mockTests[slug] !== null),
+  mockTestParams: () =>
+    Object.entries(mockTests)
+      .filter(([, test]) => test !== null)
+      .map(([paper, test]) => ({ slug: (test as { exam: { slug: string } }).exam.slug, paper })),
+  questions: () =>
+    Object.values(questions).filter(Boolean) as Array<{ path: string; exam: { slug: string } }>,
+  chapters: () => Object.keys(chapters).filter((key) => chapters[key] !== null),
+  examPractice: () => Object.keys(examPractice).filter((slug) => examPractice[slug] !== null),
+};

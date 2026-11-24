@@ -11,7 +11,7 @@ import { LastUpdated, Section, Wrap } from '@stc/ui';
 import { ArrowRightIcon } from '@/components/icons';
 import { PageHero } from '@/components/page-hero';
 import { QuestionPractice, type PracticeOption } from '@/components/question-practice';
-import { ApiError, getExamChapter, getQuestion } from '@/lib/api';
+import { ApiError, getExamChapter, getQuestion , SNAPSHOT_KEYS } from '@/lib/api';
 import { examDisplayName } from '@/lib/exam-name';
 import { questionHeadline } from '@/lib/question-headline';
 import { renderRich, renderRichInline } from '@/lib/rich-text';
@@ -31,8 +31,6 @@ import { buildMetadata } from '@/lib/seo/metadata';
  * written here, and the answer says which official key it was checked
  * against (PRINCIPLES.md #2, #3).
  */
-
-export const revalidate = 86400;
 
 type Params = { slug: string; question: string };
 
@@ -293,4 +291,14 @@ export default async function QuestionPage({ params }: { params: Promise<Params>
       </Wrap>
     </>
   );
+}
+
+/** Every question in the content snapshot is built at deploy time. */
+export const dynamicParams = false;
+
+export function generateStaticParams() {
+  return SNAPSHOT_KEYS.questions().map((question) => ({
+    slug: question.exam.slug,
+    question: question.path.split('/').pop() ?? '',
+  }));
 }
