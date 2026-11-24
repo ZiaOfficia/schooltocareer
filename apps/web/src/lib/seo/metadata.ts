@@ -46,6 +46,12 @@ type BuildInput = {
   modifiedTime?: string | null;
   /** Force noindex for a page that is otherwise indexable (e.g. a thin variant). */
   noindex?: boolean;
+  /**
+   * Drop the " | SchoolToCareer" suffix and give the title the full length
+   * budget. For pages whose title must carry a lot of distinguishing text,
+   * such as one exam question among seventy-five similar ones.
+   */
+  absoluteTitle?: boolean;
 };
 
 /**
@@ -81,7 +87,8 @@ export function buildMetadata(input: BuildInput): Metadata {
   // to child segments only, never to the page in the layout's own segment, so
   // the home title renders bare and gets the whole budget.
   const isHome = input.path === '/';
-  const suffixLength = isHome ? 0 : TITLE_TEMPLATE.DEFAULT.replace('%s', '').length;
+  const suffixLength =
+    isHome || input.absoluteTitle ? 0 : TITLE_TEMPLATE.DEFAULT.replace('%s', '').length;
   const title = clamp(rawTitle, Math.max(20, SEO_LIMITS.TITLE_MAX - suffixLength));
   const description = clamp(rawDescription, SEO_LIMITS.DESCRIPTION_MAX);
 
@@ -90,16 +97,14 @@ export function buildMetadata(input: BuildInput): Metadata {
   // Indexable only when this is the real production deployment AND the path is
   // one we want in the index AND the page has not opted out.
   const indexable =
-    isIndexableDeployment(deploymentEnv()) &&
-    !isNoindexPath(input.path) &&
-    !input.noindex;
+    isIndexableDeployment(deploymentEnv()) && !isNoindexPath(input.path) && !input.noindex;
 
   const image = input.image
     ? [{ url: input.image.url, alt: input.image.alt, width: 1200, height: 630 }]
     : undefined;
 
   return {
-    title,
+    title: input.absoluteTitle ? { absolute: title } : title,
     description,
     alternates: { canonical },
     robots: {

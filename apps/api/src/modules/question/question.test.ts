@@ -23,7 +23,10 @@ const row = (publicId: string, number: number, year = 2026): QuestionRowRecord =
   answer: { provenance: 'OFFICIAL_FINAL' },
 });
 
-const detail = (publicId: string, overrides: Partial<QuestionDetailRecord> = {}): QuestionDetailRecord =>
+const detail = (
+  publicId: string,
+  overrides: Partial<QuestionDetailRecord> = {},
+): QuestionDetailRecord =>
   ({
     id: `id_${publicId}`,
     publicId,
@@ -36,7 +39,10 @@ const detail = (publicId: string, overrides: Partial<QuestionDetailRecord> = {})
     stemHi: null,
     difficulty: null,
     updatedAt: new Date('2026-10-10T00:00:00Z'),
-    questionPaper: { ...paper('jee-main-8-apr-2026-shift-2-btech', 2026), exam: { slug: 'jee-main', shortName: 'JEE Main' } },
+    questionPaper: {
+      ...paper('jee-main-8-apr-2026-shift-2-btech', 2026),
+      exam: { slug: 'jee-main', shortName: 'JEE Main' },
+    },
     chapter: {
       id: 'ch_units',
       slug: 'units-and-measurements',
@@ -78,7 +84,11 @@ describe('QuestionService.getPublic', () => {
   it('links the neighbours inside the chapter', async () => {
     const svc = service({
       findPublicByPublicId: async (id) => detail(id),
-      listPublicInChapter: async () => [row('aaaaaaaaaa', 1), row('bbbbbbbbbb', 2), row('cccccccccc', 3)],
+      listPublicInChapter: async () => [
+        row('aaaaaaaaaa', 1),
+        row('bbbbbbbbbb', 2),
+        row('cccccccccc', 3),
+      ],
     });
     const dto = await svc.getPublic('bbbbbbbbbb');
     expect(dto.previous?.publicId).toBe('aaaaaaaaaa');
@@ -89,7 +99,10 @@ describe('QuestionService.getPublic', () => {
 
   it('has no previous at the start and no next at the end', async () => {
     const rows = [row('aaaaaaaaaa', 1), row('bbbbbbbbbb', 2)];
-    const svc = service({ findPublicByPublicId: async (id) => detail(id), listPublicInChapter: async () => rows });
+    const svc = service({
+      findPublicByPublicId: async (id) => detail(id),
+      listPublicInChapter: async () => rows,
+    });
     expect((await svc.getPublic('aaaaaaaaaa')).previous).toBeNull();
     expect((await svc.getPublic('bbbbbbbbbb')).next).toBeNull();
   });
@@ -135,7 +148,14 @@ describe('QuestionService.getChapter', () => {
       exam: { slug: 'jee-main', shortName: 'JEE Main' },
     },
     yearStats: [
-      { year: 2026, questions: 2, subjectQuestions: 25, papersInYear: 1, weightagePct: 8, changePct: null },
+      {
+        year: 2026,
+        questions: 2,
+        subjectQuestions: 25,
+        papersInYear: 1,
+        weightagePct: 8,
+        changePct: null,
+      },
     ],
   };
 
@@ -151,7 +171,9 @@ describe('QuestionService.getChapter', () => {
   });
 
   it('is a 404 for an unpublished or unknown chapter', async () => {
-    await expect(service({}).getChapter('jee-main', 'physics', 'nope')).rejects.toBeInstanceOf(NotFoundError);
+    await expect(service({}).getChapter('jee-main', 'physics', 'nope')).rejects.toBeInstanceOf(
+      NotFoundError,
+    );
   });
 });
 
@@ -176,12 +198,20 @@ describe('QuestionService.getPaperQuestions', () => {
 });
 
 describe('plainPreview', () => {
-  it('replaces maths with an ellipsis and drops markdown', () => {
-    expect(plainPreview('Find **$\\frac{dy}{dx}$** if $y = x^2$.')).toBe('Find … if … .');
+  it('writes maths as readable text and drops markdown', () => {
+    expect(plainPreview('Find **$\\frac{dy}{dx}$** if $y = x^2$.')).toBe('Find dy/dx if y = x².');
+  });
+
+  it('keeps an ellipsis for maths it cannot read, such as a matrix', () => {
+    expect(
+      plainPreview('Let $A = \\begin{bmatrix} 1 & 2 \\end{bmatrix}$. Then $\\det(A)$ is:'),
+    ).toBe('Let …. Then det(A) is:');
   });
 
   it('drops tables and images', () => {
-    expect(plainPreview('Match the lists.\n\n| A | B |\n|---|---|\n| 1 | 2 |\n\n![fig](a.png)')).toBe('Match the lists.');
+    expect(
+      plainPreview('Match the lists.\n\n| A | B |\n|---|---|\n| 1 | 2 |\n\n![fig](a.png)'),
+    ).toBe('Match the lists.');
   });
 
   it('cuts long text at a word boundary', () => {
@@ -199,7 +229,12 @@ describe('plainPreview', () => {
   });
 });
 
-const practicePaper = (slug: string, year: number, count: number, exam = { slug: 'jee-main', shortName: 'JEE Main', name: 'JEE Main' }) => ({
+const practicePaper = (
+  slug: string,
+  year: number,
+  count: number,
+  exam = { slug: 'jee-main', shortName: 'JEE Main', name: 'JEE Main' },
+) => ({
   ...paper(slug, year),
   exam,
   _count: { questions: count },
@@ -268,14 +303,21 @@ describe('QuestionService practice', () => {
     const svc = service({
       findMockTestPaper: async (slug) =>
         slug === 'empty'
-          ? { ...paper('empty', 2026), durationMin: 180, exam: { slug: 'jee-main', shortName: 'JEE Main' }, questions: [] }
+          ? {
+              ...paper('empty', 2026),
+              durationMin: 180,
+              exam: { slug: 'jee-main', shortName: 'JEE Main' },
+              questions: [],
+            }
           : {
               ...paper(slug, 2026),
               durationMin: 180,
               exam: { slug: 'jee-main', shortName: 'JEE Main' },
               questions: [
                 q(1, 'mathematics'),
-                q(2, 'physics', { answer: { provenance: 'DROPPED', numericValue: null, numericTolerance: null } }),
+                q(2, 'physics', {
+                  answer: { provenance: 'DROPPED', numericValue: null, numericTolerance: null },
+                }),
               ] as never,
             },
     });

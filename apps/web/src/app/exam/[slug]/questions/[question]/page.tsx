@@ -5,16 +5,18 @@ import Link from 'next/link';
 import { notFound, permanentRedirect } from 'next/navigation';
 
 import { ROUTES, SITE } from '@stc/constants';
-import type { AnswerProvenance, QuestionDetailDto } from '@stc/types';
+import type { AnswerProvenance, ChapterPageDto, QuestionDetailDto } from '@stc/types';
 import { LastUpdated, Section, Wrap } from '@stc/ui';
 
 import { ArrowRightIcon } from '@/components/icons';
 import { PageHero } from '@/components/page-hero';
 import { QuestionPractice, type PracticeOption } from '@/components/question-practice';
-import { ApiError, getQuestion } from '@/lib/api';
+import { ApiError, getExamChapter, getQuestion } from '@/lib/api';
+import { examDisplayName } from '@/lib/exam-name';
+import { questionHeadline } from '@/lib/question-headline';
 import { renderRich, renderRichInline } from '@/lib/rich-text';
 import { JsonLd, breadcrumbSchema } from '@/lib/seo/json-ld';
-import { buildMetadata, clamp } from '@/lib/seo/metadata';
+import { buildMetadata } from '@/lib/seo/metadata';
 
 /**
  * ONE QUESTION — a real exam question, answered and explained.
@@ -60,7 +62,10 @@ const TYPE_LABEL: Record<QuestionDetailDto['type'], string> = {
   NUMERICAL: 'Numerical answer',
 };
 
-const PROVENANCE: Record<AnswerProvenance, { tone: 'ok' | 'wait' | 'urgent' | undefined; text: string }> = {
+const PROVENANCE: Record<
+  AnswerProvenance,
+  { tone: 'ok' | 'wait' | 'urgent' | undefined; text: string }
+> = {
   OFFICIAL_FINAL: { tone: 'ok', text: 'Answer matches NTA’s final key' },
   OFFICIAL_PROVISIONAL: { tone: 'wait', text: 'Answer from NTA’s provisional key' },
   EDITORIAL: { tone: undefined, text: 'Our answer: no official key covers this question' },
@@ -72,24 +77,51 @@ function marks(question: QuestionDetailDto): string {
   return question.marksWrong < 0 ? `${right} / ${question.marksWrong}` : `${right} / no negative`;
 }
 
+/** "JEE Main 2026", from the exam's short name and the paper's year. */
+function examYear(question: QuestionDetailDto): string {
+  return `${examDisplayName(question.exam.shortName)} ${question.paper.year}`;
+}
+
+/**
+ * Title, description and heading are built from the question itself so no
+ * two of the seventy-five pages in a paper read alike: the old title was the
+ * stem's opening with maths blanked out, which made dozens of them identical.
+ */
 export async function generateMetadata({ params }: { params: Promise<Params> }) {
   const question = await load(await params);
   if (!question) return {};
-  const preview = clamp(question.preview, 52);
+  const chapter = question.chapter?.name ?? null;
+  const exam = examYear(question);
+  const suffix = ` | ${exam} Q${question.number}`;
   const official = question.answer.provenance.startsWith('OFFICIAL');
+  const shift = question.paper.shift
+    ? ` (${question.paper.shift.replace(` ${question.paper.year}`, '')})`
+    : '';
   return buildMetadata({
     template: 'question',
-    values: {
-      preview,
-      exam: question.exam.shortName,
-      year: question.paper.year,
-      paper: question.paper.title,
-      keyNote: official ? ', checked against the official answer key' : '',
-      siteName: SITE.NAME,
-    },
+    values: { siteName: SITE.NAME },
     path: question.path,
+    absoluteTitle: true,
+    title: `${questionHeadline(question.stem, chapter, 60 - suffix.length)}${suffix}`,
+    description: `${questionHeadline(question.stem, chapter, 64)} ${exam}${shift} Q${question.number}: answer and worked solution${official ? ', checked against the official key' : ''}.`,
     modifiedTime: question.updatedAt,
   });
+}
+
+/** Other questions from the same chapter; empty when the chapter page is unavailable. */
+async function chapterSiblings(question: QuestionDetailDto): Promise<ChapterPageDto['questions']> {
+  if (!question.chapter) return [];
+  try {
+    const page = await getExamChapter<ChapterPageDto>(
+      question.exam.slug,
+      question.chapter.subject.slug,
+      question.chapter.slug,
+    );
+    return (page?.questions ?? []).filter((row) => row.publicId !== question.publicId).slice(0, 6);
+  } catch (error) {
+    if (error instanceof ApiError) return [];
+    throw error;
+  }
 }
 
 export default async function QuestionPage({ params }: { params: Promise<Params> }) {
@@ -102,12 +134,16 @@ export default async function QuestionPage({ params }: { params: Promise<Params>
 
   const { answer, chapter, paper } = question;
   const provenance = PROVENANCE[answer.provenance];
+  const exam = examYear(question);
+  const siblings = await chapterSiblings(question);
 
   const options: PracticeOption[] = question.options.map((option) => ({
     label: option.label,
     html: renderRichInline(option.body),
   }));
-  const correct = question.options.filter((option) => option.isCorrect).map((option) => option.label);
+  const correct = question.options
+    .filter((option) => option.isCorrect)
+    .map((option) => option.label);
   const numeric =
     question.type === 'NUMERICAL' && answer.numericValue !== null
       ? { value: Number(answer.numericValue), tolerance: Number(answer.numericTolerance ?? 0) }
@@ -115,7 +151,7 @@ export default async function QuestionPage({ params }: { params: Promise<Params>
 
   const trail = [
     { name: 'Home', path: ROUTES.home() },
-    { name: question.exam.shortName, path: question.exam.path },
+    { name: examDisplayName(question.exam.shortName), path: question.exam.path },
     ...(chapter ? [{ name: chapter.name, path: chapter.path }] : []),
     { name: `Question ${question.number}`, path: question.path },
   ];
@@ -126,8 +162,8 @@ export default async function QuestionPage({ params }: { params: Promise<Params>
 
       <PageHero
         trail={trail}
-        title={`${question.exam.shortName} ${paper.year} · ${chapter?.name ?? 'Question'}`}
-        subtitle={`${paper.title}, question ${question.number}`}
+        title={`${exam} question ${question.number}${chapter ? `: ${chapter.name}` : ''}`}
+        subtitle={`${paper.title}. ${TYPE_LABEL[question.type]}, ${marks(question)} marks.`}
         meta={<LastUpdated iso={question.updatedAt} />}
       />
 
@@ -158,12 +194,20 @@ export default async function QuestionPage({ params }: { params: Promise<Params>
                 dropped={answer.provenance === 'DROPPED'}
               >
                 <h2 className="mb-3 text-[19px] font-semibold text-ink">Solution</h2>
-                <div className="rich" dangerouslySetInnerHTML={{ __html: renderRich(answer.solution) }} />
+                <div
+                  className="rich"
+                  dangerouslySetInnerHTML={{ __html: renderRich(answer.solution) }}
+                />
                 <p className="mt-5 text-[13.5px] text-ink-mute">
                   {answer.answerKeySourceUrl ? (
                     <>
                       Answer checked against{' '}
-                      <a href={answer.answerKeySourceUrl} target="_blank" rel="noopener" className="underline">
+                      <a
+                        href={answer.answerKeySourceUrl}
+                        target="_blank"
+                        rel="noopener"
+                        className="underline"
+                      >
                         the official answer key
                       </a>
                       . The solution is our own working.
@@ -194,11 +238,38 @@ export default async function QuestionPage({ params }: { params: Promise<Params>
           </nav>
         </div>
 
+        {siblings.length > 0 && chapter ? (
+          <Section
+            title={`More ${chapter.name} questions`}
+            lede={`Other ${chapter.name} questions from ${examDisplayName(question.exam.shortName)} papers, each with a worked solution.`}
+          >
+            <ul className="grid gap-3 sm:grid-cols-2">
+              {siblings.map((row) => (
+                <li key={row.publicId}>
+                  <Link
+                    href={row.path}
+                    className="card block h-full p-4 text-[15px] text-ink no-underline"
+                  >
+                    <span className="block text-[13px] font-semibold text-ink-mute">
+                      {row.paper.year}
+                      {row.paper.shift ? `, ${row.paper.shift}` : ''} · Q{row.number}
+                    </span>
+                    <span className="mt-1 block leading-snug">{row.preview}</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </Section>
+        ) : null}
+
         <Section title="Keep going">
           <ul className="grid gap-4 sm:grid-cols-2">
             {chapter ? (
               <li>
-                <Link href={chapter.path} className="card flex h-full items-center justify-between gap-3 p-5">
+                <Link
+                  href={chapter.path}
+                  className="card flex h-full items-center justify-between gap-3 p-5"
+                >
                   <span className="font-display text-[16px] font-semibold text-ink">
                     All {chapter.name} questions
                   </span>
@@ -207,7 +278,10 @@ export default async function QuestionPage({ params }: { params: Promise<Params>
               </li>
             ) : null}
             <li>
-              <Link href={paper.path} className="card flex h-full items-center justify-between gap-3 p-5">
+              <Link
+                href={paper.path}
+                className="card flex h-full items-center justify-between gap-3 p-5"
+              >
                 <span className="font-display text-[16px] font-semibold text-ink">
                   The full {paper.shift ?? String(paper.year)} paper
                 </span>

@@ -12,6 +12,7 @@ import type {
   QuestionLinkDto,
   QuestionPaperRefDto,
 } from '@stc/types';
+import { markdownMathToText } from '@stc/utils';
 
 import type {
   ChapterPageRecord,
@@ -27,27 +28,23 @@ import type {
 const PREVIEW_MAX = 160;
 
 /**
- * The stem's opening as plain text, for list rows and link titles.
+ * The stem's opening as plain text, for list rows, link titles and page
+ * titles.
  *
- * Maths is replaced by an ellipsis rather than shown as LaTeX source: a row
- * reading "Find \frac{dy}{dx} if…" is worse than "Find … if…", and the row
- * links to the rendered question anyway. Markdown markers are dropped.
+ * Maths is converted to readable text ("x² + y² − 6x = 0", "√(x + 1)") by
+ * @stc/utils markdownMathToText. It used to be replaced by "…", which gave
+ * dozens of questions the same preview ("Let … and … . If … , then …") and so
+ * near-identical page titles. Anything the converter cannot make readable,
+ * such as a matrix, still becomes "…".
  */
 export function plainPreview(markdown: string): string {
-  const text = markdown
-    .replace(/\$\$[\s\S]*?\$\$/g, ' … ')
-    .replace(/\$[^$\n]+\$/g, ' … ')
-    .replace(/!\[[^\]]*]\([^)]*\)/g, ' ')
-    .replace(/\[([^\]]+)]\([^)]*\)/g, '$1')
-    .replace(/^\s*\|.*$/gm, ' ')
-    .replace(/[*_`#>]/g, '')
-    .replace(/\s+/g, ' ')
-    .replace(/(?:\s*…\s*)+/g, ' … ')
-    .trim();
+  const text = markdownMathToText(markdown);
   if (text.length <= PREVIEW_MAX) return text;
   const cut = text.slice(0, PREVIEW_MAX);
   // Strip a trailing maths ellipsis or comma first, so the cut never reads "… …".
-  const head = cut.slice(0, Math.max(cut.lastIndexOf(' '), PREVIEW_MAX - 20)).replace(/[\s…,;:]+$/, '');
+  const head = cut
+    .slice(0, Math.max(cut.lastIndexOf(' '), PREVIEW_MAX - 20))
+    .replace(/[\s…,;:]+$/, '');
   return `${head}…`;
 }
 
@@ -190,12 +187,19 @@ export function toPracticeExams(papers: PracticePaperRecord[]): PracticeExamDto[
   return [...byExam.values()];
 }
 
-export function toExamPractice(practice: PracticeExamDto, chapters: PracticeChapterRecord[]): ExamPracticeDto {
+export function toExamPractice(
+  practice: PracticeExamDto,
+  chapters: PracticeChapterRecord[],
+): ExamPracticeDto {
   const exam = practice.exam.slug;
   const subjects = new Map<string, ExamPracticeDto['subjects'][number]>();
   for (const chapter of chapters) {
     const subject = chapter.examSubject.subject;
-    const group = subjects.get(subject.slug) ?? { subject: { ...subject }, questionCount: 0, chapters: [] };
+    const group = subjects.get(subject.slug) ?? {
+      subject: { ...subject },
+      questionCount: 0,
+      chapters: [],
+    };
     group.chapters.push({
       slug: chapter.slug,
       name: chapter.name,
