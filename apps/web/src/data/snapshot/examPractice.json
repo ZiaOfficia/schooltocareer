@@ -1,0 +1,454 @@
+{
+ "jee-main": {
+  "exam": {
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "name": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "practicePath": "/exam/jee-main/questions",
+  "totalQuestions": 75,
+  "mockTests": [
+   {
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "questionCount": 75,
+    "path": "/exam/jee-main/mock-test/jee-main-8-apr-2026-shift-2-btech"
+   }
+  ],
+  "subjects": [
+   {
+    "subject": {
+     "slug": "mathematics",
+     "name": "Mathematics"
+    },
+    "questionCount": 25,
+    "chapters": [
+     {
+      "slug": "sets-relations-and-functions",
+      "name": "Sets, Relations and Functions",
+      "path": "/exam/jee-main/chapters/mathematics/sets-relations-and-functions",
+      "questionCount": 1,
+      "unit": null
+     },
+     {
+      "slug": "complex-numbers-and-quadratic-equations",
+      "name": "Complex Numbers and Quadratic Equations",
+      "path": "/exam/jee-main/chapters/mathematics/complex-numbers-and-quadratic-equations",
+      "questionCount": 2,
+      "unit": null
+     },
+     {
+      "slug": "matrices-and-determinants",
+      "name": "Matrices and Determinants",
+      "path": "/exam/jee-main/chapters/mathematics/matrices-and-determinants",
+      "questionCount": 2,
+      "unit": null
+     },
+     {
+      "slug": "permutations-and-combinations",
+      "name": "Permutations and Combinations",
+      "path": "/exam/jee-main/chapters/mathematics/permutations-and-combinations",
+      "questionCount": 1,
+      "unit": null
+     },
+     {
+      "slug": "binomial-theorem",
+      "name": "Binomial Theorem and its Simple Applications",
+      "path": "/exam/jee-main/chapters/mathematics/binomial-theorem",
+      "questionCount": 1,
+      "unit": null
+     },
+     {
+      "slug": "sequence-and-series",
+      "name": "Sequence and Series",
+      "path": "/exam/jee-main/chapters/mathematics/sequence-and-series",
+      "questionCount": 2,
+      "unit": null
+     },
+     {
+      "slug": "limit-continuity-and-differentiability",
+      "name": "Limit, Continuity and Differentiability",
+      "path": "/exam/jee-main/chapters/mathematics/limit-continuity-and-differentiability",
+      "questionCount": 2,
+      "unit": null
+     },
+     {
+      "slug": "integral-calculus",
+      "name": "Integral Calculus",
+      "path": "/exam/jee-main/chapters/mathematics/integral-calculus",
+      "questionCount": 3,
+      "unit": null
+     },
+     {
+      "slug": "differential-equations",
+      "name": "Differential Equations",
+      "path": "/exam/jee-main/chapters/mathematics/differential-equations",
+      "questionCount": 1,
+      "unit": null
+     },
+     {
+      "slug": "coordinate-geometry",
+      "name": "Co-ordinate Geometry",
+      "path": "/exam/jee-main/chapters/mathematics/coordinate-geometry",
+      "questionCount": 4,
+      "unit": null
+     },
+     {
+      "slug": "three-dimensional-geometry",
+      "name": "Three Dimensional Geometry",
+      "path": "/exam/jee-main/chapters/mathematics/three-dimensional-geometry",
+      "questionCount": 2,
+      "unit": null
+     },
+     {
+      "slug": "vector-algebra",
+      "name": "Vector Algebra",
+      "path": "/exam/jee-main/chapters/mathematics/vector-algebra",
+      "questionCount": 1,
+      "unit": null
+     },
+     {
+      "slug": "statistics-and-probability",
+      "name": "Statistics and Probability",
+      "path": "/exam/jee-main/chapters/mathematics/statistics-and-probability",
+      "questionCount": 2,
+      "unit": null
+     },
+     {
+      "slug": "trigonometry",
+      "name": "Trigonometry",
+      "path": "/exam/jee-main/chapters/mathematics/trigonometry",
+      "questionCount": 1,
+      "unit": null
+     }
+    ]
+   },
+   {
+    "subject": {
+     "slug": "physics",
+     "name": "Physics"
+    },
+    "questionCount": 25,
+    "chapters": [
+     {
+      "slug": "units-and-measurements",
+      "name": "Units and Measurements",
+      "path": "/exam/jee-main/chapters/physics/units-and-measurements",
+      "questionCount": 2,
+      "unit": null
+     },
+     {
+      "slug": "kinematics",
+      "name": "Kinematics",
+      "path": "/exam/jee-main/chapters/physics/kinematics",
+      "questionCount": 3,
+      "unit": null
+     },
+     {
+      "slug": "laws-of-motion",
+      "name": "Laws of Motion",
+      "path": "/exam/jee-main/chapters/physics/laws-of-motion",
+      "questionCount": 1,
+      "unit": null
+     },
+     {
+      "slug": "rotational-motion",
+      "name": "Rotational Motion",
+      "path": "/exam/jee-main/chapters/physics/rotational-motion",
+      "questionCount": 1,
+      "unit": null
+     },
+     {
+      "slug": "properties-of-solids-and-liquids",
+      "name": "Properties of Solids and Liquids",
+      "path": "/exam/jee-main/chapters/physics/properties-of-solids-and-liquids",
+      "questionCount": 2,
+      "unit": null
+     },
+     {
+      "slug": "thermodynamics",
+      "name": "Thermodynamics",
+      "path": "/exam/jee-main/chapters/physics/thermodynamics",
+      "questionCount": 2,
+      "unit": null
+     },
+     {
+      "slug": "oscillations-and-waves",
+      "name": "Oscillations and Waves",
+      "path": "/exam/jee-main/chapters/physics/oscillations-and-waves",
+      "questionCount": 1,
+      "unit": null
+     },
+     {
+      "slug": "electrostatics",
+      "name": "Electrostatics",
+      "path": "/exam/jee-main/chapters/physics/electrostatics",
+      "questionCount": 2,
+      "unit": null
+     },
+     {
+      "slug": "current-electricity",
+      "name": "Current Electricity",
+      "path": "/exam/jee-main/chapters/physics/current-electricity",
+      "questionCount": 1,
+      "unit": null
+     },
+     {
+      "slug": "magnetic-effects-of-current-and-magnetism",
+      "name": "Magnetic Effects of Current and Magnetism",
+      "path": "/exam/jee-main/chapters/physics/magnetic-effects-of-current-and-magnetism",
+      "questionCount": 2,
+      "unit": null
+     },
+     {
+      "slug": "electromagnetic-induction-and-alternating-currents",
+      "name": "Electromagnetic Induction and Alternating Currents",
+      "path": "/exam/jee-main/chapters/physics/electromagnetic-induction-and-alternating-currents",
+      "questionCount": 1,
+      "unit": null
+     },
+     {
+      "slug": "electromagnetic-waves",
+      "name": "Electromagnetic Waves",
+      "path": "/exam/jee-main/chapters/physics/electromagnetic-waves",
+      "questionCount": 1,
+      "unit": null
+     },
+     {
+      "slug": "optics",
+      "name": "Optics",
+      "path": "/exam/jee-main/chapters/physics/optics",
+      "questionCount": 3,
+      "unit": null
+     },
+     {
+      "slug": "dual-nature-of-matter-and-radiation",
+      "name": "Dual Nature of Matter and Radiation",
+      "path": "/exam/jee-main/chapters/physics/dual-nature-of-matter-and-radiation",
+      "questionCount": 1,
+      "unit": null
+     },
+     {
+      "slug": "atoms-and-nuclei",
+      "name": "Atoms and Nuclei",
+      "path": "/exam/jee-main/chapters/physics/atoms-and-nuclei",
+      "questionCount": 1,
+      "unit": null
+     },
+     {
+      "slug": "electronic-devices",
+      "name": "Electronic Devices",
+      "path": "/exam/jee-main/chapters/physics/electronic-devices",
+      "questionCount": 1,
+      "unit": null
+     }
+    ]
+   },
+   {
+    "subject": {
+     "slug": "chemistry",
+     "name": "Chemistry"
+    },
+    "questionCount": 25,
+    "chapters": [
+     {
+      "slug": "some-basic-concepts-in-chemistry",
+      "name": "Some Basic Concepts in Chemistry",
+      "path": "/exam/jee-main/chapters/chemistry/some-basic-concepts-in-chemistry",
+      "questionCount": 1,
+      "unit": {
+       "slug": "physical-chemistry",
+       "name": "Physical Chemistry"
+      }
+     },
+     {
+      "slug": "atomic-structure",
+      "name": "Atomic Structure",
+      "path": "/exam/jee-main/chapters/chemistry/atomic-structure",
+      "questionCount": 1,
+      "unit": {
+       "slug": "physical-chemistry",
+       "name": "Physical Chemistry"
+      }
+     },
+     {
+      "slug": "chemical-bonding-and-molecular-structure",
+      "name": "Chemical Bonding and Molecular Structure",
+      "path": "/exam/jee-main/chapters/chemistry/chemical-bonding-and-molecular-structure",
+      "questionCount": 1,
+      "unit": {
+       "slug": "physical-chemistry",
+       "name": "Physical Chemistry"
+      }
+     },
+     {
+      "slug": "chemical-thermodynamics",
+      "name": "Chemical Thermodynamics",
+      "path": "/exam/jee-main/chapters/chemistry/chemical-thermodynamics",
+      "questionCount": 1,
+      "unit": {
+       "slug": "physical-chemistry",
+       "name": "Physical Chemistry"
+      }
+     },
+     {
+      "slug": "solutions",
+      "name": "Solutions",
+      "path": "/exam/jee-main/chapters/chemistry/solutions",
+      "questionCount": 2,
+      "unit": {
+       "slug": "physical-chemistry",
+       "name": "Physical Chemistry"
+      }
+     },
+     {
+      "slug": "equilibrium",
+      "name": "Equilibrium",
+      "path": "/exam/jee-main/chapters/chemistry/equilibrium",
+      "questionCount": 2,
+      "unit": {
+       "slug": "physical-chemistry",
+       "name": "Physical Chemistry"
+      }
+     },
+     {
+      "slug": "redox-reactions-and-electrochemistry",
+      "name": "Redox Reactions and Electrochemistry",
+      "path": "/exam/jee-main/chapters/chemistry/redox-reactions-and-electrochemistry",
+      "questionCount": 1,
+      "unit": {
+       "slug": "physical-chemistry",
+       "name": "Physical Chemistry"
+      }
+     },
+     {
+      "slug": "chemical-kinetics",
+      "name": "Chemical Kinetics",
+      "path": "/exam/jee-main/chapters/chemistry/chemical-kinetics",
+      "questionCount": 1,
+      "unit": {
+       "slug": "physical-chemistry",
+       "name": "Physical Chemistry"
+      }
+     },
+     {
+      "slug": "classification-of-elements-and-periodicity",
+      "name": "Classification of Elements and Periodicity in Properties",
+      "path": "/exam/jee-main/chapters/chemistry/classification-of-elements-and-periodicity",
+      "questionCount": 1,
+      "unit": {
+       "slug": "inorganic-chemistry",
+       "name": "Inorganic Chemistry"
+      }
+     },
+     {
+      "slug": "p-block-elements",
+      "name": "p-Block Elements",
+      "path": "/exam/jee-main/chapters/chemistry/p-block-elements",
+      "questionCount": 1,
+      "unit": {
+       "slug": "inorganic-chemistry",
+       "name": "Inorganic Chemistry"
+      }
+     },
+     {
+      "slug": "d-and-f-block-elements",
+      "name": "d- and f-Block Elements",
+      "path": "/exam/jee-main/chapters/chemistry/d-and-f-block-elements",
+      "questionCount": 2,
+      "unit": {
+       "slug": "inorganic-chemistry",
+       "name": "Inorganic Chemistry"
+      }
+     },
+     {
+      "slug": "coordination-compounds",
+      "name": "Coordination Compounds",
+      "path": "/exam/jee-main/chapters/chemistry/coordination-compounds",
+      "questionCount": 1,
+      "unit": {
+       "slug": "inorganic-chemistry",
+       "name": "Inorganic Chemistry"
+      }
+     },
+     {
+      "slug": "purification-and-characterisation-of-organic-compounds",
+      "name": "Purification and Characterisation of Organic Compounds",
+      "path": "/exam/jee-main/chapters/chemistry/purification-and-characterisation-of-organic-compounds",
+      "questionCount": 1,
+      "unit": {
+       "slug": "organic-chemistry",
+       "name": "Organic Chemistry"
+      }
+     },
+     {
+      "slug": "some-basic-principles-of-organic-chemistry",
+      "name": "Some Basic Principles of Organic Chemistry",
+      "path": "/exam/jee-main/chapters/chemistry/some-basic-principles-of-organic-chemistry",
+      "questionCount": 1,
+      "unit": {
+       "slug": "organic-chemistry",
+       "name": "Organic Chemistry"
+      }
+     },
+     {
+      "slug": "hydrocarbons",
+      "name": "Hydrocarbons",
+      "path": "/exam/jee-main/chapters/chemistry/hydrocarbons",
+      "questionCount": 2,
+      "unit": {
+       "slug": "organic-chemistry",
+       "name": "Organic Chemistry"
+      }
+     },
+     {
+      "slug": "organic-compounds-containing-halogens",
+      "name": "Organic Compounds Containing Halogens",
+      "path": "/exam/jee-main/chapters/chemistry/organic-compounds-containing-halogens",
+      "questionCount": 1,
+      "unit": {
+       "slug": "organic-chemistry",
+       "name": "Organic Chemistry"
+      }
+     },
+     {
+      "slug": "organic-compounds-containing-oxygen",
+      "name": "Organic Compounds Containing Oxygen",
+      "path": "/exam/jee-main/chapters/chemistry/organic-compounds-containing-oxygen",
+      "questionCount": 1,
+      "unit": {
+       "slug": "organic-chemistry",
+       "name": "Organic Chemistry"
+      }
+     },
+     {
+      "slug": "organic-compounds-containing-nitrogen",
+      "name": "Organic Compounds Containing Nitrogen",
+      "path": "/exam/jee-main/chapters/chemistry/organic-compounds-containing-nitrogen",
+      "questionCount": 2,
+      "unit": {
+       "slug": "organic-chemistry",
+       "name": "Organic Chemistry"
+      }
+     },
+     {
+      "slug": "biomolecules",
+      "name": "Biomolecules",
+      "path": "/exam/jee-main/chapters/chemistry/biomolecules",
+      "questionCount": 2,
+      "unit": {
+       "slug": "organic-chemistry",
+       "name": "Organic Chemistry"
+      }
+     }
+    ]
+   }
+  ]
+ }
+}

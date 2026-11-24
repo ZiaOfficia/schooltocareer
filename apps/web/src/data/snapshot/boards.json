@@ -1,0 +1,367 @@
+[
+ {
+  "id": "seed_board_cbse",
+  "slug": "cbse",
+  "path": "/board/cbse",
+  "name": "Central Board of Secondary Education",
+  "shortName": "CBSE",
+  "type": "CENTRAL",
+  "popularityScore": 1000,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-08-10T18:45:00.933Z",
+  "updatedAt": "2026-08-10T18:45:00.936Z",
+  "state": null,
+  "logo": null
+ },
+ {
+  "id": "seed_board_cisce",
+  "slug": "cisce",
+  "path": "/board/cisce",
+  "name": "Council for the Indian School Certificate Examinations",
+  "shortName": "CISCE",
+  "type": "CENTRAL",
+  "popularityScore": 975,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-08-10T18:45:01.183Z",
+  "updatedAt": "2026-08-10T18:45:01.184Z",
+  "state": null,
+  "logo": null
+ },
+ {
+  "id": "seed_board_nios",
+  "slug": "nios",
+  "path": "/board/nios",
+  "name": "National Institute of Open Schooling",
+  "shortName": "NIOS",
+  "type": "OPEN_SCHOOLING",
+  "popularityScore": 950,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-08-10T18:45:01.288Z",
+  "updatedAt": "2026-08-10T18:45:01.289Z",
+  "state": null,
+  "logo": null
+ },
+ {
+  "id": "seed_board_up-board",
+  "slug": "up-board",
+  "path": "/board/up-board",
+  "name": "Uttar Pradesh Madhyamik Shiksha Parishad",
+  "shortName": "UP Board",
+  "type": "STATE",
+  "popularityScore": 925,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-08-10T18:45:01.399Z",
+  "updatedAt": "2026-08-10T18:45:01.400Z",
+  "state": {
+   "id": "seed_state_UP",
+   "name": "Uttar Pradesh",
+   "slug": "uttar-pradesh",
+   "code": "UP"
+  },
+  "logo": null
+ },
+ {
+  "id": "seed_board_maharashtra-board",
+  "slug": "maharashtra-board",
+  "path": "/board/maharashtra-board",
+  "name": "Maharashtra State Board of Secondary and Higher Secondary Education",
+  "shortName": "MSBSHSE",
+  "type": "STATE",
+  "popularityScore": 900,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-08-10T18:45:01.841Z",
+  "updatedAt": "2026-08-10T18:45:01.842Z",
+  "state": {
+   "id": "seed_state_MH",
+   "name": "Maharashtra",
+   "slug": "maharashtra",
+   "code": "MH"
+  },
+  "logo": null
+ },
+ {
+  "id": "seed_board_bihar-board",
+  "slug": "bihar-board",
+  "path": "/board/bihar-board",
+  "name": "Bihar School Examination Board",
+  "shortName": "BSEB",
+  "type": "STATE",
+  "popularityScore": 875,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-08-10T18:45:01.957Z",
+  "updatedAt": "2026-08-10T18:45:01.958Z",
+  "state": {
+   "id": "seed_state_BR",
+   "name": "Bihar",
+   "slug": "bihar",
+   "code": "BR"
+  },
+  "logo": null
+ },
+ {
+  "id": "seed_board_rajasthan-board",
+  "slug": "rajasthan-board",
+  "path": "/board/rajasthan-board",
+  "name": "Board of Secondary Education Rajasthan",
+  "shortName": "RBSE",
+  "type": "STATE",
+  "popularityScore": 850,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-08-10T18:45:02.067Z",
+  "updatedAt": "2026-08-10T18:45:02.069Z",
+  "state": {
+   "id": "seed_state_RJ",
+   "name": "Rajasthan",
+   "slug": "rajasthan",
+   "code": "RJ"
+  },
+  "logo": null
+ },
+ {
+  "id": "seed_board_mp-board",
+  "slug": "mp-board",
+  "path": "/board/mp-board",
+  "name": "Madhya Pradesh Board of Secondary Education",
+  "shortName": "MPBSE",
+  "type": "STATE",
+  "popularityScore": 825,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-08-10T18:45:02.171Z",
+  "updatedAt": "2026-08-10T18:45:02.172Z",
+  "state": {
+   "id": "seed_state_MP",
+   "name": "Madhya Pradesh",
+   "slug": "madhya-pradesh",
+   "code": "MP"
+  },
+  "logo": null
+ },
+ {
+  "id": "seed_board_wb-board",
+  "slug": "wb-board",
+  "path": "/board/wb-board",
+  "name": "West Bengal Board of Secondary Education",
+  "shortName": "WBBSE",
+  "type": "STATE",
+  "popularityScore": 800,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-08-10T18:45:02.287Z",
+  "updatedAt": "2026-08-10T18:45:02.288Z",
+  "state": {
+   "id": "seed_state_WB",
+   "name": "West Bengal",
+   "slug": "west-bengal",
+   "code": "WB"
+  },
+  "logo": null
+ },
+ {
+  "id": "seed_board_tn-board",
+  "slug": "tn-board",
+  "path": "/board/tn-board",
+  "name": "Tamil Nadu State Board of School Examination",
+  "shortName": "TN Board",
+  "type": "STATE",
+  "popularityScore": 775,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-08-10T18:45:02.404Z",
+  "updatedAt": "2026-08-10T18:45:02.406Z",
+  "state": {
+   "id": "seed_state_TN",
+   "name": "Tamil Nadu",
+   "slug": "tamil-nadu",
+   "code": "TN"
+  },
+  "logo": null
+ },
+ {
+  "id": "seed_board_karnataka-board",
+  "slug": "karnataka-board",
+  "path": "/board/karnataka-board",
+  "name": "Karnataka School Examination and Assessment Board",
+  "shortName": "KSEAB",
+  "type": "STATE",
+  "popularityScore": 750,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-08-10T18:45:02.526Z",
+  "updatedAt": "2026-08-10T18:45:02.528Z",
+  "state": {
+   "id": "seed_state_KA",
+   "name": "Karnataka",
+   "slug": "karnataka",
+   "code": "KA"
+  },
+  "logo": null
+ },
+ {
+  "id": "seed_board_gujarat-board",
+  "slug": "gujarat-board",
+  "path": "/board/gujarat-board",
+  "name": "Gujarat Secondary and Higher Secondary Education Board",
+  "shortName": "GSEB",
+  "type": "STATE",
+  "popularityScore": 725,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-08-10T18:45:02.643Z",
+  "updatedAt": "2026-08-10T18:45:02.645Z",
+  "state": {
+   "id": "seed_state_GJ",
+   "name": "Gujarat",
+   "slug": "gujarat",
+   "code": "GJ"
+  },
+  "logo": null
+ },
+ {
+  "id": "seed_board_kerala-board",
+  "slug": "kerala-board",
+  "path": "/board/kerala-board",
+  "name": "Kerala Board of Public Examinations",
+  "shortName": "Kerala Board",
+  "type": "STATE",
+  "popularityScore": 700,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-08-10T18:45:02.757Z",
+  "updatedAt": "2026-08-10T18:45:02.758Z",
+  "state": {
+   "id": "seed_state_KL",
+   "name": "Kerala",
+   "slug": "kerala",
+   "code": "KL"
+  },
+  "logo": null
+ },
+ {
+  "id": "seed_board_telangana-board",
+  "slug": "telangana-board",
+  "path": "/board/telangana-board",
+  "name": "Telangana Board of Secondary Education",
+  "shortName": "TS BSE",
+  "type": "STATE",
+  "popularityScore": 675,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-08-10T18:45:02.877Z",
+  "updatedAt": "2026-08-10T18:45:02.879Z",
+  "state": {
+   "id": "seed_state_TG",
+   "name": "Telangana",
+   "slug": "telangana",
+   "code": "TG"
+  },
+  "logo": null
+ },
+ {
+  "id": "seed_board_ap-board",
+  "slug": "ap-board",
+  "path": "/board/ap-board",
+  "name": "Board of Secondary Education Andhra Pradesh",
+  "shortName": "BSEAP",
+  "type": "STATE",
+  "popularityScore": 650,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-08-10T18:45:02.997Z",
+  "updatedAt": "2026-08-10T18:45:02.998Z",
+  "state": {
+   "id": "seed_state_AP",
+   "name": "Andhra Pradesh",
+   "slug": "andhra-pradesh",
+   "code": "AP"
+  },
+  "logo": null
+ },
+ {
+  "id": "seed_board_punjab-board",
+  "slug": "punjab-board",
+  "path": "/board/punjab-board",
+  "name": "Punjab School Education Board",
+  "shortName": "PSEB",
+  "type": "STATE",
+  "popularityScore": 625,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-08-10T18:45:03.110Z",
+  "updatedAt": "2026-08-10T18:45:03.111Z",
+  "state": {
+   "id": "seed_state_PB",
+   "name": "Punjab",
+   "slug": "punjab",
+   "code": "PB"
+  },
+  "logo": null
+ },
+ {
+  "id": "seed_board_haryana-board",
+  "slug": "haryana-board",
+  "path": "/board/haryana-board",
+  "name": "Board of School Education Haryana",
+  "shortName": "BSEH",
+  "type": "STATE",
+  "popularityScore": 600,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-08-10T18:45:03.215Z",
+  "updatedAt": "2026-08-10T18:45:03.216Z",
+  "state": {
+   "id": "seed_state_HR",
+   "name": "Haryana",
+   "slug": "haryana",
+   "code": "HR"
+  },
+  "logo": null
+ },
+ {
+  "id": "seed_board_odisha-board",
+  "slug": "odisha-board",
+  "path": "/board/odisha-board",
+  "name": "Board of Secondary Education Odisha",
+  "shortName": "BSE Odisha",
+  "type": "STATE",
+  "popularityScore": 575,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-08-10T18:45:03.336Z",
+  "updatedAt": "2026-08-10T18:45:03.338Z",
+  "state": {
+   "id": "seed_state_OD",
+   "name": "Odisha",
+   "slug": "odisha",
+   "code": "OD"
+  },
+  "logo": null
+ },
+ {
+  "id": "seed_board_assam-board",
+  "slug": "assam-board",
+  "path": "/board/assam-board",
+  "name": "Assam State School Education Board",
+  "shortName": "ASSEB",
+  "type": "STATE",
+  "popularityScore": 550,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-08-10T18:45:03.450Z",
+  "updatedAt": "2026-08-10T18:45:03.451Z",
+  "state": {
+   "id": "seed_state_AS",
+   "name": "Assam",
+   "slug": "assam",
+   "code": "AS"
+  },
+  "logo": null
+ },
+ {
+  "id": "seed_board_jharkhand-board",
+  "slug": "jharkhand-board",
+  "path": "/board/jharkhand-board",
+  "name": "Jharkhand Academic Council",
+  "shortName": "JAC",
+  "type": "STATE",
+  "popularityScore": 525,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-08-10T18:45:03.566Z",
+  "updatedAt": "2026-08-10T18:45:03.567Z",
+  "state": {
+   "id": "seed_state_JH",
+   "name": "Jharkhand",
+   "slug": "jharkhand",
+   "code": "JH"
+  },
+  "logo": null
+ }
+]

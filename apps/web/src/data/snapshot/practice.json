@@ -1,0 +1,25 @@
+[
+ {
+  "exam": {
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "name": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "practicePath": "/exam/jee-main/questions",
+  "totalQuestions": 75,
+  "mockTests": [
+   {
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "questionCount": 75,
+    "path": "/exam/jee-main/mock-test/jee-main-8-apr-2026-shift-2-btech"
+   }
+  ]
+ }
+]
