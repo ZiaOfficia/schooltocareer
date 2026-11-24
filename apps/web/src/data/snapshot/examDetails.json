@@ -1,0 +1,1352 @@
+{
+ "jee-main": {
+  "id": "seed_exam_jee-main",
+  "slug": "jee-main",
+  "path": "/exam/jee-main",
+  "name": "JEE MAIN",
+  "shortName": "JEE MAIN",
+  "level": "NATIONAL",
+  "mode": "ONLINE",
+  "educationLevel": "UNDERGRADUATE",
+  "popularityScore": 1000,
+  "isActive": true,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-08-10T18:48:33.058Z",
+  "updatedAt": "2026-09-02T21:17:39.387Z",
+  "category": {
+   "id": "seed_excat_engineering",
+   "name": "Engineering",
+   "slug": "engineering"
+  },
+  "logo": null,
+  "isIndexable": false,
+  "fullName": null,
+  "conductingBody": null,
+  "frequency": "ANNUAL",
+  "officialWebsite": null,
+  "overview": null,
+  "board": null,
+  "createdAt": "2026-08-10T18:48:33.059Z",
+  "years": [
+   {
+    "id": "cmusgeimj0001v4i866n9ptyi",
+    "year": 2027,
+    "sessionName": null,
+    "slug": "2027",
+    "isCurrent": true,
+    "events": []
+   },
+   {
+    "id": "seed_ey_seed_exam_jee-main-2026",
+    "year": 2026,
+    "sessionName": null,
+    "slug": "2026",
+    "isCurrent": false,
+    "events": []
+   },
+   {
+    "id": "seed_ey_seed_exam_jee-main-2025",
+    "year": 2025,
+    "sessionName": null,
+    "slug": "2025",
+    "isCurrent": false,
+    "events": []
+   },
+   {
+    "id": "seed_ey_seed_exam_jee-main-2024",
+    "year": 2024,
+    "sessionName": null,
+    "slug": "2024",
+    "isCurrent": false,
+    "events": []
+   }
+  ]
+ },
+ "jee-advanced": {
+  "id": "seed_exam_jee-advanced",
+  "slug": "jee-advanced",
+  "path": "/exam/jee-advanced",
+  "name": "JEE ADVANCED",
+  "shortName": "JEE ADVANCED",
+  "level": "NATIONAL",
+  "mode": "ONLINE",
+  "educationLevel": "UNDERGRADUATE",
+  "popularityScore": 980,
+  "isActive": true,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-08-10T18:48:33.300Z",
+  "updatedAt": "2026-11-22T16:59:21.207Z",
+  "category": {
+   "id": "seed_excat_engineering",
+   "name": "Engineering",
+   "slug": "engineering"
+  },
+  "logo": null,
+  "isIndexable": true,
+  "fullName": null,
+  "conductingBody": "Indian Institutes of Technology, for the Joint Admission Board (organised in 2026 by IIT Roorkee)",
+  "frequency": "ANNUAL",
+  "officialWebsite": "https://jeeadv.ac.in/",
+  "overview": "JEE (Advanced) is the entrance exam for undergraduate programmes at the 23 Indian Institutes of Technology. It is the second stage of the Joint Entrance Examination: only the top 2,50,000 successful candidates in the B.E./B.Tech. paper of JEE (Main) of the same year can register for it. Seats at the IITs are then allotted through JoSAA counselling, by JEE (Advanced) rank.\n\nThe exam is conducted by one of the IITs each year on behalf of the Joint Admission Board, so the organising institute and its brochure change from cycle to cycle. IIT Roorkee organised the 2026 exam, held on 17 May 2026.\n\nThere are two compulsory papers of three hours each, taken on the same day: Paper 1 in the morning and Paper 2 in the afternoon. Each paper has separate sections for Physics, Chemistry and Mathematics. The exam is computer based only, and questions are available in English and Hindi. Unusually, the brochure does not fix the number of questions, the question types or the marking scheme in advance; they are given in the instructions at the start of each paper and change from year to year. Candidates who miss either paper are not ranked.\n\nTo appear you must also meet age and attempt limits. For 2026, candidates had to be born on or after 1 October 2001 (1 October 1996 for SC, ST and PwD candidates), could attempt the exam at most twice in consecutive years, and had to have appeared in Class XII for the first time in 2025 or 2026 with Physics, Chemistry and Mathematics. Admission to an IIT also needs 75% in Class XII (65% for SC, ST and PwD candidates) or a place in the top 20 percentile of your board.\n\nA rank is not automatic. For the Common Rank List in 2026 a candidate needed at least 10% of the maximum marks in each subject and 35% in aggregate, with lower thresholds for the GEN-EWS, OBC-NCL, SC, ST and PwD lists. Ties are broken by positive marks, then Mathematics, then Physics.\n\nCandidates who want B.Arch. at IIT (BHU) Varanasi, IIT Kharagpur or IIT Roorkee take a further Architecture Aptitude Test after the result. It is pass or fail, and seats are allotted by JEE (Advanced) rank among those who pass.\n\nThe syllabus overlaps heavily with JEE Main, so preparation for the two exams is largely the same work, but JEE (Advanced) questions go deeper and often combine several topics. Use the exam pattern and syllabus pages here to plan, practise with past papers under timed conditions, and confirm every date and rule on jeeadv.ac.in before acting on it.",
+  "board": null,
+  "createdAt": "2026-08-10T18:48:33.301Z",
+  "years": [
+   {
+    "id": "cmusgejlx0003v4i8hootcgc0",
+    "year": 2027,
+    "sessionName": null,
+    "slug": "2027",
+    "isCurrent": true,
+    "events": []
+   },
+   {
+    "id": "seed_ey_seed_exam_jee-advanced-2026",
+    "year": 2026,
+    "sessionName": null,
+    "slug": "2026",
+    "isCurrent": false,
+    "events": [
+     {
+      "id": "cmtnc0j3d0001v4h0bjgfohph",
+      "type": "EXAM_DATE",
+      "title": "Exam date",
+      "startDate": "2026-05-17T00:00:00.000Z",
+      "endDate": "2026-05-17T00:00:00.000Z",
+      "isTentative": false,
+      "officialUrl": null
+     }
+    ]
+   },
+   {
+    "id": "seed_ey_seed_exam_jee-advanced-2025",
+    "year": 2025,
+    "sessionName": null,
+    "slug": "2025",
+    "isCurrent": false,
+    "events": []
+   },
+   {
+    "id": "seed_ey_seed_exam_jee-advanced-2024",
+    "year": 2024,
+    "sessionName": null,
+    "slug": "2024",
+    "isCurrent": false,
+    "events": []
+   }
+  ]
+ },
+ "neet-ug": {
+  "id": "seed_exam_neet-ug",
+  "slug": "neet-ug",
+  "path": "/exam/neet-ug",
+  "name": "NEET UG",
+  "shortName": "NEET UG",
+  "level": "NATIONAL",
+  "mode": "OFFLINE",
+  "educationLevel": "UNDERGRADUATE",
+  "popularityScore": 960,
+  "isActive": true,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-08-10T18:48:33.419Z",
+  "updatedAt": "2026-11-22T16:59:19.827Z",
+  "category": {
+   "id": "seed_excat_medical",
+   "name": "Medical",
+   "slug": "medical"
+  },
+  "logo": null,
+  "isIndexable": true,
+  "fullName": null,
+  "conductingBody": "National Testing Agency (NTA)",
+  "frequency": "ANNUAL",
+  "officialWebsite": "https://neet.nta.nic.in/",
+  "overview": "NEET (UG), the National Eligibility cum Entrance Test for undergraduate courses, is the single entrance exam for medical and dental education in India. Under the National Medical Commission Act, 2019 and the laws governing dentistry, Ayurveda, Siddha, Unani and Homoeopathy, admission to MBBS, BDS, BAMS, BSMS, BUMS and BHMS courses in every medical institution in the country goes through NEET. That includes AIIMS and JIPMER, which have used NEET since 2020. Indian citizens and OCI cardholders who want to study medicine abroad must also qualify it.\n\nThe National Testing Agency has conducted NEET since 2019. Its role is limited to running the exam, declaring results and passing All India Ranks to the counselling authorities. The syllabus is set by the National Medical Commission, and seats are allotted afterwards through counselling: the Medical Counselling Committee for the 15% All India Quota and central institutions, and state authorities for state quota seats.\n\nThe exam is one paper, taken with pen on an OMR sheet in a single shift. It has 180 compulsory multiple-choice questions in three hours: 45 in Physics, 45 in Chemistry and 90 in Biology, split across Botany and Zoology, for 720 marks. A correct answer earns 4 marks and a wrong one loses 1. Because Biology is half the paper, a strong Biology score matters as much as Physics and Chemistry combined. The paper is offered in 13 languages, from English and Hindi to Tamil, Telugu and Urdu.\n\nTo sit NEET you must be at least 17 by 31 December of the exam year; there is no upper age limit. You need Class 12 or an equivalent with Physics, Chemistry, Biology or Biotechnology and English, including practicals. Students waiting for their Class 12 results can take the exam but must have passed by the first round of counselling.\n\nQualifying NEET is measured in percentiles of the highest score: the 50th percentile for General and EWS candidates, and the 40th for SC, ST and OBC candidates, with separate thresholds for candidates with disabilities. Qualifying makes you eligible for counselling; your All India Rank decides which seat you can get. Ties are broken by Biology marks first, then Chemistry, then Physics.\n\nThe scale is very large. In the 2026 cycle close to 20 lakh candidates sat the exam at 5,440 centres in 551 Indian cities and 14 cities abroad, and 11.21 lakh qualified. The exam first held on 3 May 2026 was followed by a re-examination on 21 June 2026, and NTA declared results on 16 July 2026. Only 1,492 candidates scored 650 or more out of 720, which shows how sharply the competition narrows near the top.\n\nThe best preparation follows the official syllabus unit by unit: 20 units each in Physics and Chemistry and 10 in Biology. Practise full papers under exam timing, because three hours for 180 questions leaves one minute per question. Use the pattern and syllabus pages here to plan, and always confirm dates and rules on neet.nta.nic.in before you act on them.",
+  "board": null,
+  "createdAt": "2026-08-10T18:48:33.420Z",
+  "years": [
+   {
+    "id": "cmusgejvm0005v4i8clgsa8vg",
+    "year": 2027,
+    "sessionName": null,
+    "slug": "2027",
+    "isCurrent": true,
+    "events": []
+   },
+   {
+    "id": "seed_ey_seed_exam_neet-ug-2026",
+    "year": 2026,
+    "sessionName": null,
+    "slug": "2026",
+    "isCurrent": false,
+    "events": []
+   },
+   {
+    "id": "seed_ey_seed_exam_neet-ug-2025",
+    "year": 2025,
+    "sessionName": null,
+    "slug": "2025",
+    "isCurrent": false,
+    "events": []
+   },
+   {
+    "id": "seed_ey_seed_exam_neet-ug-2024",
+    "year": 2024,
+    "sessionName": null,
+    "slug": "2024",
+    "isCurrent": false,
+    "events": []
+   }
+  ]
+ },
+ "cuet-ug": {
+  "id": "seed_exam_cuet-ug",
+  "slug": "cuet-ug",
+  "path": "/exam/cuet-ug",
+  "name": "CUET UG",
+  "shortName": "CUET UG",
+  "level": "NATIONAL",
+  "mode": "ONLINE",
+  "educationLevel": "UNDERGRADUATE",
+  "popularityScore": 940,
+  "isActive": true,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-08-10T18:48:33.522Z",
+  "updatedAt": "2026-11-22T16:59:20.345Z",
+  "category": {
+   "id": "seed_excat_scholarship-exams",
+   "name": "Scholarship Exams",
+   "slug": "scholarship-exams"
+  },
+  "logo": null,
+  "isIndexable": true,
+  "fullName": null,
+  "conductingBody": "National Testing Agency (NTA)",
+  "frequency": "ANNUAL",
+  "officialWebsite": "https://cuet.nta.nic.in/",
+  "overview": "CUET (UG), the Common University Entrance Test for undergraduate admissions, is how students get into bachelor’s programmes at India’s Central Universities and at the many State, Deemed and private universities that have chosen to use it. Instead of sitting a separate entrance test for each university, a student takes one set of tests and sends the score to every participating university they apply to. NTA describes it as a common platform meant to give students from rural and remote areas the same opportunity as everyone else.\n\nThe National Testing Agency conducts CUET (UG). Its job ends at registration, running the tests, answer keys, results and the score card. Each university makes its own merit list from CUET scores and runs its own admissions, so questions about seats, cut-offs and counselling go to the university, not to NTA.\n\nCUET is built from separate tests rather than one paper. In 2026 there were 37 subjects: 13 languages, 23 domain subjects from Accountancy to Sociology, and a General Aptitude Test. Each candidate can take up to five. Every test has 50 compulsory multiple-choice questions in 60 minutes, on a computer, with 5 marks for a correct answer and 1 mark deducted for a wrong one. The penalty is lighter than in NEET or JEE Main, so leaving many questions blank usually costs more than it saves. Questions are set at the level of the NCERT syllabus.\n\nBecause tests run over many days and shifts, NTA converts raw marks into an NTA Score so that candidates who sat different shifts can be compared fairly. There is no re-evaluation, and a score is valid only for the admission year it was taken in.\n\nThe most important decision is which five subjects to take. They should follow the admission rules of the programmes you want, not simply the subjects you studied in Class 12. A programme may ask for a particular language, specific domain subjects, or the General Aptitude Test, and these rules differ between universities and between courses at the same university.\n\nThere is no age limit for the exam. You must have passed Class 12 or an equivalent, or be appearing for it in the exam year, though each university can set its own age and marks requirements for a programme.\n\nCUET is now one of the largest computer-based exams anywhere. For the 2026 cycle 15,68,867 unique candidates registered. The tests ran from 11 to 31 May and on 6 and 7 June 2026, over 19 days and 35 shifts, at 868 centres in India and 15 cities abroad, from Dubai and Singapore to Washington.\n\nTo prepare, list the programmes you want, check exactly which CUET subjects each one asks for, and download those subject syllabi from cuet.nta.nic.in. Practise each test under the one-hour limit, because 50 questions in 60 minutes leaves little time to linger. The pattern and syllabus pages here set out the scheme, marking and full subject list.",
+  "board": null,
+  "createdAt": "2026-08-10T18:48:33.523Z",
+  "years": [
+   {
+    "id": "cmusgek7o0007v4i85ni2so2w",
+    "year": 2027,
+    "sessionName": null,
+    "slug": "2027",
+    "isCurrent": true,
+    "events": []
+   },
+   {
+    "id": "seed_ey_seed_exam_cuet-ug-2026",
+    "year": 2026,
+    "sessionName": null,
+    "slug": "2026",
+    "isCurrent": false,
+    "events": []
+   },
+   {
+    "id": "seed_ey_seed_exam_cuet-ug-2025",
+    "year": 2025,
+    "sessionName": null,
+    "slug": "2025",
+    "isCurrent": false,
+    "events": []
+   },
+   {
+    "id": "seed_ey_seed_exam_cuet-ug-2024",
+    "year": 2024,
+    "sessionName": null,
+    "slug": "2024",
+    "isCurrent": false,
+    "events": []
+   }
+  ]
+ },
+ "cat": {
+  "id": "seed_exam_cat",
+  "slug": "cat",
+  "path": "/exam/cat",
+  "name": "CAT",
+  "shortName": "CAT",
+  "level": "NATIONAL",
+  "mode": "ONLINE",
+  "educationLevel": "UNDERGRADUATE",
+  "popularityScore": 920,
+  "isActive": true,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-08-10T18:48:33.630Z",
+  "updatedAt": "2026-09-02T21:17:39.387Z",
+  "category": {
+   "id": "seed_excat_management",
+   "name": "Management",
+   "slug": "management"
+  },
+  "logo": null,
+  "isIndexable": false,
+  "fullName": null,
+  "conductingBody": null,
+  "frequency": "ANNUAL",
+  "officialWebsite": null,
+  "overview": null,
+  "board": null,
+  "createdAt": "2026-08-10T18:48:33.631Z",
+  "years": [
+   {
+    "id": "cmusgekhr0009v4i8fxkla8m4",
+    "year": 2027,
+    "sessionName": null,
+    "slug": "2027",
+    "isCurrent": true,
+    "events": []
+   },
+   {
+    "id": "seed_ey_seed_exam_cat-2026",
+    "year": 2026,
+    "sessionName": null,
+    "slug": "2026",
+    "isCurrent": false,
+    "events": []
+   },
+   {
+    "id": "seed_ey_seed_exam_cat-2025",
+    "year": 2025,
+    "sessionName": null,
+    "slug": "2025",
+    "isCurrent": false,
+    "events": []
+   },
+   {
+    "id": "seed_ey_seed_exam_cat-2024",
+    "year": 2024,
+    "sessionName": null,
+    "slug": "2024",
+    "isCurrent": false,
+    "events": []
+   }
+  ]
+ },
+ "clat": {
+  "id": "seed_exam_clat",
+  "slug": "clat",
+  "path": "/exam/clat",
+  "name": "CLAT",
+  "shortName": "CLAT",
+  "level": "NATIONAL",
+  "mode": "ONLINE",
+  "educationLevel": "UNDERGRADUATE",
+  "popularityScore": 900,
+  "isActive": true,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-08-10T18:48:33.746Z",
+  "updatedAt": "2026-11-22T16:59:21.377Z",
+  "category": {
+   "id": "seed_excat_law",
+   "name": "Law",
+   "slug": "law"
+  },
+  "logo": null,
+  "isIndexable": true,
+  "fullName": null,
+  "conductingBody": "Consortium of National Law Universities",
+  "frequency": "ANNUAL",
+  "officialWebsite": "https://consortiumofnlus.ac.in/",
+  "overview": "CLAT, the Common Law Admission Test, is the entrance exam for the five-year integrated law programmes at India’s National Law Universities, and for their LL.M. programmes through a separate postgraduate paper. It is conducted by the Consortium of National Law Universities.\n\nCLAT 2027, for admission in the 2027–28 academic year, is held on Sunday 6 December 2026 from 2:00 p.m. to 4:00 p.m. Applications were open from 3 August to 31 October 2026. The Consortium has said the pattern and syllabus are unchanged from CLAT 2026.\n\nThe undergraduate paper is two hours long and has 120 multiple-choice questions of one mark each. A wrong answer loses a quarter mark. The questions fall across five subjects, in approximate shares the Consortium publishes as ranges: English Language and Logical Reasoning about 20% each, Current Affairs including General Knowledge and Legal Reasoning about 25% each, and Quantitative Techniques about 10%.\n\nWhat sets CLAT apart is that every question is built on a reading passage, most of them around 450 words long. Legal Reasoning gives you a principle and a set of facts and asks you to apply one to the other; no prior knowledge of law is needed, and the principle in the passage always wins over what you think the law is. Current Affairs passages come from news and non-fiction writing. Quantitative Techniques uses Class 10 mathematics. In practice the paper is a test of reading speed and careful reasoning under time pressure.\n\nThere is no upper age limit. You need Class 12 or an equivalent with at least 45% marks, or 40% for SC, ST and PwD candidates. Students sitting their Class 12 exams in March or April of the admission year can apply, but must show proof of passing at the time of admission.\n\nTo prepare, read widely and daily: a good newspaper for current affairs, and long-form non-fiction to build reading speed. Practise full papers in two hours, and review not just the questions you got wrong but the passages that took you too long. Use the exam pattern and syllabus pages here for the section-by-section detail, and confirm dates and rules on consortiumofnlus.ac.in.",
+  "board": null,
+  "createdAt": "2026-08-10T18:48:33.747Z",
+  "years": [
+   {
+    "id": "cmusgekrh000bv4i8gsip4195",
+    "year": 2027,
+    "sessionName": null,
+    "slug": "2027",
+    "isCurrent": true,
+    "events": []
+   },
+   {
+    "id": "seed_ey_seed_exam_clat-2026",
+    "year": 2026,
+    "sessionName": null,
+    "slug": "2026",
+    "isCurrent": false,
+    "events": []
+   },
+   {
+    "id": "seed_ey_seed_exam_clat-2025",
+    "year": 2025,
+    "sessionName": null,
+    "slug": "2025",
+    "isCurrent": false,
+    "events": []
+   },
+   {
+    "id": "seed_ey_seed_exam_clat-2024",
+    "year": 2024,
+    "sessionName": null,
+    "slug": "2024",
+    "isCurrent": false,
+    "events": []
+   }
+  ]
+ },
+ "gate": {
+  "id": "seed_exam_gate",
+  "slug": "gate",
+  "path": "/exam/gate",
+  "name": "GATE",
+  "shortName": "GATE",
+  "level": "NATIONAL",
+  "mode": "ONLINE",
+  "educationLevel": "UNDERGRADUATE",
+  "popularityScore": 880,
+  "isActive": true,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-08-10T18:48:33.970Z",
+  "updatedAt": "2026-09-05T20:50:59.361Z",
+  "category": {
+   "id": "seed_excat_engineering",
+   "name": "Engineering",
+   "slug": "engineering"
+  },
+  "logo": null,
+  "isIndexable": false,
+  "fullName": null,
+  "conductingBody": null,
+  "frequency": "ANNUAL",
+  "officialWebsite": "https://gate2026.iitg.ac.in/",
+  "overview": null,
+  "board": null,
+  "createdAt": "2026-08-10T18:48:33.971Z",
+  "years": [
+   {
+    "id": "cmusgel24000dv4i8n1jxzww0",
+    "year": 2027,
+    "sessionName": null,
+    "slug": "2027",
+    "isCurrent": true,
+    "events": [
+     {
+      "id": "cmush7jjk0001v4tkwuelbj3y",
+      "type": "APPLICATION_START",
+      "title": "Application opens",
+      "startDate": "2026-09-02T00:00:00.000Z",
+      "endDate": "2026-09-02T00:00:00.000Z",
+      "isTentative": true,
+      "officialUrl": "https://gate2027.iitm.ac.in/important_dates"
+     },
+     {
+      "id": "cmush7kjs0003v4tku4193gua",
+      "type": "APPLICATION_END",
+      "title": "Last date to apply",
+      "startDate": "2026-10-05T00:00:00.000Z",
+      "endDate": "2026-10-05T00:00:00.000Z",
+      "isTentative": true,
+      "officialUrl": "https://gate2027.iitm.ac.in/important_dates"
+     },
+     {
+      "id": "cmush7l7u0005v4tkx1bjg6j1",
+      "type": "EXAM_DATE",
+      "title": "Exam date",
+      "startDate": "2027-02-06T00:00:00.000Z",
+      "endDate": "2027-02-21T00:00:00.000Z",
+      "isTentative": true,
+      "officialUrl": "https://gate2027.iitm.ac.in/important_dates"
+     },
+     {
+      "id": "cmush7lv70007v4tkca0qjhn5",
+      "type": "RESULT",
+      "title": "Result declaration",
+      "startDate": "2027-03-19T00:00:00.000Z",
+      "endDate": "2027-03-19T00:00:00.000Z",
+      "isTentative": true,
+      "officialUrl": "https://gate2027.iitm.ac.in/important_dates"
+     }
+    ]
+   },
+   {
+    "id": "seed_ey_seed_exam_gate-2026",
+    "year": 2026,
+    "sessionName": null,
+    "slug": "2026",
+    "isCurrent": false,
+    "events": [
+     {
+      "id": "cmtnc17q40003v4h0bgae4dvh",
+      "type": "APPLICATION_END",
+      "title": "Last date to apply",
+      "startDate": "2025-10-07T00:00:00.000Z",
+      "endDate": "2025-10-07T00:00:00.000Z",
+      "isTentative": true,
+      "officialUrl": null
+     },
+     {
+      "id": "cmtnc1shx0005v4h0b8vdbabb",
+      "type": "EXAM_DATE",
+      "title": "Exam date",
+      "startDate": "2026-02-07T00:00:00.000Z",
+      "endDate": "2026-02-15T00:00:00.000Z",
+      "isTentative": true,
+      "officialUrl": null
+     },
+     {
+      "id": "cmtoh7kq80001v4n4dg59agnc",
+      "type": "RESULT",
+      "title": "Result declaration",
+      "startDate": "2026-03-19T00:00:00.000Z",
+      "endDate": "2026-03-19T00:00:00.000Z",
+      "isTentative": true,
+      "officialUrl": null
+     },
+     {
+      "id": "cmtoh7lxo0003v4n4x0ynalrf",
+      "type": "APPLICATION_START",
+      "title": "Application opens",
+      "startDate": "2025-08-28T00:00:00.000Z",
+      "endDate": "2025-08-28T00:00:00.000Z",
+      "isTentative": true,
+      "officialUrl": null
+     }
+    ]
+   },
+   {
+    "id": "seed_ey_seed_exam_gate-2025",
+    "year": 2025,
+    "sessionName": null,
+    "slug": "2025",
+    "isCurrent": false,
+    "events": []
+   },
+   {
+    "id": "seed_ey_seed_exam_gate-2024",
+    "year": 2024,
+    "sessionName": null,
+    "slug": "2024",
+    "isCurrent": false,
+    "events": []
+   }
+  ]
+ },
+ "nda": {
+  "id": "seed_exam_nda",
+  "slug": "nda",
+  "path": "/exam/nda",
+  "name": "NDA",
+  "shortName": "NDA",
+  "level": "NATIONAL",
+  "mode": "ONLINE",
+  "educationLevel": "UNDERGRADUATE",
+  "popularityScore": 860,
+  "isActive": true,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-08-10T18:48:34.074Z",
+  "updatedAt": "2026-11-22T16:59:21.742Z",
+  "category": {
+   "id": "seed_excat_defence",
+   "name": "Defence",
+   "slug": "defence"
+  },
+  "logo": null,
+  "isIndexable": true,
+  "fullName": null,
+  "conductingBody": "Union Public Service Commission (UPSC)",
+  "frequency": "ANNUAL",
+  "officialWebsite": "https://upsc.gov.in/",
+  "overview": "The National Defence Academy and Naval Academy Examination, known as NDA & NA, is how students who have finished or are finishing Class 12 enter officer training for the Army, Navy and Air Force. Successful candidates join the National Defence Academy, the joint training academy for all three services, or the Indian Naval Academy under its 10+2 Cadet Entry Scheme.\n\nThe Union Public Service Commission conducts the exam twice a year, as NDA & NA (I) and (II). The (II) 2026 notice, published on 20 May 2026, announced 394 provisional vacancies for courses beginning on 1 July 2027, and the written exam was held on 13 September 2026. The NDA & NA (I) 2027 notice is due on 2 December 2026.\n\nThe written examination has two objective papers of two and a half hours each: Mathematics for 300 marks and a General Ability Test for 600 marks. The General Ability Test is divided into English, for 200 marks, and General Knowledge, for 400, which covers physics, chemistry, general science, history and the freedom movement, geography and current events. A wrong answer costs one-third of the question’s marks.\n\nCandidates who clear the written cut-off go to a Services Selection Board for an Intelligence and Personality Test worth another 900 marks. The final merit list is drawn from both stages, out of 1,800, so the SSB counts for as much as the written exam. Candidates must also meet the medical and physical standards of the service they are selected for.\n\nThe exam is open to unmarried men and women. The Army wing accepts Class 12 in any stream; the Air Force and Naval wings and the Naval Academy need Physics, Chemistry and Mathematics in Class 12. Students in Class 12 can apply and submit proof of passing later. Each notice sets its own birth-date window, so check it for the exam you are applying to.\n\nTo prepare, treat the Mathematics paper as a Class 11 and 12 revision exercise, and give General Knowledge regular time rather than a last-minute push, since it is the largest block of marks. Start preparing for the SSB early, because it decides as much of your final rank as the written papers. Use the exam pattern and syllabus pages here, and confirm every date and rule on upsc.gov.in.",
+  "board": null,
+  "createdAt": "2026-08-10T18:48:34.076Z",
+  "years": [
+   {
+    "id": "cmusgelbp000fv4i8hlv1x94c",
+    "year": 2027,
+    "sessionName": null,
+    "slug": "2027",
+    "isCurrent": true,
+    "events": []
+   },
+   {
+    "id": "seed_ey_seed_exam_nda-2026",
+    "year": 2026,
+    "sessionName": null,
+    "slug": "2026",
+    "isCurrent": false,
+    "events": []
+   },
+   {
+    "id": "seed_ey_seed_exam_nda-2025",
+    "year": 2025,
+    "sessionName": null,
+    "slug": "2025",
+    "isCurrent": false,
+    "events": []
+   },
+   {
+    "id": "seed_ey_seed_exam_nda-2024",
+    "year": 2024,
+    "sessionName": null,
+    "slug": "2024",
+    "isCurrent": false,
+    "events": []
+   }
+  ]
+ },
+ "ssc-cgl": {
+  "id": "seed_exam_ssc-cgl",
+  "slug": "ssc-cgl",
+  "path": "/exam/ssc-cgl",
+  "name": "SSC CGL",
+  "shortName": "SSC CGL",
+  "level": "NATIONAL",
+  "mode": "ONLINE",
+  "educationLevel": "UNDERGRADUATE",
+  "popularityScore": 840,
+  "isActive": true,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-08-10T18:48:34.187Z",
+  "updatedAt": "2026-11-22T16:59:20.854Z",
+  "category": {
+   "id": "seed_excat_ssc",
+   "name": "SSC",
+   "slug": "ssc"
+  },
+  "logo": null,
+  "isIndexable": true,
+  "fullName": null,
+  "conductingBody": "Staff Selection Commission (SSC)",
+  "frequency": "ANNUAL",
+  "officialWebsite": "https://ssc.gov.in/",
+  "overview": "SSC CGL, the Combined Graduate Level Examination, is the Staff Selection Commission’s recruitment exam for graduate-level posts. Through one exam it fills Group B and Group C posts across dozens of central government ministries, departments and offices. The posts range from Assistant Audit Officer and Assistant Section Officer to Inspector of Income Tax, Inspector in central excise and customs, Sub Inspector in the CBI and NIA, Junior Statistical Officer, Auditor, Accountant, Postal Assistant and Tax Assistant.\n\nThe Staff Selection Commission, which comes under the Department of Personnel and Training, conducts the exam and publishes a fresh notice for each cycle. The 2026 notice was published on 21 May 2026 with about 12,256 tentative vacancies, a figure SSC updates as departments confirm their numbers. Pay depends on the post, from Level 4 up to Level 8 of the central pay matrix.\n\nThe exam has two computer-based tiers. Tier-I is a one-hour screening test of 100 questions in four sections: reasoning, general awareness, quantitative aptitude and English comprehension. Its marks decide who goes to Tier-II and do not count towards the final result. In 2026 SSC scheduled Tier-I from 30 September to 30 October 2026.\n\nTier-II decides your rank. Every candidate takes Paper-I, which has sections on mathematical abilities and reasoning, English and general awareness, a computer knowledge test and a data entry speed test. You must qualify every section, and the computer and data entry tests are qualifying only. Candidates shortlisted for Junior Statistical Officer or Statistical Investigator also take a Statistics paper, and those shortlisted for Assistant Audit Officer or Assistant Accounts Officer take a paper on finance and economics. Negative marking applies throughout: half a mark per wrong answer in Tier-I, and a full mark in the main sections of Paper-I.\n\nAny graduate can apply, and final-year students can too if they hold the degree by the cut-off date, which was 1 August 2026 for CGL 2026. A few posts need more: Junior Statistical Officer asks for 60% in Class 12 Mathematics or Statistics in the degree. Age limits depend on the post, from 18–27 years for Group C posts to 18–30 or 20–30 for many Group B posts, with relaxation of 5 years for SC and ST, 3 years for OBC and 10 years for candidates with benchmark disabilities.\n\nBefore results, every candidate ranks the posts and departments they want through an online option form. This step is easy to get wrong. You are never considered for a post you did not list, and once a post is allotted SSC does not change it, even if you then fail that post’s physical or medical standards.\n\nTo prepare, start with Tier-II rather than Tier-I. Its English is at Class 12 level with longer comprehension passages, and its mathematics covers geometry, trigonometry and statistics at Class 10 level. Practise typing for the data entry test early, since it can eliminate an otherwise strong candidate. Use the pattern and syllabus pages here, and confirm every date and rule on ssc.gov.in.",
+  "board": null,
+  "createdAt": "2026-08-10T18:48:34.189Z",
+  "years": [
+   {
+    "id": "cmusgelld000hv4i8yp886oak",
+    "year": 2027,
+    "sessionName": null,
+    "slug": "2027",
+    "isCurrent": true,
+    "events": []
+   },
+   {
+    "id": "seed_ey_seed_exam_ssc-cgl-2026",
+    "year": 2026,
+    "sessionName": null,
+    "slug": "2026",
+    "isCurrent": false,
+    "events": []
+   },
+   {
+    "id": "seed_ey_seed_exam_ssc-cgl-2025",
+    "year": 2025,
+    "sessionName": null,
+    "slug": "2025",
+    "isCurrent": false,
+    "events": []
+   },
+   {
+    "id": "seed_ey_seed_exam_ssc-cgl-2024",
+    "year": 2024,
+    "sessionName": null,
+    "slug": "2024",
+    "isCurrent": false,
+    "events": []
+   }
+  ]
+ },
+ "ssc-chsl": {
+  "id": "seed_exam_ssc-chsl",
+  "slug": "ssc-chsl",
+  "path": "/exam/ssc-chsl",
+  "name": "SSC CHSL",
+  "shortName": "SSC CHSL",
+  "level": "NATIONAL",
+  "mode": "ONLINE",
+  "educationLevel": "UNDERGRADUATE",
+  "popularityScore": 820,
+  "isActive": true,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-08-10T18:48:34.300Z",
+  "updatedAt": "2026-09-02T21:17:39.387Z",
+  "category": {
+   "id": "seed_excat_ssc",
+   "name": "SSC",
+   "slug": "ssc"
+  },
+  "logo": null,
+  "isIndexable": false,
+  "fullName": null,
+  "conductingBody": null,
+  "frequency": "ANNUAL",
+  "officialWebsite": null,
+  "overview": null,
+  "board": null,
+  "createdAt": "2026-08-10T18:48:34.301Z",
+  "years": [
+   {
+    "id": "cmusgelux000jv4i8upqkq797",
+    "year": 2027,
+    "sessionName": null,
+    "slug": "2027",
+    "isCurrent": true,
+    "events": []
+   },
+   {
+    "id": "seed_ey_seed_exam_ssc-chsl-2026",
+    "year": 2026,
+    "sessionName": null,
+    "slug": "2026",
+    "isCurrent": false,
+    "events": []
+   },
+   {
+    "id": "seed_ey_seed_exam_ssc-chsl-2025",
+    "year": 2025,
+    "sessionName": null,
+    "slug": "2025",
+    "isCurrent": false,
+    "events": []
+   },
+   {
+    "id": "seed_ey_seed_exam_ssc-chsl-2024",
+    "year": 2024,
+    "sessionName": null,
+    "slug": "2024",
+    "isCurrent": false,
+    "events": []
+   }
+  ]
+ },
+ "ibps-po": {
+  "id": "seed_exam_ibps-po",
+  "slug": "ibps-po",
+  "path": "/exam/ibps-po",
+  "name": "IBPS PO",
+  "shortName": "IBPS PO",
+  "level": "NATIONAL",
+  "mode": "ONLINE",
+  "educationLevel": "UNDERGRADUATE",
+  "popularityScore": 800,
+  "isActive": true,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-08-10T18:48:34.417Z",
+  "updatedAt": "2026-09-02T21:17:39.387Z",
+  "category": {
+   "id": "seed_excat_banking",
+   "name": "Banking",
+   "slug": "banking"
+  },
+  "logo": null,
+  "isIndexable": false,
+  "fullName": null,
+  "conductingBody": null,
+  "frequency": "ANNUAL",
+  "officialWebsite": null,
+  "overview": null,
+  "board": null,
+  "createdAt": "2026-08-10T18:48:34.418Z",
+  "years": [
+   {
+    "id": "cmusgem4o000lv4i8lxh5t8yu",
+    "year": 2027,
+    "sessionName": null,
+    "slug": "2027",
+    "isCurrent": true,
+    "events": []
+   },
+   {
+    "id": "seed_ey_seed_exam_ibps-po-2026",
+    "year": 2026,
+    "sessionName": null,
+    "slug": "2026",
+    "isCurrent": false,
+    "events": []
+   },
+   {
+    "id": "seed_ey_seed_exam_ibps-po-2025",
+    "year": 2025,
+    "sessionName": null,
+    "slug": "2025",
+    "isCurrent": false,
+    "events": []
+   },
+   {
+    "id": "seed_ey_seed_exam_ibps-po-2024",
+    "year": 2024,
+    "sessionName": null,
+    "slug": "2024",
+    "isCurrent": false,
+    "events": []
+   }
+  ]
+ },
+ "sbi-po": {
+  "id": "seed_exam_sbi-po",
+  "slug": "sbi-po",
+  "path": "/exam/sbi-po",
+  "name": "SBI PO",
+  "shortName": "SBI PO",
+  "level": "NATIONAL",
+  "mode": "ONLINE",
+  "educationLevel": "UNDERGRADUATE",
+  "popularityScore": 780,
+  "isActive": true,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-08-10T18:48:34.526Z",
+  "updatedAt": "2026-09-02T21:17:39.387Z",
+  "category": {
+   "id": "seed_excat_banking",
+   "name": "Banking",
+   "slug": "banking"
+  },
+  "logo": null,
+  "isIndexable": false,
+  "fullName": null,
+  "conductingBody": null,
+  "frequency": "ANNUAL",
+  "officialWebsite": null,
+  "overview": null,
+  "board": null,
+  "createdAt": "2026-08-10T18:48:34.527Z",
+  "years": [
+   {
+    "id": "cmusgemeb000nv4i8vg9u579g",
+    "year": 2027,
+    "sessionName": null,
+    "slug": "2027",
+    "isCurrent": true,
+    "events": []
+   },
+   {
+    "id": "seed_ey_seed_exam_sbi-po-2026",
+    "year": 2026,
+    "sessionName": null,
+    "slug": "2026",
+    "isCurrent": false,
+    "events": []
+   },
+   {
+    "id": "seed_ey_seed_exam_sbi-po-2025",
+    "year": 2025,
+    "sessionName": null,
+    "slug": "2025",
+    "isCurrent": false,
+    "events": []
+   },
+   {
+    "id": "seed_ey_seed_exam_sbi-po-2024",
+    "year": 2024,
+    "sessionName": null,
+    "slug": "2024",
+    "isCurrent": false,
+    "events": []
+   }
+  ]
+ },
+ "rrb-ntpc": {
+  "id": "seed_exam_rrb-ntpc",
+  "slug": "rrb-ntpc",
+  "path": "/exam/rrb-ntpc",
+  "name": "RRB NTPC",
+  "shortName": "RRB NTPC",
+  "level": "NATIONAL",
+  "mode": "ONLINE",
+  "educationLevel": "UNDERGRADUATE",
+  "popularityScore": 760,
+  "isActive": true,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-08-10T18:48:34.643Z",
+  "updatedAt": "2026-09-02T21:17:39.387Z",
+  "category": {
+   "id": "seed_excat_railway",
+   "name": "Railway",
+   "slug": "railway"
+  },
+  "logo": null,
+  "isIndexable": false,
+  "fullName": null,
+  "conductingBody": null,
+  "frequency": "ANNUAL",
+  "officialWebsite": null,
+  "overview": null,
+  "board": null,
+  "createdAt": "2026-08-10T18:48:34.644Z",
+  "years": [
+   {
+    "id": "cmusgemp5000pv4i8s54q0ts4",
+    "year": 2027,
+    "sessionName": null,
+    "slug": "2027",
+    "isCurrent": true,
+    "events": []
+   },
+   {
+    "id": "seed_ey_seed_exam_rrb-ntpc-2026",
+    "year": 2026,
+    "sessionName": null,
+    "slug": "2026",
+    "isCurrent": false,
+    "events": []
+   },
+   {
+    "id": "seed_ey_seed_exam_rrb-ntpc-2025",
+    "year": 2025,
+    "sessionName": null,
+    "slug": "2025",
+    "isCurrent": false,
+    "events": []
+   },
+   {
+    "id": "seed_ey_seed_exam_rrb-ntpc-2024",
+    "year": 2024,
+    "sessionName": null,
+    "slug": "2024",
+    "isCurrent": false,
+    "events": []
+   }
+  ]
+ },
+ "upsc-civil-services": {
+  "id": "seed_exam_upsc-civil-services",
+  "slug": "upsc-civil-services",
+  "path": "/exam/upsc-civil-services",
+  "name": "UPSC CIVIL SERVICES",
+  "shortName": "UPSC CIVIL SERVICES",
+  "level": "NATIONAL",
+  "mode": "ONLINE",
+  "educationLevel": "UNDERGRADUATE",
+  "popularityScore": 740,
+  "isActive": true,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-08-10T18:48:34.757Z",
+  "updatedAt": "2026-09-02T21:17:39.387Z",
+  "category": {
+   "id": "seed_excat_upsc",
+   "name": "UPSC",
+   "slug": "upsc"
+  },
+  "logo": null,
+  "isIndexable": false,
+  "fullName": null,
+  "conductingBody": null,
+  "frequency": "ANNUAL",
+  "officialWebsite": null,
+  "overview": null,
+  "board": null,
+  "createdAt": "2026-08-10T18:48:34.760Z",
+  "years": [
+   {
+    "id": "cmusgemzj000rv4i81oglm72y",
+    "year": 2027,
+    "sessionName": null,
+    "slug": "2027",
+    "isCurrent": true,
+    "events": []
+   },
+   {
+    "id": "seed_ey_seed_exam_upsc-civil-services-2026",
+    "year": 2026,
+    "sessionName": null,
+    "slug": "2026",
+    "isCurrent": false,
+    "events": []
+   },
+   {
+    "id": "seed_ey_seed_exam_upsc-civil-services-2025",
+    "year": 2025,
+    "sessionName": null,
+    "slug": "2025",
+    "isCurrent": false,
+    "events": []
+   },
+   {
+    "id": "seed_ey_seed_exam_upsc-civil-services-2024",
+    "year": 2024,
+    "sessionName": null,
+    "slug": "2024",
+    "isCurrent": false,
+    "events": []
+   }
+  ]
+ },
+ "ctet": {
+  "id": "seed_exam_ctet",
+  "slug": "ctet",
+  "path": "/exam/ctet",
+  "name": "CTET",
+  "shortName": "CTET",
+  "level": "NATIONAL",
+  "mode": "ONLINE",
+  "educationLevel": "UNDERGRADUATE",
+  "popularityScore": 720,
+  "isActive": true,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-08-10T18:48:34.861Z",
+  "updatedAt": "2026-09-02T21:17:39.387Z",
+  "category": {
+   "id": "seed_excat_teaching",
+   "name": "Teaching",
+   "slug": "teaching"
+  },
+  "logo": null,
+  "isIndexable": false,
+  "fullName": null,
+  "conductingBody": null,
+  "frequency": "ANNUAL",
+  "officialWebsite": null,
+  "overview": null,
+  "board": null,
+  "createdAt": "2026-08-10T18:48:34.862Z",
+  "years": [
+   {
+    "id": "cmusgena6000tv4i886r8ru6n",
+    "year": 2027,
+    "sessionName": null,
+    "slug": "2027",
+    "isCurrent": true,
+    "events": []
+   },
+   {
+    "id": "seed_ey_seed_exam_ctet-2026",
+    "year": 2026,
+    "sessionName": null,
+    "slug": "2026",
+    "isCurrent": false,
+    "events": []
+   },
+   {
+    "id": "seed_ey_seed_exam_ctet-2025",
+    "year": 2025,
+    "sessionName": null,
+    "slug": "2025",
+    "isCurrent": false,
+    "events": []
+   },
+   {
+    "id": "seed_ey_seed_exam_ctet-2024",
+    "year": 2024,
+    "sessionName": null,
+    "slug": "2024",
+    "isCurrent": false,
+    "events": []
+   }
+  ]
+ },
+ "bitsat": {
+  "id": "seed_exam_bitsat",
+  "slug": "bitsat",
+  "path": "/exam/bitsat",
+  "name": "BITSAT",
+  "shortName": "BITSAT",
+  "level": "NATIONAL",
+  "mode": "ONLINE",
+  "educationLevel": "UNDERGRADUATE",
+  "popularityScore": 700,
+  "isActive": true,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-08-10T18:48:34.971Z",
+  "updatedAt": "2026-09-02T21:17:39.387Z",
+  "category": {
+   "id": "seed_excat_engineering",
+   "name": "Engineering",
+   "slug": "engineering"
+  },
+  "logo": null,
+  "isIndexable": false,
+  "fullName": null,
+  "conductingBody": null,
+  "frequency": "ANNUAL",
+  "officialWebsite": null,
+  "overview": null,
+  "board": null,
+  "createdAt": "2026-08-10T18:48:34.972Z",
+  "years": [
+   {
+    "id": "cmusgenjt000vv4i8ve9a1j0z",
+    "year": 2027,
+    "sessionName": null,
+    "slug": "2027",
+    "isCurrent": true,
+    "events": []
+   },
+   {
+    "id": "seed_ey_seed_exam_bitsat-2026",
+    "year": 2026,
+    "sessionName": null,
+    "slug": "2026",
+    "isCurrent": false,
+    "events": []
+   },
+   {
+    "id": "seed_ey_seed_exam_bitsat-2025",
+    "year": 2025,
+    "sessionName": null,
+    "slug": "2025",
+    "isCurrent": false,
+    "events": []
+   },
+   {
+    "id": "seed_ey_seed_exam_bitsat-2024",
+    "year": 2024,
+    "sessionName": null,
+    "slug": "2024",
+    "isCurrent": false,
+    "events": []
+   }
+  ]
+ },
+ "viteee": {
+  "id": "seed_exam_viteee",
+  "slug": "viteee",
+  "path": "/exam/viteee",
+  "name": "VITEEE",
+  "shortName": "VITEEE",
+  "level": "NATIONAL",
+  "mode": "ONLINE",
+  "educationLevel": "UNDERGRADUATE",
+  "popularityScore": 680,
+  "isActive": true,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-08-10T18:48:35.089Z",
+  "updatedAt": "2026-09-02T21:17:39.387Z",
+  "category": {
+   "id": "seed_excat_engineering",
+   "name": "Engineering",
+   "slug": "engineering"
+  },
+  "logo": null,
+  "isIndexable": false,
+  "fullName": null,
+  "conductingBody": null,
+  "frequency": "ANNUAL",
+  "officialWebsite": null,
+  "overview": null,
+  "board": null,
+  "createdAt": "2026-08-10T18:48:35.091Z",
+  "years": [
+   {
+    "id": "cmusgent7000xv4i8dgd44jkg",
+    "year": 2027,
+    "sessionName": null,
+    "slug": "2027",
+    "isCurrent": true,
+    "events": []
+   },
+   {
+    "id": "seed_ey_seed_exam_viteee-2026",
+    "year": 2026,
+    "sessionName": null,
+    "slug": "2026",
+    "isCurrent": false,
+    "events": []
+   },
+   {
+    "id": "seed_ey_seed_exam_viteee-2025",
+    "year": 2025,
+    "sessionName": null,
+    "slug": "2025",
+    "isCurrent": false,
+    "events": []
+   },
+   {
+    "id": "seed_ey_seed_exam_viteee-2024",
+    "year": 2024,
+    "sessionName": null,
+    "slug": "2024",
+    "isCurrent": false,
+    "events": []
+   }
+  ]
+ },
+ "wbjee": {
+  "id": "seed_exam_wbjee",
+  "slug": "wbjee",
+  "path": "/exam/wbjee",
+  "name": "WBJEE",
+  "shortName": "WBJEE",
+  "level": "NATIONAL",
+  "mode": "ONLINE",
+  "educationLevel": "UNDERGRADUATE",
+  "popularityScore": 660,
+  "isActive": true,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-08-10T18:48:35.206Z",
+  "updatedAt": "2026-09-02T21:17:39.387Z",
+  "category": {
+   "id": "seed_excat_engineering",
+   "name": "Engineering",
+   "slug": "engineering"
+  },
+  "logo": null,
+  "isIndexable": false,
+  "fullName": null,
+  "conductingBody": null,
+  "frequency": "ANNUAL",
+  "officialWebsite": null,
+  "overview": null,
+  "board": null,
+  "createdAt": "2026-08-10T18:48:35.208Z",
+  "years": [
+   {
+    "id": "cmusgeo2y000zv4i808lr0xxs",
+    "year": 2027,
+    "sessionName": null,
+    "slug": "2027",
+    "isCurrent": true,
+    "events": []
+   },
+   {
+    "id": "seed_ey_seed_exam_wbjee-2026",
+    "year": 2026,
+    "sessionName": null,
+    "slug": "2026",
+    "isCurrent": false,
+    "events": []
+   },
+   {
+    "id": "seed_ey_seed_exam_wbjee-2025",
+    "year": 2025,
+    "sessionName": null,
+    "slug": "2025",
+    "isCurrent": false,
+    "events": []
+   },
+   {
+    "id": "seed_ey_seed_exam_wbjee-2024",
+    "year": 2024,
+    "sessionName": null,
+    "slug": "2024",
+    "isCurrent": false,
+    "events": []
+   }
+  ]
+ },
+ "mht-cet": {
+  "id": "seed_exam_mht-cet",
+  "slug": "mht-cet",
+  "path": "/exam/mht-cet",
+  "name": "MHT CET",
+  "shortName": "MHT CET",
+  "level": "NATIONAL",
+  "mode": "ONLINE",
+  "educationLevel": "UNDERGRADUATE",
+  "popularityScore": 640,
+  "isActive": true,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-08-10T18:48:35.325Z",
+  "updatedAt": "2026-09-02T21:17:39.387Z",
+  "category": {
+   "id": "seed_excat_engineering",
+   "name": "Engineering",
+   "slug": "engineering"
+  },
+  "logo": null,
+  "isIndexable": false,
+  "fullName": null,
+  "conductingBody": null,
+  "frequency": "ANNUAL",
+  "officialWebsite": null,
+  "overview": null,
+  "board": null,
+  "createdAt": "2026-08-10T18:48:35.326Z",
+  "years": [
+   {
+    "id": "cmusgeocn0011v4i8onbrhyzi",
+    "year": 2027,
+    "sessionName": null,
+    "slug": "2027",
+    "isCurrent": true,
+    "events": []
+   },
+   {
+    "id": "seed_ey_seed_exam_mht-cet-2026",
+    "year": 2026,
+    "sessionName": null,
+    "slug": "2026",
+    "isCurrent": false,
+    "events": []
+   },
+   {
+    "id": "seed_ey_seed_exam_mht-cet-2025",
+    "year": 2025,
+    "sessionName": null,
+    "slug": "2025",
+    "isCurrent": false,
+    "events": []
+   },
+   {
+    "id": "seed_ey_seed_exam_mht-cet-2024",
+    "year": 2024,
+    "sessionName": null,
+    "slug": "2024",
+    "isCurrent": false,
+    "events": []
+   }
+  ]
+ },
+ "nift": {
+  "id": "seed_exam_nift",
+  "slug": "nift",
+  "path": "/exam/nift",
+  "name": "NIFT",
+  "shortName": "NIFT",
+  "level": "BOARD",
+  "mode": "ONLINE",
+  "educationLevel": "UNDERGRADUATE",
+  "popularityScore": 620,
+  "isActive": true,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-08-10T18:48:35.441Z",
+  "updatedAt": "2026-09-02T21:17:39.387Z",
+  "category": {
+   "id": "seed_excat_design",
+   "name": "Design",
+   "slug": "design"
+  },
+  "logo": null,
+  "isIndexable": false,
+  "fullName": null,
+  "conductingBody": null,
+  "frequency": "ANNUAL",
+  "officialWebsite": null,
+  "overview": null,
+  "board": {
+   "id": "seed_board_cbse",
+   "name": "Central Board of Secondary Education",
+   "shortName": "CBSE",
+   "slug": "cbse",
+   "path": "/board/cbse"
+  },
+  "createdAt": "2026-08-10T18:48:35.442Z",
+  "years": [
+   {
+    "id": "cmusgeom10013v4i8thz7bys2",
+    "year": 2027,
+    "sessionName": null,
+    "slug": "2027",
+    "isCurrent": true,
+    "events": []
+   },
+   {
+    "id": "seed_ey_seed_exam_nift-2026",
+    "year": 2026,
+    "sessionName": null,
+    "slug": "2026",
+    "isCurrent": false,
+    "events": []
+   },
+   {
+    "id": "seed_ey_seed_exam_nift-2025",
+    "year": 2025,
+    "sessionName": null,
+    "slug": "2025",
+    "isCurrent": false,
+    "events": []
+   },
+   {
+    "id": "seed_ey_seed_exam_nift-2024",
+    "year": 2024,
+    "sessionName": null,
+    "slug": "2024",
+    "isCurrent": false,
+    "events": []
+   }
+  ]
+ }
+}

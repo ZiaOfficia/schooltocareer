@@ -6,8 +6,6 @@ import { ApiError, listResults } from '@/lib/api';
 import { buildMetadata } from '@/lib/seo/metadata';
 import { LIVE } from '@/lib/site-sections';
 
-export const revalidate = 3600;
-
 export function generateMetadata() {
   return buildMetadata({
     template: 'search',

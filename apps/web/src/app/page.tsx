@@ -27,8 +27,6 @@ import { EXAM_SECTIONS, isEditorialSection, sectionsFor } from '@/lib/exam-secti
 import { buildMetadata } from '@/lib/seo/metadata';
 import { LIVE } from '@/lib/site-sections';
 
-export const revalidate = 3600;
-
 export function generateMetadata() {
   return buildMetadata({
     template: 'search',

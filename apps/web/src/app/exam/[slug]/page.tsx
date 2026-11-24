@@ -20,7 +20,7 @@ import {
 
 import { ArrowRightIcon, ArrowUpRightIcon, PlusIcon } from '@/components/icons';
 import { PageHero } from '@/components/page-hero';
-import { examHoldings, getExam, getExamPractice } from '@/lib/api';
+import { examHoldings, getExam, getExamPractice , SNAPSHOT_KEYS } from '@/lib/api';
 import { expectedFor } from '@/lib/exam-expected';
 import { EXAM_SECTIONS, liveSections, type ExamSection } from '@/lib/exam-sections';
 import { isOnNtaCalendar } from '@/lib/nta-calendar';
@@ -52,8 +52,6 @@ import { SSC_CALENDAR, sscCalendarRow } from '@/lib/ssc-calendar';
  * ends up with 100,000 thin near-duplicates. See docs/architecture for the
  * tiering rule.
  */
-
-export const revalidate = 3600;
 
 type Params = { slug: string };
 
@@ -688,4 +686,11 @@ export default async function ExamPage({ params }: { params: Promise<Params> }) 
       </Wrap>
     </>
   );
+}
+
+/** Every exam in the content snapshot is built at deploy time; nothing else exists. */
+export const dynamicParams = false;
+
+export function generateStaticParams() {
+  return SNAPSHOT_KEYS.exams().map((slug) => ({ slug }));
 }

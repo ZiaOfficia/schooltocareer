@@ -10,7 +10,6 @@ import { JsonLd, breadcrumbSchema } from '@/lib/seo/json-ld';
 import { buildMetadata } from '@/lib/seo/metadata';
 
 /** The hub for every board-exam prep guide. Lists what lib/board-prep holds. */
-export const revalidate = 86400;
 
 const TITLE = 'Board Exam 2027 Preparation: CBSE, UP Board, ICSE, ISC';
 

@@ -51,13 +51,10 @@ import { LIVE } from '@/lib/site-sections';
  */
 
 /**
- * Rendered on request, not at build time. Building it needs the API, so a
- * build with the API unreachable (CI, a preview without API_BASE_URL, or the
- * API simply asleep during a deploy) failed outright. The API reads beneath
- * it are still cached for an hour by lib/api.ts, so this costs one cheap
- * render per crawler visit, and the sitemap is never stale after a deploy.
+ * Built once per deploy, like every page: it reads the content snapshot
+ * (lib/api.ts), not the API, so it cannot fail because the API is asleep.
  */
-export const dynamic = 'force-dynamic';
+export const dynamic = 'force-static';
 
 /** 50,000 is the protocol limit. Warn well before it, not at it. */
 const SHARD_THRESHOLD = 45_000;

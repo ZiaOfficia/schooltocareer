@@ -10,7 +10,7 @@ import { Wrap } from '@stc/ui';
 
 import { MockTest, type MockTestSection } from '@/components/mock-test';
 import { PageHero } from '@/components/page-hero';
-import { getMockTest } from '@/lib/api';
+import { getMockTest , SNAPSHOT_KEYS } from '@/lib/api';
 import { renderRich, renderRichInline } from '@/lib/rich-text';
 import { JsonLd, breadcrumbSchema } from '@/lib/seo/json-ld';
 import { buildMetadata } from '@/lib/seo/metadata';
@@ -23,8 +23,6 @@ import { buildMetadata } from '@/lib/seo/metadata';
  * linked from the menu, the homepage and the paper page, which is how
  * students find it.
  */
-
-export const revalidate = 86400;
 
 type Params = { slug: string; paper: string };
 
@@ -42,7 +40,12 @@ export async function generateMetadata({ params }: { params: Promise<Params> }) 
   if (!test) return {};
   return buildMetadata({
     template: 'mockTest',
-    values: { exam: test.exam.shortName, paper: test.paper.shift ?? String(test.paper.year), count: count(test), siteName: SITE.NAME },
+    values: {
+      exam: test.exam.shortName,
+      paper: test.paper.shift ?? String(test.paper.year),
+      count: count(test),
+      siteName: SITE.NAME,
+    },
     path: ROUTES.mockTest(resolved.slug, resolved.paper),
     noindex: true,
   });
@@ -72,7 +75,10 @@ export default async function MockTestPage({ params }: { params: Promise<Params>
       marksRight: q.marksRight,
       marksWrong: q.marksWrong,
       stemHtml: renderRich(q.stem),
-      options: q.options.map((option) => ({ label: option.label, html: renderRichInline(option.body) })),
+      options: q.options.map((option) => ({
+        label: option.label,
+        html: renderRichInline(option.body),
+      })),
       correct: q.correct,
       numeric:
         q.type === 'NUMERICAL' && q.numericValue !== null
@@ -106,4 +112,11 @@ export default async function MockTestPage({ params }: { params: Promise<Params>
       </Wrap>
     </>
   );
+}
+
+/** One mock test per digitised paper, built at deploy time. */
+export const dynamicParams = false;
+
+export function generateStaticParams() {
+  return SNAPSHOT_KEYS.mockTestParams();
 }

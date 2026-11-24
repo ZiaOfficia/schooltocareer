@@ -18,7 +18,7 @@ import { AdSlot } from '@/components/ad-slot';
 import { ContentBlocks } from '@/components/content-blocks';
 import { ArrowUpRightIcon } from '@/components/icons';
 import { PageHero } from '@/components/page-hero';
-import { ApiError, examHoldings, getExam, listAllPapers, listResults } from '@/lib/api';
+import { ApiError, examHoldings, getExam, listAllPapers, listResults , SNAPSHOT_KEYS } from '@/lib/api';
 import { articlePath, articlesForGuide } from '@/lib/articles';
 import { examContent } from '@/lib/exam-content';
 import {
@@ -30,6 +30,7 @@ import {
   liveSections,
   type ExamSection,
 } from '@/lib/exam-sections';
+import { EXAM_SECTION_SLUGS } from '@/lib/exam-sections';
 import { PAPER_GUIDES } from '@/lib/paper-guides';
 import { JsonLd, breadcrumbSchema, examPageSchema, faqSchema } from '@/lib/seo/json-ld';
 import { buildMetadata } from '@/lib/seo/metadata';
@@ -42,8 +43,6 @@ import { buildMetadata } from '@/lib/seo/metadata';
  * the middle differs. Five near-identical files would have drifted; this
  * cannot, and adding a section is one entry in EXAM_SECTIONS.
  */
-
-export const revalidate = 3600;
 
 type Params = { slug: string; section: string };
 
@@ -587,5 +586,14 @@ export default async function ExamSectionPage({ params }: { params: Promise<Para
         ) : null}
       </Wrap>
     </>
+  );
+}
+
+/** Built at deploy time: every exam × section; ones with nothing to show are 404s. */
+export const dynamicParams = false;
+
+export function generateStaticParams() {
+  return SNAPSHOT_KEYS.exams().flatMap((slug) =>
+    EXAM_SECTION_SLUGS.map((section) => ({ slug, section })),
   );
 }

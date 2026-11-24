@@ -1,0 +1,2752 @@
+{
+ "jee-main/mathematics/sets-relations-and-functions": {
+  "slug": "sets-relations-and-functions",
+  "name": "Sets, Relations and Functions",
+  "subject": {
+   "slug": "mathematics",
+   "name": "Mathematics"
+  },
+  "syllabusStatus": "IN_SYLLABUS",
+  "path": "/exam/jee-main/chapters/mathematics/sets-relations-and-functions",
+  "description": null,
+  "exam": {
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "unit": null,
+  "syllabusSourceUrl": null,
+  "stats": [
+   {
+    "year": 2026,
+    "questions": 1,
+    "subjectQuestions": 25,
+    "papersInYear": 1,
+    "weightagePct": 4,
+    "changePct": null
+   }
+  ],
+  "totalQuestions": 1,
+  "questions": [
+   {
+    "publicId": "1eltcq55nt",
+    "path": "/exam/jee-main/questions/consider-relation-set-defined-by-if-only-if-1eltcq55nt",
+    "number": 1,
+    "preview": "Consider the relation R on the set {-2, -1, 0, 1, 2} defined by (a, b) ∈ R if and only if 1 + ab > 0. Then, among the statements: I. The number of elements in…",
+    "type": "MCQ_SINGLE",
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "provenance": "OFFICIAL_FINAL"
+   }
+  ],
+  "updatedAt": "2026-10-10T10:45:45.555Z"
+ },
+ "jee-main/mathematics/complex-numbers-and-quadratic-equations": {
+  "slug": "complex-numbers-and-quadratic-equations",
+  "name": "Complex Numbers and Quadratic Equations",
+  "subject": {
+   "slug": "mathematics",
+   "name": "Mathematics"
+  },
+  "syllabusStatus": "IN_SYLLABUS",
+  "path": "/exam/jee-main/chapters/mathematics/complex-numbers-and-quadratic-equations",
+  "description": null,
+  "exam": {
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "unit": null,
+  "syllabusSourceUrl": null,
+  "stats": [
+   {
+    "year": 2026,
+    "questions": 2,
+    "subjectQuestions": 25,
+    "papersInYear": 1,
+    "weightagePct": 8,
+    "changePct": null
+   }
+  ],
+  "totalQuestions": 2,
+  "questions": [
+   {
+    "publicId": "4phjblsu8t",
+    "path": "/exam/jee-main/questions/the-number-values-satisfying-equations-is-4phjblsu8t",
+    "number": 2,
+    "preview": "The number of values of …, satisfying the equations is:",
+    "type": "MCQ_SINGLE",
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "provenance": "OFFICIAL_FINAL"
+   },
+   {
+    "publicId": "9ghubgr1nk",
+    "path": "/exam/jee-main/questions/the-sum-squares-all-real-solutions-equation-9ghubgr1nk",
+    "number": 21,
+    "preview": "The sum of squares of all the real solutions of the equation log₍ₓ₊₁₎ (2x² + 5x + 3 ) = 4 - log₍₂ₓ₊₃₎ (x² + 2x + 1 ) is equal to ____.",
+    "type": "NUMERICAL",
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "provenance": "OFFICIAL_FINAL"
+   }
+  ],
+  "updatedAt": "2026-10-10T10:45:45.555Z"
+ },
+ "jee-main/mathematics/matrices-and-determinants": {
+  "slug": "matrices-and-determinants",
+  "name": "Matrices and Determinants",
+  "subject": {
+   "slug": "mathematics",
+   "name": "Mathematics"
+  },
+  "syllabusStatus": "IN_SYLLABUS",
+  "path": "/exam/jee-main/chapters/mathematics/matrices-and-determinants",
+  "description": null,
+  "exam": {
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "unit": null,
+  "syllabusSourceUrl": null,
+  "stats": [
+   {
+    "year": 2026,
+    "questions": 2,
+    "subjectQuestions": 25,
+    "papersInYear": 1,
+    "weightagePct": 8,
+    "changePct": null
+   }
+  ],
+  "totalQuestions": 2,
+  "questions": [
+   {
+    "publicId": "4mueno6c7q",
+    "path": "/exam/jee-main/questions/if-system-linear-equations-has-infinitely-many-solutions-4mueno6c7q",
+    "number": 3,
+    "preview": "If the system of linear equations: x + y + z = 6, x + 2y + 5z = 10, 2x + 3y + λ z = μ has infinitely many solutions, then the value of λ + μ equals:",
+    "type": "MCQ_SINGLE",
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "provenance": "OFFICIAL_FINAL"
+   },
+   {
+    "publicId": "bqbtu2ouh7",
+    "path": "/exam/jee-main/questions/let-if-then-equals-bqbtu2ouh7",
+    "number": 4,
+    "preview": "Let … and …. If det(B) = 66, then det(adj(A)) equals:",
+    "type": "MCQ_SINGLE",
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "provenance": "OFFICIAL_FINAL"
+   }
+  ],
+  "updatedAt": "2026-10-10T10:45:45.555Z"
+ },
+ "jee-main/mathematics/permutations-and-combinations": {
+  "slug": "permutations-and-combinations",
+  "name": "Permutations and Combinations",
+  "subject": {
+   "slug": "mathematics",
+   "name": "Mathematics"
+  },
+  "syllabusStatus": "IN_SYLLABUS",
+  "path": "/exam/jee-main/chapters/mathematics/permutations-and-combinations",
+  "description": null,
+  "exam": {
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "unit": null,
+  "syllabusSourceUrl": null,
+  "stats": [
+   {
+    "year": 2026,
+    "questions": 1,
+    "subjectQuestions": 25,
+    "papersInYear": 1,
+    "weightagePct": 4,
+    "changePct": null
+   }
+  ],
+  "totalQuestions": 1,
+  "questions": [
+   {
+    "publicId": "kk4ei45cda",
+    "path": "/exam/jee-main/questions/a-person-has-three-different-bags-four-different-kk4ei45cda",
+    "number": 9,
+    "preview": "A person has three different bags and four different books. The number of ways, in which he can put these books in the bags so that no bag is empty, is:",
+    "type": "MCQ_SINGLE",
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "provenance": "OFFICIAL_FINAL"
+   }
+  ],
+  "updatedAt": "2026-10-10T10:45:45.555Z"
+ },
+ "jee-main/mathematics/binomial-theorem": {
+  "slug": "binomial-theorem",
+  "name": "Binomial Theorem and its Simple Applications",
+  "subject": {
+   "slug": "mathematics",
+   "name": "Mathematics"
+  },
+  "syllabusStatus": "IN_SYLLABUS",
+  "path": "/exam/jee-main/chapters/mathematics/binomial-theorem",
+  "description": null,
+  "exam": {
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "unit": null,
+  "syllabusSourceUrl": null,
+  "stats": [
+   {
+    "year": 2026,
+    "questions": 1,
+    "subjectQuestions": 25,
+    "papersInYear": 1,
+    "weightagePct": 4,
+    "changePct": null
+   }
+  ],
+  "totalQuestions": 1,
+  "questions": [
+   {
+    "publicId": "yk4ln4ep0t",
+    "path": "/exam/jee-main/questions/if-then-is-equal-yk4ln4ep0t",
+    "number": 8,
+    "preview": "If …, then α is equal to:",
+    "type": "MCQ_SINGLE",
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "provenance": "OFFICIAL_FINAL"
+   }
+  ],
+  "updatedAt": "2026-10-10T10:45:45.555Z"
+ },
+ "jee-main/mathematics/sequence-and-series": {
+  "slug": "sequence-and-series",
+  "name": "Sequence and Series",
+  "subject": {
+   "slug": "mathematics",
+   "name": "Mathematics"
+  },
+  "syllabusStatus": "IN_SYLLABUS",
+  "path": "/exam/jee-main/chapters/mathematics/sequence-and-series",
+  "description": null,
+  "exam": {
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "unit": null,
+  "syllabusSourceUrl": null,
+  "stats": [
+   {
+    "year": 2026,
+    "questions": 2,
+    "subjectQuestions": 25,
+    "papersInYear": 1,
+    "weightagePct": 8,
+    "changePct": null
+   }
+  ],
+  "totalQuestions": 2,
+  "questions": [
+   {
+    "publicId": "drxwh6tufw",
+    "path": "/exam/jee-main/questions/let-up-40-terms-if-is-root-equation-drxwh6tufw",
+    "number": 5,
+    "preview": "Let α = 3 + 4 + 8 + 9 + 13 + 14 + … up to 40 terms. If (tanβ)^((α)/1020) is a root of the equation x² + x - 2 = 0, β ∈ (0, (π)/2 ), then sin²β + 3cos²β is…",
+    "type": "MCQ_SINGLE",
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "provenance": "OFFICIAL_FINAL"
+   },
+   {
+    "publicId": "dutwf0j5hz",
+    "path": "/exam/jee-main/questions/let-be-polynomial-function-such-that-then-is-dutwf0j5hz",
+    "number": 25,
+    "preview": "Let f be a polynomial function such that log₂ (f(x) ) = (log₂ (2 + 2/3 + 2/9 + … ∞ ) )·log₃ (1 + (f(x))/(f (1/x )) ), x > 0 and f(6) = 37. Then Σₙ₌₁¹⁰ f(n) is…",
+    "type": "NUMERICAL",
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "provenance": "OFFICIAL_FINAL"
+   }
+  ],
+  "updatedAt": "2026-10-10T10:45:45.555Z"
+ },
+ "jee-main/mathematics/limit-continuity-and-differentiability": {
+  "slug": "limit-continuity-and-differentiability",
+  "name": "Limit, Continuity and Differentiability",
+  "subject": {
+   "slug": "mathematics",
+   "name": "Mathematics"
+  },
+  "syllabusStatus": "IN_SYLLABUS",
+  "path": "/exam/jee-main/chapters/mathematics/limit-continuity-and-differentiability",
+  "description": null,
+  "exam": {
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "unit": null,
+  "syllabusSourceUrl": null,
+  "stats": [
+   {
+    "year": 2026,
+    "questions": 2,
+    "subjectQuestions": 25,
+    "papersInYear": 1,
+    "weightagePct": 8,
+    "changePct": null
+   }
+  ],
+  "totalQuestions": 2,
+  "questions": [
+   {
+    "publicId": "6mamsimnyi",
+    "path": "/exam/jee-main/questions/for-function-consider-following-statements-statement-i-is-6mamsimnyi",
+    "number": 13,
+    "preview": "For the function f(x) = e^(sin|x|) - |x|, …, consider the following statements: Statement I: f is differentiable for all …. Statement II: f is increasing in…",
+    "type": "MCQ_SINGLE",
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "provenance": "OFFICIAL_FINAL"
+   },
+   {
+    "publicId": "j3ztj0q024",
+    "path": "/exam/jee-main/questions/let-if-is-continuous-at-then-value-is-j3ztj0q024",
+    "number": 19,
+    "preview": "Let …. If f is continuous at x = π/2, then the value of ∫₀^(3b-6) |x² + 2x - 3 | dx is:",
+    "type": "MCQ_SINGLE",
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "provenance": "OFFICIAL_FINAL"
+   }
+  ],
+  "updatedAt": "2026-10-10T10:45:45.555Z"
+ },
+ "jee-main/mathematics/integral-calculus": {
+  "slug": "integral-calculus",
+  "name": "Integral Calculus",
+  "subject": {
+   "slug": "mathematics",
+   "name": "Mathematics"
+  },
+  "syllabusStatus": "IN_SYLLABUS",
+  "path": "/exam/jee-main/chapters/mathematics/integral-calculus",
+  "description": null,
+  "exam": {
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "unit": null,
+  "syllabusSourceUrl": null,
+  "stats": [
+   {
+    "year": 2026,
+    "questions": 3,
+    "subjectQuestions": 25,
+    "papersInYear": 1,
+    "weightagePct": 12,
+    "changePct": null
+   }
+  ],
+  "totalQuestions": 3,
+  "questions": [
+   {
+    "publicId": "bvkyposxna",
+    "path": "/exam/jee-main/questions/the-value-integral-is-equal-bvkyposxna",
+    "number": 16,
+    "preview": "The value of the integral ∫₀² (√(x(x² + x + 1)))/( (√(x + 1) ) (√(x⁴ + x² + 1) )) dx is equal to:",
+    "type": "MCQ_SINGLE",
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "provenance": "OFFICIAL_FINAL"
+   },
+   {
+    "publicId": "jkco2o65r3",
+    "path": "/exam/jee-main/questions/let-be-function-defined-as-let-where-jkco2o65r3",
+    "number": 18,
+    "preview": "Let … be a function defined as f(x) = (x - 1)/(x + 1). Let fⁱ⁺¹(x) = f (fⁱ(x) ), i = 1, 2, …, 25, where f¹(x) = f(x). If g(x) + f²⁶(x) = 0, x ∈ (1, ∞), then…",
+    "type": "MCQ_SINGLE",
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "provenance": "OFFICIAL_FINAL"
+   },
+   {
+    "publicId": "ro7amul1hm",
+    "path": "/exam/jee-main/questions/if-then-is-equal-ro7amul1hm",
+    "number": 22,
+    "preview": "If ∫(π/6)^(π/4) (cot (x - (π)/3 )cot (x + (π)/3 ) + 1 )dx = αlogₑ (√3 - 1 ), then 9α² is equal to ____.",
+    "type": "NUMERICAL",
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "provenance": "OFFICIAL_FINAL"
+   }
+  ],
+  "updatedAt": "2026-10-10T10:45:45.555Z"
+ },
+ "jee-main/mathematics/differential-equations": {
+  "slug": "differential-equations",
+  "name": "Differential Equations",
+  "subject": {
+   "slug": "mathematics",
+   "name": "Mathematics"
+  },
+  "syllabusStatus": "IN_SYLLABUS",
+  "path": "/exam/jee-main/chapters/mathematics/differential-equations",
+  "description": null,
+  "exam": {
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "unit": null,
+  "syllabusSourceUrl": null,
+  "stats": [
+   {
+    "year": 2026,
+    "questions": 1,
+    "subjectQuestions": 25,
+    "papersInYear": 1,
+    "weightagePct": 4,
+    "changePct": null
+   }
+  ],
+  "totalQuestions": 1,
+  "questions": [
+   {
+    "publicId": "d7f10wv16m",
+    "path": "/exam/jee-main/questions/let-be-solution-differential-equation-then-equals-d7f10wv16m",
+    "number": 17,
+    "preview": "Let y = y(x) be the solution of the differential equation x√(1 - x²) dy + (y√(1 - x²) - xcos⁻¹x )dx = 0, x ∈ (0, 1), lim(x→1⁻) y(x) = 1. Then y (1/2 ) equals:",
+    "type": "MCQ_SINGLE",
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "provenance": "OFFICIAL_FINAL"
+   }
+  ],
+  "updatedAt": "2026-10-10T10:45:45.555Z"
+ },
+ "jee-main/mathematics/coordinate-geometry": {
+  "slug": "coordinate-geometry",
+  "name": "Co-ordinate Geometry",
+  "subject": {
+   "slug": "mathematics",
+   "name": "Mathematics"
+  },
+  "syllabusStatus": "IN_SYLLABUS",
+  "path": "/exam/jee-main/chapters/mathematics/coordinate-geometry",
+  "description": null,
+  "exam": {
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "unit": null,
+  "syllabusSourceUrl": null,
+  "stats": [
+   {
+    "year": 2026,
+    "questions": 4,
+    "subjectQuestions": 25,
+    "papersInYear": 1,
+    "weightagePct": 16,
+    "changePct": null
+   }
+  ],
+  "totalQuestions": 4,
+  "questions": [
+   {
+    "publicId": "ma11hqrwa2",
+    "path": "/exam/jee-main/questions/if-straight-line-drawn-through-point-intersection-ma11hqrwa2",
+    "number": 10,
+    "preview": "If a straight line drawn through the point of intersection of the lines 4x + 3y - 1 = 0 and 3x + 4y - 1 = 0 meets the co-ordinate axes at the points P and Q,…",
+    "type": "MCQ_SINGLE",
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "provenance": "OFFICIAL_FINAL"
+   },
+   {
+    "publicId": "9bhu650af5",
+    "path": "/exam/jee-main/questions/let-be-vertex-parabola-its-chords-are-9bhu650af5",
+    "number": 11,
+    "preview": "Let O be the vertex of the parabola y² = 4x and its chords OP and OQ are perpendicular to each other. If the locus of the mid-point of the line segment PQ is a…",
+    "type": "MCQ_SINGLE",
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "provenance": "OFFICIAL_FINAL"
+   },
+   {
+    "publicId": "ydlcfgmuqx",
+    "path": "/exam/jee-main/questions/let-represent-ellipse-with-major-axis-along-axis-ydlcfgmuqx",
+    "number": 20,
+    "preview": "Let (x²)/(f(a² + 7a + 3)) + (y²)/(f(3a + 15)) = 1 represent an ellipse with major axis along y-axis, where f is a strictly decreasing positive function on ….…",
+    "type": "MCQ_SINGLE",
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "provenance": "OFFICIAL_FINAL"
+   },
+   {
+    "publicId": "9olbyw2lzh",
+    "path": "/exam/jee-main/questions/consider-circle-let-variable-chord-circle-subtend-9olbyw2lzh",
+    "number": 24,
+    "preview": "Consider the circle C: x² + y² - 6x - 8y - 11 = 0. Let a variable chord AB of the circle C subtend a right angle at the origin. If the locus of the foot of the…",
+    "type": "NUMERICAL",
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "provenance": "OFFICIAL_FINAL"
+   }
+  ],
+  "updatedAt": "2026-10-10T10:45:45.555Z"
+ },
+ "jee-main/mathematics/three-dimensional-geometry": {
+  "slug": "three-dimensional-geometry",
+  "name": "Three Dimensional Geometry",
+  "subject": {
+   "slug": "mathematics",
+   "name": "Mathematics"
+  },
+  "syllabusStatus": "IN_SYLLABUS",
+  "path": "/exam/jee-main/chapters/mathematics/three-dimensional-geometry",
+  "description": null,
+  "exam": {
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "unit": null,
+  "syllabusSourceUrl": null,
+  "stats": [
+   {
+    "year": 2026,
+    "questions": 2,
+    "subjectQuestions": 25,
+    "papersInYear": 1,
+    "weightagePct": 8,
+    "changePct": null
+   }
+  ],
+  "totalQuestions": 2,
+  "questions": [
+   {
+    "publicId": "aaebqmwzpx",
+    "path": "/exam/jee-main/questions/let-foot-perpendicular-from-point-line-be-aaebqmwzpx",
+    "number": 15,
+    "preview": "Let the foot of perpendicular from the point (λ, 2, 3) on the line (x - 4)/1 = (y - 9)/2 = (z - 5)/1 be the point (1, μ, 2). Then the distance between the…",
+    "type": "MCQ_SINGLE",
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "provenance": "OFFICIAL_FINAL"
+   },
+   {
+    "publicId": "ri1y1ogpax",
+    "path": "/exam/jee-main/questions/let-line-pass-through-origin-be-perpendicular-ri1y1ogpax",
+    "number": 23,
+    "preview": "Let a line L₁ pass through the origin and be perpendicular to the lines L₂: r⃗ = (3 + t)î + (2t - 1)ĵ + (2t + 4)k̂ and L₃: r⃗ = (3 + 2s)î + (3 + 2s)ĵ + (2…",
+    "type": "NUMERICAL",
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "provenance": "OFFICIAL_FINAL"
+   }
+  ],
+  "updatedAt": "2026-10-10T10:45:45.555Z"
+ },
+ "jee-main/mathematics/vector-algebra": {
+  "slug": "vector-algebra",
+  "name": "Vector Algebra",
+  "subject": {
+   "slug": "mathematics",
+   "name": "Mathematics"
+  },
+  "syllabusStatus": "IN_SYLLABUS",
+  "path": "/exam/jee-main/chapters/mathematics/vector-algebra",
+  "description": null,
+  "exam": {
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "unit": null,
+  "syllabusSourceUrl": null,
+  "stats": [
+   {
+    "year": 2026,
+    "questions": 1,
+    "subjectQuestions": 25,
+    "papersInYear": 1,
+    "weightagePct": 4,
+    "changePct": null
+   }
+  ],
+  "totalQuestions": 1,
+  "questions": [
+   {
+    "publicId": "inax2kbgqd",
+    "path": "/exam/jee-main/questions/let-vector-be-such-that-if-then-inax2kbgqd",
+    "number": 14,
+    "preview": "Let a⃗ = 4î - ĵ + 3k̂, b⃗ = 10î + 2ĵ - k̂ and a vector c⃗ be such that 2(a⃗ × b⃗) + 3(b⃗ × c⃗) = 0⃗. If a⃗ · c⃗ = 15, then c⃗ · (î + ĵ - 3k̂) is equal to:",
+    "type": "MCQ_SINGLE",
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "provenance": "OFFICIAL_FINAL"
+   }
+  ],
+  "updatedAt": "2026-10-10T10:45:45.555Z"
+ },
+ "jee-main/mathematics/statistics-and-probability": {
+  "slug": "statistics-and-probability",
+  "name": "Statistics and Probability",
+  "subject": {
+   "slug": "mathematics",
+   "name": "Mathematics"
+  },
+  "syllabusStatus": "IN_SYLLABUS",
+  "path": "/exam/jee-main/chapters/mathematics/statistics-and-probability",
+  "description": null,
+  "exam": {
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "unit": null,
+  "syllabusSourceUrl": null,
+  "stats": [
+   {
+    "year": 2026,
+    "questions": 2,
+    "subjectQuestions": 25,
+    "papersInYear": 1,
+    "weightagePct": 8,
+    "changePct": null
+   }
+  ],
+  "totalQuestions": 2,
+  "questions": [
+   {
+    "publicId": "6equwexn7y",
+    "path": "/exam/jee-main/questions/a-candidate-has-go-examination-centre-appear-6equwexn7y",
+    "number": 6,
+    "preview": "A candidate has to go to the examination centre to appear in an examination. The candidate uses only one means of transportation for the entire distance out of…",
+    "type": "MCQ_SINGLE",
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "provenance": "OFFICIAL_FINAL"
+   },
+   {
+    "publicId": "134myo9s58",
+    "path": "/exam/jee-main/questions/a-set-four-observations-has-mean-1-variance-134myo9s58",
+    "number": 7,
+    "preview": "A set of four observations has mean 1 and variance 13. Another set of six observations has mean 2 and variance 1. Then, the variance of all these 10…",
+    "type": "MCQ_SINGLE",
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "provenance": "OFFICIAL_FINAL"
+   }
+  ],
+  "updatedAt": "2026-10-10T10:45:45.555Z"
+ },
+ "jee-main/mathematics/trigonometry": {
+  "slug": "trigonometry",
+  "name": "Trigonometry",
+  "subject": {
+   "slug": "mathematics",
+   "name": "Mathematics"
+  },
+  "syllabusStatus": "IN_SYLLABUS",
+  "path": "/exam/jee-main/chapters/mathematics/trigonometry",
+  "description": null,
+  "exam": {
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "unit": null,
+  "syllabusSourceUrl": null,
+  "stats": [
+   {
+    "year": 2026,
+    "questions": 1,
+    "subjectQuestions": 25,
+    "papersInYear": 1,
+    "weightagePct": 4,
+    "changePct": null
+   }
+  ],
+  "totalQuestions": 1,
+  "questions": [
+   {
+    "publicId": "srpf6my71k",
+    "path": "/exam/jee-main/questions/let-where-inverse-trigonometric-functions-take-only-principal-srpf6my71k",
+    "number": 12,
+    "preview": "Let α = 3sin⁻¹ (6/11 ) and β = 3cos⁻¹ (4/9 ), where inverse trigonometric functions take only the principal values. Given below are two statements: Statement…",
+    "type": "MCQ_SINGLE",
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "provenance": "OFFICIAL_FINAL"
+   }
+  ],
+  "updatedAt": "2026-10-10T10:45:45.555Z"
+ },
+ "jee-main/physics/units-and-measurements": {
+  "slug": "units-and-measurements",
+  "name": "Units and Measurements",
+  "subject": {
+   "slug": "physics",
+   "name": "Physics"
+  },
+  "syllabusStatus": "IN_SYLLABUS",
+  "path": "/exam/jee-main/chapters/physics/units-and-measurements",
+  "description": null,
+  "exam": {
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "unit": null,
+  "syllabusSourceUrl": null,
+  "stats": [
+   {
+    "year": 2026,
+    "questions": 2,
+    "subjectQuestions": 25,
+    "papersInYear": 1,
+    "weightagePct": 8,
+    "changePct": null
+   }
+  ],
+  "totalQuestions": 2,
+  "questions": [
+   {
+    "publicId": "jj9124g7sf",
+    "path": "/exam/jee-main/questions/a-new-unit-length-is-chosen-such-that-jj9124g7sf",
+    "number": 26,
+    "preview": "A new unit (α) of length is chosen such that it is equal to the speed of light in vacuum. What is the distance between Venus and Earth in terms of α units if…",
+    "type": "MCQ_SINGLE",
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "provenance": "OFFICIAL_FINAL"
+   },
+   {
+    "publicId": "wgfrtfz99m",
+    "path": "/exam/jee-main/questions/consider-equation-where-magnetic-field-electric-field-permittivity-wgfrtfz99m",
+    "number": 27,
+    "preview": "Consider the equation H = (x^p ε^q E^r)/(t^s) where H = magnetic field; E = electric field, ε = permittivity, x = distance, t = time. The values of p, q, r and…",
+    "type": "MCQ_SINGLE",
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "provenance": "OFFICIAL_FINAL"
+   }
+  ],
+  "updatedAt": "2026-10-10T10:45:45.555Z"
+ },
+ "jee-main/physics/kinematics": {
+  "slug": "kinematics",
+  "name": "Kinematics",
+  "subject": {
+   "slug": "physics",
+   "name": "Physics"
+  },
+  "syllabusStatus": "IN_SYLLABUS",
+  "path": "/exam/jee-main/chapters/physics/kinematics",
+  "description": null,
+  "exam": {
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "unit": null,
+  "syllabusSourceUrl": null,
+  "stats": [
+   {
+    "year": 2026,
+    "questions": 3,
+    "subjectQuestions": 25,
+    "papersInYear": 1,
+    "weightagePct": 12,
+    "changePct": null
+   }
+  ],
+  "totalQuestions": 3,
+  "questions": [
+   {
+    "publicId": "t39ndb6lvz",
+    "path": "/exam/jee-main/questions/a-gas-balloon-is-going-up-with-constant-t39ndb6lvz",
+    "number": 29,
+    "preview": "A gas balloon is going up with a constant velocity of 10 m/s. When this balloon reached a height of 75 m, a stone is dropped from it and balloon keeps moving…",
+    "type": "MCQ_SINGLE",
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "provenance": "OFFICIAL_FINAL"
+   },
+   {
+    "publicId": "466k6fesl0",
+    "path": "/exam/jee-main/questions/two-identical-bodies-projected-with-same-speed-at-466k6fesl0",
+    "number": 31,
+    "preview": "Two identical bodies, projected with the same speed at two different angles cover the same horizontal range R. If the time of flight of these bodies are 5 s…",
+    "type": "MCQ_SINGLE",
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "provenance": "OFFICIAL_FINAL"
+   },
+   {
+    "publicId": "ntc02u3avz",
+    "path": "/exam/jee-main/questions/two-masses-3-4-kg-2-5-kg-ntc02u3avz",
+    "number": 50,
+    "preview": "Two masses of 3.4 kg and 2.5 kg are accelerated from an initial speed of 5 m/s and 12 m/s, respectively. The distances traversed by the masses in the 5th…",
+    "type": "NUMERICAL",
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "provenance": "OFFICIAL_FINAL"
+   }
+  ],
+  "updatedAt": "2026-10-10T10:45:45.555Z"
+ },
+ "jee-main/physics/laws-of-motion": {
+  "slug": "laws-of-motion",
+  "name": "Laws of Motion",
+  "subject": {
+   "slug": "physics",
+   "name": "Physics"
+  },
+  "syllabusStatus": "IN_SYLLABUS",
+  "path": "/exam/jee-main/chapters/physics/laws-of-motion",
+  "description": null,
+  "exam": {
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "unit": null,
+  "syllabusSourceUrl": null,
+  "stats": [
+   {
+    "year": 2026,
+    "questions": 1,
+    "subjectQuestions": 25,
+    "papersInYear": 1,
+    "weightagePct": 4,
+    "changePct": null
+   }
+  ],
+  "totalQuestions": 1,
+  "questions": [
+   {
+    "publicId": "rfbgxtt8e7",
+    "path": "/exam/jee-main/questions/a-car-moving-with-speed-54-km-h-rfbgxtt8e7",
+    "number": 28,
+    "preview": "A car moving with a speed of 54 km/h takes a turn of radius 20 m. A simple pendulum is suspended from the ceiling of the car. Determine the angle made by the…",
+    "type": "MCQ_SINGLE",
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "provenance": "OFFICIAL_FINAL"
+   }
+  ],
+  "updatedAt": "2026-10-10T10:45:45.555Z"
+ },
+ "jee-main/physics/rotational-motion": {
+  "slug": "rotational-motion",
+  "name": "Rotational Motion",
+  "subject": {
+   "slug": "physics",
+   "name": "Physics"
+  },
+  "syllabusStatus": "IN_SYLLABUS",
+  "path": "/exam/jee-main/chapters/physics/rotational-motion",
+  "description": null,
+  "exam": {
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "unit": null,
+  "syllabusSourceUrl": null,
+  "stats": [
+   {
+    "year": 2026,
+    "questions": 1,
+    "subjectQuestions": 25,
+    "papersInYear": 1,
+    "weightagePct": 4,
+    "changePct": null
+   }
+  ],
+  "totalQuestions": 1,
+  "questions": [
+   {
+    "publicId": "570ceoyq3g",
+    "path": "/exam/jee-main/questions/a-solid-cylinder-having-radius-length-is-slipping-570ceoyq3g",
+    "number": 32,
+    "preview": "A solid cylinder having radius R and length L is slipping on a rough horizontal plane. At time t = 0 the cylinder has a translational velocity v₀ = 49 m/s,…",
+    "type": "MCQ_SINGLE",
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "provenance": "OFFICIAL_FINAL"
+   }
+  ],
+  "updatedAt": "2026-10-10T10:45:45.555Z"
+ },
+ "jee-main/physics/properties-of-solids-and-liquids": {
+  "slug": "properties-of-solids-and-liquids",
+  "name": "Properties of Solids and Liquids",
+  "subject": {
+   "slug": "physics",
+   "name": "Physics"
+  },
+  "syllabusStatus": "IN_SYLLABUS",
+  "path": "/exam/jee-main/chapters/physics/properties-of-solids-and-liquids",
+  "description": null,
+  "exam": {
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "unit": null,
+  "syllabusSourceUrl": null,
+  "stats": [
+   {
+    "year": 2026,
+    "questions": 2,
+    "subjectQuestions": 25,
+    "papersInYear": 1,
+    "weightagePct": 8,
+    "changePct": null
+   }
+  ],
+  "totalQuestions": 2,
+  "questions": [
+   {
+    "publicId": "418f7m2lwc",
+    "path": "/exam/jee-main/questions/a-liquid-density-600-kg-m-flowing-steadily-418f7m2lwc",
+    "number": 33,
+    "preview": "A liquid of density 600 kg/m³ flowing steadily in a tube of varying cross-section. The cross-section at a point A is 1.0 cm² and that at B is 20 mm². Both the…",
+    "type": "MCQ_SINGLE",
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "provenance": "OFFICIAL_FINAL"
+   },
+   {
+    "publicId": "9yb5ujegwk",
+    "path": "/exam/jee-main/questions/a-spherical-liquid-drop-radius-acquires-terminal-velocity-9yb5ujegwk",
+    "number": 34,
+    "preview": "A spherical liquid drop of radius R acquires the terminal velocity v₁ when falls through a gas of viscosity …. Now the drop is broken into 64 identical…",
+    "type": "MCQ_SINGLE",
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "provenance": "OFFICIAL_FINAL"
+   }
+  ],
+  "updatedAt": "2026-10-10T10:45:45.555Z"
+ },
+ "jee-main/physics/thermodynamics": {
+  "slug": "thermodynamics",
+  "name": "Thermodynamics",
+  "subject": {
+   "slug": "physics",
+   "name": "Physics"
+  },
+  "syllabusStatus": "IN_SYLLABUS",
+  "path": "/exam/jee-main/chapters/physics/thermodynamics",
+  "description": null,
+  "exam": {
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "unit": null,
+  "syllabusSourceUrl": null,
+  "stats": [
+   {
+    "year": 2026,
+    "questions": 2,
+    "subjectQuestions": 25,
+    "papersInYear": 1,
+    "weightagePct": 8,
+    "changePct": null
+   }
+  ],
+  "totalQuestions": 2,
+  "questions": [
+   {
+    "publicId": "6746dzg0dc",
+    "path": "/exam/jee-main/questions/one-mole-diatomic-gas-having-rotational-modes-only-6746dzg0dc",
+    "number": 35,
+    "preview": "One mole of diatomic gas having rotational modes only is kept in a cylinder with a piston system. The cross-section area of the cylinder is 4 cm². The gas is…",
+    "type": "MCQ_SINGLE",
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "provenance": "OFFICIAL_FINAL"
+   },
+   {
+    "publicId": "r0gwqjz93v",
+    "path": "/exam/jee-main/questions/initial-pressure-volume-monoatomic-ideal-gas-are-r0gwqjz93v",
+    "number": 36,
+    "preview": "Initial pressure and volume of a monoatomic ideal gas are P and V. The change in internal energy of this gas in adiabatic expansion to volume V(final) = 27 V…",
+    "type": "MCQ_SINGLE",
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "provenance": "OFFICIAL_FINAL"
+   }
+  ],
+  "updatedAt": "2026-10-10T10:45:45.555Z"
+ },
+ "jee-main/physics/oscillations-and-waves": {
+  "slug": "oscillations-and-waves",
+  "name": "Oscillations and Waves",
+  "subject": {
+   "slug": "physics",
+   "name": "Physics"
+  },
+  "syllabusStatus": "IN_SYLLABUS",
+  "path": "/exam/jee-main/chapters/physics/oscillations-and-waves",
+  "description": null,
+  "exam": {
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "unit": null,
+  "syllabusSourceUrl": null,
+  "stats": [
+   {
+    "year": 2026,
+    "questions": 1,
+    "subjectQuestions": 25,
+    "papersInYear": 1,
+    "weightagePct": 4,
+    "changePct": null
+   }
+  ],
+  "totalQuestions": 1,
+  "questions": [
+   {
+    "publicId": "qxcel2bd9x",
+    "path": "/exam/jee-main/questions/the-frequency-oscillation-mass-suspended-by-spring-is-qxcel2bd9x",
+    "number": 37,
+    "preview": "The frequency of oscillation of a mass m suspended by a spring is v₁. If the length of the spring is cut to half, the same mass oscillates with frequency v₂.…",
+    "type": "MCQ_SINGLE",
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "provenance": "OFFICIAL_FINAL"
+   }
+  ],
+  "updatedAt": "2026-10-10T10:45:45.555Z"
+ },
+ "jee-main/physics/electrostatics": {
+  "slug": "electrostatics",
+  "name": "Electrostatics",
+  "subject": {
+   "slug": "physics",
+   "name": "Physics"
+  },
+  "syllabusStatus": "IN_SYLLABUS",
+  "path": "/exam/jee-main/chapters/physics/electrostatics",
+  "description": null,
+  "exam": {
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "unit": null,
+  "syllabusSourceUrl": null,
+  "stats": [
+   {
+    "year": 2026,
+    "questions": 2,
+    "subjectQuestions": 25,
+    "papersInYear": 1,
+    "weightagePct": 8,
+    "changePct": null
+   }
+  ],
+  "totalQuestions": 2,
+  "questions": [
+   {
+    "publicId": "0578np1gk8",
+    "path": "/exam/jee-main/questions/two-point-charges-are-placed-at-points-respectively-0578np1gk8",
+    "number": 41,
+    "preview": "Two point charges q₁ = 3 μ C and q₂ = -4 μ C are placed at points (2î + 3ĵ + 3k̂ ) and (î + ĵ + k̂ ) respectively. Force on charge q₂ is ____ N. (Take…",
+    "type": "MCQ_SINGLE",
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "provenance": "OFFICIAL_FINAL"
+   },
+   {
+    "publicId": "a3vzqtyrsd",
+    "path": "/exam/jee-main/questions/a-parallel-plate-capacitor-is-having-separation-between-a3vzqtyrsd",
+    "number": 46,
+    "preview": "A parallel plate capacitor is having separation between plates 0.885 mm. It has a capacitance of 1 μF when the space between the plates is filled with an…",
+    "type": "NUMERICAL",
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "provenance": "OFFICIAL_FINAL"
+   }
+  ],
+  "updatedAt": "2026-10-10T10:45:45.555Z"
+ },
+ "jee-main/physics/current-electricity": {
+  "slug": "current-electricity",
+  "name": "Current Electricity",
+  "subject": {
+   "slug": "physics",
+   "name": "Physics"
+  },
+  "syllabusStatus": "IN_SYLLABUS",
+  "path": "/exam/jee-main/chapters/physics/current-electricity",
+  "description": null,
+  "exam": {
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "unit": null,
+  "syllabusSourceUrl": null,
+  "stats": [
+   {
+    "year": 2026,
+    "questions": 1,
+    "subjectQuestions": 25,
+    "papersInYear": 1,
+    "weightagePct": 4,
+    "changePct": null
+   }
+  ],
+  "totalQuestions": 1,
+  "questions": [
+   {
+    "publicId": "r18o3r2h9o",
+    "path": "/exam/jee-main/questions/the-stored-charge-capacitor-steady-state-following-r18o3r2h9o",
+    "number": 49,
+    "preview": "The stored charge in the capacitor in steady state of the following circuit is ____ μC.",
+    "type": "NUMERICAL",
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "provenance": "OFFICIAL_FINAL"
+   }
+  ],
+  "updatedAt": "2026-10-10T10:45:45.555Z"
+ },
+ "jee-main/physics/magnetic-effects-of-current-and-magnetism": {
+  "slug": "magnetic-effects-of-current-and-magnetism",
+  "name": "Magnetic Effects of Current and Magnetism",
+  "subject": {
+   "slug": "physics",
+   "name": "Physics"
+  },
+  "syllabusStatus": "IN_SYLLABUS",
+  "path": "/exam/jee-main/chapters/physics/magnetic-effects-of-current-and-magnetism",
+  "description": null,
+  "exam": {
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "unit": null,
+  "syllabusSourceUrl": null,
+  "stats": [
+   {
+    "year": 2026,
+    "questions": 2,
+    "subjectQuestions": 25,
+    "papersInYear": 1,
+    "weightagePct": 8,
+    "changePct": null
+   }
+  ],
+  "totalQuestions": 2,
+  "questions": [
+   {
+    "publicId": "lnop1i35yj",
+    "path": "/exam/jee-main/questions/a-current-carrying-circular-loop-radius-2-cm-lnop1i35yj",
+    "number": 39,
+    "preview": "A current carrying circular loop of radius 2 cm with unit normal n̂ = (k̂ + î)/(√2) is placed in a magnetic field, B⃗ = B₀ (3î + 2k̂ ). If B₀ = 4 × 10⁻³ T…",
+    "type": "MCQ_SINGLE",
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "provenance": "OFFICIAL_FINAL"
+   },
+   {
+    "publicId": "f358eq4jga",
+    "path": "/exam/jee-main/questions/a-5-mg-particle-carrying-charge-c-is-f358eq4jga",
+    "number": 48,
+    "preview": "A 5 mg particle carrying a charge of 5π × 10⁻⁶ C is moving with velocity of (3î + 2k̂ ) × 10⁻² m/s in a region having magnetic field B⃗ = 0.1 k̂ Wb/m². It…",
+    "type": "NUMERICAL",
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "provenance": "OFFICIAL_FINAL"
+   }
+  ],
+  "updatedAt": "2026-10-10T10:45:45.555Z"
+ },
+ "jee-main/physics/electromagnetic-induction-and-alternating-currents": {
+  "slug": "electromagnetic-induction-and-alternating-currents",
+  "name": "Electromagnetic Induction and Alternating Currents",
+  "subject": {
+   "slug": "physics",
+   "name": "Physics"
+  },
+  "syllabusStatus": "IN_SYLLABUS",
+  "path": "/exam/jee-main/chapters/physics/electromagnetic-induction-and-alternating-currents",
+  "description": null,
+  "exam": {
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "unit": null,
+  "syllabusSourceUrl": null,
+  "stats": [
+   {
+    "year": 2026,
+    "questions": 1,
+    "subjectQuestions": 25,
+    "papersInYear": 1,
+    "weightagePct": 4,
+    "changePct": null
+   }
+  ],
+  "totalQuestions": 1,
+  "questions": [
+   {
+    "publicId": "sx92t0g0r9",
+    "path": "/exam/jee-main/questions/a-30-cm-long-solenoid-has-10-turns-sx92t0g0r9",
+    "number": 40,
+    "preview": "A 30 cm long solenoid has 10 turns per cm and area of 5 cm². The current through the solenoid coil varies from 2 A to 4 A in 3.14 s. The e.m.f. induced in the…",
+    "type": "MCQ_SINGLE",
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "provenance": "OFFICIAL_FINAL"
+   }
+  ],
+  "updatedAt": "2026-10-10T10:45:45.555Z"
+ },
+ "jee-main/physics/electromagnetic-waves": {
+  "slug": "electromagnetic-waves",
+  "name": "Electromagnetic Waves",
+  "subject": {
+   "slug": "physics",
+   "name": "Physics"
+  },
+  "syllabusStatus": "IN_SYLLABUS",
+  "path": "/exam/jee-main/chapters/physics/electromagnetic-waves",
+  "description": null,
+  "exam": {
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "unit": null,
+  "syllabusSourceUrl": null,
+  "stats": [
+   {
+    "year": 2026,
+    "questions": 1,
+    "subjectQuestions": 25,
+    "papersInYear": 1,
+    "weightagePct": 4,
+    "changePct": null
+   }
+  ],
+  "totalQuestions": 1,
+  "questions": [
+   {
+    "publicId": "7jgtux7ejj",
+    "path": "/exam/jee-main/questions/a-monochromatic-source-light-operating-at-15-kw-7jgtux7ejj",
+    "number": 38,
+    "preview": "A monochromatic source of light operating at 15 kW emits 2.5 × 10²² photons/s. The region of an electromagnetic spectrum to which the emitted electromagnetic…",
+    "type": "MCQ_SINGLE",
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "provenance": "OFFICIAL_FINAL"
+   }
+  ],
+  "updatedAt": "2026-10-10T10:45:45.555Z"
+ },
+ "jee-main/physics/optics": {
+  "slug": "optics",
+  "name": "Optics",
+  "subject": {
+   "slug": "physics",
+   "name": "Physics"
+  },
+  "syllabusStatus": "IN_SYLLABUS",
+  "path": "/exam/jee-main/chapters/physics/optics",
+  "description": null,
+  "exam": {
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "unit": null,
+  "syllabusSourceUrl": null,
+  "stats": [
+   {
+    "year": 2026,
+    "questions": 3,
+    "subjectQuestions": 25,
+    "papersInYear": 1,
+    "weightagePct": 12,
+    "changePct": null
+   }
+  ],
+  "totalQuestions": 3,
+  "questions": [
+   {
+    "publicId": "bca5rsuj90",
+    "path": "/exam/jee-main/questions/a-thin-biconvex-lens-is-prepared-from-glass-bca5rsuj90",
+    "number": 30,
+    "preview": "A thin biconvex lens is prepared from the glass (μ = 1.5) both curved surfaces of which have equal radii of 20 cm each. Left side surface of the lens is…",
+    "type": "MCQ_SINGLE",
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "provenance": "OFFICIAL_FINAL"
+   },
+   {
+    "publicId": "uln3097t4b",
+    "path": "/exam/jee-main/questions/light-ray-incident-along-vector-emerges-out-along-uln3097t4b",
+    "number": 42,
+    "preview": "Light ray incident along a vector AO⃗ (AO⃗ = 2î - 3ĵ ) emerges out along vector OB⃗ (OB⃗ = Cî - 4ĵ ) as shown in the figure below. The value of C is ____.",
+    "type": "MCQ_SINGLE",
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "provenance": "OFFICIAL_FINAL"
+   },
+   {
+    "publicId": "v0sguqfy3i",
+    "path": "/exam/jee-main/questions/some-distant-star-is-be-observed-by-some-v0sguqfy3i",
+    "number": 47,
+    "preview": "Some distant star is to be observed by some telescope of diameter of objective lens a, at an angular resolution of 3.0 × 10⁻⁷ radian. If the wavelength of…",
+    "type": "NUMERICAL",
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "provenance": "OFFICIAL_FINAL"
+   }
+  ],
+  "updatedAt": "2026-10-10T10:45:45.555Z"
+ },
+ "jee-main/physics/dual-nature-of-matter-and-radiation": {
+  "slug": "dual-nature-of-matter-and-radiation",
+  "name": "Dual Nature of Matter and Radiation",
+  "subject": {
+   "slug": "physics",
+   "name": "Physics"
+  },
+  "syllabusStatus": "IN_SYLLABUS",
+  "path": "/exam/jee-main/chapters/physics/dual-nature-of-matter-and-radiation",
+  "description": null,
+  "exam": {
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "unit": null,
+  "syllabusSourceUrl": null,
+  "stats": [
+   {
+    "year": 2026,
+    "questions": 1,
+    "subjectQuestions": 25,
+    "papersInYear": 1,
+    "weightagePct": 4,
+    "changePct": null
+   }
+  ],
+  "totalQuestions": 1,
+  "questions": [
+   {
+    "publicId": "tvu4didgjw",
+    "path": "/exam/jee-main/questions/and-be-maximum-kinetic-energies-photoelectrons-emitted-from-tvu4didgjw",
+    "number": 43,
+    "preview": "K₁ and K₂ be the maximum kinetic energies of photoelectrons emitted from a surface of a given material for the light of wavelength λ₁ and λ₂, respectively. If…",
+    "type": "MCQ_SINGLE",
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "provenance": "OFFICIAL_FINAL"
+   }
+  ],
+  "updatedAt": "2026-10-10T10:45:45.555Z"
+ },
+ "jee-main/physics/atoms-and-nuclei": {
+  "slug": "atoms-and-nuclei",
+  "name": "Atoms and Nuclei",
+  "subject": {
+   "slug": "physics",
+   "name": "Physics"
+  },
+  "syllabusStatus": "IN_SYLLABUS",
+  "path": "/exam/jee-main/chapters/physics/atoms-and-nuclei",
+  "description": null,
+  "exam": {
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "unit": null,
+  "syllabusSourceUrl": null,
+  "stats": [
+   {
+    "year": 2026,
+    "questions": 1,
+    "subjectQuestions": 25,
+    "papersInYear": 1,
+    "weightagePct": 4,
+    "changePct": null
+   }
+  ],
+  "totalQuestions": 1,
+  "questions": [
+   {
+    "publicId": "g0hic0p2ag",
+    "path": "/exam/jee-main/questions/two-radioactive-substances-b-mass-numbers-200-212-g0hic0p2ag",
+    "number": 44,
+    "preview": "Two radioactive substances A and B of mass numbers 200 and 212 respectively, shows spontaneous α-decay with same Q value of 1 MeV. The ratio of energies of…",
+    "type": "MCQ_SINGLE",
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "provenance": "OFFICIAL_FINAL"
+   }
+  ],
+  "updatedAt": "2026-10-10T10:45:45.555Z"
+ },
+ "jee-main/physics/electronic-devices": {
+  "slug": "electronic-devices",
+  "name": "Electronic Devices",
+  "subject": {
+   "slug": "physics",
+   "name": "Physics"
+  },
+  "syllabusStatus": "IN_SYLLABUS",
+  "path": "/exam/jee-main/chapters/physics/electronic-devices",
+  "description": null,
+  "exam": {
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "unit": null,
+  "syllabusSourceUrl": null,
+  "stats": [
+   {
+    "year": 2026,
+    "questions": 1,
+    "subjectQuestions": 25,
+    "papersInYear": 1,
+    "weightagePct": 4,
+    "changePct": null
+   }
+  ],
+  "totalQuestions": 1,
+  "questions": [
+   {
+    "publicId": "zpl35ycuaf",
+    "path": "/exam/jee-main/questions/the-output-given-inputs-circuit-is-zpl35ycuaf",
+    "number": 45,
+    "preview": "The output Y for the given inputs A and B to the circuit is:",
+    "type": "MCQ_SINGLE",
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "provenance": "OFFICIAL_FINAL"
+   }
+  ],
+  "updatedAt": "2026-10-10T10:45:45.555Z"
+ },
+ "jee-main/chemistry/some-basic-concepts-in-chemistry": {
+  "slug": "some-basic-concepts-in-chemistry",
+  "name": "Some Basic Concepts in Chemistry",
+  "subject": {
+   "slug": "chemistry",
+   "name": "Chemistry"
+  },
+  "syllabusStatus": "IN_SYLLABUS",
+  "path": "/exam/jee-main/chapters/chemistry/some-basic-concepts-in-chemistry",
+  "description": null,
+  "exam": {
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "unit": {
+   "slug": "physical-chemistry",
+   "name": "Physical Chemistry"
+  },
+  "syllabusSourceUrl": null,
+  "stats": [
+   {
+    "year": 2026,
+    "questions": 1,
+    "subjectQuestions": 25,
+    "papersInYear": 1,
+    "weightagePct": 4,
+    "changePct": null
+   }
+  ],
+  "totalQuestions": 1,
+  "questions": [
+   {
+    "publicId": "o9glhgepiz",
+    "path": "/exam/jee-main/questions/match-list-i-with-list-ii-choose-correct-o9glhgepiz",
+    "number": 51,
+    "preview": "Match List - I with List - II. Choose the correct answer from the options given below:",
+    "type": "MCQ_SINGLE",
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "provenance": "OFFICIAL_FINAL"
+   }
+  ],
+  "updatedAt": "2026-10-10T10:45:45.555Z"
+ },
+ "jee-main/chemistry/atomic-structure": {
+  "slug": "atomic-structure",
+  "name": "Atomic Structure",
+  "subject": {
+   "slug": "chemistry",
+   "name": "Chemistry"
+  },
+  "syllabusStatus": "IN_SYLLABUS",
+  "path": "/exam/jee-main/chapters/chemistry/atomic-structure",
+  "description": null,
+  "exam": {
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "unit": {
+   "slug": "physical-chemistry",
+   "name": "Physical Chemistry"
+  },
+  "syllabusSourceUrl": null,
+  "stats": [
+   {
+    "year": 2026,
+    "questions": 1,
+    "subjectQuestions": 25,
+    "papersInYear": 1,
+    "weightagePct": 4,
+    "changePct": null
+   }
+  ],
+  "totalQuestions": 1,
+  "questions": [
+   {
+    "publicId": "pgxxhnmdhx",
+    "path": "/exam/jee-main/questions/consider-two-radiations-wavelengths-1-2-ratio-pgxxhnmdhx",
+    "number": 73,
+    "preview": "Consider two radiations of wavelengths 1. λ₁ = 2000 Å 2. λ₂ = 6000 Å The ratio of the energies of these two radiations ((E₁)/(E₂) ) is ____ (Nearest integer).",
+    "type": "NUMERICAL",
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "provenance": "OFFICIAL_FINAL"
+   }
+  ],
+  "updatedAt": "2026-10-10T10:45:45.555Z"
+ },
+ "jee-main/chemistry/chemical-bonding-and-molecular-structure": {
+  "slug": "chemical-bonding-and-molecular-structure",
+  "name": "Chemical Bonding and Molecular Structure",
+  "subject": {
+   "slug": "chemistry",
+   "name": "Chemistry"
+  },
+  "syllabusStatus": "IN_SYLLABUS",
+  "path": "/exam/jee-main/chapters/chemistry/chemical-bonding-and-molecular-structure",
+  "description": null,
+  "exam": {
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "unit": {
+   "slug": "physical-chemistry",
+   "name": "Physical Chemistry"
+  },
+  "syllabusSourceUrl": null,
+  "stats": [
+   {
+    "year": 2026,
+    "questions": 1,
+    "subjectQuestions": 25,
+    "papersInYear": 1,
+    "weightagePct": 4,
+    "changePct": null
+   }
+  ],
+  "totalQuestions": 1,
+  "questions": [
+   {
+    "publicId": "tuma7sgilj",
+    "path": "/exam/jee-main/questions/bromine-trifluoride-autoionizes-form-brf-brf-shapes-tuma7sgilj",
+    "number": 53,
+    "preview": "Bromine trifluoride autoionizes to form BrF₂^ … and BrF₄^ …. The shapes of the cation and anion are respectively ____, and ____.",
+    "type": "MCQ_SINGLE",
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "provenance": "OFFICIAL_FINAL"
+   }
+  ],
+  "updatedAt": "2026-10-10T10:45:45.555Z"
+ },
+ "jee-main/chemistry/chemical-thermodynamics": {
+  "slug": "chemical-thermodynamics",
+  "name": "Chemical Thermodynamics",
+  "subject": {
+   "slug": "chemistry",
+   "name": "Chemistry"
+  },
+  "syllabusStatus": "IN_SYLLABUS",
+  "path": "/exam/jee-main/chapters/chemistry/chemical-thermodynamics",
+  "description": null,
+  "exam": {
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "unit": {
+   "slug": "physical-chemistry",
+   "name": "Physical Chemistry"
+  },
+  "syllabusSourceUrl": null,
+  "stats": [
+   {
+    "year": 2026,
+    "questions": 1,
+    "subjectQuestions": 25,
+    "papersInYear": 1,
+    "weightagePct": 4,
+    "changePct": null
+   }
+  ],
+  "totalQuestions": 1,
+  "questions": [
+   {
+    "publicId": "zhvqk02q6q",
+    "path": "/exam/jee-main/questions/consider-reaction-magnitude-enthalpy-change-reaction-zhvqk02q6q",
+    "number": 74,
+    "preview": "Consider the reaction 2H₂S(g) + 3O₂(g) → 2H₂O(l) + 2SO₂(g) The magnitude of enthalpy change for the reaction in kJ mol⁻¹ is ____. (Nearest integer) Given: Δf…",
+    "type": "NUMERICAL",
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "provenance": "OFFICIAL_FINAL"
+   }
+  ],
+  "updatedAt": "2026-10-10T10:45:45.555Z"
+ },
+ "jee-main/chemistry/solutions": {
+  "slug": "solutions",
+  "name": "Solutions",
+  "subject": {
+   "slug": "chemistry",
+   "name": "Chemistry"
+  },
+  "syllabusStatus": "IN_SYLLABUS",
+  "path": "/exam/jee-main/chapters/chemistry/solutions",
+  "description": null,
+  "exam": {
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "unit": {
+   "slug": "physical-chemistry",
+   "name": "Physical Chemistry"
+  },
+  "syllabusSourceUrl": null,
+  "stats": [
+   {
+    "year": 2026,
+    "questions": 2,
+    "subjectQuestions": 25,
+    "papersInYear": 1,
+    "weightagePct": 8,
+    "changePct": null
+   }
+  ],
+  "totalQuestions": 2,
+  "questions": [
+   {
+    "publicId": "hw2sp82609",
+    "path": "/exam/jee-main/questions/given-below-are-two-statements-given-molar-mass-hw2sp82609",
+    "number": 52,
+    "preview": "Given below are two statements: Given: Molar mass of C, H, O, Cl are 12, 1, 16 and 35.5 g mol⁻¹, respectively Statement I: In 30% (w/w) solution of methanol in…",
+    "type": "MCQ_SINGLE",
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "provenance": "OFFICIAL_FINAL"
+   },
+   {
+    "publicId": "ac4soc01vs",
+    "path": "/exam/jee-main/questions/which-following-statements-are-not-correct-water-magnitude-ac4soc01vs",
+    "number": 54,
+    "preview": "Which of the following statements are not correct? A. For water, magnitude of Kb is more than the magnitude of Kf. B. The elevation in boiling point of water…",
+    "type": "MCQ_SINGLE",
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "provenance": "OFFICIAL_FINAL"
+   }
+  ],
+  "updatedAt": "2026-10-10T10:45:45.555Z"
+ },
+ "jee-main/chemistry/equilibrium": {
+  "slug": "equilibrium",
+  "name": "Equilibrium",
+  "subject": {
+   "slug": "chemistry",
+   "name": "Chemistry"
+  },
+  "syllabusStatus": "IN_SYLLABUS",
+  "path": "/exam/jee-main/chapters/chemistry/equilibrium",
+  "description": null,
+  "exam": {
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "unit": {
+   "slug": "physical-chemistry",
+   "name": "Physical Chemistry"
+  },
+  "syllabusSourceUrl": null,
+  "stats": [
+   {
+    "year": 2026,
+    "questions": 2,
+    "subjectQuestions": 25,
+    "papersInYear": 1,
+    "weightagePct": 8,
+    "changePct": null
+   }
+  ],
+  "totalQuestions": 2,
+  "questions": [
+   {
+    "publicId": "o84dr7feke",
+    "path": "/exam/jee-main/questions/consider-following-reactions-which-all-reactants-products-are-o84dr7feke",
+    "number": 55,
+    "preview": "Consider the following reactions in which all the reactants and products are present in gaseous state 2 xy ⇌ x₂ + y₂ K₁ = 2.5 × 10⁵ xy + 1/2 z₂ ⇌ xyz K₂ = 5 ×…",
+    "type": "MCQ_SINGLE",
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "provenance": "OFFICIAL_FINAL"
+   },
+   {
+    "publicId": "ibeosgikx1",
+    "path": "/exam/jee-main/questions/solid-carbon-cao-caco-are-mixed-allowed-attain-ibeosgikx1",
+    "number": 75,
+    "preview": "Solid carbon, CaO and CaCO₃ are mixed and allowed to attain equilibrium at T K. CaCO₃(s) ⇌ CaO(s) + CO₂(g) K(p₁) = 0.08 atm C(s) + CO₂(g) ⇌ 2CO(g) K(p₂) = 2…",
+    "type": "NUMERICAL",
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "provenance": "OFFICIAL_FINAL"
+   }
+  ],
+  "updatedAt": "2026-10-10T10:45:45.555Z"
+ },
+ "jee-main/chemistry/redox-reactions-and-electrochemistry": {
+  "slug": "redox-reactions-and-electrochemistry",
+  "name": "Redox Reactions and Electrochemistry",
+  "subject": {
+   "slug": "chemistry",
+   "name": "Chemistry"
+  },
+  "syllabusStatus": "IN_SYLLABUS",
+  "path": "/exam/jee-main/chapters/chemistry/redox-reactions-and-electrochemistry",
+  "description": null,
+  "exam": {
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "unit": {
+   "slug": "physical-chemistry",
+   "name": "Physical Chemistry"
+  },
+  "syllabusSourceUrl": null,
+  "stats": [
+   {
+    "year": 2026,
+    "questions": 1,
+    "subjectQuestions": 25,
+    "papersInYear": 1,
+    "weightagePct": 4,
+    "changePct": null
+   }
+  ],
+  "totalQuestions": 1,
+  "questions": [
+   {
+    "publicId": "3hrou8suwq",
+    "path": "/exam/jee-main/questions/given-at-298-k-volt-volt-volt-at-3hrou8suwq",
+    "number": 56,
+    "preview": "Given at 298 K: E^ … (Fe²⁺/Fe) = X Volt and E^ … (Fe³⁺/Fe) = Y Volt. The E^ … (Fe³⁺/Fe²⁺) in Volt at 298 K is given by:",
+    "type": "MCQ_SINGLE",
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "provenance": "OFFICIAL_FINAL"
+   }
+  ],
+  "updatedAt": "2026-10-10T10:45:45.555Z"
+ },
+ "jee-main/chemistry/chemical-kinetics": {
+  "slug": "chemical-kinetics",
+  "name": "Chemical Kinetics",
+  "subject": {
+   "slug": "chemistry",
+   "name": "Chemistry"
+  },
+  "syllabusStatus": "IN_SYLLABUS",
+  "path": "/exam/jee-main/chapters/chemistry/chemical-kinetics",
+  "description": null,
+  "exam": {
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "unit": {
+   "slug": "physical-chemistry",
+   "name": "Physical Chemistry"
+  },
+  "syllabusSourceUrl": null,
+  "stats": [
+   {
+    "year": 2026,
+    "questions": 1,
+    "subjectQuestions": 25,
+    "papersInYear": 1,
+    "weightagePct": 4,
+    "changePct": null
+   }
+  ],
+  "totalQuestions": 1,
+  "questions": [
+   {
+    "publicId": "vjpot0c0xv",
+    "path": "/exam/jee-main/questions/given-below-are-two-statements-j-k-mol-vjpot0c0xv",
+    "number": 57,
+    "preview": "Given below are two statements: R = 8.314 J K⁻¹ mol⁻¹ and 1 cal = 4.2 J Statement I: When Eₐ = 12.6 kcal/mol, the room temperature rate constant is doubled by…",
+    "type": "MCQ_SINGLE",
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "provenance": "OFFICIAL_FINAL"
+   }
+  ],
+  "updatedAt": "2026-10-10T10:45:45.555Z"
+ },
+ "jee-main/chemistry/classification-of-elements-and-periodicity": {
+  "slug": "classification-of-elements-and-periodicity",
+  "name": "Classification of Elements and Periodicity in Properties",
+  "subject": {
+   "slug": "chemistry",
+   "name": "Chemistry"
+  },
+  "syllabusStatus": "IN_SYLLABUS",
+  "path": "/exam/jee-main/chapters/chemistry/classification-of-elements-and-periodicity",
+  "description": null,
+  "exam": {
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "unit": {
+   "slug": "inorganic-chemistry",
+   "name": "Inorganic Chemistry"
+  },
+  "syllabusSourceUrl": null,
+  "stats": [
+   {
+    "year": 2026,
+    "questions": 1,
+    "subjectQuestions": 25,
+    "papersInYear": 1,
+    "weightagePct": 4,
+    "changePct": null
+   }
+  ],
+  "totalQuestions": 1,
+  "questions": [
+   {
+    "publicId": "ssjbormcv3",
+    "path": "/exam/jee-main/questions/match-list-i-with-list-ii-choose-correct-ssjbormcv3",
+    "number": 58,
+    "preview": "Match List - I with List - II. Choose the correct answer from the options given below:",
+    "type": "MCQ_SINGLE",
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "provenance": "OFFICIAL_FINAL"
+   }
+  ],
+  "updatedAt": "2026-10-10T10:45:45.555Z"
+ },
+ "jee-main/chemistry/p-block-elements": {
+  "slug": "p-block-elements",
+  "name": "p-Block Elements",
+  "subject": {
+   "slug": "chemistry",
+   "name": "Chemistry"
+  },
+  "syllabusStatus": "IN_SYLLABUS",
+  "path": "/exam/jee-main/chapters/chemistry/p-block-elements",
+  "description": null,
+  "exam": {
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "unit": {
+   "slug": "inorganic-chemistry",
+   "name": "Inorganic Chemistry"
+  },
+  "syllabusSourceUrl": null,
+  "stats": [
+   {
+    "year": 2026,
+    "questions": 1,
+    "subjectQuestions": 25,
+    "papersInYear": 1,
+    "weightagePct": 4,
+    "changePct": null
+   }
+  ],
+  "totalQuestions": 1,
+  "questions": [
+   {
+    "publicId": "2qhu2rohgw",
+    "path": "/exam/jee-main/questions/find-correct-statements-related-group-15-hydrides-reducing-2qhu2rohgw",
+    "number": 59,
+    "preview": "Find the correct statements related to group 15 hydrides. A. Reducing nature increases from NH₃ to BiH₃ B. Tendency to donate lone pair of electrons decreases…",
+    "type": "MCQ_SINGLE",
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "provenance": "OFFICIAL_FINAL"
+   }
+  ],
+  "updatedAt": "2026-10-10T10:45:45.555Z"
+ },
+ "jee-main/chemistry/d-and-f-block-elements": {
+  "slug": "d-and-f-block-elements",
+  "name": "d- and f-Block Elements",
+  "subject": {
+   "slug": "chemistry",
+   "name": "Chemistry"
+  },
+  "syllabusStatus": "IN_SYLLABUS",
+  "path": "/exam/jee-main/chapters/chemistry/d-and-f-block-elements",
+  "description": null,
+  "exam": {
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "unit": {
+   "slug": "inorganic-chemistry",
+   "name": "Inorganic Chemistry"
+  },
+  "syllabusSourceUrl": null,
+  "stats": [
+   {
+    "year": 2026,
+    "questions": 2,
+    "subjectQuestions": 25,
+    "papersInYear": 1,
+    "weightagePct": 8,
+    "changePct": null
+   }
+  ],
+  "totalQuestions": 2,
+  "questions": [
+   {
+    "publicId": "naa0whk1un",
+    "path": "/exam/jee-main/questions/given-below-are-two-statements-statement-i-number-naa0whk1un",
+    "number": 60,
+    "preview": "Given below are two statements: Statement I: The number of pairs among [Ti⁴⁺, V²⁺], [V²⁺, Mn²⁺], [Mn²⁺, Fe³⁺] and [V²⁺, Cr²⁺] in which both ions are coloured…",
+    "type": "MCQ_SINGLE",
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "provenance": "OFFICIAL_FINAL"
+   },
+   {
+    "publicId": "hfoq3d31z1",
+    "path": "/exam/jee-main/questions/given-below-are-two-statements-catalytic-properties-transition-hfoq3d31z1",
+    "number": 61,
+    "preview": "Given below are two statements for catalytic properties of transition metals. Statement I: First row transition metals which act as catalyst utilise their 3d…",
+    "type": "MCQ_SINGLE",
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "provenance": "OFFICIAL_FINAL"
+   }
+  ],
+  "updatedAt": "2026-10-10T10:45:45.555Z"
+ },
+ "jee-main/chemistry/coordination-compounds": {
+  "slug": "coordination-compounds",
+  "name": "Coordination Compounds",
+  "subject": {
+   "slug": "chemistry",
+   "name": "Chemistry"
+  },
+  "syllabusStatus": "IN_SYLLABUS",
+  "path": "/exam/jee-main/chapters/chemistry/coordination-compounds",
+  "description": null,
+  "exam": {
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "unit": {
+   "slug": "inorganic-chemistry",
+   "name": "Inorganic Chemistry"
+  },
+  "syllabusSourceUrl": null,
+  "stats": [
+   {
+    "year": 2026,
+    "questions": 1,
+    "subjectQuestions": 25,
+    "papersInYear": 1,
+    "weightagePct": 4,
+    "changePct": null
+   }
+  ],
+  "totalQuestions": 1,
+  "questions": [
+   {
+    "publicId": "47atoqcyq4",
+    "path": "/exam/jee-main/questions/number-paramagnetic-complexes-among-following-is-mnbr-nicl-47atoqcyq4",
+    "number": 71,
+    "preview": "Number of paramagnetic complexes among the following is ____. [MnBr₄]²⁻, [NiCl₄]²⁻, [Ni(CN)₄]²⁻, [Ni(CO)₄], [CoF₆]³⁻, [Fe(CN)₆]⁴⁻, [Mn(CN)₆]³⁻, [Ti(CN)₆]³⁻,…",
+    "type": "NUMERICAL",
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "provenance": "OFFICIAL_FINAL"
+   }
+  ],
+  "updatedAt": "2026-10-10T10:45:45.555Z"
+ },
+ "jee-main/chemistry/purification-and-characterisation-of-organic-compounds": {
+  "slug": "purification-and-characterisation-of-organic-compounds",
+  "name": "Purification and Characterisation of Organic Compounds",
+  "subject": {
+   "slug": "chemistry",
+   "name": "Chemistry"
+  },
+  "syllabusStatus": "IN_SYLLABUS",
+  "path": "/exam/jee-main/chapters/chemistry/purification-and-characterisation-of-organic-compounds",
+  "description": null,
+  "exam": {
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "unit": {
+   "slug": "organic-chemistry",
+   "name": "Organic Chemistry"
+  },
+  "syllabusSourceUrl": null,
+  "stats": [
+   {
+    "year": 2026,
+    "questions": 1,
+    "subjectQuestions": 25,
+    "papersInYear": 1,
+    "weightagePct": 4,
+    "changePct": null
+   }
+  ],
+  "totalQuestions": 1,
+  "questions": [
+   {
+    "publicId": "hbucqxg141",
+    "path": "/exam/jee-main/questions/given-below-are-two-statements-statement-i-vapours-hbucqxg141",
+    "number": 62,
+    "preview": "Given below are two statements: Statement I: Vapours of the liquid with higher boiling point condense before vapours of the liquid with lower boiling points in…",
+    "type": "MCQ_SINGLE",
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "provenance": "OFFICIAL_FINAL"
+   }
+  ],
+  "updatedAt": "2026-10-10T10:45:45.555Z"
+ },
+ "jee-main/chemistry/some-basic-principles-of-organic-chemistry": {
+  "slug": "some-basic-principles-of-organic-chemistry",
+  "name": "Some Basic Principles of Organic Chemistry",
+  "subject": {
+   "slug": "chemistry",
+   "name": "Chemistry"
+  },
+  "syllabusStatus": "IN_SYLLABUS",
+  "path": "/exam/jee-main/chapters/chemistry/some-basic-principles-of-organic-chemistry",
+  "description": null,
+  "exam": {
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "unit": {
+   "slug": "organic-chemistry",
+   "name": "Organic Chemistry"
+  },
+  "syllabusSourceUrl": null,
+  "stats": [
+   {
+    "year": 2026,
+    "questions": 1,
+    "subjectQuestions": 25,
+    "papersInYear": 1,
+    "weightagePct": 4,
+    "changePct": null
+   }
+  ],
+  "totalQuestions": 1,
+  "questions": [
+   {
+    "publicId": "vyz047e0o6",
+    "path": "/exam/jee-main/questions/the-major-product-which-following-reaction-is-not-vyz047e0o6",
+    "number": 63,
+    "preview": "The major product of which of the following reaction is not obtained by rearrangement reaction?",
+    "type": "MCQ_SINGLE",
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "provenance": "OFFICIAL_FINAL"
+   }
+  ],
+  "updatedAt": "2026-10-10T10:45:45.555Z"
+ },
+ "jee-main/chemistry/hydrocarbons": {
+  "slug": "hydrocarbons",
+  "name": "Hydrocarbons",
+  "subject": {
+   "slug": "chemistry",
+   "name": "Chemistry"
+  },
+  "syllabusStatus": "IN_SYLLABUS",
+  "path": "/exam/jee-main/chapters/chemistry/hydrocarbons",
+  "description": null,
+  "exam": {
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "unit": {
+   "slug": "organic-chemistry",
+   "name": "Organic Chemistry"
+  },
+  "syllabusSourceUrl": null,
+  "stats": [
+   {
+    "year": 2026,
+    "questions": 2,
+    "subjectQuestions": 25,
+    "papersInYear": 1,
+    "weightagePct": 8,
+    "changePct": null
+   }
+  ],
+  "totalQuestions": 2,
+  "questions": [
+   {
+    "publicId": "nvugrleap1",
+    "path": "/exam/jee-main/questions/the-total-number-aromatic-compounds-species-from-following-nvugrleap1",
+    "number": 64,
+    "preview": "The total number of aromatic compounds/species from the following is",
+    "type": "MCQ_SINGLE",
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "provenance": "OFFICIAL_FINAL"
+   },
+   {
+    "publicId": "ksmywgysbs",
+    "path": "/exam/jee-main/questions/n-butane-monochlorination-under-photochemical-condition-gives-optically-ksmywgysbs",
+    "number": 65,
+    "preview": "n-Butane on monochlorination under photochemical condition gives an optically active compound \"P\". \"P\" on further chlorination gives dichloro compounds. The…",
+    "type": "MCQ_SINGLE",
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "provenance": "OFFICIAL_FINAL"
+   }
+  ],
+  "updatedAt": "2026-10-10T10:45:45.555Z"
+ },
+ "jee-main/chemistry/organic-compounds-containing-halogens": {
+  "slug": "organic-compounds-containing-halogens",
+  "name": "Organic Compounds Containing Halogens",
+  "subject": {
+   "slug": "chemistry",
+   "name": "Chemistry"
+  },
+  "syllabusStatus": "IN_SYLLABUS",
+  "path": "/exam/jee-main/chapters/chemistry/organic-compounds-containing-halogens",
+  "description": null,
+  "exam": {
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "unit": {
+   "slug": "organic-chemistry",
+   "name": "Organic Chemistry"
+  },
+  "syllabusSourceUrl": null,
+  "stats": [
+   {
+    "year": 2026,
+    "questions": 1,
+    "subjectQuestions": 25,
+    "papersInYear": 1,
+    "weightagePct": 4,
+    "changePct": null
+   }
+  ],
+  "totalQuestions": 1,
+  "questions": [
+   {
+    "publicId": "9b9qnad4c2",
+    "path": "/exam/jee-main/questions/given-below-are-two-statements-statement-i-due-9b9qnad4c2",
+    "number": 66,
+    "preview": "Given below are two statements: Statement I: Due to increase in van der Waals forces, the order of boiling points is CH₃CH₂CH₂I > CH₃CH₂I > CH₃I. Statement II:…",
+    "type": "MCQ_SINGLE",
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "provenance": "OFFICIAL_FINAL"
+   }
+  ],
+  "updatedAt": "2026-10-10T10:45:45.555Z"
+ },
+ "jee-main/chemistry/organic-compounds-containing-oxygen": {
+  "slug": "organic-compounds-containing-oxygen",
+  "name": "Organic Compounds Containing Oxygen",
+  "subject": {
+   "slug": "chemistry",
+   "name": "Chemistry"
+  },
+  "syllabusStatus": "IN_SYLLABUS",
+  "path": "/exam/jee-main/chapters/chemistry/organic-compounds-containing-oxygen",
+  "description": null,
+  "exam": {
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "unit": {
+   "slug": "organic-chemistry",
+   "name": "Organic Chemistry"
+  },
+  "syllabusSourceUrl": null,
+  "stats": [
+   {
+    "year": 2026,
+    "questions": 1,
+    "subjectQuestions": 25,
+    "papersInYear": 1,
+    "weightagePct": 4,
+    "changePct": null
+   }
+  ],
+  "totalQuestions": 1,
+  "questions": [
+   {
+    "publicId": "h0gfor2mcs",
+    "path": "/exam/jee-main/questions/is-product-which-is-obtained-from-benzene-by-h0gfor2mcs",
+    "number": 72,
+    "preview": "'x' is the product which is obtained from benzene by reacting it with carbon monoxide and hydrogen chloride in the presence of cuprous chloride. 'y' is the…",
+    "type": "NUMERICAL",
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "provenance": "OFFICIAL_FINAL"
+   }
+  ],
+  "updatedAt": "2026-10-10T10:45:45.555Z"
+ },
+ "jee-main/chemistry/organic-compounds-containing-nitrogen": {
+  "slug": "organic-compounds-containing-nitrogen",
+  "name": "Organic Compounds Containing Nitrogen",
+  "subject": {
+   "slug": "chemistry",
+   "name": "Chemistry"
+  },
+  "syllabusStatus": "IN_SYLLABUS",
+  "path": "/exam/jee-main/chapters/chemistry/organic-compounds-containing-nitrogen",
+  "description": null,
+  "exam": {
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "unit": {
+   "slug": "organic-chemistry",
+   "name": "Organic Chemistry"
+  },
+  "syllabusSourceUrl": null,
+  "stats": [
+   {
+    "year": 2026,
+    "questions": 2,
+    "subjectQuestions": 25,
+    "papersInYear": 1,
+    "weightagePct": 8,
+    "changePct": null
+   }
+  ],
+  "totalQuestions": 2,
+  "questions": [
+   {
+    "publicId": "yvbnf19phc",
+    "path": "/exam/jee-main/questions/consider-following-reaction-major-product-p-formed-is-yvbnf19phc",
+    "number": 67,
+    "preview": "Consider the following reaction. The major product (P) formed is:",
+    "type": "MCQ_SINGLE",
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "provenance": "OFFICIAL_FINAL"
+   },
+   {
+    "publicId": "qxroivet6l",
+    "path": "/exam/jee-main/questions/which-statements-are-true-hoffmann-bromamide-degradation-4-qxroivet6l",
+    "number": 68,
+    "preview": "Which statements are True? A. In Hoffmann bromamide degradation, 4 moles of NaOH and 2 moles of Br₂ are consumed per mole of an amide B. Hoffmann bromamide…",
+    "type": "MCQ_SINGLE",
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "provenance": "OFFICIAL_FINAL"
+   }
+  ],
+  "updatedAt": "2026-10-10T10:45:45.555Z"
+ },
+ "jee-main/chemistry/biomolecules": {
+  "slug": "biomolecules",
+  "name": "Biomolecules",
+  "subject": {
+   "slug": "chemistry",
+   "name": "Chemistry"
+  },
+  "syllabusStatus": "IN_SYLLABUS",
+  "path": "/exam/jee-main/chapters/chemistry/biomolecules",
+  "description": null,
+  "exam": {
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "unit": {
+   "slug": "organic-chemistry",
+   "name": "Organic Chemistry"
+  },
+  "syllabusSourceUrl": null,
+  "stats": [
+   {
+    "year": 2026,
+    "questions": 2,
+    "subjectQuestions": 25,
+    "papersInYear": 1,
+    "weightagePct": 8,
+    "changePct": null
+   }
+  ],
+  "totalQuestions": 2,
+  "questions": [
+   {
+    "publicId": "djak2uqyam",
+    "path": "/exam/jee-main/questions/the-incorrect-statement-from-following-with-respect-carbohydrates-djak2uqyam",
+    "number": 69,
+    "preview": "The incorrect statement from the following with respect to carbohydrates is:",
+    "type": "MCQ_SINGLE",
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "provenance": "OFFICIAL_FINAL"
+   },
+   {
+    "publicId": "k7pnj5nx5p",
+    "path": "/exam/jee-main/questions/which-following-amino-acid-will-give-violet-coloured-k7pnj5nx5p",
+    "number": 70,
+    "preview": "Which of the following amino acid will give violet coloured complex with neutral ferric chloride solution?",
+    "type": "MCQ_SINGLE",
+    "paper": {
+     "slug": "jee-main-8-apr-2026-shift-2-btech",
+     "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+     "year": 2026,
+     "shift": "8 Apr 2026, Shift 2",
+     "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech"
+    },
+    "provenance": "OFFICIAL_FINAL"
+   }
+  ],
+  "updatedAt": "2026-10-10T10:45:45.555Z"
+ }
+}

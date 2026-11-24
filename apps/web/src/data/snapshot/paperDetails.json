@@ -1,0 +1,5432 @@
+{
+ "jee-main-2-apr-2026-shift-2-btech": {
+  "id": "cmuylsbtn001tv4esvwuxjioi",
+  "slug": "jee-main-2-apr-2026-shift-2-btech",
+  "path": "/previous-year-papers/jee-main-2-apr-2026-shift-2-btech",
+  "title": "JEE Main 2026 Session 2 Question Paper: 2 Apr, Shift 2 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2026,
+  "shift": "2 Apr 2026, Shift 2",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407522/papers/jee-main/2026/jee-main-2-apr-2026-shift-2-btech.pdf",
+    "sizeLabel": "2.5 MB",
+    "pageCount": 31,
+    "version": 1
+   },
+   {
+    "role": "ANSWER_KEY",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407523/papers/jee-main/2026/jee-main-2-apr-2026-shift-2-btech-answer-key.pdf",
+    "sizeLabel": "5.9 KB",
+    "pageCount": 1,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:12:03.803Z",
+  "updatedAt": "2026-10-07T21:12:03.803Z"
+ },
+ "jee-main-2-apr-2026-shift-1-btech": {
+  "id": "cmuyls8ph001lv4esnc5p5v3c",
+  "slug": "jee-main-2-apr-2026-shift-1-btech",
+  "path": "/previous-year-papers/jee-main-2-apr-2026-shift-1-btech",
+  "title": "JEE Main 2026 Session 2 Question Paper: 2 Apr, Shift 1 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2026,
+  "shift": "2 Apr 2026, Shift 1",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407518/papers/jee-main/2026/jee-main-2-apr-2026-shift-1-btech.pdf",
+    "sizeLabel": "2.3 MB",
+    "pageCount": 30,
+    "version": 1
+   },
+   {
+    "role": "ANSWER_KEY",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407519/papers/jee-main/2026/jee-main-2-apr-2026-shift-1-btech-answer-key.pdf",
+    "sizeLabel": "5.9 KB",
+    "pageCount": 1,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:11:59.766Z",
+  "updatedAt": "2026-10-07T21:11:59.766Z"
+ },
+ "jee-main-4-apr-2026-shift-2-btech": {
+  "id": "cmuyls5z5001dv4esi4v0rcgb",
+  "slug": "jee-main-4-apr-2026-shift-2-btech",
+  "path": "/previous-year-papers/jee-main-4-apr-2026-shift-2-btech",
+  "title": "JEE Main 2026 Session 2 Question Paper: 4 Apr, Shift 2 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2026,
+  "shift": "4 Apr 2026, Shift 2",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407515/papers/jee-main/2026/jee-main-4-apr-2026-shift-2-btech.pdf",
+    "sizeLabel": "2.2 MB",
+    "pageCount": 30,
+    "version": 1
+   },
+   {
+    "role": "ANSWER_KEY",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407515/papers/jee-main/2026/jee-main-4-apr-2026-shift-2-btech-answer-key.pdf",
+    "sizeLabel": "5.9 KB",
+    "pageCount": 1,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:11:56.225Z",
+  "updatedAt": "2026-10-07T21:11:56.225Z"
+ },
+ "jee-main-4-apr-2026-shift-1-btech": {
+  "id": "cmuyls3990015v4es5jp78o0o",
+  "slug": "jee-main-4-apr-2026-shift-1-btech",
+  "path": "/previous-year-papers/jee-main-4-apr-2026-shift-1-btech",
+  "title": "JEE Main 2026 Session 2 Question Paper: 4 Apr, Shift 1 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2026,
+  "shift": "4 Apr 2026, Shift 1",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407511/papers/jee-main/2026/jee-main-4-apr-2026-shift-1-btech.pdf",
+    "sizeLabel": "2.0 MB",
+    "pageCount": 28,
+    "version": 1
+   },
+   {
+    "role": "ANSWER_KEY",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407512/papers/jee-main/2026/jee-main-4-apr-2026-shift-1-btech-answer-key.pdf",
+    "sizeLabel": "5.9 KB",
+    "pageCount": 1,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:11:52.701Z",
+  "updatedAt": "2026-10-07T21:11:52.701Z"
+ },
+ "jee-main-5-apr-2026-shift-2-btech": {
+  "id": "cmuylrzqj000xv4esxcgrd0re",
+  "slug": "jee-main-5-apr-2026-shift-2-btech",
+  "path": "/previous-year-papers/jee-main-5-apr-2026-shift-2-btech",
+  "title": "JEE Main 2026 Session 2 Question Paper: 5 Apr, Shift 2 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2026,
+  "shift": "5 Apr 2026, Shift 2",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407506/papers/jee-main/2026/jee-main-5-apr-2026-shift-2-btech.pdf",
+    "sizeLabel": "2.5 MB",
+    "pageCount": 30,
+    "version": 1
+   },
+   {
+    "role": "ANSWER_KEY",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407507/papers/jee-main/2026/jee-main-5-apr-2026-shift-2-btech-answer-key.pdf",
+    "sizeLabel": "5.9 KB",
+    "pageCount": 1,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:11:48.140Z",
+  "updatedAt": "2026-10-07T21:11:48.140Z"
+ },
+ "jee-main-5-apr-2026-shift-1-btech": {
+  "id": "cmuylrwp0000pv4esfix9x4f7",
+  "slug": "jee-main-5-apr-2026-shift-1-btech",
+  "path": "/previous-year-papers/jee-main-5-apr-2026-shift-1-btech",
+  "title": "JEE Main 2026 Session 2 Question Paper: 5 Apr, Shift 1 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2026,
+  "shift": "5 Apr 2026, Shift 1",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407502/papers/jee-main/2026/jee-main-5-apr-2026-shift-1-btech.pdf",
+    "sizeLabel": "2.2 MB",
+    "pageCount": 30,
+    "version": 1
+   },
+   {
+    "role": "ANSWER_KEY",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407503/papers/jee-main/2026/jee-main-5-apr-2026-shift-1-btech-answer-key.pdf",
+    "sizeLabel": "5.9 KB",
+    "pageCount": 1,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:11:44.197Z",
+  "updatedAt": "2026-10-07T21:11:44.197Z"
+ },
+ "jee-main-6-apr-2026-shift-2-btech": {
+  "id": "cmuylrtvf000hv4esuprf30c9",
+  "slug": "jee-main-6-apr-2026-shift-2-btech",
+  "path": "/previous-year-papers/jee-main-6-apr-2026-shift-2-btech",
+  "title": "JEE Main 2026 Session 2 Question Paper: 6 Apr, Shift 2 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2026,
+  "shift": "6 Apr 2026, Shift 2",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407499/papers/jee-main/2026/jee-main-6-apr-2026-shift-2-btech.pdf",
+    "sizeLabel": "2.5 MB",
+    "pageCount": 31,
+    "version": 1
+   },
+   {
+    "role": "ANSWER_KEY",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407500/papers/jee-main/2026/jee-main-6-apr-2026-shift-2-btech-answer-key.pdf",
+    "sizeLabel": "5.9 KB",
+    "pageCount": 1,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:11:40.539Z",
+  "updatedAt": "2026-10-07T21:11:40.539Z"
+ },
+ "jee-main-6-apr-2026-shift-1-btech": {
+  "id": "cmuylrq850009v4es246v8hr3",
+  "slug": "jee-main-6-apr-2026-shift-1-btech",
+  "path": "/previous-year-papers/jee-main-6-apr-2026-shift-1-btech",
+  "title": "JEE Main 2026 Session 2 Question Paper: 6 Apr, Shift 1 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2026,
+  "shift": "6 Apr 2026, Shift 1",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407494/papers/jee-main/2026/jee-main-6-apr-2026-shift-1-btech.pdf",
+    "sizeLabel": "2.1 MB",
+    "pageCount": 28,
+    "version": 1
+   },
+   {
+    "role": "ANSWER_KEY",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407495/papers/jee-main/2026/jee-main-6-apr-2026-shift-1-btech-answer-key.pdf",
+    "sizeLabel": "5.9 KB",
+    "pageCount": 1,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:11:35.813Z",
+  "updatedAt": "2026-10-07T21:11:35.813Z"
+ },
+ "jee-main-8-apr-2026-shift-2-btech": {
+  "id": "cmuylrn6j0001v4esvg16974d",
+  "slug": "jee-main-8-apr-2026-shift-2-btech",
+  "path": "/previous-year-papers/jee-main-8-apr-2026-shift-2-btech",
+  "title": "JEE Main 2026 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2026,
+  "shift": "8 Apr 2026, Shift 2",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791406444/papers/jee-main/2026/jee-main-8-apr-2026-shift-2-btech.pdf",
+    "sizeLabel": "2.5 MB",
+    "pageCount": 31,
+    "version": 1
+   },
+   {
+    "role": "ANSWER_KEY",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791406445/papers/jee-main/2026/jee-main-8-apr-2026-shift-2-btech-answer-key.pdf",
+    "sizeLabel": "5.9 KB",
+    "pageCount": 1,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:11:31.863Z",
+  "updatedAt": "2026-10-07T21:11:31.863Z"
+ },
+ "jee-main-22-jan-2025-shift-2-btech": {
+  "id": "cmuyltiq2003uv4esquans99h",
+  "slug": "jee-main-22-jan-2025-shift-2-btech",
+  "path": "/previous-year-papers/jee-main-22-jan-2025-shift-2-btech",
+  "title": "JEE Main 2025 Session 1 Question Paper: 22 Jan, Shift 2 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2025,
+  "shift": "22 Jan 2025, Shift 2",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407579/papers/jee-main/2025/jee-main-22-jan-2025-shift-2-btech.pdf",
+    "sizeLabel": "4.6 MB",
+    "pageCount": 66,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:12:59.402Z",
+  "updatedAt": "2026-10-07T21:12:59.402Z"
+ },
+ "jee-main-23-jan-2025-shift-2-btech": {
+  "id": "cmuyltfyy003pv4esvs3cu615",
+  "slug": "jee-main-23-jan-2025-shift-2-btech",
+  "path": "/previous-year-papers/jee-main-23-jan-2025-shift-2-btech",
+  "title": "JEE Main 2025 Session 1 Question Paper: 23 Jan, Shift 2 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2025,
+  "shift": "23 Jan 2025, Shift 2",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407575/papers/jee-main/2025/jee-main-23-jan-2025-shift-2-btech.pdf",
+    "sizeLabel": "4.6 MB",
+    "pageCount": 70,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:12:55.835Z",
+  "updatedAt": "2026-10-07T21:12:55.835Z"
+ },
+ "jee-main-28-jan-2025-shift-1-btech": {
+  "id": "cmuyltcf2003kv4esdi3bh6fw",
+  "slug": "jee-main-28-jan-2025-shift-1-btech",
+  "path": "/previous-year-papers/jee-main-28-jan-2025-shift-1-btech",
+  "title": "JEE Main 2025 Session 1 Question Paper: 28 Jan, Shift 1 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2025,
+  "shift": "28 Jan 2025, Shift 1",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407570/papers/jee-main/2025/jee-main-28-jan-2025-shift-1-btech.pdf",
+    "sizeLabel": "8.9 MB",
+    "pageCount": 70,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:12:51.230Z",
+  "updatedAt": "2026-10-07T21:12:51.230Z"
+ },
+ "jee-main-30-jan-2025-shift-2-barch": {
+  "id": "cmuylt7uc003fv4es0wqynp4a",
+  "slug": "jee-main-30-jan-2025-shift-2-barch",
+  "path": "/previous-year-papers/jee-main-30-jan-2025-shift-2-barch",
+  "title": "JEE Main 2025 Session 1 Question Paper: 30 Jan, Shift 2 (B.Arch)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2025,
+  "shift": "30 Jan 2025, Shift 2",
+  "setCode": "B.Arch",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 400,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407564/papers/jee-main/2025/jee-main-30-jan-2025-shift-2-barch.pdf",
+    "sizeLabel": "4.6 MB",
+    "pageCount": 71,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:12:45.301Z",
+  "updatedAt": "2026-10-07T21:12:45.301Z"
+ },
+ "jee-main-2-apr-2025-shift-1-btech": {
+  "id": "cmuylt4tr003av4es4vztokfa",
+  "slug": "jee-main-2-apr-2025-shift-1-btech",
+  "path": "/previous-year-papers/jee-main-2-apr-2025-shift-1-btech",
+  "title": "JEE Main 2025 Session 2 Question Paper: 2 Apr, Shift 1 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2025,
+  "shift": "2 Apr 2025, Shift 1",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407560/papers/jee-main/2025/jee-main-2-apr-2025-shift-1-btech.pdf",
+    "sizeLabel": "4.8 MB",
+    "pageCount": 66,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:12:41.391Z",
+  "updatedAt": "2026-10-07T21:12:41.391Z"
+ },
+ "jee-main-3-apr-2025-shift-2-btech": {
+  "id": "cmuylt1np0035v4esnfbrqmau",
+  "slug": "jee-main-3-apr-2025-shift-2-btech",
+  "path": "/previous-year-papers/jee-main-3-apr-2025-shift-2-btech",
+  "title": "JEE Main 2025 Session 2 Question Paper: 3 Apr, Shift 2 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2025,
+  "shift": "3 Apr 2025, Shift 2",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407556/papers/jee-main/2025/jee-main-3-apr-2025-shift-2-btech.pdf",
+    "sizeLabel": "4.4 MB",
+    "pageCount": 59,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:12:37.286Z",
+  "updatedAt": "2026-10-07T21:12:37.286Z"
+ },
+ "jee-main-3-apr-2025-shift-1-btech": {
+  "id": "cmuylsyua0030v4esn88et5c2",
+  "slug": "jee-main-3-apr-2025-shift-1-btech",
+  "path": "/previous-year-papers/jee-main-3-apr-2025-shift-1-btech",
+  "title": "JEE Main 2025 Session 2 Question Paper: 3 Apr, Shift 1 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2025,
+  "shift": "3 Apr 2025, Shift 1",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407553/papers/jee-main/2025/jee-main-3-apr-2025-shift-1-btech.pdf",
+    "sizeLabel": "4.5 MB",
+    "pageCount": 63,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:12:33.635Z",
+  "updatedAt": "2026-10-07T21:12:33.635Z"
+ },
+ "jee-main-4-apr-2025-shift-2-btech": {
+  "id": "cmuylsvyr002vv4esm7h8hcw2",
+  "slug": "jee-main-4-apr-2025-shift-2-btech",
+  "path": "/previous-year-papers/jee-main-4-apr-2025-shift-2-btech",
+  "title": "JEE Main 2025 Session 2 Question Paper: 4 Apr, Shift 2 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2025,
+  "shift": "4 Apr 2025, Shift 2",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407549/papers/jee-main/2025/jee-main-4-apr-2025-shift-2-btech.pdf",
+    "sizeLabel": "4.8 MB",
+    "pageCount": 67,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:12:29.908Z",
+  "updatedAt": "2026-10-07T21:12:29.908Z"
+ },
+ "jee-main-4-apr-2025-shift-1-btech": {
+  "id": "cmuylsson002qv4esn4o47qkv",
+  "slug": "jee-main-4-apr-2025-shift-1-btech",
+  "path": "/previous-year-papers/jee-main-4-apr-2025-shift-1-btech",
+  "title": "JEE Main 2025 Session 2 Question Paper: 4 Apr, Shift 1 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2025,
+  "shift": "4 Apr 2025, Shift 1",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407545/papers/jee-main/2025/jee-main-4-apr-2025-shift-1-btech.pdf",
+    "sizeLabel": "2.0 MB",
+    "pageCount": 90,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:12:25.655Z",
+  "updatedAt": "2026-10-07T21:12:25.655Z"
+ },
+ "jee-main-7-apr-2025-shift-2-btech": {
+  "id": "cmuylsquv002lv4esrboll9uf",
+  "slug": "jee-main-7-apr-2025-shift-2-btech",
+  "path": "/previous-year-papers/jee-main-7-apr-2025-shift-2-btech",
+  "title": "JEE Main 2025 Session 2 Question Paper: 7 Apr, Shift 2 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2025,
+  "shift": "7 Apr 2025, Shift 2",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407542/papers/jee-main/2025/jee-main-7-apr-2025-shift-2-btech.pdf",
+    "sizeLabel": "4.7 MB",
+    "pageCount": 66,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:12:23.288Z",
+  "updatedAt": "2026-10-07T21:12:23.288Z"
+ },
+ "jee-main-7-apr-2025-shift-1-btech": {
+  "id": "cmuylso1c002gv4esdlzb182q",
+  "slug": "jee-main-7-apr-2025-shift-1-btech",
+  "path": "/previous-year-papers/jee-main-7-apr-2025-shift-1-btech",
+  "title": "JEE Main 2025 Session 2 Question Paper: 7 Apr, Shift 1 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2025,
+  "shift": "7 Apr 2025, Shift 1",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407539/papers/jee-main/2025/jee-main-7-apr-2025-shift-1-btech.pdf",
+    "sizeLabel": "4.4 MB",
+    "pageCount": 65,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:12:19.632Z",
+  "updatedAt": "2026-10-07T21:12:19.632Z"
+ },
+ "jee-main-8-apr-2025-shift-2-btech": {
+  "id": "cmuylsl7w002bv4es2dh55cph",
+  "slug": "jee-main-8-apr-2025-shift-2-btech",
+  "path": "/previous-year-papers/jee-main-8-apr-2025-shift-2-btech",
+  "title": "JEE Main 2025 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2025,
+  "shift": "8 Apr 2025, Shift 2",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407535/papers/jee-main/2025/jee-main-8-apr-2025-shift-2-btech.pdf",
+    "sizeLabel": "4.3 MB",
+    "pageCount": 62,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:12:15.980Z",
+  "updatedAt": "2026-10-07T21:12:15.980Z"
+ },
+ "jee-main-9-apr-2025-shift-1-bplanning": {
+  "id": "cmuylsiah0026v4esf7jajp4d",
+  "slug": "jee-main-9-apr-2025-shift-1-bplanning",
+  "path": "/previous-year-papers/jee-main-9-apr-2025-shift-1-bplanning",
+  "title": "JEE Main 2025 Session 2 Question Paper: 9 Apr, Shift 1 (B.Planning)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2025,
+  "shift": "9 Apr 2025, Shift 1",
+  "setCode": "B.Planning",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": null,
+  "durationMin": null,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407531/papers/jee-main/2025/jee-main-9-apr-2025-shift-1-bplanning.pdf",
+    "sizeLabel": "5.2 MB",
+    "pageCount": 139,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:12:12.185Z",
+  "updatedAt": "2026-10-07T21:12:12.185Z"
+ },
+ "jee-main-9-apr-2025-shift-1-barch-bplanning": {
+  "id": "cmuylsf7e0021v4esnoojlzo9",
+  "slug": "jee-main-9-apr-2025-shift-1-barch-bplanning",
+  "path": "/previous-year-papers/jee-main-9-apr-2025-shift-1-barch-bplanning",
+  "title": "JEE Main 2025 Session 2 Question Paper: 9 Apr, Shift 1 (B.Arch + B.Planning)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2025,
+  "shift": "9 Apr 2025, Shift 1",
+  "setCode": "B.Arch + B.Planning",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": null,
+  "durationMin": null,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407527/papers/jee-main/2025/jee-main-9-apr-2025-shift-1-barch-bplanning.pdf",
+    "sizeLabel": "5.4 MB",
+    "pageCount": 142,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:12:08.186Z",
+  "updatedAt": "2026-10-07T21:12:08.186Z"
+ },
+ "jee-main-24-jan-2024-shift-2-bplanning": {
+  "id": "cmuylv97n006hv4esjp76opqo",
+  "slug": "jee-main-24-jan-2024-shift-2-bplanning",
+  "path": "/previous-year-papers/jee-main-24-jan-2024-shift-2-bplanning",
+  "title": "JEE Main 2024 Session 1 Question Paper: 24 Jan, Shift 2 (B.Planning)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2024,
+  "shift": "24 Jan 2024, Shift 2",
+  "setCode": "B.Planning",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 400,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407659/papers/jee-main/2024/jee-main-24-jan-2024-shift-2-bplanning.pdf",
+    "sizeLabel": "5.8 MB",
+    "pageCount": 136,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:14:20.387Z",
+  "updatedAt": "2026-10-07T21:14:20.387Z"
+ },
+ "jee-main-24-jan-2024-shift-2-barch-bplanning": {
+  "id": "cmuylv5at006cv4esii7nkozi",
+  "slug": "jee-main-24-jan-2024-shift-2-barch-bplanning",
+  "path": "/previous-year-papers/jee-main-24-jan-2024-shift-2-barch-bplanning",
+  "title": "JEE Main 2024 Session 1 Question Paper: 24 Jan, Shift 2 (B.Arch + B.Planning)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2024,
+  "shift": "24 Jan 2024, Shift 2",
+  "setCode": "B.Arch + B.Planning",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 500,
+  "durationMin": 210,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407654/papers/jee-main/2024/jee-main-24-jan-2024-shift-2-barch-bplanning.pdf",
+    "sizeLabel": "5.9 MB",
+    "pageCount": 139,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:14:15.318Z",
+  "updatedAt": "2026-10-07T21:14:15.318Z"
+ },
+ "jee-main-24-jan-2024-shift-2-barch": {
+  "id": "cmuylv17w0067v4estbtb08gj",
+  "slug": "jee-main-24-jan-2024-shift-2-barch",
+  "path": "/previous-year-papers/jee-main-24-jan-2024-shift-2-barch",
+  "title": "JEE Main 2024 Session 1 Question Paper: 24 Jan, Shift 2 (B.Arch)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2024,
+  "shift": "24 Jan 2024, Shift 2",
+  "setCode": "B.Arch",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 400,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407649/papers/jee-main/2024/jee-main-24-jan-2024-shift-2-barch.pdf",
+    "sizeLabel": "4.2 MB",
+    "pageCount": 105,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:14:10.028Z",
+  "updatedAt": "2026-10-07T21:14:10.028Z"
+ },
+ "jee-main-27-jan-2024-shift-1-btech": {
+  "id": "cmuyluybb0062v4eszik9cfut",
+  "slug": "jee-main-27-jan-2024-shift-1-btech",
+  "path": "/previous-year-papers/jee-main-27-jan-2024-shift-1-btech",
+  "title": "JEE Main 2024 Session 1 Question Paper: 27 Jan, Shift 1 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2024,
+  "shift": "27 Jan 2024, Shift 1",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407645/papers/jee-main/2024/jee-main-27-jan-2024-shift-1-btech.pdf",
+    "sizeLabel": "5.0 MB",
+    "pageCount": 117,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:14:06.263Z",
+  "updatedAt": "2026-10-07T21:14:06.263Z"
+ },
+ "jee-main-29-jan-2024-shift-1-btech": {
+  "id": "cmuyluux5005xv4esvz5s5b2x",
+  "slug": "jee-main-29-jan-2024-shift-1-btech",
+  "path": "/previous-year-papers/jee-main-29-jan-2024-shift-1-btech",
+  "title": "JEE Main 2024 Session 1 Question Paper: 29 Jan, Shift 1 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2024,
+  "shift": "29 Jan 2024, Shift 1",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407641/papers/jee-main/2024/jee-main-29-jan-2024-shift-1-btech.pdf",
+    "sizeLabel": "4.5 MB",
+    "pageCount": 104,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:14:01.865Z",
+  "updatedAt": "2026-10-07T21:14:01.865Z"
+ },
+ "jee-main-30-jan-2024-shift-2-btech": {
+  "id": "cmuylurx9005sv4esw2p3jg88",
+  "slug": "jee-main-30-jan-2024-shift-2-btech",
+  "path": "/previous-year-papers/jee-main-30-jan-2024-shift-2-btech",
+  "title": "JEE Main 2024 Session 1 Question Paper: 30 Jan, Shift 2 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2024,
+  "shift": "30 Jan 2024, Shift 2",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407637/papers/jee-main/2024/jee-main-30-jan-2024-shift-2-btech.pdf",
+    "sizeLabel": "5.0 MB",
+    "pageCount": 105,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:13:57.981Z",
+  "updatedAt": "2026-10-07T21:13:57.981Z"
+ },
+ "jee-main-30-jan-2024-shift-1-btech": {
+  "id": "cmuyluoja005nv4esmlujuccx",
+  "slug": "jee-main-30-jan-2024-shift-1-btech",
+  "path": "/previous-year-papers/jee-main-30-jan-2024-shift-1-btech",
+  "title": "JEE Main 2024 Session 1 Question Paper: 30 Jan, Shift 1 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2024,
+  "shift": "30 Jan 2024, Shift 1",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407633/papers/jee-main/2024/jee-main-30-jan-2024-shift-1-btech.pdf",
+    "sizeLabel": "5.3 MB",
+    "pageCount": 121,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:13:53.590Z",
+  "updatedAt": "2026-10-07T21:13:53.590Z"
+ },
+ "jee-main-31-jan-2024-shift-2-btech": {
+  "id": "cmuylul2o005iv4es2fs4lav3",
+  "slug": "jee-main-31-jan-2024-shift-2-btech",
+  "path": "/previous-year-papers/jee-main-31-jan-2024-shift-2-btech",
+  "title": "JEE Main 2024 Session 1 Question Paper: 31 Jan, Shift 2 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2024,
+  "shift": "31 Jan 2024, Shift 2",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407628/papers/jee-main/2024/jee-main-31-jan-2024-shift-2-btech.pdf",
+    "sizeLabel": "4.7 MB",
+    "pageCount": 108,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:13:49.104Z",
+  "updatedAt": "2026-10-07T21:13:49.104Z"
+ },
+ "jee-main-31-jan-2024-shift-1-btech": {
+  "id": "cmuyluhst005dv4eshvgid9ky",
+  "slug": "jee-main-31-jan-2024-shift-1-btech",
+  "path": "/previous-year-papers/jee-main-31-jan-2024-shift-1-btech",
+  "title": "JEE Main 2024 Session 1 Question Paper: 31 Jan, Shift 1 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2024,
+  "shift": "31 Jan 2024, Shift 1",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407624/papers/jee-main/2024/jee-main-31-jan-2024-shift-1-btech.pdf",
+    "sizeLabel": "4.7 MB",
+    "pageCount": 106,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:13:44.861Z",
+  "updatedAt": "2026-10-07T21:13:44.861Z"
+ },
+ "jee-main-1-feb-2024-shift-2-btech": {
+  "id": "cmuyludtq0058v4esn6hpl2x5",
+  "slug": "jee-main-1-feb-2024-shift-2-btech",
+  "path": "/previous-year-papers/jee-main-1-feb-2024-shift-2-btech",
+  "title": "JEE Main 2024 Session 1 Question Paper: 1 Feb, Shift 2 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2024,
+  "shift": "1 Feb 2024, Shift 2",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407619/papers/jee-main/2024/jee-main-1-feb-2024-shift-2-btech.pdf",
+    "sizeLabel": "5.1 MB",
+    "pageCount": 116,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:13:39.710Z",
+  "updatedAt": "2026-10-07T21:13:39.710Z"
+ },
+ "jee-main-1-feb-2024-shift-1-btech": {
+  "id": "cmuyluaqm0053v4esirlbgyon",
+  "slug": "jee-main-1-feb-2024-shift-1-btech",
+  "path": "/previous-year-papers/jee-main-1-feb-2024-shift-1-btech",
+  "title": "JEE Main 2024 Session 1 Question Paper: 1 Feb, Shift 1 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2024,
+  "shift": "1 Feb 2024, Shift 1",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407615/papers/jee-main/2024/jee-main-1-feb-2024-shift-1-btech.pdf",
+    "sizeLabel": "5.2 MB",
+    "pageCount": 117,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:13:35.710Z",
+  "updatedAt": "2026-10-07T21:13:35.710Z"
+ },
+ "jee-main-6-apr-2024-shift-2-btech": {
+  "id": "cmuylu7r1004yv4esu2jel83j",
+  "slug": "jee-main-6-apr-2024-shift-2-btech",
+  "path": "/previous-year-papers/jee-main-6-apr-2024-shift-2-btech",
+  "title": "JEE Main 2024 Session 2 Question Paper: 6 Apr, Shift 2 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2024,
+  "shift": "6 Apr 2024, Shift 2",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407611/papers/jee-main/2024/jee-main-6-apr-2024-shift-2-btech.pdf",
+    "sizeLabel": "5.4 MB",
+    "pageCount": 123,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:13:31.837Z",
+  "updatedAt": "2026-10-07T21:13:31.837Z"
+ },
+ "jee-main-6-apr-2024-shift-1-btech": {
+  "id": "cmuylu4t6004tv4es1h8k9qef",
+  "slug": "jee-main-6-apr-2024-shift-1-btech",
+  "path": "/previous-year-papers/jee-main-6-apr-2024-shift-1-btech",
+  "title": "JEE Main 2024 Session 2 Question Paper: 6 Apr, Shift 1 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2024,
+  "shift": "6 Apr 2024, Shift 1",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407607/papers/jee-main/2024/jee-main-6-apr-2024-shift-1-btech.pdf",
+    "sizeLabel": "4.7 MB",
+    "pageCount": 107,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:13:28.026Z",
+  "updatedAt": "2026-10-07T21:13:28.026Z"
+ },
+ "jee-main-8-apr-2024-shift-2-btech": {
+  "id": "cmuylu1r0004ov4es3kab2p1f",
+  "slug": "jee-main-8-apr-2024-shift-2-btech",
+  "path": "/previous-year-papers/jee-main-8-apr-2024-shift-2-btech",
+  "title": "JEE Main 2024 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2024,
+  "shift": "8 Apr 2024, Shift 2",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407603/papers/jee-main/2024/jee-main-8-apr-2024-shift-2-btech.pdf",
+    "sizeLabel": "5.4 MB",
+    "pageCount": 117,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:13:24.061Z",
+  "updatedAt": "2026-10-07T21:13:24.061Z"
+ },
+ "jee-main-8-apr-2024-shift-1-btech": {
+  "id": "cmuyltyaj004jv4eshk6647nd",
+  "slug": "jee-main-8-apr-2024-shift-1-btech",
+  "path": "/previous-year-papers/jee-main-8-apr-2024-shift-1-btech",
+  "title": "JEE Main 2024 Session 2 Question Paper: 8 Apr, Shift 1 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2024,
+  "shift": "8 Apr 2024, Shift 1",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407599/papers/jee-main/2024/jee-main-8-apr-2024-shift-1-btech.pdf",
+    "sizeLabel": "4.9 MB",
+    "pageCount": 110,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:13:19.579Z",
+  "updatedAt": "2026-10-07T21:13:19.579Z"
+ },
+ "jee-main-9-apr-2024-shift-2-btech": {
+  "id": "cmuyltuyk004ev4esi22lmblu",
+  "slug": "jee-main-9-apr-2024-shift-2-btech",
+  "path": "/previous-year-papers/jee-main-9-apr-2024-shift-2-btech",
+  "title": "JEE Main 2024 Session 2 Question Paper: 9 Apr, Shift 2 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2024,
+  "shift": "9 Apr 2024, Shift 2",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407594/papers/jee-main/2024/jee-main-9-apr-2024-shift-2-btech.pdf",
+    "sizeLabel": "4.8 MB",
+    "pageCount": 108,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:13:15.260Z",
+  "updatedAt": "2026-10-07T21:13:15.260Z"
+ },
+ "jee-main-12-apr-2024-shift-1-bplanning": {
+  "id": "cmuyltryt0049v4esn5kd31dc",
+  "slug": "jee-main-12-apr-2024-shift-1-bplanning",
+  "path": "/previous-year-papers/jee-main-12-apr-2024-shift-1-bplanning",
+  "title": "JEE Main 2024 Session 2 Question Paper: 12 Apr, Shift 1 (B.Planning)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2024,
+  "shift": "12 Apr 2024, Shift 1",
+  "setCode": "B.Planning",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 400,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407591/papers/jee-main/2024/jee-main-12-apr-2024-shift-1-bplanning.pdf",
+    "sizeLabel": "6.0 MB",
+    "pageCount": 134,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:13:11.382Z",
+  "updatedAt": "2026-10-07T21:13:11.382Z"
+ },
+ "jee-main-12-apr-2024-shift-1-barch-bplanning": {
+  "id": "cmuyltoqy0044v4esv262o7nz",
+  "slug": "jee-main-12-apr-2024-shift-1-barch-bplanning",
+  "path": "/previous-year-papers/jee-main-12-apr-2024-shift-1-barch-bplanning",
+  "title": "JEE Main 2024 Session 2 Question Paper: 12 Apr, Shift 1 (B.Arch + B.Planning)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2024,
+  "shift": "12 Apr 2024, Shift 1",
+  "setCode": "B.Arch + B.Planning",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 500,
+  "durationMin": 210,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407586/papers/jee-main/2024/jee-main-12-apr-2024-shift-1-barch-bplanning.pdf",
+    "sizeLabel": "6.2 MB",
+    "pageCount": 137,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:13:07.210Z",
+  "updatedAt": "2026-10-07T21:13:07.210Z"
+ },
+ "jee-main-12-apr-2024-shift-1-barch": {
+  "id": "cmuyltlc7003zv4eskxcev0pq",
+  "slug": "jee-main-12-apr-2024-shift-1-barch",
+  "path": "/previous-year-papers/jee-main-12-apr-2024-shift-1-barch",
+  "title": "JEE Main 2024 Session 2 Question Paper: 12 Apr, Shift 1 (B.Arch)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2024,
+  "shift": "12 Apr 2024, Shift 1",
+  "setCode": "B.Arch",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 400,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407582/papers/jee-main/2024/jee-main-12-apr-2024-shift-1-barch.pdf",
+    "sizeLabel": "4.3 MB",
+    "pageCount": 103,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:13:02.791Z",
+  "updatedAt": "2026-10-07T21:13:02.791Z"
+ },
+ "jee-main-28-jan-2023-shift-2-bplanning": {
+  "id": "cmuylxaxy008uv4es86imd151",
+  "slug": "jee-main-28-jan-2023-shift-2-bplanning",
+  "path": "/previous-year-papers/jee-main-28-jan-2023-shift-2-bplanning",
+  "title": "JEE Main 2023 Session 1 Question Paper: 28 Jan, Shift 2 (B.Planning)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2023,
+  "shift": "28 Jan 2023, Shift 2",
+  "setCode": "B.Planning",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 400,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407755/papers/jee-main/2023/jee-main-28-jan-2023-shift-2-bplanning.pdf",
+    "sizeLabel": "6.1 MB",
+    "pageCount": 142,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:15:55.943Z",
+  "updatedAt": "2026-10-07T21:15:55.943Z"
+ },
+ "jee-main-28-jan-2023-shift-2-barch-bplanning": {
+  "id": "cmuylx7h6008pv4esvd1nxqj1",
+  "slug": "jee-main-28-jan-2023-shift-2-barch-bplanning",
+  "path": "/previous-year-papers/jee-main-28-jan-2023-shift-2-barch-bplanning",
+  "title": "JEE Main 2023 Session 1 Question Paper: 28 Jan, Shift 2 (B.Arch + B.Planning)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2023,
+  "shift": "28 Jan 2023, Shift 2",
+  "setCode": "B.Arch + B.Planning",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 500,
+  "durationMin": 210,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407750/papers/jee-main/2023/jee-main-28-jan-2023-shift-2-barch-bplanning.pdf",
+    "sizeLabel": "6.3 MB",
+    "pageCount": 145,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:15:51.450Z",
+  "updatedAt": "2026-10-07T21:15:51.450Z"
+ },
+ "jee-main-28-jan-2023-shift-2-barch": {
+  "id": "cmuylx3as008kv4escugoya50",
+  "slug": "jee-main-28-jan-2023-shift-2-barch",
+  "path": "/previous-year-papers/jee-main-28-jan-2023-shift-2-barch",
+  "title": "JEE Main 2023 Session 1 Question Paper: 28 Jan, Shift 2 (B.Arch)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2023,
+  "shift": "28 Jan 2023, Shift 2",
+  "setCode": "B.Arch",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 400,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407745/papers/jee-main/2023/jee-main-28-jan-2023-shift-2-barch.pdf",
+    "sizeLabel": "4.6 MB",
+    "pageCount": 111,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:15:46.036Z",
+  "updatedAt": "2026-10-07T21:15:46.036Z"
+ },
+ "jee-main-6-apr-2023-shift-2-btech": {
+  "id": "cmuylx06p008fv4esdpu5n8qk",
+  "slug": "jee-main-6-apr-2023-shift-2-btech",
+  "path": "/previous-year-papers/jee-main-6-apr-2023-shift-2-btech",
+  "title": "JEE Main 2023 Session 2 Question Paper: 6 Apr, Shift 2 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2023,
+  "shift": "6 Apr 2023, Shift 2",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407741/papers/jee-main/2023/jee-main-6-apr-2023-shift-2-btech.pdf",
+    "sizeLabel": "9.5 MB",
+    "pageCount": 114,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:15:42.001Z",
+  "updatedAt": "2026-10-07T21:15:42.001Z"
+ },
+ "jee-main-6-apr-2023-shift-1-btech": {
+  "id": "cmuylwuyv008av4es7efcrt99",
+  "slug": "jee-main-6-apr-2023-shift-1-btech",
+  "path": "/previous-year-papers/jee-main-6-apr-2023-shift-1-btech",
+  "title": "JEE Main 2023 Session 2 Question Paper: 6 Apr, Shift 1 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2023,
+  "shift": "6 Apr 2023, Shift 1",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407734/papers/jee-main/2023/jee-main-6-apr-2023-shift-1-btech.pdf",
+    "sizeLabel": "5.0 MB",
+    "pageCount": 107,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:15:35.239Z",
+  "updatedAt": "2026-10-07T21:15:35.239Z"
+ },
+ "jee-main-8-apr-2023-shift-2-btech": {
+  "id": "cmuylwrpn0085v4es07uy96ua",
+  "slug": "jee-main-8-apr-2023-shift-2-btech",
+  "path": "/previous-year-papers/jee-main-8-apr-2023-shift-2-btech",
+  "title": "JEE Main 2023 Session 2 Question Paper: 8 Apr, Shift 2 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2023,
+  "shift": "8 Apr 2023, Shift 2",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407730/papers/jee-main/2023/jee-main-8-apr-2023-shift-2-btech.pdf",
+    "sizeLabel": "4.9 MB",
+    "pageCount": 105,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:15:31.020Z",
+  "updatedAt": "2026-10-07T21:15:31.020Z"
+ },
+ "jee-main-8-apr-2023-shift-1-btech": {
+  "id": "cmuylwom10080v4estrwbg010",
+  "slug": "jee-main-8-apr-2023-shift-1-btech",
+  "path": "/previous-year-papers/jee-main-8-apr-2023-shift-1-btech",
+  "title": "JEE Main 2023 Session 2 Question Paper: 8 Apr, Shift 1 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2023,
+  "shift": "8 Apr 2023, Shift 1",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407725/papers/jee-main/2023/jee-main-8-apr-2023-shift-1-btech.pdf",
+    "sizeLabel": "9.3 MB",
+    "pageCount": 115,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:15:27.001Z",
+  "updatedAt": "2026-10-07T21:15:27.001Z"
+ },
+ "jee-main-10-apr-2023-shift-2-btech": {
+  "id": "cmuylwii7007vv4esg8lttbkx",
+  "slug": "jee-main-10-apr-2023-shift-2-btech",
+  "path": "/previous-year-papers/jee-main-10-apr-2023-shift-2-btech",
+  "title": "JEE Main 2023 Session 2 Question Paper: 10 Apr, Shift 2 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2023,
+  "shift": "10 Apr 2023, Shift 2",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407718/papers/jee-main/2023/jee-main-10-apr-2023-shift-2-btech.pdf",
+    "sizeLabel": "5.0 MB",
+    "pageCount": 107,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:15:19.087Z",
+  "updatedAt": "2026-10-07T21:15:19.087Z"
+ },
+ "jee-main-10-apr-2023-shift-1-btech": {
+  "id": "cmuylwfd5007qv4esw2yz1spv",
+  "slug": "jee-main-10-apr-2023-shift-1-btech",
+  "path": "/previous-year-papers/jee-main-10-apr-2023-shift-1-btech",
+  "title": "JEE Main 2023 Session 2 Question Paper: 10 Apr, Shift 1 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2023,
+  "shift": "10 Apr 2023, Shift 1",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407714/papers/jee-main/2023/jee-main-10-apr-2023-shift-1-btech.pdf",
+    "sizeLabel": "9.4 MB",
+    "pageCount": 113,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:15:15.017Z",
+  "updatedAt": "2026-10-07T21:15:15.017Z"
+ },
+ "jee-main-11-apr-2023-shift-1-btech": {
+  "id": "cmuylwadm007lv4esatevi5te",
+  "slug": "jee-main-11-apr-2023-shift-1-btech",
+  "path": "/previous-year-papers/jee-main-11-apr-2023-shift-1-btech",
+  "title": "JEE Main 2023 Session 2 Question Paper: 11 Apr, Shift 1 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2023,
+  "shift": "11 Apr 2023, Shift 1",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407708/papers/jee-main/2023/jee-main-11-apr-2023-shift-1-btech.pdf",
+    "sizeLabel": "5.6 MB",
+    "pageCount": 110,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:15:08.554Z",
+  "updatedAt": "2026-10-07T21:15:08.554Z"
+ },
+ "jee-main-12-apr-2023-shift-2-bplanning": {
+  "id": "cmuylw6xh007gv4esu3j61v3s",
+  "slug": "jee-main-12-apr-2023-shift-2-bplanning",
+  "path": "/previous-year-papers/jee-main-12-apr-2023-shift-2-bplanning",
+  "title": "JEE Main 2023 Session 2 Question Paper: 12 Apr, Shift 2 (B.Planning)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2023,
+  "shift": "12 Apr 2023, Shift 2",
+  "setCode": "B.Planning",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 400,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407703/papers/jee-main/2023/jee-main-12-apr-2023-shift-2-bplanning.pdf",
+    "sizeLabel": "9.7 MB",
+    "pageCount": 146,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:15:04.086Z",
+  "updatedAt": "2026-10-07T21:15:04.086Z"
+ },
+ "jee-main-12-apr-2023-shift-2-barch-bplanning": {
+  "id": "cmuylw0vy007bv4esk143dplj",
+  "slug": "jee-main-12-apr-2023-shift-2-barch-bplanning",
+  "path": "/previous-year-papers/jee-main-12-apr-2023-shift-2-barch-bplanning",
+  "title": "JEE Main 2023 Session 2 Question Paper: 12 Apr, Shift 2 (B.Arch + B.Planning)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2023,
+  "shift": "12 Apr 2023, Shift 2",
+  "setCode": "B.Arch + B.Planning",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 500,
+  "durationMin": 210,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407695/papers/jee-main/2023/jee-main-12-apr-2023-shift-2-barch-bplanning.pdf",
+    "sizeLabel": "9.9 MB",
+    "pageCount": 149,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:14:56.255Z",
+  "updatedAt": "2026-10-07T21:14:56.255Z"
+ },
+ "jee-main-12-apr-2023-shift-2-barch": {
+  "id": "cmuylvuyj0076v4es7qqghxka",
+  "slug": "jee-main-12-apr-2023-shift-2-barch",
+  "path": "/previous-year-papers/jee-main-12-apr-2023-shift-2-barch",
+  "title": "JEE Main 2023 Session 2 Question Paper: 12 Apr, Shift 2 (B.Arch)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2023,
+  "shift": "12 Apr 2023, Shift 2",
+  "setCode": "B.Arch",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 400,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407688/papers/jee-main/2023/jee-main-12-apr-2023-shift-2-barch.pdf",
+    "sizeLabel": "7.2 MB",
+    "pageCount": 116,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:14:48.571Z",
+  "updatedAt": "2026-10-07T21:14:48.571Z"
+ },
+ "jee-main-12-apr-2023-shift-1-btech": {
+  "id": "cmuylvpt50071v4esjmyco3i6",
+  "slug": "jee-main-12-apr-2023-shift-1-btech",
+  "path": "/previous-year-papers/jee-main-12-apr-2023-shift-1-btech",
+  "title": "JEE Main 2023 Session 2 Question Paper: 12 Apr, Shift 1 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2023,
+  "shift": "12 Apr 2023, Shift 1",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407681/papers/jee-main/2023/jee-main-12-apr-2023-shift-1-btech.pdf",
+    "sizeLabel": "5.1 MB",
+    "pageCount": 108,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:14:41.897Z",
+  "updatedAt": "2026-10-07T21:14:41.897Z"
+ },
+ "jee-main-13-apr-2023-shift-2-btech": {
+  "id": "cmuylvlx8006wv4es7c17fj1g",
+  "slug": "jee-main-13-apr-2023-shift-2-btech",
+  "path": "/previous-year-papers/jee-main-13-apr-2023-shift-2-btech",
+  "title": "JEE Main 2023 Session 2 Question Paper: 13 Apr, Shift 2 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2023,
+  "shift": "13 Apr 2023, Shift 2",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407676/papers/jee-main/2023/jee-main-13-apr-2023-shift-2-btech.pdf",
+    "sizeLabel": "5.0 MB",
+    "pageCount": 103,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:14:36.860Z",
+  "updatedAt": "2026-10-07T21:14:36.860Z"
+ },
+ "jee-main-13-apr-2023-shift-1-btech": {
+  "id": "cmuylvioe006rv4esax88migb",
+  "slug": "jee-main-13-apr-2023-shift-1-btech",
+  "path": "/previous-year-papers/jee-main-13-apr-2023-shift-1-btech",
+  "title": "JEE Main 2023 Session 2 Question Paper: 13 Apr, Shift 1 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2023,
+  "shift": "13 Apr 2023, Shift 1",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407671/papers/jee-main/2023/jee-main-13-apr-2023-shift-1-btech.pdf",
+    "sizeLabel": "7.1 MB",
+    "pageCount": 110,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:14:32.654Z",
+  "updatedAt": "2026-10-07T21:14:32.654Z"
+ },
+ "jee-main-15-apr-2023-shift-1-btech": {
+  "id": "cmuylve9d006mv4esowfx0nk1",
+  "slug": "jee-main-15-apr-2023-shift-1-btech",
+  "path": "/previous-year-papers/jee-main-15-apr-2023-shift-1-btech",
+  "title": "JEE Main 2023 Session 2 Question Paper: 15 Apr, Shift 1 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2023,
+  "shift": "15 Apr 2023, Shift 1",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407666/papers/jee-main/2023/jee-main-15-apr-2023-shift-1-btech.pdf",
+    "sizeLabel": "9.3 MB",
+    "pageCount": 115,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:14:26.930Z",
+  "updatedAt": "2026-10-07T21:14:26.930Z"
+ },
+ "jee-main-23-jun-2022-shift-2-bplanning": {
+  "id": "cmuylz9id00cvv4eshrs75v3p",
+  "slug": "jee-main-23-jun-2022-shift-2-bplanning",
+  "path": "/previous-year-papers/jee-main-23-jun-2022-shift-2-bplanning",
+  "title": "JEE Main 2022 Session 1 Question Paper: 23 Jun, Shift 2 (B.Planning)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2022,
+  "shift": "23 Jun 2022, Shift 2",
+  "setCode": "B.Planning",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": null,
+  "durationMin": null,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407847/papers/jee-main/2022/jee-main-23-jun-2022-shift-2-bplanning.pdf",
+    "sizeLabel": "3.0 MB",
+    "pageCount": 33,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:17:27.398Z",
+  "updatedAt": "2026-10-07T21:17:27.398Z"
+ },
+ "jee-main-23-jun-2022-shift-1-barch": {
+  "id": "cmuylz74n00cqv4eseasve0nj",
+  "slug": "jee-main-23-jun-2022-shift-1-barch",
+  "path": "/previous-year-papers/jee-main-23-jun-2022-shift-1-barch",
+  "title": "JEE Main 2022 Session 1 Question Paper: 23 Jun, Shift 1 (B.Arch)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2022,
+  "shift": "23 Jun 2022, Shift 1",
+  "setCode": "B.Arch",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": null,
+  "durationMin": null,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407843/papers/jee-main/2022/jee-main-23-jun-2022-shift-1-barch.pdf",
+    "sizeLabel": "3.1 MB",
+    "pageCount": 38,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:17:24.311Z",
+  "updatedAt": "2026-10-07T21:17:24.311Z"
+ },
+ "jee-main-24-jun-2022-shift-2-btech": {
+  "id": "cmuylz4gg00clv4esggld4kqk",
+  "slug": "jee-main-24-jun-2022-shift-2-btech",
+  "path": "/previous-year-papers/jee-main-24-jun-2022-shift-2-btech",
+  "title": "JEE Main 2022 Session 1 Question Paper: 24 Jun, Shift 2 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2022,
+  "shift": "24 Jun 2022, Shift 2",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": null,
+  "durationMin": null,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407840/papers/jee-main/2022/jee-main-24-jun-2022-shift-2-btech.pdf",
+    "sizeLabel": "2.1 MB",
+    "pageCount": 18,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:17:20.848Z",
+  "updatedAt": "2026-10-07T21:17:20.848Z"
+ },
+ "jee-main-24-jun-2022-shift-1-btech": {
+  "id": "cmuylz23j00cgv4es7igsg5ic",
+  "slug": "jee-main-24-jun-2022-shift-1-btech",
+  "path": "/previous-year-papers/jee-main-24-jun-2022-shift-1-btech",
+  "title": "JEE Main 2022 Session 1 Question Paper: 24 Jun, Shift 1 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2022,
+  "shift": "24 Jun 2022, Shift 1",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": null,
+  "durationMin": null,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407837/papers/jee-main/2022/jee-main-24-jun-2022-shift-1-btech.pdf",
+    "sizeLabel": "3.2 MB",
+    "pageCount": 26,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:17:17.791Z",
+  "updatedAt": "2026-10-07T21:17:17.791Z"
+ },
+ "jee-main-25-jun-2022-shift-2-btech": {
+  "id": "cmuylyzm700cbv4esphm32aj7",
+  "slug": "jee-main-25-jun-2022-shift-2-btech",
+  "path": "/previous-year-papers/jee-main-25-jun-2022-shift-2-btech",
+  "title": "JEE Main 2022 Session 1 Question Paper: 25 Jun, Shift 2 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2022,
+  "shift": "25 Jun 2022, Shift 2",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": null,
+  "durationMin": null,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407834/papers/jee-main/2022/jee-main-25-jun-2022-shift-2-btech.pdf",
+    "sizeLabel": "2.2 MB",
+    "pageCount": 21,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:17:14.575Z",
+  "updatedAt": "2026-10-07T21:17:14.575Z"
+ },
+ "jee-main-25-jun-2022-shift-1-btech": {
+  "id": "cmuylyxpb00c6v4espgo6rgm4",
+  "slug": "jee-main-25-jun-2022-shift-1-btech",
+  "path": "/previous-year-papers/jee-main-25-jun-2022-shift-1-btech",
+  "title": "JEE Main 2022 Session 1 Question Paper: 25 Jun, Shift 1 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2022,
+  "shift": "25 Jun 2022, Shift 1",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": null,
+  "durationMin": null,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407831/papers/jee-main/2022/jee-main-25-jun-2022-shift-1-btech.pdf",
+    "sizeLabel": "3.0 MB",
+    "pageCount": 26,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:17:12.095Z",
+  "updatedAt": "2026-10-07T21:17:12.095Z"
+ },
+ "jee-main-26-jun-2022-shift-2-btech": {
+  "id": "cmuylyvgc00c1v4eserdx8pp4",
+  "slug": "jee-main-26-jun-2022-shift-2-btech",
+  "path": "/previous-year-papers/jee-main-26-jun-2022-shift-2-btech",
+  "title": "JEE Main 2022 Session 1 Question Paper: 26 Jun, Shift 2 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2022,
+  "shift": "26 Jun 2022, Shift 2",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": null,
+  "durationMin": null,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407828/papers/jee-main/2022/jee-main-26-jun-2022-shift-2-btech.pdf",
+    "sizeLabel": "2.1 MB",
+    "pageCount": 20,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:17:09.181Z",
+  "updatedAt": "2026-10-07T21:17:09.181Z"
+ },
+ "jee-main-26-jun-2022-shift-1-btech": {
+  "id": "cmuylytcl00bwv4esytcbfhne",
+  "slug": "jee-main-26-jun-2022-shift-1-btech",
+  "path": "/previous-year-papers/jee-main-26-jun-2022-shift-1-btech",
+  "title": "JEE Main 2022 Session 1 Question Paper: 26 Jun, Shift 1 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2022,
+  "shift": "26 Jun 2022, Shift 1",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": null,
+  "durationMin": null,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407825/papers/jee-main/2022/jee-main-26-jun-2022-shift-1-btech.pdf",
+    "sizeLabel": "3.1 MB",
+    "pageCount": 28,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:17:06.453Z",
+  "updatedAt": "2026-10-07T21:17:06.453Z"
+ },
+ "jee-main-27-jun-2022-shift-2-btech": {
+  "id": "cmuylyqxh00brv4esvwotn15r",
+  "slug": "jee-main-27-jun-2022-shift-2-btech",
+  "path": "/previous-year-papers/jee-main-27-jun-2022-shift-2-btech",
+  "title": "JEE Main 2022 Session 1 Question Paper: 27 Jun, Shift 2 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2022,
+  "shift": "27 Jun 2022, Shift 2",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": null,
+  "durationMin": null,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407822/papers/jee-main/2022/jee-main-27-jun-2022-shift-2-btech.pdf",
+    "sizeLabel": "2.4 MB",
+    "pageCount": 22,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:17:03.317Z",
+  "updatedAt": "2026-10-07T21:17:03.317Z"
+ },
+ "jee-main-27-jun-2022-shift-1-btech": {
+  "id": "cmuylyou000bmv4ese75no0mj",
+  "slug": "jee-main-27-jun-2022-shift-1-btech",
+  "path": "/previous-year-papers/jee-main-27-jun-2022-shift-1-btech",
+  "title": "JEE Main 2022 Session 1 Question Paper: 27 Jun, Shift 1 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2022,
+  "shift": "27 Jun 2022, Shift 1",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": null,
+  "durationMin": null,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407819/papers/jee-main/2022/jee-main-27-jun-2022-shift-1-btech.pdf",
+    "sizeLabel": "3.1 MB",
+    "pageCount": 27,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:17:00.600Z",
+  "updatedAt": "2026-10-07T21:17:00.600Z"
+ },
+ "jee-main-28-jun-2022-shift-2-btech": {
+  "id": "cmuylylsk00bhv4esr3hl035d",
+  "slug": "jee-main-28-jun-2022-shift-2-btech",
+  "path": "/previous-year-papers/jee-main-28-jun-2022-shift-2-btech",
+  "title": "JEE Main 2022 Session 1 Question Paper: 28 Jun, Shift 2 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2022,
+  "shift": "28 Jun 2022, Shift 2",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": null,
+  "durationMin": null,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407815/papers/jee-main/2022/jee-main-28-jun-2022-shift-2-btech.pdf",
+    "sizeLabel": "3.4 MB",
+    "pageCount": 28,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:16:56.660Z",
+  "updatedAt": "2026-10-07T21:16:56.660Z"
+ },
+ "jee-main-28-jun-2022-shift-1-btech": {
+  "id": "cmuylyij400bcv4ests4q5unw",
+  "slug": "jee-main-28-jun-2022-shift-1-btech",
+  "path": "/previous-year-papers/jee-main-28-jun-2022-shift-1-btech",
+  "title": "JEE Main 2022 Session 1 Question Paper: 28 Jun, Shift 1 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2022,
+  "shift": "28 Jun 2022, Shift 1",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": null,
+  "durationMin": null,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407811/papers/jee-main/2022/jee-main-28-jun-2022-shift-1-btech.pdf",
+    "sizeLabel": "2.3 MB",
+    "pageCount": 21,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:16:52.432Z",
+  "updatedAt": "2026-10-07T21:16:52.432Z"
+ },
+ "jee-main-29-jun-2022-shift-2-btech": {
+  "id": "cmuylygiz00b7v4esbxtkfff8",
+  "slug": "jee-main-29-jun-2022-shift-2-btech",
+  "path": "/previous-year-papers/jee-main-29-jun-2022-shift-2-btech",
+  "title": "JEE Main 2022 Session 1 Question Paper: 29 Jun, Shift 2 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2022,
+  "shift": "29 Jun 2022, Shift 2",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": null,
+  "durationMin": null,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407809/papers/jee-main/2022/jee-main-29-jun-2022-shift-2-btech.pdf",
+    "sizeLabel": "2.3 MB",
+    "pageCount": 20,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:16:49.835Z",
+  "updatedAt": "2026-10-07T21:16:49.835Z"
+ },
+ "jee-main-29-jun-2022-shift-2-barch-bplanning": {
+  "id": "cmuylye9p00b2v4eshrbse0fm",
+  "slug": "jee-main-29-jun-2022-shift-2-barch-bplanning",
+  "path": "/previous-year-papers/jee-main-29-jun-2022-shift-2-barch-bplanning",
+  "title": "JEE Main 2022 Session 1 Question Paper: 29 Jun, Shift 2 (B.Arch + B.Planning)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2022,
+  "shift": "29 Jun 2022, Shift 2",
+  "setCode": "B.Arch + B.Planning",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": null,
+  "durationMin": null,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407806/papers/jee-main/2022/jee-main-29-jun-2022-shift-2-barch-bplanning.pdf",
+    "sizeLabel": "3.3 MB",
+    "pageCount": 34,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:16:46.910Z",
+  "updatedAt": "2026-10-07T21:16:46.910Z"
+ },
+ "jee-main-29-jun-2022-shift-2-barch": {
+  "id": "cmuylybmq00axv4esoo0n8awy",
+  "slug": "jee-main-29-jun-2022-shift-2-barch",
+  "path": "/previous-year-papers/jee-main-29-jun-2022-shift-2-barch",
+  "title": "JEE Main 2022 Session 1 Question Paper: 29 Jun, Shift 2 (B.Arch)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2022,
+  "shift": "29 Jun 2022, Shift 2",
+  "setCode": "B.Arch",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": null,
+  "durationMin": null,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407803/papers/jee-main/2022/jee-main-29-jun-2022-shift-2-barch.pdf",
+    "sizeLabel": "2.2 MB",
+    "pageCount": 26,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:16:43.491Z",
+  "updatedAt": "2026-10-07T21:16:43.491Z"
+ },
+ "jee-main-29-jun-2022-shift-1-btech": {
+  "id": "cmuyly9gy00asv4es1ftde9ci",
+  "slug": "jee-main-29-jun-2022-shift-1-btech",
+  "path": "/previous-year-papers/jee-main-29-jun-2022-shift-1-btech",
+  "title": "JEE Main 2022 Session 1 Question Paper: 29 Jun, Shift 1 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2022,
+  "shift": "29 Jun 2022, Shift 1",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": null,
+  "durationMin": null,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407800/papers/jee-main/2022/jee-main-29-jun-2022-shift-1-btech.pdf",
+    "sizeLabel": "3.2 MB",
+    "pageCount": 26,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:16:40.690Z",
+  "updatedAt": "2026-10-07T21:16:40.690Z"
+ },
+ "jee-main-30-jun-2022-shift-1-btech": {
+  "id": "cmuyly6yb00anv4es23eli43b",
+  "slug": "jee-main-30-jun-2022-shift-1-btech",
+  "path": "/previous-year-papers/jee-main-30-jun-2022-shift-1-btech",
+  "title": "JEE Main 2022 Session 1 Question Paper: 30 Jun, Shift 1 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2022,
+  "shift": "30 Jun 2022, Shift 1",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": null,
+  "durationMin": null,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407797/papers/jee-main/2022/jee-main-30-jun-2022-shift-1-btech.pdf",
+    "sizeLabel": "3.1 MB",
+    "pageCount": 28,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:16:37.427Z",
+  "updatedAt": "2026-10-07T21:16:37.427Z"
+ },
+ "jee-main-26-jul-2022-shift-2-btech": {
+  "id": "cmuyly4oi00aiv4est911yhvt",
+  "slug": "jee-main-26-jul-2022-shift-2-btech",
+  "path": "/previous-year-papers/jee-main-26-jul-2022-shift-2-btech",
+  "title": "JEE Main 2022 Session 2 Question Paper: 26 Jul, Shift 2 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2022,
+  "shift": "26 Jul 2022, Shift 2",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": null,
+  "durationMin": null,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407794/papers/jee-main/2022/jee-main-26-jul-2022-shift-2-btech.pdf",
+    "sizeLabel": "2.5 MB",
+    "pageCount": 30,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:16:34.482Z",
+  "updatedAt": "2026-10-07T21:16:34.482Z"
+ },
+ "jee-main-26-jul-2022-shift-1-btech": {
+  "id": "cmuyly2av00adv4esx9e696id",
+  "slug": "jee-main-26-jul-2022-shift-1-btech",
+  "path": "/previous-year-papers/jee-main-26-jul-2022-shift-1-btech",
+  "title": "JEE Main 2022 Session 2 Question Paper: 26 Jul, Shift 1 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2022,
+  "shift": "26 Jul 2022, Shift 1",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": null,
+  "durationMin": null,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407791/papers/jee-main/2022/jee-main-26-jul-2022-shift-1-btech.pdf",
+    "sizeLabel": "2.9 MB",
+    "pageCount": 39,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:16:31.399Z",
+  "updatedAt": "2026-10-07T21:16:31.399Z"
+ },
+ "jee-main-27-jul-2022-shift-2-btech": {
+  "id": "cmuylxz5j00a8v4esrk1qs6j5",
+  "slug": "jee-main-27-jul-2022-shift-2-btech",
+  "path": "/previous-year-papers/jee-main-27-jul-2022-shift-2-btech",
+  "title": "JEE Main 2022 Session 2 Question Paper: 27 Jul, Shift 2 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2022,
+  "shift": "27 Jul 2022, Shift 2",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": null,
+  "durationMin": null,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407786/papers/jee-main/2022/jee-main-27-jul-2022-shift-2-btech.pdf",
+    "sizeLabel": "3.5 MB",
+    "pageCount": 43,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:16:27.319Z",
+  "updatedAt": "2026-10-07T21:16:27.319Z"
+ },
+ "jee-main-27-jul-2022-shift-1-btech": {
+  "id": "cmuylxwoi00a3v4esumvjrbwc",
+  "slug": "jee-main-27-jul-2022-shift-1-btech",
+  "path": "/previous-year-papers/jee-main-27-jul-2022-shift-1-btech",
+  "title": "JEE Main 2022 Session 2 Question Paper: 27 Jul, Shift 1 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2022,
+  "shift": "27 Jul 2022, Shift 1",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": null,
+  "durationMin": null,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407783/papers/jee-main/2022/jee-main-27-jul-2022-shift-1-btech.pdf",
+    "sizeLabel": "2.8 MB",
+    "pageCount": 32,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:16:24.114Z",
+  "updatedAt": "2026-10-07T21:16:24.114Z"
+ },
+ "jee-main-28-jul-2022-shift-2-btech": {
+  "id": "cmuylxud7009yv4esenkb6980",
+  "slug": "jee-main-28-jul-2022-shift-2-btech",
+  "path": "/previous-year-papers/jee-main-28-jul-2022-shift-2-btech",
+  "title": "JEE Main 2022 Session 2 Question Paper: 28 Jul, Shift 2 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2022,
+  "shift": "28 Jul 2022, Shift 2",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": null,
+  "durationMin": null,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407780/papers/jee-main/2022/jee-main-28-jul-2022-shift-2-btech.pdf",
+    "sizeLabel": "2.6 MB",
+    "pageCount": 33,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:16:21.116Z",
+  "updatedAt": "2026-10-07T21:16:21.116Z"
+ },
+ "jee-main-28-jul-2022-shift-1-btech": {
+  "id": "cmuylxsai009tv4esupnd2hv3",
+  "slug": "jee-main-28-jul-2022-shift-1-btech",
+  "path": "/previous-year-papers/jee-main-28-jul-2022-shift-1-btech",
+  "title": "JEE Main 2022 Session 2 Question Paper: 28 Jul, Shift 1 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2022,
+  "shift": "28 Jul 2022, Shift 1",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": null,
+  "durationMin": null,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407778/papers/jee-main/2022/jee-main-28-jul-2022-shift-1-btech.pdf",
+    "sizeLabel": "3.2 MB",
+    "pageCount": 40,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:16:18.426Z",
+  "updatedAt": "2026-10-07T21:16:18.426Z"
+ },
+ "jee-main-29-jul-2022-shift-2-btech": {
+  "id": "cmuylxpt7009ov4esrem6avmr",
+  "slug": "jee-main-29-jul-2022-shift-2-btech",
+  "path": "/previous-year-papers/jee-main-29-jul-2022-shift-2-btech",
+  "title": "JEE Main 2022 Session 2 Question Paper: 29 Jul, Shift 2 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2022,
+  "shift": "29 Jul 2022, Shift 2",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": null,
+  "durationMin": null,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407774/papers/jee-main/2022/jee-main-29-jul-2022-shift-2-btech.pdf",
+    "sizeLabel": "2.4 MB",
+    "pageCount": 30,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:16:15.211Z",
+  "updatedAt": "2026-10-07T21:16:15.211Z"
+ },
+ "jee-main-29-jul-2022-shift-1-btech": {
+  "id": "cmuylxnqn009jv4esyim241ej",
+  "slug": "jee-main-29-jul-2022-shift-1-btech",
+  "path": "/previous-year-papers/jee-main-29-jul-2022-shift-1-btech",
+  "title": "JEE Main 2022 Session 2 Question Paper: 29 Jul, Shift 1 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2022,
+  "shift": "29 Jul 2022, Shift 1",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": null,
+  "durationMin": null,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407771/papers/jee-main/2022/jee-main-29-jul-2022-shift-1-btech.pdf",
+    "sizeLabel": "3.0 MB",
+    "pageCount": 42,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:16:12.528Z",
+  "updatedAt": "2026-10-07T21:16:12.528Z"
+ },
+ "jee-main-30-jul-2022-shift-2-btech": {
+  "id": "cmuylxl9p009ev4esxry4pe86",
+  "slug": "jee-main-30-jul-2022-shift-2-btech",
+  "path": "/previous-year-papers/jee-main-30-jul-2022-shift-2-btech",
+  "title": "JEE Main 2022 Session 2 Question Paper: 30 Jul, Shift 2 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2022,
+  "shift": "30 Jul 2022, Shift 2",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": null,
+  "durationMin": null,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407768/papers/jee-main/2022/jee-main-30-jul-2022-shift-2-btech.pdf",
+    "sizeLabel": "2.3 MB",
+    "pageCount": 31,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:16:09.325Z",
+  "updatedAt": "2026-10-07T21:16:09.325Z"
+ },
+ "jee-main-30-jul-2022-shift-1-bplanning": {
+  "id": "cmuylxjbl0099v4esztp5576j",
+  "slug": "jee-main-30-jul-2022-shift-1-bplanning",
+  "path": "/previous-year-papers/jee-main-30-jul-2022-shift-1-bplanning",
+  "title": "JEE Main 2022 Session 2 Question Paper: 30 Jul, Shift 1 (B.Planning)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2022,
+  "shift": "30 Jul 2022, Shift 1",
+  "setCode": "B.Planning",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": null,
+  "durationMin": null,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407766/papers/jee-main/2022/jee-main-30-jul-2022-shift-1-bplanning.pdf",
+    "sizeLabel": "4.3 MB",
+    "pageCount": 68,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:16:06.801Z",
+  "updatedAt": "2026-10-07T21:16:06.801Z"
+ },
+ "jee-main-30-jul-2022-shift-1-barch-bplanning": {
+  "id": "cmuylxgb30094v4espev2jnv9",
+  "slug": "jee-main-30-jul-2022-shift-1-barch-bplanning",
+  "path": "/previous-year-papers/jee-main-30-jul-2022-shift-1-barch-bplanning",
+  "title": "JEE Main 2022 Session 2 Question Paper: 30 Jul, Shift 1 (B.Arch + B.Planning)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2022,
+  "shift": "30 Jul 2022, Shift 1",
+  "setCode": "B.Arch + B.Planning",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": null,
+  "durationMin": null,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407762/papers/jee-main/2022/jee-main-30-jul-2022-shift-1-barch-bplanning.pdf",
+    "sizeLabel": "4.5 MB",
+    "pageCount": 69,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:16:02.896Z",
+  "updatedAt": "2026-10-07T21:16:02.896Z"
+ },
+ "jee-main-30-jul-2022-shift-1-barch": {
+  "id": "cmuylxdel008zv4esnqtyl1pm",
+  "slug": "jee-main-30-jul-2022-shift-1-barch",
+  "path": "/previous-year-papers/jee-main-30-jul-2022-shift-1-barch",
+  "title": "JEE Main 2022 Session 2 Question Paper: 30 Jul, Shift 1 (B.Arch)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2022,
+  "shift": "30 Jul 2022, Shift 1",
+  "setCode": "B.Arch",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": null,
+  "durationMin": null,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407758/papers/jee-main/2022/jee-main-30-jul-2022-shift-1-barch.pdf",
+    "sizeLabel": "3.2 MB",
+    "pageCount": 55,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:15:59.134Z",
+  "updatedAt": "2026-10-07T21:15:59.134Z"
+ },
+ "jee-main-23-feb-2021-shift-2-bplanning": {
+  "id": "cmuym30xs00hgv4essq9evk42",
+  "slug": "jee-main-23-feb-2021-shift-2-bplanning",
+  "path": "/previous-year-papers/jee-main-23-feb-2021-shift-2-bplanning",
+  "title": "JEE Main 2021 Session 1 Question Paper: 23 Feb, Shift 2 (B.Planning)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2021,
+  "shift": "23 Feb 2021, Shift 2",
+  "setCode": "B.Planning",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 400,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791408022/papers/jee-main/2021/jee-main-23-feb-2021-shift-2-bplanning.pdf",
+    "sizeLabel": "4.8 MB",
+    "pageCount": 73,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:20:22.912Z",
+  "updatedAt": "2026-10-07T21:20:22.912Z"
+ },
+ "jee-main-23-feb-2021-shift-2-barch-bplanning": {
+  "id": "cmuym2r9w00hbv4esvg84cnf5",
+  "slug": "jee-main-23-feb-2021-shift-2-barch-bplanning",
+  "path": "/previous-year-papers/jee-main-23-feb-2021-shift-2-barch-bplanning",
+  "title": "JEE Main 2021 Session 1 Question Paper: 23 Feb, Shift 2 (B.Arch + B.Planning)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2021,
+  "shift": "23 Feb 2021, Shift 2",
+  "setCode": "B.Arch + B.Planning",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 500,
+  "durationMin": 210,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791408009/papers/jee-main/2021/jee-main-23-feb-2021-shift-2-barch-bplanning.pdf",
+    "sizeLabel": "5.0 MB",
+    "pageCount": 74,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:20:10.388Z",
+  "updatedAt": "2026-10-07T21:20:10.388Z"
+ },
+ "jee-main-23-feb-2021-shift-2-barch": {
+  "id": "cmuym2li000h6v4es7qwoapsh",
+  "slug": "jee-main-23-feb-2021-shift-2-barch",
+  "path": "/previous-year-papers/jee-main-23-feb-2021-shift-2-barch",
+  "title": "JEE Main 2021 Session 1 Question Paper: 23 Feb, Shift 2 (B.Arch)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2021,
+  "shift": "23 Feb 2021, Shift 2",
+  "setCode": "B.Arch",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 400,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791408002/papers/jee-main/2021/jee-main-23-feb-2021-shift-2-barch.pdf",
+    "sizeLabel": "6.4 MB",
+    "pageCount": 115,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:20:02.904Z",
+  "updatedAt": "2026-10-07T21:20:02.904Z"
+ },
+ "jee-main-24-feb-2021-shift-2-btech": {
+  "id": "cmuym2efk00h1v4eskk2ikn9n",
+  "slug": "jee-main-24-feb-2021-shift-2-btech",
+  "path": "/previous-year-papers/jee-main-24-feb-2021-shift-2-btech",
+  "title": "JEE Main 2021 Session 1 Question Paper: 24 Feb, Shift 2 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2021,
+  "shift": "24 Feb 2021, Shift 2",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407993/papers/jee-main/2021/jee-main-24-feb-2021-shift-2-btech.pdf",
+    "sizeLabel": "3.8 MB",
+    "pageCount": 56,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:19:53.745Z",
+  "updatedAt": "2026-10-07T21:19:53.745Z"
+ },
+ "jee-main-24-feb-2021-shift-1-btech": {
+  "id": "cmuym2aa500gwv4esygqeaqil",
+  "slug": "jee-main-24-feb-2021-shift-1-btech",
+  "path": "/previous-year-papers/jee-main-24-feb-2021-shift-1-btech",
+  "title": "JEE Main 2021 Session 1 Question Paper: 24 Feb, Shift 1 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2021,
+  "shift": "24 Feb 2021, Shift 1",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407988/papers/jee-main/2021/jee-main-24-feb-2021-shift-1-btech.pdf",
+    "sizeLabel": "3.8 MB",
+    "pageCount": 53,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:19:48.365Z",
+  "updatedAt": "2026-10-07T21:19:48.365Z"
+ },
+ "jee-main-25-feb-2021-shift-2-btech": {
+  "id": "cmuym25vo00grv4espd0zrbqd",
+  "slug": "jee-main-25-feb-2021-shift-2-btech",
+  "path": "/previous-year-papers/jee-main-25-feb-2021-shift-2-btech",
+  "title": "JEE Main 2021 Session 1 Question Paper: 25 Feb, Shift 2 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2021,
+  "shift": "25 Feb 2021, Shift 2",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407982/papers/jee-main/2021/jee-main-25-feb-2021-shift-2-btech.pdf",
+    "sizeLabel": "3.7 MB",
+    "pageCount": 53,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:19:42.660Z",
+  "updatedAt": "2026-10-07T21:19:42.660Z"
+ },
+ "jee-main-25-feb-2021-shift-1-btech": {
+  "id": "cmuym20di00gmv4esovzpruzg",
+  "slug": "jee-main-25-feb-2021-shift-1-btech",
+  "path": "/previous-year-papers/jee-main-25-feb-2021-shift-1-btech",
+  "title": "JEE Main 2021 Session 1 Question Paper: 25 Feb, Shift 1 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2021,
+  "shift": "25 Feb 2021, Shift 1",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407974/papers/jee-main/2021/jee-main-25-feb-2021-shift-1-btech.pdf",
+    "sizeLabel": "3.8 MB",
+    "pageCount": 53,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:19:35.527Z",
+  "updatedAt": "2026-10-07T21:19:35.527Z"
+ },
+ "jee-main-26-feb-2021-shift-2-btech": {
+  "id": "cmuym1tia00ghv4esnre1wd6c",
+  "slug": "jee-main-26-feb-2021-shift-2-btech",
+  "path": "/previous-year-papers/jee-main-26-feb-2021-shift-2-btech",
+  "title": "JEE Main 2021 Session 1 Question Paper: 26 Feb, Shift 2 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2021,
+  "shift": "26 Feb 2021, Shift 2",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407966/papers/jee-main/2021/jee-main-26-feb-2021-shift-2-btech.pdf",
+    "sizeLabel": "3.6 MB",
+    "pageCount": 53,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:19:26.627Z",
+  "updatedAt": "2026-10-07T21:19:26.627Z"
+ },
+ "jee-main-26-feb-2021-shift-1-btech": {
+  "id": "cmuym1q8d00gcv4esp74bjshh",
+  "slug": "jee-main-26-feb-2021-shift-1-btech",
+  "path": "/previous-year-papers/jee-main-26-feb-2021-shift-1-btech",
+  "title": "JEE Main 2021 Session 1 Question Paper: 26 Feb, Shift 1 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2021,
+  "shift": "26 Feb 2021, Shift 1",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407961/papers/jee-main/2021/jee-main-26-feb-2021-shift-1-btech.pdf",
+    "sizeLabel": "3.8 MB",
+    "pageCount": 52,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:19:22.381Z",
+  "updatedAt": "2026-10-07T21:19:22.381Z"
+ },
+ "jee-main-16-mar-2021-shift-2-btech": {
+  "id": "cmuym1mpd00g7v4eswlo8qx6i",
+  "slug": "jee-main-16-mar-2021-shift-2-btech",
+  "path": "/previous-year-papers/jee-main-16-mar-2021-shift-2-btech",
+  "title": "JEE Main 2021 Session 2 Question Paper: 16 Mar, Shift 2 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2021,
+  "shift": "16 Mar 2021, Shift 2",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407957/papers/jee-main/2021/jee-main-16-mar-2021-shift-2-btech.pdf",
+    "sizeLabel": "3.9 MB",
+    "pageCount": 45,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:19:17.809Z",
+  "updatedAt": "2026-10-07T21:19:17.809Z"
+ },
+ "jee-main-17-mar-2021-shift-2-btech": {
+  "id": "cmuym1je000g2v4esse155ahg",
+  "slug": "jee-main-17-mar-2021-shift-2-btech",
+  "path": "/previous-year-papers/jee-main-17-mar-2021-shift-2-btech",
+  "title": "JEE Main 2021 Session 2 Question Paper: 17 Mar, Shift 2 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2021,
+  "shift": "17 Mar 2021, Shift 2",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407952/papers/jee-main/2021/jee-main-17-mar-2021-shift-2-btech.pdf",
+    "sizeLabel": "4.0 MB",
+    "pageCount": 46,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:19:13.513Z",
+  "updatedAt": "2026-10-07T21:19:13.513Z"
+ },
+ "jee-main-17-mar-2021-shift-1-btech": {
+  "id": "cmuym1fyh00fxv4esccruunhz",
+  "slug": "jee-main-17-mar-2021-shift-1-btech",
+  "path": "/previous-year-papers/jee-main-17-mar-2021-shift-1-btech",
+  "title": "JEE Main 2021 Session 2 Question Paper: 17 Mar, Shift 1 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2021,
+  "shift": "17 Mar 2021, Shift 1",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407948/papers/jee-main/2021/jee-main-17-mar-2021-shift-1-btech.pdf",
+    "sizeLabel": "3.7 MB",
+    "pageCount": 45,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:19:09.065Z",
+  "updatedAt": "2026-10-07T21:19:09.065Z"
+ },
+ "jee-main-18-mar-2021-shift-2-btech": {
+  "id": "cmuym1cqs00fsv4esl17pvza3",
+  "slug": "jee-main-18-mar-2021-shift-2-btech",
+  "path": "/previous-year-papers/jee-main-18-mar-2021-shift-2-btech",
+  "title": "JEE Main 2021 Session 2 Question Paper: 18 Mar, Shift 2 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2021,
+  "shift": "18 Mar 2021, Shift 2",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407944/papers/jee-main/2021/jee-main-18-mar-2021-shift-2-btech.pdf",
+    "sizeLabel": "3.8 MB",
+    "pageCount": 47,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:19:04.900Z",
+  "updatedAt": "2026-10-07T21:19:04.900Z"
+ },
+ "jee-main-18-mar-2021-shift-1-btech": {
+  "id": "cmuym199n00fnv4es1mnmei10",
+  "slug": "jee-main-18-mar-2021-shift-1-btech",
+  "path": "/previous-year-papers/jee-main-18-mar-2021-shift-1-btech",
+  "title": "JEE Main 2021 Session 2 Question Paper: 18 Mar, Shift 1 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2021,
+  "shift": "18 Mar 2021, Shift 1",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407940/papers/jee-main/2021/jee-main-18-mar-2021-shift-1-btech.pdf",
+    "sizeLabel": "4.0 MB",
+    "pageCount": 47,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:19:00.395Z",
+  "updatedAt": "2026-10-07T21:19:00.395Z"
+ },
+ "jee-main-20-jul-2021-shift-2-btech": {
+  "id": "cmuym15nz00fiv4es0iph9dm2",
+  "slug": "jee-main-20-jul-2021-shift-2-btech",
+  "path": "/previous-year-papers/jee-main-20-jul-2021-shift-2-btech",
+  "title": "JEE Main 2021 Session 3 Question Paper: 20 Jul, Shift 2 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2021,
+  "shift": "20 Jul 2021, Shift 2",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407934/papers/jee-main/2021/jee-main-20-jul-2021-shift-2-btech.pdf",
+    "sizeLabel": "3.3 MB",
+    "pageCount": 60,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:18:55.727Z",
+  "updatedAt": "2026-10-07T21:18:55.727Z"
+ },
+ "jee-main-22-jul-2021-shift-2-btech": {
+  "id": "cmuym129300fdv4esyl77rt3x",
+  "slug": "jee-main-22-jul-2021-shift-2-btech",
+  "path": "/previous-year-papers/jee-main-22-jul-2021-shift-2-btech",
+  "title": "JEE Main 2021 Session 3 Question Paper: 22 Jul, Shift 2 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2021,
+  "shift": "22 Jul 2021, Shift 2",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407930/papers/jee-main/2021/jee-main-22-jul-2021-shift-2-btech.pdf",
+    "sizeLabel": "3.1 MB",
+    "pageCount": 58,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:18:51.303Z",
+  "updatedAt": "2026-10-07T21:18:51.303Z"
+ },
+ "jee-main-25-jul-2021-shift-2-btech": {
+  "id": "cmuym0z9400f8v4esszanghtm",
+  "slug": "jee-main-25-jul-2021-shift-2-btech",
+  "path": "/previous-year-papers/jee-main-25-jul-2021-shift-2-btech",
+  "title": "JEE Main 2021 Session 3 Question Paper: 25 Jul, Shift 2 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2021,
+  "shift": "25 Jul 2021, Shift 2",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407927/papers/jee-main/2021/jee-main-25-jul-2021-shift-2-btech.pdf",
+    "sizeLabel": "2.9 MB",
+    "pageCount": 56,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:18:47.416Z",
+  "updatedAt": "2026-10-07T21:18:47.416Z"
+ },
+ "jee-main-25-jul-2021-shift-1-btech": {
+  "id": "cmuym0wvl00f3v4esna64vbsy",
+  "slug": "jee-main-25-jul-2021-shift-1-btech",
+  "path": "/previous-year-papers/jee-main-25-jul-2021-shift-1-btech",
+  "title": "JEE Main 2021 Session 3 Question Paper: 25 Jul, Shift 1 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2021,
+  "shift": "25 Jul 2021, Shift 1",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407923/papers/jee-main/2021/jee-main-25-jul-2021-shift-1-btech.pdf",
+    "sizeLabel": "3.3 MB",
+    "pageCount": 60,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:18:44.338Z",
+  "updatedAt": "2026-10-07T21:18:44.338Z"
+ },
+ "jee-main-27-jul-2021-shift-1-btech": {
+  "id": "cmuym0tyb00eyv4es1jq7a1sd",
+  "slug": "jee-main-27-jul-2021-shift-1-btech",
+  "path": "/previous-year-papers/jee-main-27-jul-2021-shift-1-btech",
+  "title": "JEE Main 2021 Session 3 Question Paper: 27 Jul, Shift 1 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2021,
+  "shift": "27 Jul 2021, Shift 1",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407920/papers/jee-main/2021/jee-main-27-jul-2021-shift-1-btech.pdf",
+    "sizeLabel": "3.3 MB",
+    "pageCount": 59,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:18:40.547Z",
+  "updatedAt": "2026-10-07T21:18:40.547Z"
+ },
+ "jee-main-3-aug-2021-shift-2-btech": {
+  "id": "cmuym0rdg00etv4es1pvzumnq",
+  "slug": "jee-main-3-aug-2021-shift-2-btech",
+  "path": "/previous-year-papers/jee-main-3-aug-2021-shift-2-btech",
+  "title": "JEE Main 2021 Session 4 Question Paper: 3 Aug, Shift 2 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2021,
+  "shift": "3 Aug 2021, Shift 2",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407916/papers/jee-main/2021/jee-main-3-aug-2021-shift-2-btech.pdf",
+    "sizeLabel": "4.1 MB",
+    "pageCount": 59,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:18:37.204Z",
+  "updatedAt": "2026-10-07T21:18:37.204Z"
+ },
+ "jee-main-3-aug-2021-shift-1-btech": {
+  "id": "cmuym0odb00eov4eschilh30r",
+  "slug": "jee-main-3-aug-2021-shift-1-btech",
+  "path": "/previous-year-papers/jee-main-3-aug-2021-shift-1-btech",
+  "title": "JEE Main 2021 Session 4 Question Paper: 3 Aug, Shift 1 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2021,
+  "shift": "3 Aug 2021, Shift 1",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407912/papers/jee-main/2021/jee-main-3-aug-2021-shift-1-btech.pdf",
+    "sizeLabel": "4.3 MB",
+    "pageCount": 63,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:18:33.312Z",
+  "updatedAt": "2026-10-07T21:18:33.312Z"
+ },
+ "jee-main-4-aug-2021-shift-2-btech": {
+  "id": "cmuym0la400ejv4es6po6b8gl",
+  "slug": "jee-main-4-aug-2021-shift-2-btech",
+  "path": "/previous-year-papers/jee-main-4-aug-2021-shift-2-btech",
+  "title": "JEE Main 2021 Session 4 Question Paper: 4 Aug, Shift 2 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2021,
+  "shift": "4 Aug 2021, Shift 2",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407908/papers/jee-main/2021/jee-main-4-aug-2021-shift-2-btech.pdf",
+    "sizeLabel": "4.0 MB",
+    "pageCount": 61,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:18:29.308Z",
+  "updatedAt": "2026-10-07T21:18:29.308Z"
+ },
+ "jee-main-4-aug-2021-shift-1-btech": {
+  "id": "cmuym0i9100eev4esqv65e4m2",
+  "slug": "jee-main-4-aug-2021-shift-1-btech",
+  "path": "/previous-year-papers/jee-main-4-aug-2021-shift-1-btech",
+  "title": "JEE Main 2021 Session 4 Question Paper: 4 Aug, Shift 1 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2021,
+  "shift": "4 Aug 2021, Shift 1",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407904/papers/jee-main/2021/jee-main-4-aug-2021-shift-1-btech.pdf",
+    "sizeLabel": "3.7 MB",
+    "pageCount": 55,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:18:25.382Z",
+  "updatedAt": "2026-10-07T21:18:25.382Z"
+ },
+ "jee-main-26-aug-2021-shift-2-btech": {
+  "id": "cmuym0f7d00e9v4esi7r6ue2t",
+  "slug": "jee-main-26-aug-2021-shift-2-btech",
+  "path": "/previous-year-papers/jee-main-26-aug-2021-shift-2-btech",
+  "title": "JEE Main 2021 Session 4 Question Paper: 26 Aug, Shift 2 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2021,
+  "shift": "26 Aug 2021, Shift 2",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407901/papers/jee-main/2021/jee-main-26-aug-2021-shift-2-btech.pdf",
+    "sizeLabel": "2.7 MB",
+    "pageCount": 71,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:18:21.434Z",
+  "updatedAt": "2026-10-07T21:18:21.434Z"
+ },
+ "jee-main-26-aug-2021-shift-1-btech": {
+  "id": "cmuym0cpf00e4v4esdtr5v0z0",
+  "slug": "jee-main-26-aug-2021-shift-1-btech",
+  "path": "/previous-year-papers/jee-main-26-aug-2021-shift-1-btech",
+  "title": "JEE Main 2021 Session 4 Question Paper: 26 Aug, Shift 1 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2021,
+  "shift": "26 Aug 2021, Shift 1",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407897/papers/jee-main/2021/jee-main-26-aug-2021-shift-1-btech.pdf",
+    "sizeLabel": "3.2 MB",
+    "pageCount": 66,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:18:18.195Z",
+  "updatedAt": "2026-10-07T21:18:18.195Z"
+ },
+ "jee-main-27-aug-2021-shift-2-btech": {
+  "id": "cmuym09z500dzv4esou7u1d8t",
+  "slug": "jee-main-27-aug-2021-shift-2-btech",
+  "path": "/previous-year-papers/jee-main-27-aug-2021-shift-2-btech",
+  "title": "JEE Main 2021 Session 4 Question Paper: 27 Aug, Shift 2 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2021,
+  "shift": "27 Aug 2021, Shift 2",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407894/papers/jee-main/2021/jee-main-27-aug-2021-shift-2-btech.pdf",
+    "sizeLabel": "3.2 MB",
+    "pageCount": 67,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:18:14.657Z",
+  "updatedAt": "2026-10-07T21:18:14.657Z"
+ },
+ "jee-main-27-aug-2021-shift-1-btech": {
+  "id": "cmuym07lb00duv4esrpzlbvhw",
+  "slug": "jee-main-27-aug-2021-shift-1-btech",
+  "path": "/previous-year-papers/jee-main-27-aug-2021-shift-1-btech",
+  "title": "JEE Main 2021 Session 4 Question Paper: 27 Aug, Shift 1 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2021,
+  "shift": "27 Aug 2021, Shift 1",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407891/papers/jee-main/2021/jee-main-27-aug-2021-shift-1-btech.pdf",
+    "sizeLabel": "3.1 MB",
+    "pageCount": 64,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:18:11.567Z",
+  "updatedAt": "2026-10-07T21:18:11.567Z"
+ },
+ "jee-main-31-aug-2021-shift-2-btech": {
+  "id": "cmuym05dz00dpv4es35ifv6vf",
+  "slug": "jee-main-31-aug-2021-shift-2-btech",
+  "path": "/previous-year-papers/jee-main-31-aug-2021-shift-2-btech",
+  "title": "JEE Main 2021 Session 4 Question Paper: 31 Aug, Shift 2 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2021,
+  "shift": "31 Aug 2021, Shift 2",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407888/papers/jee-main/2021/jee-main-31-aug-2021-shift-2-btech.pdf",
+    "sizeLabel": "3.4 MB",
+    "pageCount": 67,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:18:08.711Z",
+  "updatedAt": "2026-10-07T21:18:08.711Z"
+ },
+ "jee-main-31-aug-2021-shift-1-btech": {
+  "id": "cmuym02x900dkv4esjrlox86u",
+  "slug": "jee-main-31-aug-2021-shift-1-btech",
+  "path": "/previous-year-papers/jee-main-31-aug-2021-shift-1-btech",
+  "title": "JEE Main 2021 Session 4 Question Paper: 31 Aug, Shift 1 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2021,
+  "shift": "31 Aug 2021, Shift 1",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407884/papers/jee-main/2021/jee-main-31-aug-2021-shift-1-btech.pdf",
+    "sizeLabel": "3.1 MB",
+    "pageCount": 65,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:18:05.517Z",
+  "updatedAt": "2026-10-07T21:18:05.517Z"
+ },
+ "jee-main-1-sep-2021-shift-2-btech": {
+  "id": "cmuym00j500dfv4esw3hr7j8s",
+  "slug": "jee-main-1-sep-2021-shift-2-btech",
+  "path": "/previous-year-papers/jee-main-1-sep-2021-shift-2-btech",
+  "title": "JEE Main 2021 Session 4 Question Paper: 1 Sep, Shift 2 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2021,
+  "shift": "1 Sep 2021, Shift 2",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407882/papers/jee-main/2021/jee-main-1-sep-2021-shift-2-btech.pdf",
+    "sizeLabel": "3.1 MB",
+    "pageCount": 59,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:18:02.418Z",
+  "updatedAt": "2026-10-07T21:18:02.418Z"
+ },
+ "jee-main-2-sep-2021-shift-2-bplanning": {
+  "id": "cmuylzy7p00dav4essngfc2ih",
+  "slug": "jee-main-2-sep-2021-shift-2-bplanning",
+  "path": "/previous-year-papers/jee-main-2-sep-2021-shift-2-bplanning",
+  "title": "JEE Main 2021 Session 4 Question Paper: 2 Sep, Shift 2 (B.Planning)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2021,
+  "shift": "2 Sep 2021, Shift 2",
+  "setCode": "B.Planning",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 400,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407878/papers/jee-main/2021/jee-main-2-sep-2021-shift-2-bplanning.pdf",
+    "sizeLabel": "4.0 MB",
+    "pageCount": 80,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:17:59.413Z",
+  "updatedAt": "2026-10-07T21:17:59.413Z"
+ },
+ "jee-main-2-sep-2021-shift-2-barch-bplanning": {
+  "id": "cmuylzv5e00d5v4esvzu2xvfo",
+  "slug": "jee-main-2-sep-2021-shift-2-barch-bplanning",
+  "path": "/previous-year-papers/jee-main-2-sep-2021-shift-2-barch-bplanning",
+  "title": "JEE Main 2021 Session 4 Question Paper: 2 Sep, Shift 2 (B.Arch + B.Planning)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2021,
+  "shift": "2 Sep 2021, Shift 2",
+  "setCode": "B.Arch + B.Planning",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 500,
+  "durationMin": 210,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407875/papers/jee-main/2021/jee-main-2-sep-2021-shift-2-barch-bplanning.pdf",
+    "sizeLabel": "4.3 MB",
+    "pageCount": 82,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:17:55.442Z",
+  "updatedAt": "2026-10-07T21:17:55.442Z"
+ },
+ "jee-main-2-sep-2021-shift-1-barch": {
+  "id": "cmuylzs6x00d0v4eslsfau1ud",
+  "slug": "jee-main-2-sep-2021-shift-1-barch",
+  "path": "/previous-year-papers/jee-main-2-sep-2021-shift-1-barch",
+  "title": "JEE Main 2021 Session 4 Question Paper: 2 Sep, Shift 1 (B.Arch)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2021,
+  "shift": "2 Sep 2021, Shift 1",
+  "setCode": "B.Arch",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 400,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791407871/papers/jee-main/2021/jee-main-2-sep-2021-shift-1-barch.pdf",
+    "sizeLabel": "2.6 MB",
+    "pageCount": 62,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:17:51.609Z",
+  "updatedAt": "2026-10-07T21:17:51.609Z"
+ },
+ "jee-main-6-jan-2020-shift-2-bplanning": {
+  "id": "cmuym5y6t00k8v4esomc24c6a",
+  "slug": "jee-main-6-jan-2020-shift-2-bplanning",
+  "path": "/previous-year-papers/jee-main-6-jan-2020-shift-2-bplanning",
+  "title": "JEE Main 2020 Session 1 Question Paper: 6 Jan, Shift 2 (B.Planning)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2020,
+  "shift": "6 Jan 2020, Shift 2",
+  "setCode": "B.Planning",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": null,
+  "durationMin": null,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791408158/papers/jee-main/2020/jee-main-6-jan-2020-shift-2-bplanning.pdf",
+    "sizeLabel": "4.8 MB",
+    "pageCount": 190,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:22:39.318Z",
+  "updatedAt": "2026-10-07T21:22:39.318Z"
+ },
+ "jee-main-6-jan-2020-shift-2-barch-bplanning": {
+  "id": "cmuym5tfa00k3v4es6g1bda9e",
+  "slug": "jee-main-6-jan-2020-shift-2-barch-bplanning",
+  "path": "/previous-year-papers/jee-main-6-jan-2020-shift-2-barch-bplanning",
+  "title": "JEE Main 2020 Session 1 Question Paper: 6 Jan, Shift 2 (B.Arch + B.Planning)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2020,
+  "shift": "6 Jan 2020, Shift 2",
+  "setCode": "B.Arch + B.Planning",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": null,
+  "durationMin": null,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791408152/papers/jee-main/2020/jee-main-6-jan-2020-shift-2-barch-bplanning.pdf",
+    "sizeLabel": "4.9 MB",
+    "pageCount": 192,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:22:33.142Z",
+  "updatedAt": "2026-10-07T21:22:33.142Z"
+ },
+ "jee-main-6-jan-2020-shift-2-barch": {
+  "id": "cmuym5ode00jyv4esyn0fu5pc",
+  "slug": "jee-main-6-jan-2020-shift-2-barch",
+  "path": "/previous-year-papers/jee-main-6-jan-2020-shift-2-barch",
+  "title": "JEE Main 2020 Session 1 Question Paper: 6 Jan, Shift 2 (B.Arch)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2020,
+  "shift": "6 Jan 2020, Shift 2",
+  "setCode": "B.Arch",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": null,
+  "durationMin": null,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791408146/papers/jee-main/2020/jee-main-6-jan-2020-shift-2-barch.pdf",
+    "sizeLabel": "3.5 MB",
+    "pageCount": 149,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:22:26.595Z",
+  "updatedAt": "2026-10-07T21:22:26.595Z"
+ },
+ "jee-main-6-jan-2020-shift-1-barch": {
+  "id": "cmuym5ka600jtv4eswjimo2eq",
+  "slug": "jee-main-6-jan-2020-shift-1-barch",
+  "path": "/previous-year-papers/jee-main-6-jan-2020-shift-1-barch",
+  "title": "JEE Main 2020 Session 1 Question Paper: 6 Jan, Shift 1 (B.Arch)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2020,
+  "shift": "6 Jan 2020, Shift 1",
+  "setCode": "B.Arch",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": null,
+  "durationMin": null,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791408140/papers/jee-main/2020/jee-main-6-jan-2020-shift-1-barch.pdf",
+    "sizeLabel": "3.3 MB",
+    "pageCount": 147,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:22:21.294Z",
+  "updatedAt": "2026-10-07T21:22:21.294Z"
+ },
+ "jee-main-8-jan-2020-shift-2-btech": {
+  "id": "cmuym5gij00jov4esy3kj6bla",
+  "slug": "jee-main-8-jan-2020-shift-2-btech",
+  "path": "/previous-year-papers/jee-main-8-jan-2020-shift-2-btech",
+  "title": "JEE Main 2020 Session 1 Question Paper: 8 Jan, Shift 2 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2020,
+  "shift": "8 Jan 2020, Shift 2",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": null,
+  "durationMin": null,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791408136/papers/jee-main/2020/jee-main-8-jan-2020-shift-2-btech.pdf",
+    "sizeLabel": "4.1 MB",
+    "pageCount": 130,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:22:16.412Z",
+  "updatedAt": "2026-10-07T21:22:16.412Z"
+ },
+ "jee-main-8-jan-2020-shift-1-btech": {
+  "id": "cmuym5cm200jjv4es1n4y4p25",
+  "slug": "jee-main-8-jan-2020-shift-1-btech",
+  "path": "/previous-year-papers/jee-main-8-jan-2020-shift-1-btech",
+  "title": "JEE Main 2020 Session 1 Question Paper: 8 Jan, Shift 1 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2020,
+  "shift": "8 Jan 2020, Shift 1",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": null,
+  "durationMin": null,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791408130/papers/jee-main/2020/jee-main-8-jan-2020-shift-1-btech.pdf",
+    "sizeLabel": "4.0 MB",
+    "pageCount": 130,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:22:11.354Z",
+  "updatedAt": "2026-10-07T21:22:11.354Z"
+ },
+ "jee-main-9-jan-2020-shift-2-btech": {
+  "id": "cmuym58e400jev4es0zs3fmu0",
+  "slug": "jee-main-9-jan-2020-shift-2-btech",
+  "path": "/previous-year-papers/jee-main-9-jan-2020-shift-2-btech",
+  "title": "JEE Main 2020 Session 1 Question Paper: 9 Jan, Shift 2 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2020,
+  "shift": "9 Jan 2020, Shift 2",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": null,
+  "durationMin": null,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791408125/papers/jee-main/2020/jee-main-9-jan-2020-shift-2-btech.pdf",
+    "sizeLabel": "4.1 MB",
+    "pageCount": 133,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:22:05.884Z",
+  "updatedAt": "2026-10-07T21:22:05.884Z"
+ },
+ "jee-main-9-jan-2020-shift-1-btech": {
+  "id": "cmuym52ox00j9v4esxjhs4v5d",
+  "slug": "jee-main-9-jan-2020-shift-1-btech",
+  "path": "/previous-year-papers/jee-main-9-jan-2020-shift-1-btech",
+  "title": "JEE Main 2020 Session 1 Question Paper: 9 Jan, Shift 1 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2020,
+  "shift": "9 Jan 2020, Shift 1",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": null,
+  "durationMin": null,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791408118/papers/jee-main/2020/jee-main-9-jan-2020-shift-1-btech.pdf",
+    "sizeLabel": "4.0 MB",
+    "pageCount": 132,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:21:58.498Z",
+  "updatedAt": "2026-10-07T21:21:58.498Z"
+ },
+ "jee-main-1-sep-2020-shift-2-bplanning": {
+  "id": "cmuym4yak00j4v4estnthlxhv",
+  "slug": "jee-main-1-sep-2020-shift-2-bplanning",
+  "path": "/previous-year-papers/jee-main-1-sep-2020-shift-2-bplanning",
+  "title": "JEE Main 2020 Session 2 Question Paper: 1 Sep, Shift 2 (B.Planning)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2020,
+  "shift": "1 Sep 2020, Shift 2",
+  "setCode": "B.Planning",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 400,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791408112/papers/jee-main/2020/jee-main-1-sep-2020-shift-2-bplanning.pdf",
+    "sizeLabel": "9.2 MB",
+    "pageCount": 239,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:21:52.796Z",
+  "updatedAt": "2026-10-07T21:21:52.796Z"
+ },
+ "jee-main-1-sep-2020-shift-2-barch-bplanning": {
+  "id": "cmuym4qj600izv4esco703xd3",
+  "slug": "jee-main-1-sep-2020-shift-2-barch-bplanning",
+  "path": "/previous-year-papers/jee-main-1-sep-2020-shift-2-barch-bplanning",
+  "title": "JEE Main 2020 Session 2 Question Paper: 1 Sep, Shift 2 (B.Arch + B.Planning)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2020,
+  "shift": "1 Sep 2020, Shift 2",
+  "setCode": "B.Arch + B.Planning",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 500,
+  "durationMin": 210,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791408102/papers/jee-main/2020/jee-main-1-sep-2020-shift-2-barch-bplanning.pdf",
+    "sizeLabel": "9.4 MB",
+    "pageCount": 242,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:21:42.739Z",
+  "updatedAt": "2026-10-07T21:21:42.739Z"
+ },
+ "jee-main-1-sep-2020-shift-2-barch": {
+  "id": "cmuym4hpl00iuv4esbzyxw5i0",
+  "slug": "jee-main-1-sep-2020-shift-2-barch",
+  "path": "/previous-year-papers/jee-main-1-sep-2020-shift-2-barch",
+  "title": "JEE Main 2020 Session 2 Question Paper: 1 Sep, Shift 2 (B.Arch)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2020,
+  "shift": "1 Sep 2020, Shift 2",
+  "setCode": "B.Arch",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 400,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791408090/papers/jee-main/2020/jee-main-1-sep-2020-shift-2-barch.pdf",
+    "sizeLabel": "6.4 MB",
+    "pageCount": 189,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:21:31.305Z",
+  "updatedAt": "2026-10-07T21:21:31.305Z"
+ },
+ "jee-main-1-sep-2020-shift-1-barch": {
+  "id": "cmuym4bfe00ipv4esv4zwj0zo",
+  "slug": "jee-main-1-sep-2020-shift-1-barch",
+  "path": "/previous-year-papers/jee-main-1-sep-2020-shift-1-barch",
+  "title": "JEE Main 2020 Session 2 Question Paper: 1 Sep, Shift 1 (B.Arch)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2020,
+  "shift": "1 Sep 2020, Shift 1",
+  "setCode": "B.Arch",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 400,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791408082/papers/jee-main/2020/jee-main-1-sep-2020-shift-1-barch.pdf",
+    "sizeLabel": "6.0 MB",
+    "pageCount": 175,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:21:23.162Z",
+  "updatedAt": "2026-10-07T21:21:23.162Z"
+ },
+ "jee-main-2-sep-2020-shift-2-btech": {
+  "id": "cmuym45x200ikv4esytfdpcqr",
+  "slug": "jee-main-2-sep-2020-shift-2-btech",
+  "path": "/previous-year-papers/jee-main-2-sep-2020-shift-2-btech",
+  "title": "JEE Main 2020 Session 2 Question Paper: 2 Sep, Shift 2 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2020,
+  "shift": "2 Sep 2020, Shift 2",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791408075/papers/jee-main/2020/jee-main-2-sep-2020-shift-2-btech.pdf",
+    "sizeLabel": "5.2 MB",
+    "pageCount": 88,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:21:16.023Z",
+  "updatedAt": "2026-10-07T21:21:16.023Z"
+ },
+ "jee-main-2-sep-2020-shift-1-btech": {
+  "id": "cmuym40rq00ifv4es1e0wl7we",
+  "slug": "jee-main-2-sep-2020-shift-1-btech",
+  "path": "/previous-year-papers/jee-main-2-sep-2020-shift-1-btech",
+  "title": "JEE Main 2020 Session 2 Question Paper: 2 Sep, Shift 1 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2020,
+  "shift": "2 Sep 2020, Shift 1",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791408068/papers/jee-main/2020/jee-main-2-sep-2020-shift-1-btech.pdf",
+    "sizeLabel": "5.3 MB",
+    "pageCount": 114,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:21:09.350Z",
+  "updatedAt": "2026-10-07T21:21:09.350Z"
+ },
+ "jee-main-3-sep-2020-shift-2-btech": {
+  "id": "cmuym3vor00iav4esgle1bd68",
+  "slug": "jee-main-3-sep-2020-shift-2-btech",
+  "path": "/previous-year-papers/jee-main-3-sep-2020-shift-2-btech",
+  "title": "JEE Main 2020 Session 2 Question Paper: 3 Sep, Shift 2 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2020,
+  "shift": "3 Sep 2020, Shift 2",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791408062/papers/jee-main/2020/jee-main-3-sep-2020-shift-2-btech.pdf",
+    "sizeLabel": "5.3 MB",
+    "pageCount": 86,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:21:02.763Z",
+  "updatedAt": "2026-10-07T21:21:02.763Z"
+ },
+ "jee-main-3-sep-2020-shift-1-btech": {
+  "id": "cmuym3qka00i5v4est6oocicp",
+  "slug": "jee-main-3-sep-2020-shift-1-btech",
+  "path": "/previous-year-papers/jee-main-3-sep-2020-shift-1-btech",
+  "title": "JEE Main 2020 Session 2 Question Paper: 3 Sep, Shift 1 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2020,
+  "shift": "3 Sep 2020, Shift 1",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791408055/papers/jee-main/2020/jee-main-3-sep-2020-shift-1-btech.pdf",
+    "sizeLabel": "4.9 MB",
+    "pageCount": 107,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:20:56.122Z",
+  "updatedAt": "2026-10-07T21:20:56.122Z"
+ },
+ "jee-main-4-sep-2020-shift-2-btech": {
+  "id": "cmuym3ltu00i0v4esj9xejv2m",
+  "slug": "jee-main-4-sep-2020-shift-2-btech",
+  "path": "/previous-year-papers/jee-main-4-sep-2020-shift-2-btech",
+  "title": "JEE Main 2020 Session 2 Question Paper: 4 Sep, Shift 2 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2020,
+  "shift": "4 Sep 2020, Shift 2",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791408049/papers/jee-main/2020/jee-main-4-sep-2020-shift-2-btech.pdf",
+    "sizeLabel": "4.9 MB",
+    "pageCount": 84,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:20:49.986Z",
+  "updatedAt": "2026-10-07T21:20:49.986Z"
+ },
+ "jee-main-4-sep-2020-shift-1-btech": {
+  "id": "cmuym3gyd00hvv4es4pjn0do5",
+  "slug": "jee-main-4-sep-2020-shift-1-btech",
+  "path": "/previous-year-papers/jee-main-4-sep-2020-shift-1-btech",
+  "title": "JEE Main 2020 Session 2 Question Paper: 4 Sep, Shift 1 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2020,
+  "shift": "4 Sep 2020, Shift 1",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791408043/papers/jee-main/2020/jee-main-4-sep-2020-shift-1-btech.pdf",
+    "sizeLabel": "5.2 MB",
+    "pageCount": 114,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:20:43.670Z",
+  "updatedAt": "2026-10-07T21:20:43.670Z"
+ },
+ "jee-main-5-sep-2020-shift-1-btech": {
+  "id": "cmuym3c1z00hqv4esa2uufzkd",
+  "slug": "jee-main-5-sep-2020-shift-1-btech",
+  "path": "/previous-year-papers/jee-main-5-sep-2020-shift-1-btech",
+  "title": "JEE Main 2020 Session 2 Question Paper: 5 Sep, Shift 1 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2020,
+  "shift": "5 Sep 2020, Shift 1",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791408036/papers/jee-main/2020/jee-main-5-sep-2020-shift-1-btech.pdf",
+    "sizeLabel": "4.8 MB",
+    "pageCount": 83,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:20:37.320Z",
+  "updatedAt": "2026-10-07T21:20:37.320Z"
+ },
+ "jee-main-6-sep-2020-shift-2-btech": {
+  "id": "cmuym37ak00hlv4es4qk8ypzv",
+  "slug": "jee-main-6-sep-2020-shift-2-btech",
+  "path": "/previous-year-papers/jee-main-6-sep-2020-shift-2-btech",
+  "title": "JEE Main 2020 Session 2 Question Paper: 6 Sep, Shift 2 (B.E./B.Tech)",
+  "paperType": "PREVIOUS_YEAR",
+  "year": 2020,
+  "shift": "6 Sep 2020, Shift 2",
+  "setCode": "B.E./B.Tech",
+  "locale": "EN",
+  "hasSolution": false,
+  "downloadCount": 0,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-10-07T21:11:27.614Z",
+  "exam": {
+   "id": "seed_exam_jee-main",
+   "slug": "jee-main",
+   "shortName": "JEE MAIN",
+   "path": "/exam/jee-main"
+  },
+  "subject": null,
+  "totalQuestions": null,
+  "totalMarks": 300,
+  "durationMin": 180,
+  "board": null,
+  "files": [
+   {
+    "role": "PAPER",
+    "locale": "EN",
+    "url": "https://res.cloudinary.com/dukyebopv/raw/upload/v1791408030/papers/jee-main/2020/jee-main-6-sep-2020-shift-2-btech.pdf",
+    "sizeLabel": "5.3 MB",
+    "pageCount": 84,
+    "version": 1
+   }
+  ],
+  "createdAt": "2026-10-07T21:20:31.148Z",
+  "updatedAt": "2026-10-07T21:20:31.148Z"
+ }
+}

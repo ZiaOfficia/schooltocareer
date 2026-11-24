@@ -7,7 +7,7 @@ import { FactGrid, Section, Wrap } from '@stc/ui';
 
 import { ArrowRightIcon } from '@/components/icons';
 import { PageHero } from '@/components/page-hero';
-import { getExamPractice } from '@/lib/api';
+import { getExamPractice , SNAPSHOT_KEYS } from '@/lib/api';
 import { JsonLd, breadcrumbSchema } from '@/lib/seo/json-ld';
 import { buildMetadata } from '@/lib/seo/metadata';
 
@@ -16,8 +16,6 @@ import { buildMetadata } from '@/lib/seo/metadata';
  * question bank. Every chapter listed has at least one published question,
  * with its count; chapters with none are left out rather than shown empty.
  */
-
-export const revalidate = 3600;
 
 type Params = { slug: string };
 
@@ -137,4 +135,11 @@ export default async function ExamPracticePage({ params }: { params: Promise<Par
       </Wrap>
     </>
   );
+}
+
+/** One practice hub per exam with digitised questions, built at deploy time. */
+export const dynamicParams = false;
+
+export function generateStaticParams() {
+  return SNAPSHOT_KEYS.examPractice().map((slug) => ({ slug }));
 }

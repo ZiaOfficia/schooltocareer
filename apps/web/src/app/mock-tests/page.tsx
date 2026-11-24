@@ -15,8 +15,6 @@ import { buildMetadata } from '@/lib/seo/metadata';
  * actually digitised, so it only ever lists tests that open.
  */
 
-export const revalidate = 3600;
-
 export function generateMetadata() {
   return buildMetadata({
     template: 'mockTests',
